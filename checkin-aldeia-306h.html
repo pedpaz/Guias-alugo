@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check-in — Aldeia do Lago 306H</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lago: #0a2a3a;
+    --lago-mid: #0f3d54;
+    --lago-light: #1a5c7a;
+    --termal: #c4813a;
+    --termal-light: #e0a355;
+    --termal-pale: #f5e4c8;
+    --areia: #f2ede6;
+    --branco: #faf9f7;
+    --texto: #1a1a1a;
+    --texto-claro: #5a5a5a;
+    --erro: #c0392b;
+    --ok: #27ae60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--branco);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--lago);
+    padding: 28px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(196,129,58,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(26,92,122,0.3) 0%, transparent 50%);
+  }
+  .header-content { position: relative; z-index: 1; }
+  .header-badge {
+    display: inline-block;
+    border: 1px solid rgba(196,129,58,0.4);
+    color: var(--termal-light);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(30px, 7vw, 52px);
+    color: white;
+    line-height: 1.1;
+  }
+  .header h1 em { font-style: italic; color: var(--termal-light); }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── RESERVA CARD ── */
+  .reserva-banner {
+    max-width: 600px;
+    margin: -20px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .reserva-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 40px rgba(10,42,58,0.14);
+    padding: 24px 28px;
+    border-top: 3px solid var(--termal);
+  }
+  .reserva-apto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--lago);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .reserva-apto span { font-style: italic; color: var(--termal); }
+  .reserva-datas {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    background: var(--areia);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .reserva-data-item { text-align: center; }
+  .reserva-data-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-claro); margin-bottom: 4px; }
+  .reserva-data-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--lago); }
+  .reserva-data-hora { font-size: 11px; color: var(--texto-claro); margin-top: 2px; }
+  .reserva-arrow { color: var(--termal); font-size: 18px; }
+  .reserva-alert {
+    margin-top: 14px;
+    background: rgba(196,129,58,0.1);
+    border-left: 3px solid var(--termal);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--texto-claro);
+    line-height: 1.5;
+  }
+  .reserva-alert strong { color: var(--termal); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    max-width: 600px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+  }
+  .progress-bar-outer {
+    height: 3px;
+    background: rgba(10,42,58,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--lago), var(--termal));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 25%;
+  }
+  .progress-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .progress-step {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: rgba(10,42,58,0.3);
+    padding: 0 4px;
+    transition: color 0.3s;
+  }
+  .progress-step.active { color: var(--lago); font-weight: 500; }
+  .progress-step.done { color: var(--termal); }
+  .progress-step-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(10,42,58,0.15);
+    margin: 0 auto 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    background: white;
+    transition: all 0.3s;
+    color: rgba(10,42,58,0.3);
+  }
+  .progress-step.active .progress-step-dot { border-color: var(--lago); color: var(--lago); background: white; }
+  .progress-step.done .progress-step-dot { border-color: var(--termal); background: var(--termal); color: white; }
+
+  /* ── FORM CONTAINER ── */
+  .form-container {
+    max-width: 600px;
+    margin: 28px auto 60px;
+    padding: 0 20px;
+  }
+
+  /* ── STEP ── */
+  .step { display: none; animation: fadeUp 0.4s ease both; }
+  .step.active { display: block; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--lago);
+    margin-bottom: 6px;
+  }
+  .step-title em { font-style: italic; color: var(--termal); }
+  .step-desc { font-size: 13.5px; color: var(--texto-claro); line-height: 1.6; margin-bottom: 28px; }
+
+  /* ── FIELDS ── */
+  .field-group { margin-bottom: 18px; }
+  .field-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--lago);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .field-group label span { color: var(--termal); } /* required asterisk */
+
+  .field-group input,
+  .field-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid rgba(10,42,58,0.15);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field-group input:focus,
+  .field-group select:focus {
+    outline: none;
+    border-color: var(--lago);
+    box-shadow: 0 0 0 3px rgba(10,42,58,0.07);
+  }
+  .field-group input.error { border-color: var(--erro); }
+  .field-group input::placeholder { color: rgba(10,42,58,0.25); }
+  .field-hint { font-size: 11.5px; color: var(--texto-claro); margin-top: 6px; }
+  .field-error { font-size: 11.5px; color: var(--erro); margin-top: 6px; display: none; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width:480px){ .field-row { grid-template-columns: 1fr; } }
+
+  /* Counter fields */
+  .counter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(10,42,58,0.15);
+    border-radius: 8px;
+    background: white;
+  }
+  .counter-label { flex: 1; }
+  .counter-label strong { display: block; font-size: 14px; color: var(--lago); font-weight: 500; }
+  .counter-label small { font-size: 11.5px; color: var(--texto-claro); }
+  .counter-btns { display: flex; align-items: center; gap: 12px; }
+  .counter-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(10,42,58,0.2);
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--lago);
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .counter-btn:hover { background: var(--lago); color: white; border-color: var(--lago); }
+  .counter-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .counter-value { font-family: 'Cormorant Garamond', serif; font-size: 26px; min-width: 28px; text-align: center; color: var(--lago); }
+
+  /* Hospede extra cards */
+  .hospede-card {
+    border: 1.5px solid rgba(10,42,58,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 14px;
+    background: white;
+    position: relative;
+  }
+  .hospede-card-title {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--termal);
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .remove-hospede {
+    background: none;
+    border: none;
+    color: rgba(10,42,58,0.3);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+  .remove-hospede:hover { color: var(--erro); background: rgba(192,57,43,0.08); }
+
+  .add-hospede-btn {
+    width: 100%;
+    padding: 14px;
+    border: 1.5px dashed rgba(10,42,58,0.2);
+    border-radius: 10px;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(10,42,58,0.5);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .add-hospede-btn:hover { border-color: var(--termal); color: var(--termal); background: var(--termal-pale); }
+
+  /* ── RESUMO ── */
+  .resumo-section { margin-bottom: 24px; }
+  .resumo-section-title {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--termal);
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(10,42,58,0.08);
+  }
+  .resumo-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    font-size: 13.5px;
+    gap: 12px;
+  }
+  .resumo-key { color: var(--texto-claro); flex-shrink: 0; }
+  .resumo-val { color: var(--lago); font-weight: 500; text-align: right; }
+  .resumo-hospede-card {
+    background: var(--areia);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+  .resumo-hospede-nome { font-size: 14px; font-weight: 500; color: var(--lago); }
+  .resumo-hospede-cpf { font-size: 12px; color: var(--texto-claro); margin-top: 2px; }
+
+  /* ── BUTTONS ── */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    align-items: center;
+  }
+  .btn-primary {
+    flex: 1;
+    padding: 15px 24px;
+    background: var(--lago);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--lago-light); transform: translateY(-1px); }
+  .btn-secondary {
+    padding: 15px 20px;
+    background: none;
+    border: 1.5px solid rgba(10,42,58,0.2);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--texto-claro);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-secondary:hover { border-color: var(--lago); color: var(--lago); }
+  .btn-whatsapp {
+    flex: 1;
+    padding: 16px 24px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+  }
+  .btn-whatsapp:hover { background: #22c55e; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(37,211,102,0.4); }
+
+  .btn-whatsapp svg { width: 20px; height: 20px; fill: white; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    animation: fadeUp 0.5s ease both;
+  }
+  .success-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(37,211,102,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    margin: 0 auto 24px;
+    animation: pop 0.5s ease 0.2s both;
+  }
+  @keyframes pop { from{transform:scale(0.5);opacity:0} to{transform:scale(1);opacity:1} }
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--lago);
+    margin-bottom: 10px;
+  }
+  .success-screen h2 em { font-style: italic; color: var(--termal); }
+  .success-screen p { font-size: 14px; color: var(--texto-claro); line-height: 1.7; margin-bottom: 28px; }
+  .success-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--lago);
+    color: white;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .success-link:hover { background: var(--lago-light); }
+
+  /* ── LOGO ALUGO ── */
+  .alg-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .alg-alu { font-size: 18px; font-weight: 300; }
+  .alg-go  { font-size: 18px; font-weight: 700; color: var(--termal-light); }
+
+  /* ── TAXA ALERT ── block layout */
+  .taxa-alert {
+    margin-top: 12px;
+    background: var(--lago);
+    border-radius: 10px;
+    padding: 16px;
+    color: white;
+    text-align: center;
+  }
+  .taxa-alert-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--termal-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .taxa-alert-header span { font-size: 15px; }
+  .taxa-alert-info {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .taxa-alert-info strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+  .taxa-alert-badge {
+    display: inline-block;
+    background: var(--termal);
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .taxa-alert-badge small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--lago);
+    padding: 36px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid rgba(196,129,58,0.2);
+  }
+  .footer-logo { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .footer-tagline {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+  .footer-sep { width: 28px; height: 1px; background: rgba(196,129,58,0.35); }
+  .footer-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .apto-selector-wrap {
+    margin-bottom: 16px;
+  }
+  .apto-selector-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--termal);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .apto-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .apto-opt {
+    border: 1.5px solid rgba(10,42,58,0.15);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--branco);
+  }
+  .apto-opt:hover { border-color: var(--termal-light); background: var(--termal-pale); }
+  .apto-opt.selected { border-color: var(--lago); background: var(--lago); color: white; }
+  .apto-opt-num { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; line-height: 1; }
+  .apto-opt-info { font-size: 10px; margin-top: 3px; color: var(--texto-claro); }
+  .apto-opt.selected .apto-opt-info { color: rgba(255,255,255,0.65); }
+
+  /* ── CIÊNCIA CHECKBOXES ── */
+  .ciencia-box {
+    background: var(--areia);
+    border: 1.5px solid rgba(10,42,58,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .ciencia-box-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--lago);
+    font-weight: 500;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ciencia-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(10,42,58,0.07);
+    cursor: pointer;
+  }
+  .ciencia-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .ciencia-item input[type="checkbox"] { display: none; }
+  .ciencia-check {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid rgba(10,42,58,0.2);
+    background: white;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .ciencia-item.checked .ciencia-check { background: var(--lago); border-color: var(--lago); color: white; }
+  .ciencia-item.checked .ciencia-check::after { content: '✓'; }
+  .ciencia-text { font-size: 13.5px; color: var(--texto); line-height: 1.55; }
+  .ciencia-text strong { color: var(--lago); }
+  .ciencia-erro {
+    font-size: 12px;
+    color: var(--erro);
+    margin-top: 10px;
+    display: none;
+    padding: 8px 10px;
+    background: rgba(192,57,43,0.07);
+    border-radius: 6px;
+  }
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(196,129,58,0.25), transparent);
+    margin: 24px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--lago);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-logo .alg-logo-text .alg-alu,
+  .footer-logo .alg-logo-text .alg-go { color: white; }
+  .footer-sep {
+    width: 32px; height: 1px;
+    background: rgba(196,129,58,0.4);
+  }
+  .footer-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  /* ── APTO FIXO BADGE ── */
+  .apto-fixo-badge {
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    padding:14px 18px; margin-bottom:16px;
+    background:var(--lago); border-radius:14px; color:#fff;
+  }
+  .apto-fixo-num { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; line-height:1; }
+  .apto-fixo-info { font-size:11px; letter-spacing:.5px; color:rgba(255,255,255,.7); text-align:left; }
+  .apto-fixo-info strong { display:block; font-size:13px; color:#fff; letter-spacing:0; }
+
+  /* ── TERMOS ── */
+  .termos-list { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+  .termo-item {
+    display:flex; gap:12px; align-items:flex-start;
+    padding:13px 15px; background:#fafafa; border:1px solid #eee;
+    border-radius:11px; font-size:13.5px; line-height:1.55; color:var(--texto);
+  }
+  .termo-item .ti-ic { flex-shrink:0; font-size:16px; line-height:1.4; }
+  .termo-item strong { color:var(--lago); }
+  .termo-item .ti-mult { color:var(--termal); font-weight:600; }
+
+  .aceite-box {
+    display:flex; gap:13px; align-items:flex-start; cursor:pointer;
+    padding:16px; border:1.5px solid var(--termal); border-radius:13px;
+    background:var(--termal-pale); margin-bottom:6px; transition:.2s;
+  }
+  .aceite-box.checked { background:var(--lago); border-color:var(--lago); }
+  .aceite-box.checked .aceite-txt { color:#fff; }
+  .aceite-box.checked .aceite-txt strong { color:#fff; }
+  .aceite-check {
+    flex-shrink:0; width:24px; height:24px; border-radius:6px;
+    border:2px solid var(--lago); background:#fff; position:relative; margin-top:1px;
+  }
+  .aceite-box.checked .aceite-check { background:var(--termal); border-color:var(--termal); }
+  .aceite-box.checked .aceite-check::after {
+    content:''; position:absolute; left:7px; top:3px; width:6px; height:11px;
+    border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg);
+  }
+  .aceite-txt { font-size:13.5px; line-height:1.55; color:var(--texto); }
+  .aceite-txt strong { color:var(--lago); }
+  .aceite-erro { display:none; font-size:12.5px; color:#b03030; margin-top:10px; }
+
+  /* ── CONTRATO ── */
+  .contrato-doc {
+    background:#fff; border:1px solid #e6e1d8; border-radius:14px;
+    padding:26px 22px; margin-bottom:22px;
+    max-height:430px; overflow-y:auto;
+    box-shadow:inset 0 -16px 18px -16px rgba(0,0,0,.08);
+  }
+  .contrato-doc h3 {
+    font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:600;
+    color:var(--lago); text-align:center; margin-bottom:3px; line-height:1.2;
+  }
+  .contrato-doc .ct-sub { text-align:center; font-size:10.5px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--termal); margin-bottom:20px; }
+  .ct-block { margin-bottom:15px; font-size:12.5px; line-height:1.6; color:#2a2a2a; }
+  .ct-block .ct-label { font-size:10px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--texto-claro); display:block; margin-bottom:3px; }
+  .ct-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-bottom:16px; }
+  .ct-clausula { margin-bottom:11px; font-size:12px; line-height:1.62; color:#2a2a2a; }
+  .ct-clausula b { color:var(--lago); }
+  .ct-clausula .mult { color:var(--termal); font-weight:600; }
+  .ct-hr { border:none; border-top:1px solid #eee; margin:16px 0; }
+  .ct-aceite-line { font-size:11.5px; font-style:italic; color:var(--texto-claro);
+    line-height:1.55; margin-top:6px; }
+  .btn-print {
+    width:100%; padding:13px; margin-bottom:16px; border:1.5px solid var(--lago);
+    background:#fff; color:var(--lago); border-radius:11px; font-family:inherit;
+    font-size:14px; font-weight:500; cursor:pointer; display:flex;
+    align-items:center; justify-content:center; gap:8px;
+  }
+  .btn-print:active { background:var(--areia); }
+
+  /* ── PRINT — imprime apenas o contrato, com os dados no topo ── */
+  @media print {
+    @page { margin: 1.4cm; }
+    .header, .reserva-banner, .progress-wrap, .footer { display:none !important; }
+    #step-1,#step-2,#step-3,#step-4,#step-5,#step-6 { display:none !important; }
+    #step-7 { display:block !important; }
+    #step-7 .step-title, #step-7 .step-desc,
+    #step-7 .btn-print, #step-7 .btn-row { display:none !important; }
+    .form-container { padding:0 !important; margin:0 !important; max-width:100% !important; }
+    #print-area {
+      max-height:none !important; overflow:visible !important;
+      border:none !important; box-shadow:none !important;
+      padding:0 !important; margin:0 !important;
+    }
+  }
+
+  .uf-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%230a2a3a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
+  }
+
+  /* ── CAPA / WELCOME ── */
+  .welcome-infos { display:flex; flex-direction:column; gap:11px; margin:18px 0 22px; }
+  .winfo { display:flex; gap:13px; align-items:flex-start; padding:13px 15px;
+           background:#fafafa; border:1px solid #eee; border-radius:12px; text-align:left; }
+  .winfo-ic { font-size:18px; line-height:1.3; flex-shrink:0; }
+  .winfo > div { font-size:13px; line-height:1.55; color:var(--texto); }
+  .winfo > div strong { display:block; font-size:11px; letter-spacing:.5px; text-transform:uppercase;
+                        color:var(--lago); margin-bottom:3px; }
+  .winfo-warn { background:#fdf6ec; border-color:#f0d9b5; }
+  .winfo-warn > div strong { color:var(--termal); }
+  .winfo-money { background:#fbf2e2; border-color:#e7caa0; }
+  .winfo-money > div strong { color:var(--termal); }
+  .money-emph { color:var(--termal); font-weight:600; }
+  .btn-comecar { margin-top:2px; }
+
+  /* ── VOLUME / SOMBRA NOS CARDS ── */
+  .reserva-card { box-shadow:0 16px 46px rgba(10,42,58,0.20), 0 3px 10px rgba(10,42,58,0.10) !important; }
+  .winfo { box-shadow:0 4px 14px rgba(10,42,58,0.07), 0 1px 3px rgba(10,42,58,0.05); }
+  .counter-wrap { box-shadow:0 5px 16px rgba(10,42,58,0.07), 0 1px 3px rgba(10,42,58,0.05); }
+  .hospede-card { box-shadow:0 8px 24px rgba(10,42,58,0.09), 0 2px 5px rgba(10,42,58,0.06); }
+  .aceite-box { box-shadow:0 8px 26px rgba(10,42,58,0.10); }
+
+  /* ── AVISO DE HORÁRIO (capa) ── */
+  .winfo-horario {
+    flex-direction:column; align-items:stretch; gap:0;
+    background:linear-gradient(135deg,#fff5ea 0%,#fdeccf 100%);
+    border:1px solid #e8c79a; border-left:5px solid var(--termal);
+    padding:16px 16px 14px;
+    box-shadow:0 12px 30px rgba(196,129,58,0.18), 0 2px 6px rgba(10,42,58,0.06);
+  }
+  .wh-head { display:flex; align-items:center; gap:9px; font-weight:600; color:var(--lago);
+             font-size:13.5px; margin-bottom:12px; letter-spacing:.2px; }
+  .wh-head .wh-ic { font-size:18px; }
+  .wh-item { display:flex; gap:11px; padding:11px 0; border-top:1px solid rgba(196,129,58,0.22); }
+  .wh-item:first-of-type { border-top:none; padding-top:2px; }
+  .wh-badge { flex-shrink:0; background:var(--termal); color:#fff; font-size:10px; font-weight:600;
+              letter-spacing:.4px; text-transform:uppercase; padding:4px 9px; border-radius:20px;
+              height:fit-content; white-space:nowrap; }
+  .wh-body strong { display:block; color:var(--lago); font-size:13px; margin-bottom:2px; }
+  .wh-body span { color:#6b5640; font-size:12px; line-height:1.55; }
+
+  /* ── HEADER COMPACTO (telas do fluxo) ── */
+  .header-compact { background:var(--lago); padding:15px 22px; display:flex;
+                    align-items:center; justify-content:space-between; }
+  .alg-logo-mini { font-family:'Cormorant Garamond',serif; font-size:22px; color:#fff; font-weight:600; line-height:1; }
+  .alg-logo-mini span { opacity:.6; }
+  .alg-logo-mini strong { color:var(--termal); font-weight:600; }
+  .hc-info { font-size:12px; letter-spacing:.5px; color:rgba(255,255,255,.82); }
+</style>
+</head>
+<body>
+
+<!-- ===== TELA 0: CAPA ===== -->
+<div id="welcome-screen">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-content">
+    <div style="margin-bottom:20px">
+      <div class="alg-logo">
+        <span class="alg-alu" style="color:rgba(255,255,255,0.65)">alu</span><span class="alg-go">GO</span>
+      </div>
+    </div>
+    <div class="header-badge">Aldeia do Lago · Caldas Novas</div>
+    <h1>Check-in<br><em>online</em></h1>
+    <p class="header-sub">Preencha antes da sua chegada e evite filas na portaria</p>
+  </div>
+</div>
+
+<!-- CAPA: informações da estadia -->
+<div class="reserva-banner">
+  <div class="reserva-card">
+
+    <!-- Apartamento (fixo) -->
+    <div class="apto-fixo-badge">
+      <div class="apto-fixo-num">306H</div>
+      <div class="apto-fixo-info"><strong>Flat Aldeia do Lago</strong> · 2 quartos · Caldas Novas</div>
+    </div>
+
+    <div class="welcome-infos">
+      <div class="winfo winfo-horario">
+        <div class="wh-head"><span class="wh-ic">⏰</span> Horários de entrada e saída</div>
+        <div class="wh-item">
+          <span class="wh-badge">Entrada · 14h</span>
+          <div class="wh-body"><strong>Não chegue antes do horário</strong><span>O apartamento só é liberado às 14h. Não há como entrar mais cedo — organize sua chegada a partir desse horário.</span></div>
+        </div>
+        <div class="wh-item">
+          <span class="wh-badge">Saída · 11h</span>
+          <div class="wh-body"><strong>Não permaneça após o check-out, nem na piscina</strong><span>A saída é até as 11h. Após isso não é permitido ficar no apartamento nem nas áreas de piscina, pois o condomínio precisa dar baixa na reserva e preparar o imóvel para o próximo hóspede.</span></div>
+        </div>
+      </div>
+      <div class="winfo winfo-money">
+        <span class="winfo-ic">💵</span>
+        <div><strong>Taxa de ocupação · R$ 50,00</strong>Cobrada por estadia, na portaria. <span class="money-emph">Somente em dinheiro — não aceitamos Pix nem cartão.</span></div>
+      </div>
+      <div class="winfo">
+        <span class="winfo-ic">📋</span>
+        <div><strong>Tenha em mãos</strong>CPF e RG do titular. O preenchimento leva cerca de 3 minutos</div>
+      </div>
+      <div class="winfo winfo-warn">
+        <span class="winfo-ic">⏱</span>
+        <div><strong>Envie com 24h de antecedência</strong>Sem esses dados a recepção não consegue identificar sua reserva, o que atrasa sua entrada</div>
+      </div>
+    </div>
+
+    <button class="btn-primary btn-comecar" onclick="iniciarCheckin()">Começar check-in →</button>
+  </div>
+</div>
+
+</div><!-- /welcome-screen -->
+
+<!-- ===== TELA 1+: FLUXO ===== -->
+<div id="flow-screen" style="display:none">
+
+<!-- HEADER COMPACTO -->
+<div class="header-compact">
+  <div class="alg-logo-mini"><span>alu</span><strong>GO</strong></div>
+  <div class="hc-info">Check-in · Apto 306H</div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="progress-bar"></div>
+  </div>
+  <div class="progress-steps">
+    <div class="progress-step active" id="ps-2">
+      <div class="progress-step-dot">1</div>
+      Hóspedes
+    </div>
+    <div class="progress-step" id="ps-3">
+      <div class="progress-step-dot">2</div>
+      Titular
+    </div>
+    <div class="progress-step" id="ps-4">
+      <div class="progress-step-dot">3</div>
+      Demais
+    </div>
+    <div class="progress-step" id="ps-5">
+      <div class="progress-step-dot">4</div>
+      Resumo
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-container">
+
+  <!-- STEP 1: Composição do grupo -->
+  <!-- PASSO 1: Datas da estadia -->
+  <div class="step active" id="step-1">
+    <h2 class="step-title">Quando é a<br>sua <em>estadia?</em></h2>
+    <p class="step-desc">Informe as datas de entrada e saída para registrarmos corretamente na portaria.</p>
+
+    <div style="display:flex; flex-direction:column; gap:18px; margin-bottom:28px;">
+      <div>
+        <label style="display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Check-in</label>
+        <input type="date" id="input-checkin" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box;" oninput="onDateChange()">
+        <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">A partir das 14h</div>
+      </div>
+      <div>
+        <label style="display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Check-out</label>
+        <input type="date" id="input-checkout" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box;" oninput="onDateChange()">
+        <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">Até as 11h</div>
+      </div>
+    </div>
+
+    <div id="erro-datas" style="display:none; background:#fff3cd; border:1px solid #ffc107; border-radius:8px; padding:12px 14px; font-size:13px; color:#856404; margin-bottom:20px;"></div>
+
+    <button class="btn-primary" onclick="validarDatas()">Continuar →</button>
+  </div>
+
+  <div class="step" id="step-2">
+    <h2 class="step-title">Quantas pessoas<br>vão <em>chegar?</em></h2>
+    <p class="step-desc">Informe a composição do grupo para que o condomínio possa preparar o apartamento adequadamente.</p>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="counter-wrap">
+        <div class="counter-label">
+          <strong>Adultos</strong>
+          <small>18 anos ou mais</small>
+        </div>
+        <div class="counter-btns">
+          <button class="counter-btn" onclick="changeCount('adultos', -1)">−</button>
+          <div class="counter-value" id="val-adultos">1</div>
+          <button class="counter-btn" onclick="changeCount('adultos', +1)">+</button>
+        </div>
+      </div>
+
+      <div class="counter-wrap">
+        <div class="counter-label">
+          <strong>Crianças</strong>
+          <small>Menores de 18 anos</small>
+        </div>
+        <div class="counter-btns">
+          <button class="counter-btn" onclick="changeCount('criancas', -1)">−</button>
+          <div class="counter-value" id="val-criancas">0</div>
+          <button class="counter-btn" onclick="changeCount('criancas', +1)">+</button>
+        </div>
+      </div>
+
+      <div id="capacidade-aviso" style="display:none;position:absolute;pointer-events:none;opacity:0"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="nextStep(3)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Dados do titular -->
+  <div class="step" id="step-3">
+    <h2 class="step-title">Dados do<br><em>titular</em></h2>
+    <p class="step-desc">Quem realizou a reserva. Esses dados são necessários para o registro na portaria do condomínio.</p>
+
+    <div class="field-group">
+      <label>Nome Completo <span>*</span></label>
+      <input type="text" id="t-nome" placeholder="Como está no documento" autocomplete="name">
+      <div class="field-error" id="err-t-nome">Por favor, informe o nome completo.</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label>CPF <span>*</span></label>
+        <input type="text" id="t-cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
+        <div class="field-error" id="err-t-cpf">CPF inválido.</div>
+      </div>
+      <div class="field-group">
+        <label>RG <span>*</span></label>
+        <input type="text" id="t-rg" placeholder="0000000" maxlength="15">
+        <div class="field-error" id="err-t-rg">Por favor, informe o RG.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="field-group">
+      <label>Endereço <span>*</span></label>
+      <input type="text" id="t-endereco" placeholder="Rua / Av. e número">
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label>Bairro <span>*</span></label>
+        <input type="text" id="t-bairro" placeholder="Bairro">
+      </div>
+      <div class="field-group">
+        <label>Cidade <span>*</span></label>
+        <input type="text" id="t-cidade" placeholder="Cidade">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label>Estado <span>*</span></label>
+        <select id="t-estado" class="uf-select">
+          <option value="" disabled selected>UF</option>
+          <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+          <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+          <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+          <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+          <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+          <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+          <option>SP</option><option>SE</option><option>TO</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>CEP <span>*</span></label>
+        <input type="text" id="t-cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="nextStep(2)">← Voltar</button>
+      <button class="btn-primary" onclick="validateStep2()">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Demais hóspedes -->
+  <div class="step" id="step-4">
+    <h2 class="step-title">Demais<br><em>hóspedes</em></h2>
+    <p class="step-desc" id="step3-desc">Informe os dados de cada hóspede adicional. CPF é opcional para crianças.</p>
+
+    <div id="hospedes-container"></div>
+
+    <button class="add-hospede-btn" id="add-btn" onclick="addHospede()">
+      + Adicionar outro hóspede
+    </button>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="nextStep(3)">← Voltar</button>
+      <button class="btn-primary" onclick="nextStep(5)">Ver Resumo →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Resumo -->
+  <div class="step" id="step-5">
+    <h2 class="step-title">Tudo<br><em>certo?</em></h2>
+    <p class="step-desc">Revise os dados antes de enviar. Após envio, as informações chegam diretamente ao anfitrião pelo WhatsApp.</p>
+
+    <div id="resumo-content"></div>
+
+    <!-- Checkboxes de ciência -->
+    <div class="ciencia-box">
+      <div class="ciencia-box-title">☑️ Confirmo que estou ciente</div>
+
+      <div class="ciencia-item" id="ci-taxa" onclick="toggleCiencia('taxa')">
+        <input type="checkbox" id="chk-taxa">
+        <div class="ciencia-check"></div>
+        <div class="ciencia-text">
+          Estou ciente que o condomínio cobra uma <strong>taxa de ocupação</strong> por estadia,
+          paga diretamente na portaria em <strong>dinheiro</strong>
+          (<span id="ci-taxa-valor">R$ 40,00</span> para este apartamento).
+        </div>
+      </div>
+
+      <div class="ciencia-item" id="ci-cama" onclick="toggleCiencia('cama')">
+        <input type="checkbox" id="chk-cama">
+        <div class="ciencia-check"></div>
+        <div class="ciencia-text">
+          Estou ciente que o apartamento <strong>não inclui roupa de cama</strong>.
+          Deverei trazer a minha ou alugar na recepção (sujeito à disponibilidade).
+        </div>
+      </div>
+
+      <div class="ciencia-erro" id="ciencia-erro">⚠️ Por favor, confirme os dois itens acima antes de enviar.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="nextStep(4)">← Corrigir</button>
+      <button class="btn-primary" onclick="goTermos()">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: Termos -->
+  <div class="step" id="step-6">
+    <h2 class="step-title">Termos da<br><em>estadia</em></h2>
+    <p class="step-desc">Antes de finalizar, confirme que está de acordo com as regras da hospedagem. O contrato completo aparece na próxima tela.</p>
+
+    <div class="termos-list">
+      <div class="termo-item"><span class="ti-ic">👥</span><div>Ocupação máxima de <strong>8 pessoas</strong>. Pessoas além do permitido: <span class="ti-mult">multa de R$ 200,00</span> e possível cancelamento sem reembolso.</div></div>
+      <div class="termo-item"><span class="ti-ic">🔑</span><div>Check-in <strong>a partir das 14h</strong>. O apartamento só é liberado nesse horário — <span class="ti-mult">não é possível entrar antes.</span></div></div>
+      <div class="termo-item"><span class="ti-ic">🕚</span><div>Check-out até as <strong>11h</strong>. Não é permitido permanecer no apartamento nem nas áreas de piscina após esse horário. Saída sem autorização: <span class="ti-mult">multa de R$ 200,00</span> (late check-out).</div></div>
+      <div class="termo-item"><span class="ti-ic">💵</span><div>Taxa de acesso (pulseiras): <strong>R$ 50,00</strong> por estadia, paga na guarita. <span class="ti-mult">Somente em dinheiro — não aceitamos Pix nem cartão.</span></div></div>
+      <div class="termo-item"><span class="ti-ic">🛏️</span><div>O apartamento <strong>não inclui roupa de cama</strong>. Traga a sua ou alugue na recepção (sujeito à disponibilidade).</div></div>
+      <div class="termo-item"><span class="ti-ic">🔥</span><div>Churrasqueira permitida <strong>com custo adicional sob consulta</strong>. Pesca permitida nas áreas do condomínio (<strong>equipamento não incluído</strong>).</div></div>
+      <div class="termo-item"><span class="ti-ic">🐾</span><div><strong>Não é permitida</strong> a entrada ou permanência de animais de estimação.</div></div>
+      <div class="termo-item"><span class="ti-ic">🧹</span><div>O imóvel é entregue limpo e em ordem. Você responde por <strong>danos ou avarias</strong> causados durante a estadia.</div></div>
+    </div>
+
+    <div class="aceite-box" id="aceite-box" onclick="toggleAceite()">
+      <div class="aceite-check"></div>
+      <div class="aceite-txt"><strong>Li e aceito</strong> os termos acima e o contrato de locação por temporada.</div>
+    </div>
+    <div class="aceite-erro" id="aceite-erro">⚠️ É necessário aceitar os termos para continuar.</div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="nextStep(4)">← Voltar</button>
+      <button class="btn-primary" onclick="goContrato()">Ver contrato →</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: Contrato -->
+  <div class="step" id="step-7">
+    <h2 class="step-title">Contrato de<br><em>locação</em></h2>
+    <p class="step-desc">Documento gerado com os seus dados. Você pode imprimir ou salvar uma cópia antes de enviar.</p>
+
+    <button class="btn-print" onclick="printContrato()">🖨️ Imprimir / Salvar PDF</button>
+
+    <div class="contrato-doc" id="print-area"></div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTermos()">← Voltar</button>
+      <button class="btn-whatsapp" onclick="sendWhatsApp()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Aceitar e enviar
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">✅</div>
+  <h2>Dados<br><em>enviados!</em></h2>
+  <p>Suas informações foram enviadas ao anfitrião pelo WhatsApp. Você receberá uma confirmação em breve.<br><br>Abrindo o <strong>Guia do Hóspede</strong> automaticamente em instantes…</p>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:8px;">
+    <div id="redirect-countdown" style="font-size:13px;color:var(--texto-claro);">Redirecionando em <strong id="cnt">2</strong>s…</div>
+    <a href="https://pedpaz.github.io/Guias-alugo/guia-aldeia-306h.html" class="success-link">📖 Abrir Guia agora</a>
+  </div>
+</div>
+
+</div><!-- /flow-screen -->
+
+<footer class="footer">
+  <div class="footer-logo">
+    <div class="alg-logo">
+      <span class="alg-alu" style="color:rgba(255,255,255,0.6)">alu</span><span class="alg-go">GO</span>
+    </div>
+    <div class="footer-tagline">Gestão de imóveis para temporada</div>
+  </div>
+  <div class="footer-sep"></div>
+  <div class="footer-text">Aldeia do Lago · Caldas Novas, Goiás<br>Formulário de Check-in Online</div>
+</footer>
+
+<script>
+  /* ── CONFIG ── */
+  const WHATSAPP_NUMBER = '5562981771013';
+  const APTOS = {
+    '103A': { quartos: 1, maxPessoas: 5, taxa: 40 },
+    '405A': { quartos: 1, maxPessoas: 5, taxa: 40 },
+    '306H': { quartos: 2, maxPessoas: 8, taxa: 50 },
+  };
+
+  /* ── ESTADO ── */
+  const params     = new URLSearchParams(window.location.search);
+  let checkinVal  = params.get('checkin')  || '';
+  let checkoutVal = params.get('checkout') || '';
+
+  const nomeParam  = params.get('nome')     || '';
+  const currentApto = '306H';
+
+  function aptoInfo() { return APTOS[currentApto]; }
+
+
+  function updateTaxaNotice() {
+    const info = aptoInfo();
+    document.getElementById('taxa-alert').innerHTML = `
+      <div class="taxa-alert-header">
+        <span>💰</span> Taxa de ocupação do condomínio
+      </div>
+      <div class="taxa-alert-info">
+        <strong>Apto ${currentApto}</strong> · ${info.quartos} quarto${info.quartos > 1 ? 's' : ''}<br>
+        Cobrada na portaria · somente em dinheiro
+      </div>
+      <div class="taxa-alert-badge">
+        R$ ${info.taxa},00
+        <small>por estadia</small>
+      </div>`;
+  }
+
+  /* ── CIÊNCIA CHECKBOXES ── */
+  const ciencias = { taxa: false, cama: false };
+
+  function toggleCiencia(key) {
+    ciencias[key] = !ciencias[key];
+    const item = document.getElementById('ci-' + key);
+    item.classList.toggle('checked', ciencias[key]);
+    document.getElementById('chk-' + key).checked = ciencias[key];
+    if (ciencias.taxa && ciencias.cama) {
+      document.getElementById('ciencia-erro').style.display = 'none';
+    }
+  }
+
+  /* ── COUNTERS ── */
+  const counts = { adultos: 1, criancas: 0 };
+
+  function changeCount(field, delta) {
+    const total = counts.adultos + counts.criancas;
+    const newTotal = total + delta;
+    // Silently block if over capacity — no visible message
+    if (delta > 0 && newTotal > aptoInfo().maxPessoas) return;
+    counts[field] = Math.max(0, counts[field] + delta);
+    if (field === 'adultos') counts.adultos = Math.max(1, counts.adultos);
+    document.getElementById('val-' + field).textContent = counts[field];
+    refreshStep3Desc();
+  }
+
+  function refreshStep3Desc() {
+    const total = counts.adultos + counts.criancas;
+    const extras = total - 1;
+    const desc = document.getElementById('step3-desc');
+    if (extras <= 0) {
+      desc.textContent = 'Você informou apenas 1 pessoa (o titular). Se houver mais hóspedes, adicione abaixo.';
+    } else {
+      desc.textContent = `Além do titular, informe os dados dos outros ${extras} hóspede(s). CPF é opcional para crianças.`;
+    }
+    rebuildHospedes(extras);
+  }
+
+  /* ── STEP NAV ── */
+  let currentStep = 1;
+
+  function setProgress(stepNum) {
+    ['2','3','4','5'].forEach(id => {
+      const ps = document.getElementById('ps-' + id);
+      if (!ps) return;
+      ps.classList.remove('active','done');
+      const s = parseInt(id);
+      if (s < stepNum) ps.classList.add('done');
+      else if (s === stepNum) ps.classList.add('active');
+    });
+    const pct = stepNum <= 1 ? 0 : Math.min(100, (stepNum - 1) * 25);
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  function nextStep(n) {
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    document.getElementById('step-' + n).classList.add('active');
+
+    setProgress(n);
+
+    currentStep = n;
+    if (n === 5) buildResumo();
+    window.scrollTo({ top: document.querySelector('.progress-wrap').offsetTop - 16, behavior: 'smooth' });
+  }
+
+  /* ── STEP 2 VALIDATION ── */
+  function validateStep2() {
+    let ok = true;
+    const required = [
+      { id: 't-nome',     err: 'err-t-nome',     label: 'nome completo' },
+      { id: 't-cpf',      err: 'err-t-cpf',      label: 'CPF' },
+      { id: 't-rg',       err: 'err-t-rg',       label: 'RG' },
+      { id: 't-endereco', err: null, label: '' },
+      { id: 't-bairro',   err: null, label: '' },
+      { id: 't-cidade',   err: null, label: '' },
+      { id: 't-estado',   err: null, label: '' },
+      { id: 't-cep',      err: null, label: '' },
+    ];
+    required.forEach(f => {
+      const el = document.getElementById(f.id);
+      const errEl = f.err ? document.getElementById(f.err) : null;
+      if (!el.value.trim()) {
+        el.classList.add('error');
+        if (errEl) errEl.style.display = 'block';
+        ok = false;
+      } else {
+        el.classList.remove('error');
+        if (errEl) errEl.style.display = 'none';
+      }
+    });
+    if (ok) nextStep(4);
+  }
+
+  /* ── STEP 3: HOSPEDES ── */
+  let hospedeCount = 0;
+  const hospedesData = [];
+
+  function rebuildHospedes(needed) {
+    const container = document.getElementById('hospedes-container');
+    // Ajusta a quantidade de cards
+    while (hospedesData.length < needed) hospedesData.push({ nome: '', cpf: '' });
+    while (hospedesData.length > needed) hospedesData.pop();
+    renderHospedeCards();
+    document.getElementById('add-btn').style.display = needed < 10 ? 'flex' : 'none';
+  }
+
+  function renderHospedeCards() {
+    const container = document.getElementById('hospedes-container');
+    container.innerHTML = '';
+    hospedesData.forEach((h, i) => {
+      const card = document.createElement('div');
+      card.className = 'hospede-card';
+      card.innerHTML = `
+        <div class="hospede-card-title">
+          Hóspede ${i + 2}
+          ${hospedesData.length > 0 ? `<button class="remove-hospede" onclick="removeHospede(${i})">✕</button>` : ''}
+        </div>
+        <div class="field-group">
+          <label>Nome Completo <span>*</span></label>
+          <input type="text" id="h-nome-${i}" placeholder="Nome completo" value="${h.nome}" oninput="saveHospede(${i},'nome',this.value)">
+        </div>
+        <div class="field-group">
+          <label>CPF <span style="color:var(--texto-claro);font-weight:300">(opcional para crianças)</span></label>
+          <input type="text" id="h-cpf-${i}" placeholder="000.000.000-00" maxlength="14" value="${h.cpf}" oninput="maskCPF(this);saveHospede(${i},'cpf',this.value)">
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function saveHospede(i, field, val) { hospedesData[i][field] = val; }
+
+  function addHospede() {
+    hospedesData.push({ nome: '', cpf: '' });
+    renderHospedeCards();
+  }
+
+  function removeHospede(i) {
+    hospedesData.splice(i, 1);
+    renderHospedeCards();
+  }
+
+  /* ── RESUMO ── */
+  function buildResumo() {
+    // Sync hospede values from DOM
+    hospedesData.forEach((h, i) => {
+      const nEl = document.getElementById('h-nome-' + i);
+      const cEl = document.getElementById('h-cpf-' + i);
+      if (nEl) h.nome = nEl.value;
+      if (cEl) h.cpf = cEl.value;
+    });
+
+    const t = {
+      nome: val('t-nome'), cpf: val('t-cpf'), rg: val('t-rg'),
+      endereco: val('t-endereco'), bairro: val('t-bairro'),
+      cidade: val('t-cidade'), estado: val('t-estado'), cep: val('t-cep'),
+    };
+
+    let html = `
+      <div class="resumo-section">
+        <div class="resumo-section-title">Reserva</div>
+        <div class="resumo-row"><span class="resumo-key">Apartamento</span><span class="resumo-val">Flat Aldeia do Lago — ${currentApto}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Check-in</span><span class="resumo-val">${checkinVal || '—'}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Check-out</span><span class="resumo-val">${checkoutVal || '—'}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Adultos</span><span class="resumo-val">${counts.adultos}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Crianças</span><span class="resumo-val">${counts.criancas}</span></div>
+      </div>
+      <div class="resumo-section">
+        <div class="resumo-section-title">Titular da Reserva</div>
+        <div class="resumo-row"><span class="resumo-key">Nome</span><span class="resumo-val">${t.nome}</span></div>
+        <div class="resumo-row"><span class="resumo-key">CPF</span><span class="resumo-val">${t.cpf}</span></div>
+        <div class="resumo-row"><span class="resumo-key">RG</span><span class="resumo-val">${t.rg}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Endereço</span><span class="resumo-val">${t.endereco}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Bairro</span><span class="resumo-val">${t.bairro}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Cidade</span><span class="resumo-val">${t.cidade}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Estado</span><span class="resumo-val">${t.estado}</span></div>
+        <div class="resumo-row"><span class="resumo-key">CEP</span><span class="resumo-val">${t.cep}</span></div>
+      </div>`;
+
+    if (hospedesData.length > 0) {
+      html += `<div class="resumo-section"><div class="resumo-section-title">Demais Hóspedes</div>`;
+      hospedesData.forEach((h, i) => {
+        html += `
+          <div class="resumo-hospede-card">
+            <div class="resumo-hospede-nome">${h.nome || '(nome não informado)'}</div>
+            <div class="resumo-hospede-cpf">CPF: ${h.cpf || 'não informado'}</div>
+          </div>`;
+      });
+      html += `</div>`;
+    }
+
+    document.getElementById('resumo-content').innerHTML = html;
+  }
+
+  /* ── WHATSAPP ── */
+  function sendWhatsApp() {
+    if (!aceiteContrato) {
+      const e = document.getElementById('aceite-erro');
+      e.style.display = 'block';
+      goTermos();
+      return;
+    }
+    const t = {
+      nome: val('t-nome'), cpf: val('t-cpf'), rg: val('t-rg'),
+      endereco: val('t-endereco'), bairro: val('t-bairro'),
+      cidade: val('t-cidade'), estado: val('t-estado'), cep: val('t-cep'),
+    };
+
+    let msg = `✅ *DADOS PARA CHECK-IN*\n`;
+    msg += `🏠 Flat Aldeia do Lago — *${currentApto}*\n`;
+    if (checkinVal)  msg += `📅 Check-in: *${checkinVal}* (14h)\n`;
+    if (checkoutVal) msg += `📅 Check-out: *${checkoutVal}* (11h)\n`;
+    msg += `\n`;
+    msg += `👥 *COMPOSIÇÃO DO GRUPO*\n`;
+    msg += `• Adultos: ${counts.adultos}\n`;
+    msg += `• Crianças: ${counts.criancas}\n`;
+    msg += `\n`;
+    msg += `📋 *TITULAR DA RESERVA*\n`;
+    msg += `• Nome: ${t.nome}\n`;
+    msg += `• CPF: ${t.cpf}\n`;
+    msg += `• RG: ${t.rg}\n`;
+    msg += `• Endereço: ${t.endereco}, ${t.bairro}\n`;
+    msg += `• Cidade: ${t.cidade}${t.estado ? ' - ' + t.estado : ''} — CEP: ${t.cep}\n`;
+
+    if (hospedesData.length > 0) {
+      msg += `\n👤 *DEMAIS HÓSPEDES*\n`;
+      hospedesData.forEach((h, i) => {
+        msg += `${i + 2}. ${h.nome || '(sem nome)'}`;
+        if (h.cpf) msg += ` — CPF: ${h.cpf}`;
+        msg += `\n`;
+      });
+    }
+
+    msg += contratoTexto();
+    msg += `\n_Enviado pelo formulário de check-in online · aluGO_`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+    // Auto-redirect to guide after 2s with countdown
+    let secs = 2;
+    const cntEl = document.getElementById('cnt');
+    const ticker = setInterval(() => {
+      secs--;
+      if (cntEl) cntEl.textContent = secs;
+      if (secs <= 0) {
+        clearInterval(ticker);
+        window.location.href = 'https://pedpaz.github.io/Guias-alugo/guia-aldeia-306h.html';
+      }
+    }, 1000);
+
+    // Show success
+    document.getElementById('step-7').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    ['2','3','4','5'].forEach(i => {
+      const m = document.getElementById('ps-' + i);
+      if (m) { m.classList.remove('active'); m.classList.add('done'); }
+    });
+    document.getElementById('progress-bar').style.width = '100%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+
+  /* ── INICIAR ── */
+  function iniciarCheckin() {
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('flow-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'instant' in document.documentElement.style ? 'instant' : 'auto' });
+  }
+
+  /* ── ACEITE / NAV CONTRATO ── */
+  let aceiteContrato = false;
+  function toggleAceite() {
+    aceiteContrato = !aceiteContrato;
+    document.getElementById('aceite-box').classList.toggle('checked', aceiteContrato);
+    if (aceiteContrato) document.getElementById('aceite-erro').style.display = 'none';
+  }
+
+  function showStepRaw(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    setProgress(n);
+    currentStep = n;
+    window.scrollTo({ top: document.querySelector('.progress-wrap').offsetTop - 16, behavior: 'smooth' });
+  }
+
+  function goTermos() { showStepRaw(6); }
+
+  function goContrato() {
+    if (!aceiteContrato) {
+      const e = document.getElementById('aceite-erro');
+      e.style.display = 'block';
+      e.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    buildContrato();
+    showStepRaw(7);
+  }
+
+  /* ── CONTRATO ── */
+  function buildContrato() {
+    const t = {
+      nome: val('t-nome'), cpf: val('t-cpf'), rg: val('t-rg'),
+      endereco: val('t-endereco'), bairro: val('t-bairro'),
+      cidade: val('t-cidade'), estado: val('t-estado'), cep: val('t-cep'),
+    };
+    const info = aptoInfo();
+    const hoje = new Date().toLocaleDateString('pt-BR');
+    const cidadeUf = t.cidade + (t.estado ? ' - ' + t.estado : '');
+    const enderecoFull = [t.endereco, t.bairro, cidadeUf, t.cep].filter(Boolean).join(', ');
+
+    const html = `
+      <h3>Contrato de Locação por Temporada</h3>
+      <div class="ct-sub">Flat Aldeia do Lago · Caldas Novas — GO</div>
+
+      <div class="ct-grid">
+        <div class="ct-block"><span class="ct-label">Locadora</span>aluGO — Gestão de imóveis para temporada</div>
+        <div class="ct-block"><span class="ct-label">Imóvel</span>Flat Aldeia do Lago — Apto <b>${currentApto}</b> (${info.quartos} quarto${info.quartos>1?'s':''})</div>
+        <div class="ct-block"><span class="ct-label">Locatário(a)</span>${t.nome || '—'}</div>
+        <div class="ct-block"><span class="ct-label">CPF / RG</span>${t.cpf || '—'} / ${t.rg || '—'}</div>
+        <div class="ct-block" style="grid-column:1/-1"><span class="ct-label">Endereço do locatário</span>${enderecoFull || '—'}</div>
+        <div class="ct-block"><span class="ct-label">Check-in</span>${checkinVal || '—'} · a partir das 14h</div>
+        <div class="ct-block"><span class="ct-label">Check-out</span>${checkoutVal || '—'} · até as 11h</div>
+        <div class="ct-block"><span class="ct-label">Hóspedes</span>${counts.adultos} adulto(s) e ${counts.criancas} criança(s)</div>
+        <div class="ct-block"><span class="ct-label">Taxa de acesso (pulseiras)</span>R$ ${info.taxa},00 · em dinheiro na guarita</div>
+      </div>
+
+      <hr class="ct-hr">
+
+      <div class="ct-clausula"><b>1. Do objeto.</b> A LOCADORA cede ao(à) LOCATÁRIO(A), a título de locação por temporada, o imóvel mobiliado acima identificado, para uso residencial transitório dos hóspedes declarados.</div>
+      <div class="ct-clausula"><b>2. Do prazo.</b> A locação vigora do check-in (a partir das 14h da data de entrada) ao check-out (até as 11h da data de saída), caracterizando locação por temporada nos termos do art. 48 da Lei nº 8.245/1991. <b>O imóvel é liberado somente a partir das 14h, não sendo possível a entrada antecipada.</b></div>
+      <div class="ct-clausula"><b>3. Do valor.</b> O valor da estadia foi acordado e quitado pela plataforma de reserva ou diretamente com a LOCADORA. Não há valores de locação a pagar no local, ressalvadas as taxas previstas neste contrato.</div>
+      <div class="ct-clausula"><b>4. Da finalidade.</b> O imóvel destina-se exclusivamente à hospedagem temporária dos hóspedes declarados, sendo vedada a sublocação, a cessão a terceiros e a realização de festas, eventos ou qualquer uso comercial.</div>
+      <div class="ct-clausula"><b>5. Da ocupação máxima.</b> A capacidade máxima é de <b>${info.maxPessoas} pessoas</b>. A presença de pessoas além do declarado/permitido sujeita o(a) LOCATÁRIO(A) à <span class="mult">multa de R$ 200,00</span> e à possível rescisão imediata, sem reembolso.</div>
+      <div class="ct-clausula"><b>6. Do check-out.</b> A desocupação deve ocorrer até as 11h da data de saída. Após esse horário não é permitida a permanência no imóvel nem nas áreas comuns e piscinas do condomínio, uma vez que é necessário dar baixa na reserva e preparar o imóvel para o próximo hóspede. A saída após o horário sem autorização prévia da LOCADORA acarretará <span class="mult">multa de R$ 200,00</span> (late check-out).</div>
+      <div class="ct-clausula"><b>7. Da taxa de acesso (pulseiras).</b> O condomínio cobra taxa de acesso paga <b>em dinheiro na guarita</b>: R$ 40,00 (apto de 1 quarto) e R$ 50,00 (apto de 2 quartos). Para este imóvel: <b>R$ ${info.taxa},00</b> por estadia. <b>O pagamento é aceito somente em dinheiro — não há máquina de cartão nem cobrança por Pix.</b></div>
+      <div class="ct-clausula"><b>8. Das regras do condomínio.</b> O(A) LOCATÁRIO(A) compromete-se a respeitar o regulamento interno, o silêncio e o uso adequado das áreas comuns. O uso da <b>churrasqueira</b> é permitido mediante custo adicional e consulta prévia. A <b>pesca</b> é permitida nas áreas do condomínio, não incluído o equipamento.</div>
+      <div class="ct-clausula"><b>9. Da roupa de cama.</b> O imóvel <b>não inclui roupa de cama</b>. O(A) LOCATÁRIO(A) deverá trazer a sua ou alugá-la na recepção, conforme disponibilidade.</div>
+      <div class="ct-clausula"><b>10. Da conservação e vistoria.</b> O imóvel é entregue limpo e em perfeito estado. O(A) LOCATÁRIO(A) obriga-se a devolvê-lo nas mesmas condições, respondendo por danos, faltas ou avarias causados durante a estadia.</div>
+      <div class="ct-clausula"><b>11. Dos animais.</b> <b>Não é permitida</b> a entrada ou permanência de animais de estimação (pets) no imóvel.</div>
+      <div class="ct-clausula"><b>12. Do cancelamento.</b> Cancelamentos, no-show e reembolsos seguem as políticas da plataforma de reserva utilizada ou o que houver sido acordado diretamente com a LOCADORA.</div>
+      <div class="ct-clausula"><b>13. Do foro.</b> Fica eleito o foro da Comarca de Caldas Novas/GO para dirimir quaisquer questões oriundas deste contrato.</div>
+
+      <hr class="ct-hr">
+      <div class="ct-aceite-line">Caldas Novas/GO, ${hoje}. O preenchimento deste formulário e o aceite eletrônico registram a integral concordância do(a) LOCATÁRIO(A) com as cláusulas acima, dispensada assinatura física.</div>
+    `;
+    document.getElementById('print-area').innerHTML = html;
+  }
+
+  function printContrato() {
+    const area = document.getElementById('print-area');
+    if (!area.innerHTML.trim()) buildContrato();
+    window.print();
+  }
+
+  function contratoTexto() {
+    const info = aptoInfo();
+    const hoje = new Date().toLocaleDateString('pt-BR');
+    let c = '\n———————————————\n';
+    c += '✔️ *TERMOS DO CONTRATO — CIÊNCIA DO HÓSPEDE*\n';
+    c += `O titular declarou ter lido e aceito integralmente o Contrato de Locação por Temporada (Flat Aldeia do Lago · Apto ${currentApto}), concordando com:\n\n`;
+    c += '• *Entrada* a partir das 14h — não é possível entrar antes\n';
+    c += '• *Saída* até as 11h — sem permanecer no imóvel ou nas piscinas após o horário (multa R$ 200)\n';
+    c += `• *Ocupação máxima* de ${info.maxPessoas} pessoas — excedente: multa R$ 200\n`;
+    c += `• *Taxa de acesso* R$ ${info.taxa},00 por estadia — somente em dinheiro na guarita (sem Pix nem cartão)\n`;
+    c += '• *Roupa de cama* não incluída\n';
+    c += '• *Animais (pets)* não são permitidos\n';
+    c += '• *Churrasqueira* com custo adicional sob consulta · *pesca* permitida (sem equipamento)\n';
+    c += '• Responsável por *danos ou avarias* durante a estadia\n';
+    c += `\n✅ Aceite eletrônico em ${hoje} — dispensa assinatura física.\n`;
+    c += '———————————————\n';
+    return c;
+  }
+
+  /* ── MASKS ── */
+  function maskCPF(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,11);
+    if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/,'$1.$2.$3-$4');
+    else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{0,3})/,'$1.$2.$3');
+    else if (v.length > 3) v = v.replace(/(\d{3})(\d{0,3})/,'$1.$2');
+    el.value = v;
+  }
+  function maskCEP(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,8);
+    if (v.length > 5) v = v.replace(/(\d{5})(\d{0,3})/,'$1-$2');
+    el.value = v;
+  }
+
+  function val(id) { return (document.getElementById(id)||{}).value || ''; }
+
+  /* ── INIT ── */
+  if (nomeParam) document.getElementById('t-nome').value  = nomeParam;
+  document.getElementById('ci-taxa-valor').textContent = `R$ ${aptoInfo().taxa},00`;
+  refreshStep3Desc();
+
+  // ── DATE STEP ──────────────────────────────────────────────────────────
+  function formatDateBR(isoStr) {
+    if (!isoStr) return '';
+    const [y, m, d] = isoStr.split('-');
+    return d + '/' + m + '/' + y;
+  }
+
+  function onDateChange() { /* datas são revisadas no passo de datas e no resumo */ }
+
+  function validarDatas() {
+    const ciEl = document.getElementById('input-checkin');
+    const coEl = document.getElementById('input-checkout');
+    const erroEl = document.getElementById('erro-datas');
+    const ci = ciEl.value;
+    const co = coEl.value;
+    if (!ci || !co) {
+      erroEl.style.display = 'block';
+      erroEl.textContent = 'Por favor, preencha as duas datas.';
+      return;
+    }
+    if (co <= ci) {
+      erroEl.style.display = 'block';
+      erroEl.textContent = 'A data de saída deve ser após a data de entrada.';
+      return;
+    }
+    erroEl.style.display = 'none';
+    // update global vars used in WhatsApp message
+    checkinVal  = formatDateBR(ci);
+    checkoutVal = formatDateBR(co);
+    nextStep(2);
+  }
+  // ───────────────────────────────────────────────────────────────────────
+
+  // Pre-fill date inputs from URL params
+  (function() {
+    const ci = params.get('checkin');
+    const co = params.get('checkout');
+    if (ci) {
+      // convert dd/mm/yyyy or yyyy-mm-dd to yyyy-mm-dd for input
+      let iso = ci;
+      if (ci.includes('/')) {
+        const [d,m,y] = ci.split('/');
+        iso = y + '-' + m.padStart(2,'0') + '-' + d.padStart(2,'0');
+      }
+      const el = document.getElementById('input-checkin');
+      if (el) el.value = iso;
+    }
+    if (co) {
+      let iso = co;
+      if (co.includes('/')) {
+        const [d,m,y] = co.split('/');
+        iso = y + '-' + m.padStart(2,'0') + '-' + d.padStart(2,'0');
+      }
+      const el = document.getElementById('input-checkout');
+      if (el) el.value = iso;
+    }
+    if (ci || co) onDateChange();
+  })();
+
+</script>
+</body>
+</html>
