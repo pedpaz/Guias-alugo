@@ -1122,7 +1122,8 @@
 
     <div class="contrato-doc" id="print-area"></div>
 
-    <div class="btn-row">
+    <div style="background:#fff;border:1px solid rgba(196,129,58,.35);border-left:4px solid var(--termal);border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 4px 16px rgba(10,42,58,.06);"><div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--lago);margin-bottom:3px;">Como concluir seu check-in</div><div style="font-size:13px;color:var(--texto-claro);margin-bottom:14px;">Seu check-in só é registrado quando a mensagem chega até nós pelo WhatsApp:</div><div style="display:flex;gap:11px;align-items:flex-start;margin-bottom:10px;"><span style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--lago);color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">1</span><div style="font-size:13.5px;color:var(--texto);">Toque no botão verde abaixo — ele abre o WhatsApp da aluGO.</div></div><div style="display:flex;gap:11px;align-items:flex-start;margin-bottom:10px;"><span style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--lago);color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">2</span><div style="font-size:13.5px;color:var(--texto);">Sua mensagem já vem pronta com seus dados.</div></div><div style="display:flex;gap:11px;align-items:flex-start;"><span style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#25D366;color:#fff;font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">3</span><div style="font-size:13.5px;color:var(--texto);"><b>Toque em ENVIAR (➤) dentro do WhatsApp.</b> É este passo que conclui o check-in — sem ele, não recebemos nada.</div></div><div style="display:flex;gap:9px;align-items:flex-start;background:rgba(196,129,58,.10);border-radius:9px;padding:12px 13px;margin-top:14px;"><span style="font-size:15px;">⚠️</span><div style="font-size:12.5px;color:#7a5327;line-height:1.5;">Enquanto você não enviar a mensagem no WhatsApp, não recebemos seu check-in e a portaria não consegue liberar seu acesso.</div></div></div>
+      <div class="btn-row">
       <button class="btn-secondary" onclick="goTermos()">← Voltar</button>
       <button class="btn-whatsapp" onclick="sendWhatsApp()">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1284,7 +1285,24 @@
         if (errEl) errEl.style.display = 'none';
       }
     });
-    if (ok) nextStep(4);
+    {
+      var _stp = document.getElementById('step-'+currentStep) || document.querySelector('.step.active') || document;
+      var _ge = document.getElementById('step2-erro-auto');
+      if (ok) { if(_ge) _ge.style.display='none'; nextStep(4); }
+      else {
+        if (!_ge) {
+          _ge = document.createElement('div');
+          _ge.id = 'step2-erro-auto';
+          _ge.style.cssText = 'background:#fbeae5;border:1px solid #e0a08a;color:#b4451f;padding:12px 14px;border-radius:10px;font-size:14px;margin:14px 0;line-height:1.5;';
+          var _btn = _stp.querySelector('.btn-primary') || _stp.querySelector('button');
+          if (_btn && _btn.parentNode) _btn.parentNode.parentNode.insertBefore(_ge, _btn.parentNode); else _stp.appendChild(_ge);
+        }
+        _ge.innerHTML = '\u26a0\ufe0f Selecione/preencha os campos obrigat\u00f3rios destacados em vermelho \u2014 inclusive o <strong>Estado</strong>.';
+        _ge.style.display = 'block';
+        var _first = _stp.querySelector('.error');
+        if (_first) { _first.scrollIntoView({behavior:'smooth', block:'center'}); try{_first.focus();}catch(e){} }
+      }
+    }
   }
 
   /* ── STEP 3: HOSPEDES ── */
