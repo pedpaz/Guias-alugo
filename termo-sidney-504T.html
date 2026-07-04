@@ -150,7 +150,7 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
     <p class="screen-sub">Nome e CPF de cada hóspede — usados no cadastro do reconhecimento facial na recepção.</p>
     <div class="card">
       <div id="guests-list"></div>
-      <button class="btn btn-ghost" id="addGuest" type="button" style="margin-top:6px">+ Adicionar hóspede <span style="opacity:.55;font-weight:500">(máx. 4)</span></button>
+      <button class="btn btn-ghost" id="addGuestBtn" type="button" onclick="addGuest()" style="margin-top:6px">+ Adicionar hóspede <span style="opacity:.55;font-weight:500">(máx. 4)</span></button>
     </div>
     <div class="btnrow"><button class="btn btn-primary" onclick="next1()">Continuar →</button></div>
   </div>
@@ -246,9 +246,9 @@ function guestHTML(i){return `<div class="guest-card" id="g-${i}">
   <div class="field"><label>Nome completo${i===1?' *':''}</label><input type="text" id="nome${i}" placeholder="Nome completo"></div>
   <div class="field" style="margin-bottom:0"><label>CPF${i===1?' *':''}</label><input type="text" id="cpf${i}" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" oninput="maskCPF(this)"></div>
 </div>`;}
-function addGuest(){if(gc>=4)return;gc++;document.getElementById('guests-list').insertAdjacentHTML('beforeend',guestHTML(gc));document.getElementById('addGuest').style.display=gc>=4?'none':'block';}
+function addGuest(){if(gc>=4)return;gc++;document.getElementById('guests-list').insertAdjacentHTML('beforeend',guestHTML(gc));document.getElementById('addGuestBtn').style.display=gc>=4?'none':'block';}
 function removeGuest(i){const el=document.getElementById('g-'+i);if(el)el.remove();gc--;
-  /* renumber */ const list=document.getElementById('guests-list');list.innerHTML='';gc=0;addGuest();document.getElementById('addGuest').style.display='block';}
+  /* renumber */ const list=document.getElementById('guests-list');list.innerHTML='';gc=0;addGuest();document.getElementById('addGuestBtn').style.display='block';}
 addGuest();
 /* NAV */
 function setStepper(n){document.querySelectorAll('.step').forEach(s=>{const d=+s.dataset.s;s.classList.toggle('active',d===n);s.classList.toggle('done',d<n);});}
