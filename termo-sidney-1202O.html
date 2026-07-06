@@ -237,7 +237,7 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
 </div>
 
 <script>
-const WPP='5562981771013';
+const WPP='5562982545453';
 function maskCPF(el){let v=el.value.replace(/\D/g,'');v=v.replace(/(\d{3})(\d)/,'$1.$2');v=v.replace(/(\d{3})(\d)/,'$1.$2');v=v.replace(/(\d{3})(\d{1,2})$/,'$1-$2');el.value=v;}
 /* GUESTS */
 let gc=0;
@@ -313,6 +313,6 @@ function finalizar(){
   window.scrollTo({top:0,behavior:'smooth'});
   abrirWhats();
 }
-function abrirWhats(){if(_url)window.open(_url,'_blank');}
+function abrirWhats(){if(_url)(function(W){var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(_url);}
 </script>
 </body></html>

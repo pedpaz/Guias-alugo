@@ -1160,7 +1160,7 @@
 
 <script>
   /* ── CONFIG ── */
-  const WHATSAPP_NUMBER = '5562981771013';
+  const WHATSAPP_NUMBER = '5562982545453';
   const APTOS = {
     '103A': { quartos: 1, maxPessoas: 5, taxa: 40 },
     '405A': { quartos: 1, maxPessoas: 5, taxa: 40 },
@@ -1449,7 +1449,7 @@
     msg += `\n_Enviado pelo formulário de check-in online · aluGO_`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
+    (function(W){var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(url);
     // Auto-redirect to guide after 2s with countdown
     let secs = 2;
     const cntEl = document.getElementById('cnt');
