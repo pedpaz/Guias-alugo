@@ -1859,7 +1859,24 @@ footer {
   <a href="#contato" class="ni"><svg class="ico" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contato</a>
 </div></nav>
 
-<main>
+<main><style>
+.guide-intro{background:var(--bg-2);border:1px solid var(--rule);border-radius:16px;padding:24px 20px;}
+.gi-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:9px;}
+.gi-title{font-family:var(--font-display);font-variation-settings:var(--fr-soft);font-size:1.5rem;color:var(--text);margin-bottom:9px;line-height:1.12;}
+.gi-text{font-size:.88rem;color:var(--text-2);line-height:1.65;margin-bottom:20px;}
+.gi-steps{display:flex;flex-direction:column;gap:10px;}
+.gi-step{display:flex;align-items:center;gap:13px;padding:13px 14px;background:var(--bg-3);border:1px solid var(--rule);border-radius:11px;text-decoration:none;transition:border-color .2s;}
+.gi-step:hover{border-color:var(--rule-hi);}
+.gi-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--amber-lo);color:var(--amber);border:1px solid var(--rule-hi);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1rem;}
+.gi-step-txt{flex:1;}
+.gi-step-txt b{display:block;color:var(--text);font-size:.86rem;font-weight:600;margin-bottom:1px;}
+.gi-step-txt span{display:block;color:var(--text-3);font-size:.76rem;line-height:1.4;}
+.gi-chev{width:16px;height:16px;color:var(--text-3);flex-shrink:0;}
+</style>
+
+<div class="wrap" style="padding-top:26px;">
+<div class="guide-intro"><div class="gi-eyebrow">Como funciona</div><div class="gi-title">Seu guia digital da estadia</div><div class="gi-text">Aqui está tudo o que você precisa para uma estadia tranquila — acesso, Wi-Fi, comodidades, regras e dicas. Três momentos pedem a sua ação:</div><div class="gi-steps"><a class="gi-step" href="#cadastro"><span class="gi-num">1</span><div class="gi-step-txt"><b>Antes de chegar</b><span>Faça seu check-in online — é o que libera o seu acesso.</span></div><svg class="gi-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></a><a class="gi-step" href="#cadastro"><span class="gi-num">2</span><div class="gi-step-txt"><b>Ao entrar</b><span>Faça a vistoria de entrada e registre qualquer detalhe.</span></div><svg class="gi-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></a><a class="gi-step" href="#checkout"><span class="gi-num">3</span><div class="gi-step-txt"><b>Ao sair</b><span>Confira a saída e avise o seu check-out por aqui.</span></div><svg class="gi-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></a></div></div></div>
+
 
 <div class="wrap" style="padding-top:30px;">
   <div class="essentials reveal">
@@ -1868,7 +1885,7 @@ footer {
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><div><span class="ess-k">Wi-Fi</span><span class="ess-v">QS Marista Hóspedes</span><span class="ess-sub">senha: Bemvindo2022</span></div></div>
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M3 9h18"/></svg></div><div><span class="ess-k">Acesso</span><span class="ess-v">Cartão na recepção</span><span class="ess-sub">Recepção 24h</span></div></div>
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20"/></svg></div><div><span class="ess-k">Suíte</span><span class="ess-v">1310</span><span class="ess-sub">13º andar</span></div></div>
-      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div><div><span class="ess-k">Check-in / out</span><span class="ess-v">15h / 12h</span></div></div>
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div><div><span class="ess-k">Check-in / out</span><span class="ess-v">15h / 12h</span></div></div><div class="ess-item" style="grid-column:span 2;"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><span class="ess-k">Tomadas</span><span class="ess-v">220V</span><span class="ess-sub">confira a voltagem dos seus aparelhos</span></div></div>
     </div>
     <div class="ess-note reveal">
       <a href="#acesso" class="ess-note-link"><span><b>Como retirar seu cartão de acesso?</b></span><span style="white-space:nowrap">Ver passo a passo →</span></a>
@@ -1938,6 +1955,7 @@ footer {
     <div class="d-row"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><text x="12" y="16" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">2</text></svg><div><div class="d-head">Identifique-se como hóspede da Suíte 1310</div><div class="d-body">Com seu pré-cadastro feito (check-in online), é só apresentar um documento com foto.</div></div></div>
     <div class="d-row"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><text x="12" y="16" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">3</text></svg><div><div class="d-head">Retire seu cartão magnético</div><div class="d-body">Use o cartão para acessar o elevador e a porta da suíte durante toda a estadia.</div></div></div>
   </div>
+  <div class="note reveal" style="margin-top:18px;"><svg class="ico" viewBox="0 0 24 24"><path d="M5 17h14M6 17V9l2-4h8l2 4v8M7 21v-2M17 21v-2M8 9h8"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg><span><strong>Estacionamento:</strong> o hotel oferece estacionamento com manobrista, <strong>cobrado à parte</strong> (R$ 35,70). Consulte a recepção na chegada.</span></div>
   <div class="note reveal" style="margin-top:22px;"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Qualquer dúvida na chegada, a recepção e a aluGO (WhatsApp) estão à disposição 24h.</span></div>
 </section>
 
@@ -2032,6 +2050,19 @@ footer {
     <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Cartão de acesso devolvido na recepção</span></div>
     <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Avisar a aluGO no WhatsApp que finalizou</span></div>
   </div>
+
+  <style>
+.co-notify{margin-top:28px;position:relative;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));border:1px solid var(--rule-hi);border-radius:18px;padding:26px 22px 30px;text-align:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.55),0 8px 20px -8px rgba(0,0,0,.4);animation:coPulse 2.6s ease-in-out infinite;}
+@keyframes coPulse{0%,100%{transform:translateY(0);box-shadow:0 0 0 1px rgba(37,211,102,.22),0 0 20px -2px rgba(37,211,102,.30),0 18px 40px -12px rgba(0,0,0,.55);}50%{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(37,211,102,.55),0 0 44px 3px rgba(37,211,102,.62),0 24px 48px -12px rgba(0,0,0,.6);}}
+.co-pill{display:inline-block;background:rgba(217,107,87,.14);color:#e58a78;border:1px solid rgba(217,107,87,.4);font-size:.6rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:5px 13px;border-radius:20px;margin-bottom:14px;}
+.co-title{font-family:var(--font-display);font-variation-settings:var(--fr-soft);font-size:1.4rem;color:var(--text);margin-bottom:7px;line-height:1.1;}
+.co-sub{font-size:.85rem;color:var(--text-2);line-height:1.6;margin:0 auto 22px;max-width:34ch;}
+.co-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:18px;background:linear-gradient(180deg,#2ee06f,#20b757);color:#fff;border:none;border-radius:14px;font-family:var(--font-body);font-size:1.06rem;font-weight:800;letter-spacing:.02em;cursor:pointer;box-shadow:0 7px 0 #178f43,0 16px 26px -6px rgba(37,211,102,.55),0 2px 4px rgba(0,0,0,.25);transition:transform .09s ease,box-shadow .09s ease;-webkit-tap-highlight-color:transparent;}
+.co-btn::before{content:'';position:absolute;top:2px;left:8px;right:8px;height:38%;border-radius:12px 12px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.28),transparent);pointer-events:none;}
+.co-btn:active{transform:translateY(7px);box-shadow:0 1px 0 #178f43,0 6px 14px -6px rgba(37,211,102,.5),0 1px 2px rgba(0,0,0,.2);}
+.co-btn svg{width:23px;height:23px;fill:#fff;stroke:none;position:relative;}
+.co-hint{margin-top:13px;font-size:.7rem;color:var(--text-3);letter-spacing:.03em;}
+</style><div class="co-notify"><div class="co-pill">⚠ Antes de ir embora</div><div class="co-title">Confirme seu check-out</div><div class="co-sub">Toque para avisar que você saiu — é o que libera a limpeza e prepara tudo para o próximo hóspede. Leva 1 segundo. 💛</div><button class="co-btn" onclick="avisarCheckout()"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.2 3 2 3.1 4.9 4.3c2.4 1 2.9.8 3.4.8s1.7-.7 1.9-1.3.2-1.2.2-1.3-.2-.2-.5-.3z"/></svg> Avisar meu check-out</button><div class="co-hint">Um toque abre o WhatsApp com a mensagem pronta</div></div>
 </section>
 
 <!-- 10 BAIRRO -->
@@ -2088,6 +2119,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 
 /* VISTORIA */
 function toggleCheck(item){item.classList.toggle('done');}
+function avisarCheckout(){var msg='👋 Olá! Acabei de fazer o *check-out* do *Suíte 1310 · QS Marista*. Deixei tudo em ordem, muito obrigado(a)! 🔑';var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);(function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(W);}
+window.avisarCheckout=avisarCheckout;
 function enviarVistoria(){
   const items=[...document.querySelectorAll('.vist-item')];
   const ok=items.filter(i=>i.classList.contains('done')).map(i=>i.querySelector('.cl-text').textContent.trim());
@@ -2123,6 +2156,8 @@ window.toggleCheck=toggleCheck;window.enviarVistoria=enviarVistoria;
 </div>
 <script>
 const KB=[
+ {keys:['estacionamento','vaga','garagem','manobrista','carro','onde estaciono','parking'],answer:'O hotel oferece <strong>estacionamento com manobrista</strong>, cobrado à parte (R$ 35,70). Consulte o valor atual na recep\u00e7\u00e3o. \ud83d\ude97'},
+ {keys:['tomada','tomadas','voltagem','volts','220','220v','carregador','energia da tomada'],answer:'As tomadas são <strong>220V</strong>. Confira a voltagem dos seus aparelhos e carregadores antes de ligar. ⚡'},
  {keys:['wifi','wi-fi','internet','rede','senha wifi','senha da rede','conectar'],answer:'A rede é <strong>QS Marista Hóspedes</strong> e a senha é <strong>Bemvindo2022</strong>. Boa navegação! 📶'},
  {keys:['acesso','cartao','cartão','entrar','chave','porta','como entro','recepcao','recepção'],answer:'O acesso é por <strong>cartão magnético</strong>: vá à recepção (térreo, 24h), identifique-se como hóspede da <strong>Suíte 1310</strong> e retire seu cartão. Ele abre o elevador e a porta da suíte. 🪪'},
  {keys:['check-in','checkin','entrada','horario chegada','que horas posso chegar'],answer:'O check-in é a partir das <strong>15h</strong>. Faça o check-in online antes para agilizar o pré-cadastro na recepção. ⏰'},
