@@ -1408,6 +1408,7 @@
 
   /* ── WHATSAPP ── */
   function sendWhatsApp() {
+    enviarCheckinLoftcare();
     if (!aceiteContrato) {
       const e = document.getElementById('aceite-erro');
       e.style.display = 'block';
@@ -1665,6 +1666,37 @@
     if (ci || co) onDateChange();
   })();
 
+</script>
+<script>
+function enviarCheckinLoftcare() {
+  try {
+    var v = function(id){ var el=document.getElementById(id); return el ? (el.value||'').trim() : ''; };
+    var c = function(id){ var el=document.getElementById(id); return !!(el && el.checked); };
+    var txt = function(id){ var el=document.getElementById(id); return el ? (el.textContent||'').trim() : ''; };
+    var hospedes = [];
+    document.querySelectorAll('[id^="h-nome-"]').forEach(function(el){
+      var i = el.id.replace('h-nome-','');
+      if ((el.value||'').trim()) hospedes.push({ nome: el.value.trim(), cpf: v('h-cpf-'+i) });
+    });
+    var payload = {
+      token: "COLE_O_TOKEN_AQUI",
+      unidade: "ADL-103A",
+      check_in: (typeof checkinVal !== 'undefined' && checkinVal) ? checkinVal : v('input-checkin'),
+      check_out: (typeof checkoutVal !== 'undefined' && checkoutVal) ? checkoutVal : v('input-checkout'),
+      hora_chegada: v('input-hora'),
+      adultos: parseInt(txt('val-adultos') || '0', 10),
+      criancas: parseInt(txt('val-criancas') || '0', 10),
+      titular: { nome:v('t-nome'), cpf:v('t-cpf'), rg:v('t-rg'), endereco:v('t-endereco'),
+        bairro:v('t-bairro'), cidade:v('t-cidade'), estado:v('t-estado'), cep:v('t-cep') },
+      hospedes: hospedes,
+      aceites: { taxa_ocupacao:c('chk-taxa'), roupa_cama:c('chk-cama'), contrato:true }
+    };
+    fetch("https://loftcare-os.vercel.app/api/public/checkin", {
+      method:"POST", keepalive:true, headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  } catch(e) {}
+}
 </script>
 </body>
 </html>
