@@ -1911,136 +1911,79 @@ footer {
 
 
 <!-- ════ 01 · CADASTRO ════ -->
+<style>
+.essentials{background:linear-gradient(135deg,var(--amber-lo),transparent);border:1px solid var(--rule-hi);border-radius:14px;padding:20px 18px;}
+.ess-title{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.ess-title svg{width:15px;height:15px;}
+.ess-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 14px;}
+.ess-item{display:flex;align-items:flex-start;gap:11px;}
+.ess-ic{width:36px;height:36px;border-radius:10px;background:var(--amber-lo);color:var(--amber);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ess-ic svg{width:18px;height:18px;}
+.ess-k{display:block;font-size:.58rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-3);margin-bottom:2px;}
+.ess-v{display:block;font-family:var(--font-display);font-variation-settings:var(--fr-soft);font-size:1.12rem;color:var(--text);line-height:1.15;word-break:break-word;}
+.ess-sub{display:block;font-size:.64rem;color:var(--text-3);margin-top:2px;}
+@media(max-width:380px){.ess-grid{grid-template-columns:1fr;}}
+.ess-note{margin-top:16px;}
+.ess-note-link{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.84rem;color:var(--amber);font-weight:600;text-decoration:none;border:1px solid var(--rule-hi);border-radius:10px;padding:13px 15px;background:var(--amber-lo);}
+.ess-note-link b{color:var(--text);font-weight:600;}
+.ess-info{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:.82rem;color:var(--text);line-height:1.6;background:var(--bg-2);border:1px solid var(--rule-hi);border-radius:10px;padding:13px 15px;}
+.ess-info svg{width:16px;height:16px;color:var(--amber);flex-shrink:0;margin-top:2px;}
+</style>
+<div class="wrap" style="padding-top:26px;">
+  <div class="essentials reveal">
+    <div class="ess-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Acesso rápido · o essencial</div>
+    <div class="ess-grid">
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><div><span class="ess-k">Wi-Fi</span><span class="ess-v">Macedo Paz</span><span class="ess-sub">senha: rotas1234</span></div></div>
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15 19 4"/><path d="m18 5 2 2"/><path d="m15 8 2 2"/></svg></div><div><span class="ess-k">Senha da porta</span><span class="ess-v">2255</span></div></div>
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div><div><span class="ess-k">Check-in / out</span><span class="ess-v">15h / 12h</span></div></div>
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><span class="ess-k">Tomadas</span><span class="ess-v">220V</span><span class="ess-sub">confira seus aparelhos</span></div></div>
+    </div>
+    <div class="ess-note reveal">
+      <a href="#acesso" class="ess-note-link"><span><b>Dificuldade para abrir a porta?</b></span><span style="white-space:nowrap">Ver passo a passo &rarr;</span></a>
+      <p class="ess-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Todas as informações da sua estadia estão neste guia — role a página ou use o menu acima.</p>
+    </div>
+  </div>
+</div>
 <section id="cadastro" data-num="01">
   <div class="sec-head reveal">
-    <div class="sec-eyebrow">
-      <span class="sec-eyebrow-num">01</span>
-      <span class="sec-eyebrow-rule"></span>
-      <span class="sec-eyebrow-label">Check-in</span>
-    </div>
-    <h2 class="sec-title">Cadastro <em>dos</em> Hóspedes</h2>
+    <div class="sec-eyebrow"><span class="sec-eyebrow-num">01</span><span class="sec-eyebrow-rule"></span><span class="sec-eyebrow-label">Check-in</span></div>
+    <h2 class="sec-title">Check-in <em>digital</em></h2>
   </div>
-
-  <div class="note reveal" style="margin-bottom:28px;">
-    <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <span><strong>Nome, CPF, datas e horário de chegada são obrigatórios.</strong> Envie antes da chegada — agiliza o cadastro de biometria na portaria. Após entrar no apartamento, preencha também a <strong>vistoria abaixo</strong> para garantir sua proteção.</span>
+  <p class="t-italic reveal" style="margin-bottom:24px;font-size:1.02rem;">Antes da chegada, preencha o termo de estadia — dados dos hóspedes para a biometria da portaria e ciência das regras. Leva 2 minutos.</p>
+  <div class="cta-card reveal" style="background:var(--bg-2);border:1px solid var(--rule-hi);border-radius:14px;padding:28px 22px;text-align:center;">
+    <div style="width:56px;height:56px;border-radius:50%;background:var(--amber-lo);color:var(--amber);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><svg class="ico" viewBox="0 0 24 24" style="width:26px;height:26px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+    <div style="font-family:var(--font-display);font-variation-settings:var(--fr-soft);font-weight:420;font-size:1.3rem;margin-bottom:9px;">Termo de Estadia · Duplex 2903</div>
+    <div style="font-size:.86rem;color:var(--text-2);line-height:1.6;margin:0 auto 22px;max-width:40ch;">Nome e CPF de cada hóspede + aceite das regras. Necessário para liberar a biometria na portaria.</div>
+    <a href="https://pedpaz.github.io/Guias-alugo/termo-2903-walk-bueno.html" class="btn-primary" style="text-decoration:none;"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Preencher termo de estadia</a>
   </div>
-
-  <div class="form-shell reveal">
-
-    <div class="guest-block" id="guest-1">
-      <div class="guest-tag">
-        <svg class="ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Hóspede Principal
-      </div>
-      <div class="f-row">
-        <label class="f-label">Nome Completo *</label>
-        <input class="f-input" type="text" id="nome1" placeholder="Nome completo" autocomplete="name">
-      </div>
-      <div class="f-row">
-        <label class="f-label">CPF *</label>
-        <input class="f-input" type="text" id="cpf1" placeholder="000.000.000-00" oninput="maskCPF(this)" inputmode="numeric" maxlength="14">
-      </div>
-    </div>
-
-    <div class="guest-block" id="guest-2" style="display:none">
-      <div class="guest-tag">Hóspede 2</div>
-      <div class="f-row">
-        <label class="f-label">Nome Completo</label>
-        <input class="f-input" type="text" id="nome2" placeholder="Nome completo">
-      </div>
-      <div class="f-row">
-        <label class="f-label">CPF</label>
-        <input class="f-input" type="text" id="cpf2" placeholder="000.000.000-00" oninput="maskCPF(this)" inputmode="numeric" maxlength="14">
-      </div>
-    </div>
-
-    <div class="guest-block" id="guest-3" style="display:none">
-      <div class="guest-tag">Hóspede 3</div>
-      <div class="f-row">
-        <label class="f-label">Nome Completo</label>
-        <input class="f-input" type="text" id="nome3" placeholder="Nome completo">
-      </div>
-      <div class="f-row">
-        <label class="f-label">CPF</label>
-        <input class="f-input" type="text" id="cpf3" placeholder="000.000.000-00" oninput="maskCPF(this)" inputmode="numeric" maxlength="14">
-      </div>
-    </div>
-
-    <div class="guest-block" id="guest-4" style="display:none">
-      <div class="guest-tag">Hóspede 4</div>
-      <div class="f-row">
-        <label class="f-label">Nome Completo</label>
-        <input class="f-input" type="text" id="nome4" placeholder="Nome completo">
-      </div>
-      <div class="f-row">
-        <label class="f-label">CPF</label>
-        <input class="f-input" type="text" id="cpf4" placeholder="000.000.000-00" oninput="maskCPF(this)" inputmode="numeric" maxlength="14">
-      </div>
-    </div>
-
-    <button class="btn-outline" id="addGuestBtn" onclick="addGuest()">
-      <svg class="ico ico-sm" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Adicionar hóspede
-    </button>
-
-    <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--rule);">
-      <div class="guest-tag">
-        <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Datas da Estadia *
-      </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-        <div class="f-row" style="margin-bottom:0;">
-          <label class="f-label">Check-in *</label>
-          <input class="f-input" type="date" id="dataCheckin" style="color-scheme:dark; cursor:pointer;">
-        </div>
-        <div class="f-row" style="margin-bottom:0;">
-          <label class="f-label">Check-out *</label>
-          <input class="f-input" type="date" id="dataCheckout" style="color-scheme:dark; cursor:pointer;">
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--rule);">
-      <div class="guest-tag">
-        <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Horário de Chegada *
-      </div>
-      <div class="f-row">
-        <label class="f-label">Horário estimado *</label>
-        <input class="f-input" type="time" id="horarioChegada" min="15:00" max="23:59" style="color-scheme:dark; cursor:pointer;">
-      </div>
-      <p style="font-size:.74rem; color:var(--text-3); margin-top:10px; line-height:1.65;">
-        ⓘ Check-in disponível <strong style="color:var(--text-2);">a partir das 15h</strong>. Se precisar chegar antes (early check-in), me avise pelo WhatsApp — sujeito à disponibilidade.
-      </p>
-    </div>
-
-    <button class="btn-primary" onclick="enviarCadastro()">
-      <svg class="ico" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      Enviar Cadastro
-    </button>
-
-  </div>
-
-  <!-- VISTORIA -->
-  <div style="margin-top:18px; border:1px solid var(--rule-hi); border-radius:14px; overflow:hidden;" class="reveal">
-    <div style="background:var(--bg-3); padding:20px; border-bottom:1px solid var(--rule);">
-      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
-        <div>
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
             <svg class="ico ico-lg" viewBox="0 0 24 24" style="color:var(--amber);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <span style="font-family:var(--font-body); font-size:.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--text);">Vistoria de Chegada</span>
           </div>
           <p style="font-family:var(--font-display); font-variation-settings:var(--fr-soft); font-style:italic; font-weight:300; font-size:.92rem; color:var(--text-2); line-height:1.7; max-width:380px;">
             Preencha <strong style="font-style:normal; font-family:var(--font-body); font-weight:600; color:var(--text);">após entrar no apartamento</strong>. Se notar qualquer item danificado ou fora do lugar, registre aqui — você fica protegido de cobranças por danos pré-existentes.
           </p>
+          <div style="display:flex; gap:11px; align-items:flex-start; margin-top:14px; background:var(--amber-lo); border:1px solid var(--rule-hi); border-radius:8px; padding:12px 14px;">
+            <svg class="ico" viewBox="0 0 24 24" style="color:var(--amber); margin-top:1px;"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p style="font-family:var(--font-body); font-size:.78rem; color:var(--text-2); line-height:1.6;">Caso a vistoria <strong style="color:var(--text);">não seja enviada</strong>, entenderemos que o apartamento foi recebido em <strong style="color:var(--text);">perfeitas condições e em total conformidade</strong>.</p>
+          </div>
         </div>
-        <span style="flex-shrink:0; font-family:var(--font-body); font-size:.55rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-3); background:var(--bg); border:1px solid var(--rule); border-radius:5px; padding:5px 10px; white-space:nowrap; margin-top:2px;">Opcional</span>
+        
       </div>
     </div>
 
     <div style="padding:22px 20px; background:var(--bg-2);">
-      <label style="display:block; font-family:var(--font-body); font-size:.6rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:10px;">O que você observou?</label>
+      <label style="display:block; font-family:var(--font-body); font-size:.6rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:10px;">Confira e marque os itens em ordem</label>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Cama, colchão e roupa de cama</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Sofá, estofados e decoração</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">TV, Alexa e cortinas elétricas</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Cozinha: cooktop, micro-ondas e geladeira</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Adega e cervejeira</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Banheiros e chuveiros</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Ar-condicionado e iluminação</span></div>
+      <div class="cl-item vist-item" onclick="toggleCheck(this)"><div class="cl-box"><span class="cl-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div><span class="cl-text">Limpeza geral</span></div>
+      <div style="height:16px"></div>
+      <label style="display:block; font-family:var(--font-body); font-size:.6rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--text-3); margin-bottom:10px;">Algo fora do lugar ou danificado? (opcional)</label>
       <textarea id="vistoria" rows="4"
         placeholder="Ex: Arranhão na lateral do sofá, lâmpada queimada no banheiro, mancha no tapete..."
         style="width:100%; background:var(--bg); border:1px solid var(--rule-hi); border-radius:9px; padding:13px 15px; color:var(--text); font-family:var(--font-body); font-size:14px; line-height:1.65; resize:vertical; min-height:96px; outline:none; transition:border-color .3s;"
@@ -2456,6 +2399,10 @@ footer {
     <h2 class="sec-title">Regras <em>da</em> Casa</h2>
   </div>
 
+  <div class="smoke-alert reveal" style="position:relative;display:flex;gap:14px;align-items:flex-start;background:linear-gradient(135deg,rgba(217,107,87,.16),rgba(212,160,92,.07));border:1px solid rgba(217,107,87,.45);border-radius:13px;padding:17px;margin-bottom:18px;overflow:hidden;">
+    <div style="flex-shrink:0;width:44px;height:44px;border-radius:50%;background:rgba(217,107,87,.18);border:1px solid rgba(217,107,87,.5);display:flex;align-items:center;justify-content:center;color:#e58a78;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><path d="M3 15h11M17 15h1.5a1.5 1.5 0 0 0 0-3H17M14 15v-3"/></svg></div>
+    <div><div style="font-family:var(--font-display);font-variation-settings:var(--fr-soft);font-weight:480;font-size:1.05rem;color:#f0a594;">🚭 Proibido fumar no apartamento</div><div style="font-size:.8rem;color:var(--text-2);line-height:1.5;margin-top:4px;">Inclui cigarro, narguilé e vape, em todos os ambientes. Descumprimento: <b style="color:#f0a594;">multa de 1 (um) salário mínimo vigente + higienização</b>.</div></div>
+  </div>
   <div class="card reveal">
     <div class="d-row">
       <svg class="ico" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -2861,16 +2808,24 @@ function enviarCadastro() {
   (function(W){var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})('https://wa.me/5562982545453?text=' + encodeURIComponent(msg));
 }
 
-function enviarVistoria() {
-  const v = document.getElementById('vistoria').value.trim();
-  if (!v) { alert('Descreva o que você observou no apartamento antes de enviar.'); return; }
-  let msg = '🔍 *VISTORIA DE CHEGADA — WALK BUENO 2903*\n';
-  msg += '━━━━━━━━━━━━━━━━━━━━\n\n' + v + '\n\n';
-  msg += '_⚠️ Hóspede registrou observações na chegada._\n';
-  msg += '_📸 Verifique se há fotos em sequência._';
-  (function(W){var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})('https://wa.me/5562982545453?text=' + encodeURIComponent(msg));
+function enviarVistoria(){
+  var items=[].slice.call(document.querySelectorAll('.vist-item'));
+  var ok=items.filter(function(i){return i.classList.contains('done');}).map(function(i){return i.querySelector('.cl-text').textContent.trim();});
+  var pend=items.filter(function(i){return !i.classList.contains('done');}).map(function(i){return i.querySelector('.cl-text').textContent.trim();});
+  var v=((document.getElementById('vistoria')||{}).value||'').trim();
+  if(ok.length===0 && !v){alert('Marque os itens conferidos ou descreva alguma observação antes de enviar.');return;}
+  var msg='\uD83D\uDD0D *VISTORIA DE CHEGADA \u2014 WALK BUENO 2903*\n';
+  msg+='\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n';
+  msg+='\u2705 *Itens conferidos (OK):*\n'+(ok.length?ok.map(function(x){return '\u2022 '+x;}).join('\n'):'\u2014')+'\n';
+  if(pend.length)msg+='\n\u2B1C *N\u00E3o conferidos:*\n'+pend.map(function(x){return '\u2022 '+x;}).join('\n')+'\n';
+  msg+='\n\uD83D\uDCDD *Observa\u00E7\u00F5es:*\n'+(v||'Nenhuma observa\u00E7\u00E3o relatada.')+'\n';
+  msg+='\n_\uD83D\uDCF8 Reforce com fotos na sequ\u00EAncia._';
+  var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);
+  (function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');
+  var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);
+  document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});
+  window.location.href=app;})(W);
 }
-
 function copyPix() {
   const btn = document.getElementById('pixBtn');
   const val = document.getElementById('pixKey').value;
