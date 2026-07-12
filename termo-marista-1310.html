@@ -288,6 +288,7 @@ function finalizar(){
   const typed=document.getElementById('signame').value.trim();
   if(!hasSig&&!typed){document.getElementById('f-signame').classList.add('has-error');alert('⚠️ Assine no quadro ou digite seu nome para concluir.');return;}
   const g=guests();const ass=typed||g[0]?.nome||'Locatário';const stamp=nowStamp();
+  enviarCheckinLoftcare();
   const placa=document.getElementById('placa').value.trim().toUpperCase();
   let m='*TERMO DE ESTADIA — QS MARISTA · SUÍTE 1310*\n';
   m+='━━━━━━━━━━━━━━━━━━━━\n\n*HÓSPEDES:*\n';
@@ -314,5 +315,26 @@ function finalizar(){
   abrirWhats();
 }
 function abrirWhats(){if(_url)(function(W){var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(_url);}
+</script>
+<script>
+function enviarCheckinLoftcare(){
+  try{
+    var g=[]; for(var i=1;i<=gc;i++){var n=document.getElementById('nome'+i),cc=document.getElementById('cpf'+i);
+      if(n&&n.value.trim())g.push({nome:n.value.trim(),cpf:cc?cc.value.trim():''});}
+    var t=g[0]||{};
+    var payload={ token:"COLE_O_TOKEN_AQUI", unidade:"QS-1310", tipo:"termo",
+      check_in:(document.getElementById('cin')||{}).value||'',
+      check_out:(document.getElementById('cout')||{}).value||'',
+      hora_chegada:(document.getElementById('chora')||{}).value||'',
+      titular:{nome:t.nome||'',cpf:t.cpf||''},
+      hospedes:g.slice(1),
+      placa:((document.getElementById('placa')||{}).value||'').toUpperCase(),
+      assinatura:((document.getElementById('signame')||{}).value||'').trim()||(t.nome||''),
+      aceites:{contrato:true,nao_fumar:true,sem_festas:true,capacidade:true,checkout:true}
+    };
+    fetch("https://loftcare-os.vercel.app/api/public/checkin",{method:"POST",keepalive:true,
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
+  }catch(e){}
+}
 </script>
 </body></html>
