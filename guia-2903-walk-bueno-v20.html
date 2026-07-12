@@ -2882,7 +2882,18 @@ function copyPix() {
 }
 
 function toggleCheck(item) { item.classList.toggle('done'); }
-function avisarCheckout(){var msg='👋 Olá! Acabei de fazer o *check-out* do *Walk Bueno 2903*. Deixei tudo em ordem, muito obrigado(a)! 🔑';var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);(function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(W);}
+function avisarCheckoutLoftcare(){
+  try{
+    var payload = { token: "COLE_O_TOKEN_AQUI", unidade: "WB-2903" };
+    fetch("https://loftcare-os.vercel.app/api/public/checkout", {
+      method:"POST", keepalive:true, headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  }catch(e){}
+}
+window.avisarCheckoutLoftcare=avisarCheckoutLoftcare;
+function avisarCheckout(){
+  avisarCheckoutLoftcare();var msg='👋 Olá! Acabei de fazer o *check-out* do *Walk Bueno 2903*. Deixei tudo em ordem, muito obrigado(a)! 🔑';var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);(function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(W);}
 window.avisarCheckout=avisarCheckout;
 
 // Compatibility: tag photos with class for vignette CSS (no :has needed)
