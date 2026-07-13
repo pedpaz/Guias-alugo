@@ -946,6 +946,48 @@
     .contato-btn.secondary { margin-left: 0; margin-top: 10px; }
   }
 </style>
+<style>
+/* ── PADRÃO aluGO ── */
+.gi{background:var(--branco);border:1px solid rgba(10,42,58,.10);border-radius:16px;padding:22px 20px;margin-bottom:18px;box-shadow:0 6px 20px rgba(10,42,58,.06);}
+.gi-eye{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--termal);margin-bottom:8px;}
+.gi-tt{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--lago);margin-bottom:8px;line-height:1.15;}
+.gi-tx{font-size:.88rem;color:var(--texto-claro);line-height:1.65;margin-bottom:18px;}
+.gi-steps{display:flex;flex-direction:column;gap:10px;}
+.gi-step{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--areia);border:1px solid rgba(10,42,58,.08);border-radius:11px;text-decoration:none;}
+.gi-num{flex-shrink:0;width:29px;height:29px;border-radius:50%;background:var(--lago);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;}
+.gi-st b{display:block;color:var(--texto);font-size:.86rem;font-weight:600;}
+.gi-st span{display:block;color:var(--texto-claro);font-size:.76rem;line-height:1.4;}
+.ess{background:linear-gradient(135deg,var(--termal-pale),transparent);border:1px solid rgba(196,129,58,.35);border-radius:16px;padding:20px 18px;margin-bottom:18px;}
+.ess-t{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--termal);margin-bottom:16px;}
+.ess-g{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;}
+.ess-i{display:flex;align-items:flex-start;gap:11px;}
+.ess-ic{width:36px;height:36px;border-radius:10px;background:rgba(196,129,58,.16);color:var(--termal);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;}
+.ess-k{display:block;font-size:.58rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--texto-claro);margin-bottom:2px;}
+.ess-v{display:block;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--lago);line-height:1.15;word-break:break-word;font-weight:600;}
+.ess-s{display:block;font-size:.64rem;color:var(--texto-claro);margin-top:2px;}
+@media(max-width:380px){.ess-g{grid-template-columns:1fr;}}
+.vist{background:var(--branco);border:1px solid rgba(10,42,58,.10);border-radius:16px;padding:22px 20px;margin-bottom:18px;}
+.vist-h{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--lago);margin-bottom:6px;}
+.vist-p{font-size:.85rem;color:var(--texto-claro);line-height:1.6;margin-bottom:12px;}
+.vist-warn{display:flex;gap:10px;align-items:flex-start;background:rgba(196,129,58,.10);border:1px solid rgba(196,129,58,.3);border-radius:9px;padding:12px 13px;margin-bottom:16px;}
+.vist-warn p{font-size:.78rem;color:#7a5327;line-height:1.55;}
+.vitem{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(10,42,58,.08);cursor:pointer;}
+.vitem:last-of-type{border-bottom:none;}
+.vbox{width:22px;height:22px;border-radius:6px;border:2px solid rgba(196,129,58,.5);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:12px;transition:.16s;}
+.vitem.done .vbox{background:var(--termal);border-color:var(--termal);}
+.vitem span{font-size:.9rem;color:var(--texto-claro);}
+.vitem.done span{color:var(--texto);}
+.vist textarea{width:100%;background:var(--areia);border:1px solid rgba(10,42,58,.12);border-radius:9px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--texto);resize:vertical;min-height:76px;outline:none;margin-top:12px;}
+.vist-btn{width:100%;margin-top:14px;padding:14px;background:transparent;border:1px solid var(--termal);color:var(--termal);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;cursor:pointer;}
+.co{position:relative;background:var(--branco);border:1px solid rgba(10,42,58,.10);border-radius:18px;padding:24px 20px 28px;text-align:center;margin-bottom:18px;animation:coP 2.6s ease-in-out infinite;}
+@keyframes coP{0%,100%{transform:translateY(0);box-shadow:0 0 0 1px rgba(37,211,102,.22),0 0 18px -2px rgba(37,211,102,.28),0 10px 30px -12px rgba(10,42,58,.25);}50%{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(37,211,102,.55),0 0 40px 2px rgba(37,211,102,.5),0 16px 38px -12px rgba(10,42,58,.3);}}
+.co-p{display:inline-block;background:rgba(196,129,58,.14);color:#a8642a;border:1px solid rgba(196,129,58,.4);font-size:.58rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:12px;}
+.co-t{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--lago);margin-bottom:7px;}
+.co-s{font-size:.84rem;color:var(--texto-claro);line-height:1.6;margin:0 auto 20px;max-width:32ch;}
+.co-b{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;background:linear-gradient(180deg,#2ee06f,#20b757);color:#fff;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:1.02rem;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #178f43,0 14px 24px -6px rgba(37,211,102,.45);transition:transform .09s,box-shadow .09s;}
+.co-b:active{transform:translateY(6px);box-shadow:0 1px 0 #178f43;}
+.co-h{margin-top:12px;font-size:.7rem;color:var(--texto-claro);}
+</style>
 </head>
 <body>
 
@@ -1001,6 +1043,8 @@
 <div class="section active" id="boas-vindas">
   <div class="section-bg"></div>
   <div class="page">
+<div class="gi"><div class="gi-eye">Como funciona</div><div class="gi-tt">Seu guia digital da estadia</div><div class="gi-tx">Aqui está tudo o que você precisa — acesso, Wi-Fi, regras, atrações e dicas. Três momentos pedem a sua ação:</div><div class="gi-steps"><a class="gi-step" href="https://pedpaz.github.io/Guias-alugo/checkin-aldeia-306h.html" target="_blank"><span class="gi-num">1</span><div class="gi-st"><b>Antes de chegar</b><span>Faça o check-in online — obrigatório para liberar seu acesso.</span></div></a><a class="gi-step" href="#vistoria-306h"><span class="gi-num">2</span><div class="gi-st"><b>Ao entrar</b><span>Faça a vistoria de chegada e registre qualquer detalhe.</span></div></a><a class="gi-step" href="#checkout-306h"><span class="gi-num">3</span><div class="gi-st"><b>Ao sair</b><span>Entregue a chave e avise o seu check-out por aqui.</span></div></a></div></div><div class="ess"><div class="ess-t">⚡ Acesso rápido · o essencial</div><div class="ess-g"><div class="ess-i"><div class="ess-ic">📶</div><div><span class="ess-k">Wi-Fi</span><span class="ess-v">306H</span><span class="ess-s">senha: 306H2025</span></div></div><div class="ess-i"><div class="ess-ic">🔑</div><div><span class="ess-k">Acesso</span><span class="ess-v">Chave na recepção</span><span class="ess-s">devolver na saída</span></div></div><div class="ess-i"><div class="ess-ic">🕒</div><div><span class="ess-k">Check-in / out</span><span class="ess-v">14h / 11h</span></div></div><div class="ess-i"><div class="ess-ic">💡</div><div><span class="ess-k">Tomadas</span><span class="ess-v">220V</span><span class="ess-s">confira seus aparelhos</span></div></div><div class="ess-i" style="grid-column:span 2;"><div class="ess-ic">💰</div><div><span class="ess-k">Taxa de ocupação (2 quartos)</span><span class="ess-v">R$ 50,00</span><span class="ess-s">paga na portaria · SOMENTE em dinheiro</span></div></div></div></div><div class="vist" id="vistoria-306h"><div class="vist-h">🔍 Vistoria de chegada</div><div class="vist-p">Preencha assim que entrar no apartamento. Notou algo danificado ou fora do lugar? Registre aqui — isso protege você de cobranças por danos pré-existentes.</div><div class="vist-warn"><span>⚠️</span><p>Caso a vistoria <strong>não seja enviada</strong>, entenderemos que o apartamento foi recebido em <strong>perfeitas condições e em total conformidade</strong>.</p></div><label style="display:block;font-size:.6rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--texto-claro);margin-bottom:8px;">Confira e marque os itens em ordem</label><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Camas, colchões e mobília</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Sofá e estofados</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>TV e controle remoto</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Cozinha: fogão, geladeira e utensílios</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Banheiro e chuveiro</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Ar-condicionado e ventiladores</span></div><div class="vitem" onclick="this.classList.toggle('done')"><div class="vbox">✓</div><span>Limpeza geral</span></div><label style="display:block;font-size:.6rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--texto-claro);margin:16px 0 6px;">Algo fora do lugar ou danificado? (opcional)</label><textarea id="vist-obs-306h" placeholder="Ex: arranhão no sofá, lâmpada queimada..."></textarea><button class="vist-btn" onclick="enviarVistoriaAlugo()">🔍 Enviar vistoria</button></div><div class="co" id="checkout-306h"><div class="co-p">⚠ Antes de ir embora</div><div class="co-t">Confirme seu check-out</div><div class="co-s">Entregue a chave na recepção e toque abaixo para avisar. É esse aviso que libera a limpeza. Leva 1 segundo. 💛</div><button class="co-b" onclick="avisarCheckout()"><svg viewBox="0 0 24 24" style="width:21px;height:21px;fill:#fff;"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.2 3 2 3.1 4.9 4.3c2.4 1 2.9.8 3.4.8s1.7-.7 1.9-1.3.2-1.2.2-1.3-.2-.2-.5-.3z"/></svg> Avisar meu check-out</button><div class="co-h">Um toque abre o WhatsApp com a mensagem pronta</div></div>
+
     <div class="section-header">
       <div class="section-label">Bem-vindo(a)</div>
       <h2 class="section-title">Sua estadia no<br><em>paraíso termal</em></h2>
@@ -1692,7 +1736,7 @@
       <h3>Precisa de ajuda?</h3>
       <p>Estou disponível para qualquer dúvida antes, durante ou após a sua estadia. Respondo rapidamente pelo WhatsApp. Fique à vontade para chamar!</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-        <a href="https://wa.me/5562981771013" class="contato-btn" target="_blank">
+        <a href="https://wa.me/5562982545453" class="contato-btn" target="_blank">
           <span>💬</span> WhatsApp
         </a>
         <a href="mailto:contato@alugo.com.br" class="contato-btn secondary">
@@ -1958,7 +2002,7 @@
 
 <script>
 (function(){
-  const WPP = '5562981771013';
+  const WPP = '5562982545453';
 
   /* ── BASE DE CONHECIMENTO ─────────────────────────────────────── */
   const KB = [
@@ -2094,7 +2138,7 @@
     const btn = document.createElement('button');
     btn.className = 'cc-wpp-btn';
     btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.546 4.113 1.502 5.851L.001 24l6.293-1.49A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.847 0-3.584-.472-5.105-1.303l-.367-.213-3.736.884.888-3.644-.232-.383A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Falar com o anfitrião';
-    btn.onclick = () => window.open('https://wa.me/' + WPP, '_blank');
+    btn.onclick = () => (function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})('https://wa.me/' + WPP);
     msgs.appendChild(btn);
     msgs.scrollTop = msgs.scrollHeight;
   }
@@ -2141,5 +2185,26 @@
 </script>
 <!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
+
+<script>
+function enviarVistoriaAlugo(){
+  var items=[].slice.call(document.querySelectorAll('.vitem'));
+  var ok=items.filter(function(i){return i.classList.contains('done');}).map(function(i){return i.querySelector('span').textContent.trim();});
+  var pend=items.filter(function(i){return !i.classList.contains('done');}).map(function(i){return i.querySelector('span').textContent.trim();});
+  var el=document.getElementById('vist-obs-306h'); var v=el?(el.value||'').trim():'';
+  if(ok.length===0 && !v){alert('Marque os itens conferidos ou descreva alguma observação antes de enviar.');return;}
+  var msg='\uD83D\uDD0D *VISTORIA DE CHEGADA \u2014 ALDEIA DO LAGO \u00B7 APTO 306H*\n';
+  msg+='\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n';
+  msg+='\u2705 *Itens conferidos:*\n'+(ok.length?ok.map(function(x){return '\u2022 '+x;}).join('\n'):'\u2014')+'\n';
+  if(pend.length)msg+='\n\u2B1C *N\u00E3o conferidos:*\n'+pend.map(function(x){return '\u2022 '+x;}).join('\n')+'\n';
+  msg+='\n\uD83D\uDCDD *Observa\u00E7\u00F5es:*\n'+(v||'Nenhuma observa\u00E7\u00E3o relatada.')+'\n';
+  msg+='\n_\uD83D\uDCF8 Reforce com fotos na sequ\u00EAncia._';
+  abrirWppAlugo(msg);
+}
+function avisarCheckoutLoftcare(){try{var p={token:"COLE_O_TOKEN_AQUI",unidade:"ADL-306H"};fetch("https://loftcare-os.vercel.app/api/public/checkout",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(){});}catch(e){}}
+function avisarCheckout(){avisarCheckoutLoftcare();abrirWppAlugo('\uD83D\uDC4B Ol\u00E1! Acabei de fazer o *check-out* do *Aldeia do Lago \u00B7 Apto 306H*. Chave entregue na recep\u00E7\u00E3o e tudo em ordem. Obrigado(a)! \uD83D\uDD11');}
+function abrirWppAlugo(msg){var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;}
+window.enviarVistoriaAlugo=enviarVistoriaAlugo;window.avisarCheckout=avisarCheckout;
+</script>
 </body>
 </html>
