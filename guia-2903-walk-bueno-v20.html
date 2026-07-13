@@ -1936,7 +1936,7 @@ footer {
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><div><span class="ess-k">Wi-Fi</span><span class="ess-v">Macedo Paz</span><span class="ess-sub">senha: rotas1234</span></div></div>
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15 19 4"/><path d="m18 5 2 2"/><path d="m15 8 2 2"/></svg></div><div><span class="ess-k">Senha da porta</span><span class="ess-v">2255</span></div></div>
       <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div><div><span class="ess-k">Check-in / out</span><span class="ess-v">15h / 12h</span></div></div>
-      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><span class="ess-k">Tomadas</span><span class="ess-v">220V</span><span class="ess-sub">confira seus aparelhos</span></div></div>
+      <div class="ess-item"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><span class="ess-k">Tomadas</span><span class="ess-v">220V</span><span class="ess-sub">confira seus aparelhos</span></div></div><div class="ess-item" style="grid-column:span 2;"><div class="ess-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M5 17h14M6 17V9l2-4h8l2 4v8M7 21v-2M17 21v-2"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg></div><div><span class="ess-k">Garagem</span><span class="ess-v">Vaga 106</span><span class="ess-sub">térreo (-1) · controle na mesa da entrada</span></div></div>
     </div>
     <div class="ess-note reveal">
       <a href="#acesso" class="ess-note-link"><span><b>Dificuldade para abrir a porta?</b></span><span style="white-space:nowrap">Ver passo a passo &rarr;</span></a>
@@ -2070,7 +2070,7 @@ footer {
       <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
       <div>
         <div class="d-head">Estacionamento Privativo</div>
-        <div class="d-body">Vaga nº <strong>106</strong> no térreo. O controle está sobre a mesa próxima à porta de entrada.</div>
+        <div class="d-body">Vaga nº <strong>106</strong>, no térreo — que corresponde ao <strong>andar -1</strong> do elevador. O controle está sobre a mesa próxima à porta de entrada.</div>
       </div>
     </div>
     <div class="d-row">
@@ -2127,6 +2127,12 @@ footer {
   <div class="note reveal" style="margin-top:22px;">
     <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     <span>Para <strong>early check-in</strong> ou <strong>late checkout</strong>, entre em contato pelo WhatsApp com antecedência. Sujeito à disponibilidade.</span>
+  </div>
+
+  <div class="card reveal" style="margin-top:22px;">
+    <div class="card-title"><svg class="ico" viewBox="0 0 24 24"><path d="M5 17h14M6 17V9l2-4h8l2 4v8M7 21v-2M17 21v-2"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg> Garagem</div>
+    <div class="d-row"><svg class="ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><div><div class="d-head">Vaga nº 106 · térreo</div><div class="d-body">Sua vaga é privativa e identificada. <strong>Atenção:</strong> no Walk Bueno, o térreo corresponde ao <strong>andar -1</strong> do elevador.</div></div></div>
+    <div class="d-row"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1.5"/><path d="M9 7h6"/></svg><div><div class="d-head">Controle da garagem</div><div class="d-body">Está <strong>sobre a mesa próxima à entrada</strong> do apartamento.</div></div></div>
   </div>
 </section>
 
@@ -2993,7 +2999,7 @@ const KB = [
   },
   {
     keys: ['estacionamento','vaga','garagem','carro','parking'],
-    answer: 'Sua vaga privativa é a <strong>nº 106</strong>, no térreo. O controle da garagem está sobre a mesa próxima à porta de entrada do apartamento. Devolva no mesmo local ao sair. 🚗'
+    answer: 'Sua vaga privativa é a <strong>nº 106</strong>, no térreo — que no elevador corresponde ao <strong>andar -1</strong>. O controle da garagem está sobre a mesa próxima à porta de entrada do apartamento. Devolva no mesmo local ao sair. 🚗'
   },
   {
     keys: ['piscina','academia','sauna','jacuzzi','lazer','salao jogos','jogos','mini mercado','mercado','lavanderia','31','horario lazer','horario piscina','horario academia'],
