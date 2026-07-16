@@ -917,6 +917,12 @@
         <input type="date" id="input-checkout" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box;" oninput="onDateChange()">
         <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">Até as 11h</div>
       </div>
+
+      <div>
+        <label style="display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Horário previsto de chegada</label>
+        <input type="time" id="input-hora" min="14:00" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box;">
+        <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">A partir das 14h — nos ajuda a preparar sua recepção</div>
+      </div>
     </div>
 
     <div id="erro-datas" style="display:none; background:#fff3cd; border:1px solid #ffc107; border-radius:8px; padding:12px 14px; font-size:13px; color:#856404; margin-bottom:20px;"></div>
@@ -1168,6 +1174,7 @@
   const params     = new URLSearchParams(window.location.search);
   let checkinVal  = params.get('checkin')  || '';
   let checkoutVal = params.get('checkout') || '';
+  let horaVal = '';
 
   const nomeParam  = params.get('nome')     || '';
   const currentApto = '405A';
@@ -1375,6 +1382,7 @@
         <div class="resumo-row"><span class="resumo-key">Apartamento</span><span class="resumo-val">Flat Aldeia do Lago — ${currentApto}</span></div>
         <div class="resumo-row"><span class="resumo-key">Check-in</span><span class="resumo-val">${checkinVal || '—'}</span></div>
         <div class="resumo-row"><span class="resumo-key">Check-out</span><span class="resumo-val">${checkoutVal || '—'}</span></div>
+        <div class="resumo-row"><span class="resumo-key">Chegada prevista</span><span class="resumo-val">${horaVal || '—'}</span></div>
         <div class="resumo-row"><span class="resumo-key">Adultos</span><span class="resumo-val">${counts.adultos}</span></div>
         <div class="resumo-row"><span class="resumo-key">Crianças</span><span class="resumo-val">${counts.criancas}</span></div>
       </div>
@@ -1424,6 +1432,7 @@
     msg += `🏠 Flat Aldeia do Lago — *${currentApto}*\n`;
     if (checkinVal)  msg += `📅 Check-in: *${checkinVal}* (14h)\n`;
     if (checkoutVal) msg += `📅 Check-out: *${checkoutVal}* (11h)\n`;
+    if (horaVal)     msg += `🕐 Chegada prevista: *${horaVal}*\n`;
     msg += `\n`;
     msg += `👥 *COMPOSIÇÃO DO GRUPO*\n`;
     msg += `• Adultos: ${counts.adultos}\n`;
@@ -1532,7 +1541,7 @@
         <div class="ct-block"><span class="ct-label">Locatário(a)</span>${t.nome || '—'}</div>
         <div class="ct-block"><span class="ct-label">CPF / RG</span>${t.cpf || '—'} / ${t.rg || '—'}</div>
         <div class="ct-block" style="grid-column:1/-1"><span class="ct-label">Endereço do locatário</span>${enderecoFull || '—'}</div>
-        <div class="ct-block"><span class="ct-label">Check-in</span>${checkinVal || '—'} · a partir das 14h</div>
+        <div class="ct-block"><span class="ct-label">Check-in</span>${checkinVal || '—'}${horaVal ? ' · chegada prevista ' + horaVal : ''} · a partir das 14h</div>
         <div class="ct-block"><span class="ct-label">Check-out</span>${checkoutVal || '—'} · até as 11h</div>
         <div class="ct-block"><span class="ct-label">Hóspedes</span>${counts.adultos} adulto(s) e ${counts.criancas} criança(s)</div>
         <div class="ct-block"><span class="ct-label">Taxa de acesso (pulseiras)</span>R$ ${info.taxa},00 · em dinheiro na guarita</div>
@@ -1631,10 +1640,17 @@
       erroEl.textContent = 'A data de saída deve ser após a data de entrada.';
       return;
     }
+    const ho = document.getElementById('input-hora').value;
+    if (!ho) {
+      erroEl.style.display = 'block';
+      erroEl.textContent = 'Informe o horário previsto de chegada.';
+      return;
+    }
     erroEl.style.display = 'none';
     // update global vars used in WhatsApp message
     checkinVal  = formatDateBR(ci);
     checkoutVal = formatDateBR(co);
+    horaVal = ho;
     nextStep(2);
   }
   // ───────────────────────────────────────────────────────────────────────
