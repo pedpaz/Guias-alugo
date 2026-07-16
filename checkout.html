@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Check-out · aluGO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c100d;--bg-2:#141813;--bg-3:#1b201c;
+  --text:#ecead4;--text-2:#a4a18e;--text-3:#6a6c5f;
+  --amber:#d4a05c;--amber-hi:#e8b97a;--rule:rgba(212,160,92,.15);--rule-hi:rgba(212,160,92,.32);
+  --wpp:#25D366;
+  --fb:'Manrope',system-ui,sans-serif;--fd:'Fraunces',Georgia,serif;
+  --fr:"opsz" 80,"SOFT" 70,"WONK" 0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 20px 60px;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:520px;margin:0 auto;}
+header{text-align:center;padding:44px 0 26px;}
+.brand{font-family:var(--fd);font-variation-settings:var(--fr);font-size:1.5rem;letter-spacing:.02em;}
+.brand b{color:var(--amber);font-weight:600;}
+.eyebrow{font-size:.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-top:8px;}
+h1{font-family:var(--fd);font-variation-settings:var(--fr);font-weight:340;font-size:2.2rem;line-height:1.08;margin:22px 0 8px;}
+h1 em{font-style:italic;color:var(--amber-hi);}
+.unit-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(212,160,92,.12);border:1px solid var(--rule-hi);color:var(--amber-hi);border-radius:22px;padding:7px 15px;font-size:.78rem;font-weight:600;margin-top:6px;}
+.sub{color:var(--text-2);font-size:.9rem;margin-top:14px;line-height:1.65;}
+.card{background:var(--bg-2);border:1px solid var(--rule);border-radius:16px;padding:22px 20px;margin-top:24px;}
+.card-t{font-size:.62rem;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px;}
+.card-s{font-size:.83rem;color:var(--text-3);margin-bottom:16px;}
+.item{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--rule);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;}
+.item:last-of-type{border-bottom:none;}
+.box{width:24px;height:24px;border-radius:7px;border:2px solid var(--rule-hi);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.18s;}
+.box svg{width:14px;height:14px;stroke:var(--bg);opacity:0;transition:.18s;}
+.item.done .box{background:var(--amber);border-color:var(--amber);}
+.item.done .box svg{opacity:1;}
+.item span{font-size:.93rem;color:var(--text-2);transition:.18s;}
+.item.done span{color:var(--text);text-decoration:line-through;text-decoration-color:var(--text-3);}
+.progress{height:3px;background:var(--bg-3);border-radius:3px;overflow:hidden;margin-top:16px;}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--amber-hi));transition:width .35s cubic-bezier(.2,.8,.2,1);}
+.progress-txt{font-size:.7rem;color:var(--text-3);margin-top:8px;text-align:right;}
+/* CTA */
+.co{margin-top:28px;position:relative;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));border:1px solid var(--rule-hi);border-radius:18px;padding:26px 22px 30px;text-align:center;animation:pulse 2.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:translateY(0);box-shadow:0 0 0 1px rgba(37,211,102,.22),0 0 20px -2px rgba(37,211,102,.30),0 18px 40px -12px rgba(0,0,0,.55);}50%{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(37,211,102,.55),0 0 44px 3px rgba(37,211,102,.62),0 24px 48px -12px rgba(0,0,0,.6);}}
+.co-pill{display:inline-block;background:rgba(217,107,87,.14);color:#e58a78;border:1px solid rgba(217,107,87,.4);font-size:.58rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:5px 13px;border-radius:20px;margin-bottom:14px;}
+.co-t{font-family:var(--fd);font-variation-settings:var(--fr);font-size:1.35rem;margin-bottom:7px;line-height:1.12;}
+.co-s{font-size:.85rem;color:var(--text-2);line-height:1.6;margin:0 auto 22px;max-width:32ch;}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;padding:19px;background:linear-gradient(180deg,#2ee06f,#20b757);color:#fff;border:none;border-radius:14px;font-family:var(--fb);font-size:1.08rem;font-weight:800;cursor:pointer;box-shadow:0 7px 0 #178f43,0 16px 26px -6px rgba(37,211,102,.5);transition:transform .09s,box-shadow .09s;-webkit-tap-highlight-color:transparent;}
+.btn::before{content:'';position:absolute;top:2px;left:8px;right:8px;height:38%;border-radius:12px 12px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.26),transparent);pointer-events:none;}
+.btn:active{transform:translateY(7px);box-shadow:0 1px 0 #178f43;}
+.btn svg{width:23px;height:23px;fill:#fff;position:relative;}
+.hint{margin-top:13px;font-size:.7rem;color:var(--text-3);}
+/* SUCCESS */
+#done{display:none;text-align:center;padding:40px 10px;}
+.check{width:82px;height:82px;border-radius:50%;background:rgba(37,211,102,.12);border:1.5px solid rgba(37,211,102,.5);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;color:var(--wpp);animation:pop .5s cubic-bezier(.16,1.4,.5,1);}
+.check svg{width:40px;height:40px;}
+@keyframes pop{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+#done h2{font-family:var(--fd);font-variation-settings:var(--fr);font-weight:340;font-size:2rem;margin-bottom:12px;}
+#done h2 em{font-style:italic;color:var(--amber-hi);}
+#done p{color:var(--text-2);font-size:.92rem;max-width:34ch;margin:0 auto 10px;line-height:1.65;}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:24px;padding:14px 24px;background:transparent;border:1px solid var(--rule-hi);color:var(--text);border-radius:11px;font-family:var(--fb);font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;}
+.warnbox{display:none;background:linear-gradient(135deg,rgba(217,107,87,.14),rgba(212,160,92,.06));border:1px solid rgba(217,107,87,.45);border-left:4px solid #d96b57;border-radius:14px;padding:20px 18px;margin-top:24px;}
+.warnbox .wt{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-variation-settings:var(--fr);font-size:1.15rem;color:#f0a594;margin-bottom:8px;}
+.warnbox .wt svg{width:22px;height:22px;flex-shrink:0;}
+.warnbox p{font-size:.86rem;color:var(--text-2);line-height:1.65;}
+.warnbox a{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:16px;padding:15px;background:var(--wpp);color:#fff;border-radius:11px;font-weight:700;font-size:.95rem;text-decoration:none;}
+footer{text-align:center;margin-top:40px;font-size:.72rem;color:var(--text-3);letter-spacing:.04em;}
+footer b{color:var(--amber);}
+</style></head>
+<body>
+<div class="wrap">
+
+  <div id="main">
+    <header>
+      <div class="brand">alu<b>GO</b></div>
+      <div class="eyebrow">Gestão de imóveis para temporada</div>
+      <h1>Confirmar seu <em>check-out</em></h1>
+      <div class="unit-chip" id="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:15px;height:15px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span id="unitName">Sua unidade</span>
+      </div>
+      <p class="sub">Toque no botão abaixo para nos avisar que você saiu. É isso que libera a limpeza e prepara tudo para o próximo hóspede.</p>
+    </header>
+
+    <div class="warnbox" id="warn">
+      <div class="wt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Link incompleto</div>
+      <p>Não conseguimos identificar o seu apartamento por este link — ele pode ter sido cortado ao ser copiado. Sem essa informação, não é possível registrar o check-out por aqui.</p>
+      <p style="margin-top:10px;"><strong style="color:var(--text);">Fale com a gente pelo WhatsApp</strong> que confirmamos sua saída na hora.</p>
+      <a href="https://wa.me/5562982545453?text=Ol%C3%A1!%20Estou%20fazendo%20o%20check-out%20e%20o%20link%20n%C3%A3o%20identificou%20meu%20apartamento.">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff;"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.2 3 2 3.1 4.9 4.3c2.4 1 2.9.8 3.4.8s1.7-.7 1.9-1.3.2-1.2.2-1.3-.2-.2-.5-.3z"/></svg>
+        Avisar meu check-out pelo WhatsApp
+      </a>
+    </div>
+
+    <div class="co">
+      <div class="co-pill">⚠ Último passo</div>
+      <div class="co-t">Já estou de saída</div>
+      <div class="co-s">Um toque e pronto. Leva 1 segundo. 💛</div>
+      <button class="btn" id="btn">
+        <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.2 3 2 3.1 4.9 4.3c2.4 1 2.9.8 3.4.8s1.7-.7 1.9-1.3.2-1.2.2-1.3-.2-.2-.5-.3z"/></svg>
+        Confirmar meu check-out
+      </button>
+      <div class="hint">Registramos na hora e abrimos o WhatsApp</div>
+    </div>
+  </div>
+
+  <div id="done">
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2>Check-out <em>confirmado!</em></h2>
+    <p id="doneTxt">Recebemos seu aviso. Muito obrigado pela estadia!</p>
+    <p>Foi um prazer receber você. Volte sempre. ✦</p>
+    <a class="ghost" id="wppAgain">Reabrir WhatsApp</a>
+  </div>
+
+  <footer>alu<b>GO</b> · Gestão de imóveis para temporada</footer>
+</div>
+
+<script>
+var WPP='5562982545453';
+var ENDPOINT='https://loftcare-os.vercel.app/api/public/checkout';
+var TOKEN='COLE_O_TOKEN_AQUI';
+
+var UNITS={
+  'ADL-103A':{nome:'Aldeia do Lago · 103A', chave:'Deixar a chave no local combinado'},
+  'ADL-306H':{nome:'Aldeia do Lago · 306H', chave:'Deixar a chave no local combinado'},
+  'ADL-405A':{nome:'Aldeia do Lago · 405A', chave:'Deixar a chave no local combinado'},
+  'SM-504T' :{nome:'Metropolitan Sidney · 504T', chave:'Cartão de energia deixado na porta'},
+  'SM-1202O':{nome:'Metropolitan Sidney · 1202O', chave:'Cartão de energia deixado na porta'},
+  'QS-1310' :{nome:'QS Marista · Suíte 1310', chave:'Cartão de acesso devolvido na recepção'},
+  'WB-2903' :{nome:'Walk Bueno · Duplex 2903', chave:'Controle da garagem na mesa da entrada'},
+  'CP-1113' :{nome:'Crystal Place · Flat 1113', chave:'Cartão magnético devolvido na recepção'},
+  'CP-1313' :{nome:'Crystal Place · Flat 1313', chave:'Chave devolvida na recepção'},
+  'CP-2413' :{nome:'Crystal Place · Flat 2413', chave:'Cartão magnético devolvido na recepção'},
+  'CP-911'  :{nome:'Crystal Place · Suíte do Imperador 911', chave:'Porta fechada e travada (fechadura digital)'},
+  'CP-209'  :{nome:'Crystal Place · Suíte do Imperador 209', chave:'Porta fechada e travada (fechadura digital)'}
+};
+
+function getUnit(){
+  var p=new URLSearchParams(window.location.search);
+  var u=(p.get('u')||p.get('unidade')||'').toUpperCase().trim();
+  return UNITS[u] ? u : '';
+}
+var UCODE=getUnit();
+var UINFO=UCODE ? UNITS[UCODE] : null;
+
+if(UINFO){
+  document.getElementById('unitName').textContent = UINFO.nome;
+}else{
+  // link sem código de unidade (ou inválido): mostra aviso e esconde o botão
+  document.getElementById('chip').style.display='none';
+  var coEl=document.querySelector('.co'); if(coEl) coEl.style.display='none';
+  var subEl=document.querySelector('.sub'); if(subEl) subEl.style.display='none';
+  document.getElementById('warn').style.display='block';
+}
+
+
+function abrirWpp(){
+  var nome = UINFO ? UINFO.nome : 'minha unidade';
+  var msg='👋 *CHECK-OUT REALIZADO*\n';
+  msg+='🏠 '+nome+'\n';
+  msg+='━━━━━━━━━━━━━━━━\n\n';
+  msg+='Acabei de sair do apartamento. Deixei tudo em ordem!\n';
+  msg+='\n_Enviado pela página de check-out · aluGO_';
+  var W='https://wa.me/'+WPP+'?text='+encodeURIComponent(msg);
+  var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');
+  var t=setTimeout(function(){ if(!document.hidden) window.location.href=W; },1500);
+  document.addEventListener('visibilitychange',function h(){ if(document.hidden){ clearTimeout(t); document.removeEventListener('visibilitychange',h);} });
+  window.location.href=app;
+}
+
+function enviarSistema(){
+  if(!UCODE) return;
+  try{
+    fetch(ENDPOINT,{
+      method:'POST', keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ token:TOKEN, unidade:UCODE })
+    }).catch(function(){});
+  }catch(e){}
+}
+
+document.getElementById('btn').addEventListener('click',function(){
+  enviarSistema();
+  document.getElementById('doneTxt').textContent = UINFO
+    ? 'Recebemos seu aviso de saída do '+UINFO.nome+'. Muito obrigado pela estadia!'
+    : 'Recebemos seu aviso. Muito obrigado pela estadia!';
+  document.getElementById('main').style.display='none';
+  document.getElementById('done').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  abrirWpp();
+});
+document.getElementById('wppAgain').addEventListener('click',function(e){ e.preventDefault(); abrirWpp(); });
+</script>
+</body></html>
