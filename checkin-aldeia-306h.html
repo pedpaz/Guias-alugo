@@ -926,7 +926,7 @@
 
   <div class="step" id="step-2">
     <h2 class="step-title">Quantas pessoas<br>vão <em>chegar?</em></h2>
-    <p class="step-desc">Informe a composição do grupo para que o condomínio possa preparar o apartamento adequadamente.</p>
+    <p class="step-desc">Conte <strong>todas</strong> as pessoas que vão se hospedar, incluindo você e as crianças. A portaria libera apenas os hóspedes cadastrados.</p>
 
     <div style="display:flex;flex-direction:column;gap:12px">
       <div class="counter-wrap">
@@ -1032,17 +1032,14 @@
   <!-- STEP 3: Demais hóspedes -->
   <div class="step" id="step-4">
     <h2 class="step-title">Demais<br><em>hóspedes</em></h2>
-    <p class="step-desc" id="step3-desc">Informe os dados de cada hóspede adicional. CPF é opcional para crianças.</p>
+    <p class="step-desc" id="step3-desc">Informe os dados de cada hóspede — todos os ocupantes precisam estar cadastrados. CPF é opcional para crianças.</p>
 
     <div id="hospedes-container"></div>
 
-    <button class="add-hospede-btn" id="add-btn" onclick="addHospede()">
-      + Adicionar outro hóspede
-    </button>
 
     <div class="btn-row">
       <button class="btn-secondary" onclick="nextStep(3)">← Voltar</button>
-      <button class="btn-primary" onclick="nextStep(5)">Ver Resumo →</button>
+      <button class="btn-primary" onclick="validateStep3()">Ver Resumo →</button>
     </div>
   </div>
 
@@ -1226,9 +1223,9 @@
     const extras = total - 1;
     const desc = document.getElementById('step3-desc');
     if (extras <= 0) {
-      desc.textContent = 'Você informou apenas 1 pessoa (o titular). Se houver mais hóspedes, adicione abaixo.';
+      desc.textContent = 'Você informou que apenas 1 pessoa (você) vai se hospedar. Se houver mais pessoas — inclusive crianças — volte e ajuste a quantidade: todos os ocupantes precisam estar cadastrados.';
     } else {
-      desc.textContent = `Além do titular, informe os dados dos outros ${extras} hóspede(s). CPF é opcional para crianças.`;
+      desc.textContent = `Você informou ${extras + 1} pessoa(s) no total. Preencha abaixo os dados de cada um dos ${extras} hóspede(s) além de você. CPF é opcional para crianças. Todos os ocupantes precisam estar cadastrados.`;
     }
     rebuildHospedes(extras);
   }
@@ -1315,7 +1312,6 @@
     while (hospedesData.length < needed) hospedesData.push({ nome: '', cpf: '' });
     while (hospedesData.length > needed) hospedesData.pop();
     renderHospedeCards();
-    document.getElementById('add-btn').style.display = needed < 10 ? 'flex' : 'none';
   }
 
   function renderHospedeCards() {
@@ -1327,7 +1323,6 @@
       card.innerHTML = `
         <div class="hospede-card-title">
           Hóspede ${i + 2}
-          ${hospedesData.length > 0 ? `<button class="remove-hospede" onclick="removeHospede(${i})">✕</button>` : ''}
         </div>
         <div class="field-group">
           <label>Nome Completo <span>*</span></label>
@@ -1344,15 +1339,19 @@
 
   function saveHospede(i, field, val) { hospedesData[i][field] = val; }
 
-  function addHospede() {
-    hospedesData.push({ nome: '', cpf: '' });
-    renderHospedeCards();
+  function validateStep3() {
+    for (let i = 0; i < hospedesData.length; i++) {
+      if (!hospedesData[i].nome.trim()) {
+        alert('⚠️ Informe o nome completo do Hóspede ' + (i + 2) + '.\n\nVocê declarou ' + (hospedesData.length + 1) + ' pessoa(s) no total — todas precisam estar cadastradas.');
+        const el = document.getElementById('h-nome-' + i);
+        if (el) el.focus();
+        return;
+      }
+    }
+    nextStep(5);
   }
 
-  function removeHospede(i) {
-    hospedesData.splice(i, 1);
-    renderHospedeCards();
-  }
+
 
   /* ── RESUMO ── */
   function buildResumo() {

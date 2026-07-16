@@ -147,10 +147,20 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
   <div class="screen active" id="screen-1">
     <div class="pill">Etapa 1 de 4</div>
     <h2 class="screen-title">Dados dos Hóspedes</h2>
-    <p class="screen-sub">Nome e CPF de cada hóspede — usados no cadastro do reconhecimento facial na recepção.</p>
+    <p class="screen-sub">Nome e CPF de cada hóspede — usados no cadastro do reconhecimento facial na recepção. O apartamento só é liberado para as pessoas cadastradas aqui.</p>
     <div class="card">
+      <div class="field" id="f-qtd"><label>Quantas pessoas vão se hospedar? (incluindo você) *</label>
+        <select id="qtd" onchange="setGuests(this.value)">
+          <option value="">Selecione a quantidade…</option>
+          <option value="1">1 pessoa (somente eu)</option>
+          <option value="2">2 pessoas</option>
+          <option value="3">3 pessoas</option>
+          <option value="4">4 pessoas</option>
+        </select>
+        <div class="error-msg">Informe quantas pessoas vão se hospedar</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;background:var(--input);border:1px solid var(--line);border-left:3px solid var(--honey);border-radius:9px;padding:12px 14px;margin-bottom:14px;font-size:.83rem;color:var(--text-2);line-height:1.5"><span>⚠️</span><span><b style="color:var(--text-1)">Todas as pessoas que vão se hospedar precisam estar cadastradas</b> — inclusive crianças. A recepção confere a lista e libera apenas os hóspedes informados neste termo.</span></div>
       <div id="guests-list"></div>
-      <button class="btn btn-ghost" id="addGuestBtn" type="button" onclick="addGuest()" style="margin-top:6px">+ Adicionar hóspede <span style="opacity:.55;font-weight:500">(máx. 4)</span></button>
     </div>
     <div class="btnrow"><button class="btn btn-primary" onclick="next1()">Continuar →</button></div>
   </div>
@@ -243,18 +253,28 @@ function maskCPF(el){let v=el.value.replace(/\D/g,'');v=v.replace(/(\d{3})(\d)/,
 /* GUESTS */
 let gc=0;
 function guestHTML(i){return `<div class="guest-card" id="g-${i}">
-  <div class="guest-card-head"><span class="guest-card-tag">${i===1?'Hóspede principal (titular)':'Hóspede '+i}</span>${i>1?`<button class="guest-remove" onclick="removeGuest(${i})">✕ remover</button>`:''}</div>
-  <div class="field"><label>Nome completo${i===1?' *':''}</label><input type="text" id="nome${i}" placeholder="Nome completo"></div>
-  <div class="field" style="margin-bottom:0"><label>CPF${i===1?' *':''}</label><input type="text" id="cpf${i}" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" oninput="maskCPF(this)"></div>
+  <div class="guest-card-head"><span class="guest-card-tag">${i===1?'Hóspede 1 · Principal (titular)':'Hóspede '+i}</span></div>
+  <div class="field"><label>Nome completo *</label><input type="text" id="nome${i}" placeholder="Nome completo"></div>
+  <div class="field" style="margin-bottom:0"><label>CPF${i===1?' *':' <span style=\'opacity:.55;font-weight:500\'>(opcional para crianças)</span>'}</label><input type="text" id="cpf${i}" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" oninput="maskCPF(this)"></div>
 </div>`;}
-function addGuest(){if(gc>=4)return;gc++;document.getElementById('guests-list').insertAdjacentHTML('beforeend',guestHTML(gc));document.getElementById('addGuestBtn').style.display=gc>=4?'none':'block';}
-function removeGuest(i){const el=document.getElementById('g-'+i);if(el)el.remove();gc--;
-  /* renumber */ const list=document.getElementById('guests-list');list.innerHTML='';gc=0;addGuest();document.getElementById('addGuestBtn').style.display='block';}
-addGuest();
+function setGuests(v){
+  const n=parseInt(v||'0',10)||0;
+  const old=[];for(let i=1;i<=gc;i++){const ne=document.getElementById('nome'+i),ce=document.getElementById('cpf'+i);old.push({n:ne?ne.value:'',c:ce?ce.value:''});}
+  gc=n;const list=document.getElementById('guests-list');list.innerHTML='';
+  for(let i=1;i<=n;i++){list.insertAdjacentHTML('beforeend',guestHTML(i));if(old[i-1]){document.getElementById('nome'+i).value=old[i-1].n;document.getElementById('cpf'+i).value=old[i-1].c;}}
+  document.getElementById('f-qtd').classList.remove('has-error');
+}
 /* NAV */
 function setStepper(n){document.querySelectorAll('.step').forEach(s=>{const d=+s.dataset.s;s.classList.toggle('active',d===n);s.classList.toggle('done',d<n);});}
 function goto(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+n).classList.add('active');if(n<=4)setStepper(n);window.scrollTo({top:0,behavior:'smooth'});}
-function next1(){const n=document.getElementById('nome1').value.trim();const c=document.getElementById('cpf1').value.trim();if(!n){alert('⚠️ Informe o nome do titular.');return;}if(!c){alert('⚠️ Informe o CPF do titular.');return;}goto(2);}
+function next1(){
+  document.getElementById('f-qtd').classList.remove('has-error');
+  if(!gc){document.getElementById('f-qtd').classList.add('has-error');document.getElementById('qtd').focus();window.scrollTo({top:0,behavior:'smooth'});return;}
+  for(let i=1;i<=gc;i++){if(!document.getElementById('nome'+i).value.trim()){alert('⚠️ Informe o nome completo do Hóspede '+i+'.\n\nVocê declarou '+gc+' pessoa(s) — todas precisam estar cadastradas.');document.getElementById('nome'+i).focus();return;}}
+  if(!document.getElementById('cpf1').value.trim()){alert('⚠️ Informe o CPF do titular.');document.getElementById('cpf1').focus();return;}
+  const semCpf=[];for(let i=2;i<=gc;i++){if(!document.getElementById('cpf'+i).value.trim())semCpf.push(i);}
+  if(semCpf.length&&!confirm('O(s) Hóspede(s) '+semCpf.join(', ')+' está(ão) sem CPF.\n\nO CPF só pode ficar em branco para crianças que ainda não possuem o documento. Deseja continuar?'))return;
+  goto(2);}
 function next2(){let ok=true;['f-cin','f-cout','f-hora'].forEach(id=>document.getElementById(id).classList.remove('has-error'));
   const ci=document.getElementById('cin').value,co=document.getElementById('cout').value,ho=document.getElementById('chora').value;
   if(!ci){document.getElementById('f-cin').classList.add('has-error');ok=false;}
@@ -267,7 +287,7 @@ function fmtDate(s){if(!s)return'—';const[y,m,d]=s.split('-');return `${d}/${m
 function guests(){const a=[];for(let i=1;i<=gc;i++){const n=document.getElementById('nome'+i),c=document.getElementById('cpf'+i);if(n&&n.value.trim())a.push({nome:n.value.trim(),cpf:c?c.value.trim():''});}return a;}
 function buildRecap(){const g=guests();document.getElementById('recap').innerHTML=
   `<div class="r"><span class="k">Titular</span><span class="v">${g[0]?.nome||'—'}</span></div>`+
-  `<div class="r"><span class="k">Hóspedes</span><span class="v">${g.length} de 4</span></div>`+
+  `<div class="r"><span class="k">Hóspedes</span><span class="v">${gc} pessoa${gc>1?'s':''}</span></div>`+
   `<div class="r"><span class="k">Check-in</span><span class="v">${fmtDate(document.getElementById('cin').value)} · ${document.getElementById('chora').value||'—'}</span></div>`+
   `<div class="r"><span class="k">Check-out</span><span class="v">${fmtDate(document.getElementById('cout').value)}</span></div>`;}
 /* SIGNATURE CANVAS */
