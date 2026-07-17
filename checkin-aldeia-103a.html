@@ -920,7 +920,30 @@
 
       <div>
         <label style="display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Horário previsto de chegada</label>
-        <input type="time" id="input-hora" min="14:00" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box;">
+        <select id="input-hora" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box; appearance:none;">
+          <option value="">Selecione o horário…</option>
+          <option value="14:00">14:00</option>
+          <option value="14:30">14:30</option>
+          <option value="15:00">15:00</option>
+          <option value="15:30">15:30</option>
+          <option value="16:00">16:00</option>
+          <option value="16:30">16:30</option>
+          <option value="17:00">17:00</option>
+          <option value="17:30">17:30</option>
+          <option value="18:00">18:00</option>
+          <option value="18:30">18:30</option>
+          <option value="19:00">19:00</option>
+          <option value="19:30">19:30</option>
+          <option value="20:00">20:00</option>
+          <option value="20:30">20:30</option>
+          <option value="21:00">21:00</option>
+          <option value="21:30">21:30</option>
+          <option value="22:00">22:00</option>
+          <option value="22:30">22:30</option>
+          <option value="23:00">23:00</option>
+          <option value="23:30">23:30</option>
+          <option value="após 00:00">Depois da meia-noite (combinar no WhatsApp)</option>
+        </select>
         <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">A partir das 14h — nos ajuda a preparar sua recepção</div>
       </div>
     </div>
@@ -1038,7 +1061,7 @@
   <!-- STEP 3: Demais hóspedes -->
   <div class="step" id="step-4">
     <h2 class="step-title">Demais<br><em>hóspedes</em></h2>
-    <p class="step-desc" id="step3-desc">Informe os dados de cada hóspede — todos os ocupantes precisam estar cadastrados. CPF é opcional para crianças.</p>
+    <p class="step-desc" id="step3-desc">Informe os dados de cada hóspede — todos os ocupantes precisam estar cadastrados. <strong>O CPF é obrigatório para todos os adultos</strong>; crianças sem CPF podem deixar o campo em branco.</p>
 
     <div id="hospedes-container"></div>
 
@@ -1232,7 +1255,7 @@
     if (extras <= 0) {
       desc.textContent = 'Você informou que apenas 1 pessoa (você) vai se hospedar. Se houver mais pessoas — inclusive crianças — volte e ajuste a quantidade: todos os ocupantes precisam estar cadastrados.';
     } else {
-      desc.textContent = `Você informou ${extras + 1} pessoa(s) no total. Preencha abaixo os dados de cada um dos ${extras} hóspede(s) além de você. CPF é opcional para crianças. Todos os ocupantes precisam estar cadastrados.`;
+      desc.textContent = `Você informou ${extras + 1} pessoa(s) no total. Preencha abaixo os dados de cada um dos ${extras} hóspede(s) além de você. O CPF é obrigatório para todos os adultos; crianças sem CPF podem deixar em branco. Todos os ocupantes precisam estar cadastrados.`;
     }
     rebuildHospedes(extras);
   }
@@ -1327,16 +1350,17 @@
     hospedesData.forEach((h, i) => {
       const card = document.createElement('div');
       card.className = 'hospede-card';
+      const isAdulto = i < (counts.adultos - 1);
       card.innerHTML = `
         <div class="hospede-card-title">
-          Hóspede ${i + 2}
+          Hóspede ${i + 2} · ${isAdulto ? 'Adulto' : 'Criança'}
         </div>
         <div class="field-group">
           <label>Nome Completo <span>*</span></label>
           <input type="text" id="h-nome-${i}" placeholder="Nome completo" value="${h.nome}" oninput="saveHospede(${i},'nome',this.value)">
         </div>
         <div class="field-group">
-          <label>CPF <span style="color:var(--texto-claro);font-weight:300">(opcional para crianças)</span></label>
+          <label>CPF ${isAdulto ? '<span>*</span> <span style="color:var(--texto-claro);font-weight:300">(obrigatório para adultos)</span>' : '<span style="color:var(--texto-claro);font-weight:300">(opcional — apenas se a criança já tiver)</span>'}</label>
           <input type="text" id="h-cpf-${i}" placeholder="000.000.000-00" maxlength="14" value="${h.cpf}" oninput="maskCPF(this);saveHospede(${i},'cpf',this.value)">
         </div>
       `;
@@ -1347,10 +1371,17 @@
   function saveHospede(i, field, val) { hospedesData[i][field] = val; }
 
   function validateStep3() {
+    const adultosExtras = counts.adultos - 1;
     for (let i = 0; i < hospedesData.length; i++) {
       if (!hospedesData[i].nome.trim()) {
         alert('⚠️ Informe o nome completo do Hóspede ' + (i + 2) + '.\n\nVocê declarou ' + (hospedesData.length + 1) + ' pessoa(s) no total — todas precisam estar cadastradas.');
         const el = document.getElementById('h-nome-' + i);
+        if (el) el.focus();
+        return;
+      }
+      if (i < adultosExtras && !hospedesData[i].cpf.trim()) {
+        alert('⚠️ Informe o CPF do Hóspede ' + (i + 2) + '.\n\nO CPF é obrigatório para todos os hóspedes adultos — o condomínio exige para liberar o acesso. Apenas crianças podem ficar sem CPF.');
+        const el = document.getElementById('h-cpf-' + i);
         if (el) el.focus();
         return;
       }
