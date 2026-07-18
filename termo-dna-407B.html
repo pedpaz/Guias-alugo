@@ -177,8 +177,6 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
       <div class="field" id="f-hora"><label>Horário previsto de chegada</label>
         <select id="chora">
           <option value="">Selecione o horário…</option>
-          <option value="14:00">14:00</option>
-          <option value="14:30">14:30</option>
           <option value="15:00">15:00</option>
           <option value="15:30">15:30</option>
           <option value="16:00">16:00</option>
@@ -201,7 +199,7 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
         </select>
         <div class="error-msg">Informe o horário</div></div>
       <div class="field"><label>Placa do veículo (opcional)</label><input type="text" id="placa" placeholder="ABC0D00" style="text-transform:uppercase"></div>
-      <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 14h · Check-out até as 11h. Saída fora do prazo está sujeita a multa de R$ 200,00 por hora.</div>
+      <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 15h · Check-out até as 12h. Saída fora do prazo está sujeita a multa de R$ 200,00 por hora.</div>
     </div>
     <div class="btnrow"><button class="btn btn-back" onclick="goto(1)">←</button><button class="btn btn-primary" onclick="next2()">Continuar →</button></div>
   </div>
@@ -219,7 +217,7 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
       <div class="rules-box">
         <div class="rule-item"><strong>1. Imóvel</strong>Flat 407B, Edifício Dna Smart, Goiânia–GO, com mobília, eletrodomésticos e utensílios descritos no imóvel.</div>
         <div class="rule-item"><strong>2. Capacidade</strong>Máximo de 4 pessoas, conforme reserva. Hóspedes adicionais sem autorização prévia serão cobrados à taxa de <span class="fine">R$ 200,00 por pessoa</span>.</div>
-        <div class="rule-item"><strong>3. Check-in e Check-out</strong>Entrada a partir das 14h e saída até as 11h. Saída fora do prazo sujeita a multa de <span class="fine">R$ 200,00 por hora</span>.</div>
+        <div class="rule-item"><strong>3. Check-in e Check-out</strong>Entrada a partir das 15h e saída até as 12h. Saída fora do prazo sujeita a multa de <span class="fine">R$ 200,00 por hora</span>.</div>
         <div class="rule-item hot"><strong>🚭 4. Proibição de fumar</strong>É <b>expressamente proibido fumar</b> em qualquer ambiente interno, incluindo cigarro, narguilé e cigarro eletrônico. O descumprimento sujeita o locatário a <span class="fine">multa de R$ 300,00</span>, acrescida do custo de higienização.</div>
         <div class="rule-item"><strong>5. Acesso ao flat</strong>A entrada é por <strong>fechadura digital</strong> — a senha é individual e enviada após a confirmação do cadastro. Não compartilhe a senha com pessoas não cadastradas neste termo.</div>
         <div class="rule-item"><strong>6. Festas e eventos</strong>O imóvel destina-se exclusivamente à hospedagem dos hóspedes cadastrados. Festas ou eventos são proibidos, sob pena de <span class="fine">multa de R$ 500,00</span>, acrescida do custo integral de eventuais danos.</div>
@@ -233,7 +231,7 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
       <label class="accept-row"><input type="checkbox" class="decl"><span>Declaro que <strong>li e concordo</strong> com todas as cláusulas deste termo de estadia.</span></label>
       <label class="accept-row"><input type="checkbox" class="decl"><span>Estou ciente de que <strong>festas e eventos são proibidos</strong> (multa de R$ 500,00 + danos).</span></label>
       <label class="accept-row"><input type="checkbox" class="decl"><span>Estou ciente da <strong>capacidade máxima de 4 pessoas</strong> (excedente: R$ 200,00 por pessoa).</span></label>
-      <label class="accept-row"><input type="checkbox" class="decl"><span>Estou ciente do <strong>check-out às 11h</strong> (atraso: R$ 200,00/hora) e de que respondo por <strong>danos ao imóvel</strong>.</span></label>
+      <label class="accept-row"><input type="checkbox" class="decl"><span>Estou ciente do <strong>check-out às 12h</strong> (atraso: R$ 200,00/hora) e de que respondo por <strong>danos ao imóvel</strong>.</span></label>
       <div class="error-msg" id="accept-error" style="margin-top:10px">É necessário marcar todas as declarações para continuar.</div>
     </div>
     <div class="btnrow"><button class="btn btn-back" onclick="goto(2)">←</button><button class="btn btn-primary" onclick="next3()">Continuar →</button></div>
@@ -348,7 +346,7 @@ function finalizar(){
   m+='⚠️ *PROIBIDO FUMAR* (cigarro/narguilé/vape) — multa R$300 + higienização\n';
   m+='✓ Festas/eventos proibidos (R$500 + danos)\n';
   m+='✓ Capacidade máx. 4 (excedente R$200/pessoa)\n';
-  m+='✓ Check-out 11h (atraso R$200/h) · responsável por danos\n';
+  m+='✓ Check-out 12h (atraso R$200/h) · responsável por danos\n';
   m+='✓ Silêncio após 22h · sem pets\n';
   m+='\n━━━━━━━━━━━━━━━━━━━━\n';
   m+=`*Assinado por:* ${ass}\n*Em:* ${stamp}\n`;
@@ -379,7 +377,8 @@ function enviarCheckinLoftcare(){
       assinatura:((document.getElementById('signame')||{}).value||'').trim()||(t.nome||''),
       aceites:{contrato:true,nao_fumar:true,sem_festas:true,capacidade:true,checkout:true}
     };
-    (function(b){var u="https://loftcare-os.vercel.app/api/public/checkin";try{if(navigator.sendBeacon&&navigator.sendBeacon(u,new Blob([b],{type:"text/plain;charset=UTF-8"})))return;}catch(e){}fetch(u,{method:"POST",keepalive:true,headers:{"Content-Type":"text/plain;charset=UTF-8"},body:b}).catch(function(){});})(JSON.stringify(payload));
+    fetch("https://loftcare-os.vercel.app/api/public/checkin",{method:"POST",keepalive:true,
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
   }catch(e){}
 }
 </script>
