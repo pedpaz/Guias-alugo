@@ -379,8 +379,7 @@ function enviarCheckinLoftcare(){
       assinatura:((document.getElementById('signame')||{}).value||'').trim()||(t.nome||''),
       aceites:{contrato:true,nao_fumar:true,sem_festas:true,capacidade:true,checkout:true}
     };
-    fetch("https://loftcare-os.vercel.app/api/public/checkin",{method:"POST",keepalive:true,
-      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});
+    (function(b){var u="https://loftcare-os.vercel.app/api/public/checkin";try{if(navigator.sendBeacon&&navigator.sendBeacon(u,new Blob([b],{type:"text/plain;charset=UTF-8"})))return;}catch(e){}fetch(u,{method:"POST",keepalive:true,headers:{"Content-Type":"text/plain;charset=UTF-8"},body:b}).catch(function(){});})(JSON.stringify(payload));
   }catch(e){}
 }
 </script>
