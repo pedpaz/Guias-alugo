@@ -198,8 +198,26 @@ canvas#sigCanvas{background:rgba(0,0,0,.25);border:1px dashed var(--line-2);bord
           <option value="23:30">23:30</option>
           <option value="após 00:00">Depois da meia-noite (combinar no WhatsApp)</option>
         </select>
-        <div class="error-msg">Informe o horário</div></div>
-      <div class="field"><label>Placa do veículo (opcional)</label><input type="text" id="placa" placeholder="ABC0D00" style="text-transform:uppercase"></div>
+        <div class="error-msg">Informe o horário</div>
+        <div class="field" id="f-hora-saida"><label>Horário previsto de saída (até 11:00)</label>
+        <select id="csaida">
+          <option value="">Selecione o horário…</option>
+          <option value="06:00">06:00</option>
+          <option value="06:30">06:30</option>
+          <option value="07:00">07:00</option>
+          <option value="07:30">07:30</option>
+          <option value="08:00">08:00</option>
+          <option value="08:30">08:30</option>
+          <option value="09:00">09:00</option>
+          <option value="09:30">09:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+        </select>
+        <div class="error-msg">Informe o horário de saída</div>
+        <div style="font-size:11px;color:#9a8;margin-top:5px;padding-left:2px;">O check-out é até 11:00. Não é possível prever saída após esse horário.</div>
+        </div></div>
+      
       <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 14h · Check-out até as 11h. Saída fora do prazo está sujeita a multa de R$ 200,00 por hora.</div>
     </div>
     <div class="btnrow"><button class="btn btn-back" onclick="goto(1)">←</button><button class="btn btn-primary" onclick="next2()">Continuar →</button></div>
@@ -335,14 +353,14 @@ function finalizar(){
   const typed=document.getElementById('signame').value.trim();
   if(!hasSig&&!typed){document.getElementById('f-signame').classList.add('has-error');alert('⚠️ Assine no quadro ou digite seu nome para concluir.');return;}
   const g=guests();const ass=typed||g[0]?.nome||'Locatário';const stamp=nowStamp();
+  var _cs=(document.getElementById('csaida')||{}).value||'';
+  if(_cs && _cs > '11:00'){var fs=document.getElementById('f-hora-saida');if(fs)fs.classList.add('has-error');alert('\u26A0\uFE0F O check-out \u00E9 at\u00E9 as 11:00. N\u00E3o \u00E9 poss\u00EDvel prever sa\u00EDda ap\u00F3s esse hor\u00E1rio.');return;}
   enviarCheckinLoftcare();
-  const placa=document.getElementById('placa').value.trim().toUpperCase();
   let m='*TERMO DE ESTADIA — CRYSTAL PLACE · SUÍTE DO IMPERADOR 209*\n';
   m+='━━━━━━━━━━━━━━━━━━━━\n\n*HÓSPEDES:*\n';
   g.forEach((x,i)=>{m+=`${i===0?'Titular':'Hóspede '+(i+1)}: ${x.nome}${x.cpf?' — CPF '+x.cpf:''}\n`;});
   m+=`\n*Check-in:* ${fmtDate(document.getElementById('cin').value)} às ${document.getElementById('chora').value}\n`;
   m+=`*Check-out:* ${fmtDate(document.getElementById('cout').value)}\n`;
-  if(placa)m+=`*Placa:* ${placa}\n`;
   m+='\n━━━━━━━━━━━━━━━━━━━━\n*CIÊNCIA E ACEITE:*\n';
   m+='✓ Li e concordo com o termo de estadia\n';
   m+='⚠️ *PROIBIDO FUMAR* (cigarro/narguilé/vape) — multa R$300 + higienização\n';
@@ -369,13 +387,13 @@ function enviarCheckinLoftcare(){
     var g=[]; for(var i=1;i<=gc;i++){var n=document.getElementById('nome'+i),cc=document.getElementById('cpf'+i);
       if(n&&n.value.trim())g.push({nome:n.value.trim(),cpf:cc?cc.value.trim():''});}
     var t=g[0]||{};
-    var payload={ token:"COLE_O_TOKEN_AQUI", unidade:"CP-209", tipo:"termo",
+    var payload={ unidade:"CP-209", tipo:"termo",
       check_in:(document.getElementById('cin')||{}).value||'',
       check_out:(document.getElementById('cout')||{}).value||'',
       hora_chegada:(document.getElementById('chora')||{}).value||'',
+      hora_saida:(document.getElementById('csaida')||{}).value||'',
       titular:{nome:t.nome||'',cpf:t.cpf||''},
       hospedes:g.slice(1),
-      placa:((document.getElementById('placa')||{}).value||'').toUpperCase(),
       assinatura:((document.getElementById('signame')||{}).value||'').trim()||(t.nome||''),
       aceites:{contrato:true,nao_fumar:true,sem_festas:true,capacidade:true,checkout:true}
     };

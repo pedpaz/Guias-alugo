@@ -945,6 +945,24 @@
           <option value="após 00:00">Depois da meia-noite (combinar no WhatsApp)</option>
         </select>
         <div style="font-size:11px; color:var(--texto-claro); margin-top:5px; padding-left:4px;">A partir das 14h — nos ajuda a preparar sua recepção</div>
+        </div>
+        <div style="margin-top:18px;">
+        <label style="display:block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto-claro); margin-bottom:8px;">Horário previsto de saída (até 11h)</label>
+        <select id="input-saida" style="width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:10px; font-size:16px; font-family:inherit; color:var(--lago); background:#fafafa; box-sizing:border-box; appearance:none;">
+          <option value="">Selecione o horário…</option>
+          <option value="06:00">06:00</option>
+          <option value="06:30">06:30</option>
+          <option value="07:00">07:00</option>
+          <option value="07:30">07:30</option>
+          <option value="08:00">08:00</option>
+          <option value="08:30">08:30</option>
+          <option value="09:00">09:00</option>
+          <option value="09:30">09:30</option>
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+        </select>
+        <div style="font-size:11px; color:#b08; margin-top:5px; padding-left:4px;">O check-out é até as 11h. Não é possível prever saída após esse horário.</div>
       </div>
     </div>
 
@@ -1446,6 +1464,8 @@
 
   /* ── WHATSAPP ── */
   function sendWhatsApp() {
+    var _cs=(document.getElementById('input-saida')||{}).value||'';
+    if(_cs && _cs > '11:00'){alert('\u26A0\uFE0F O check-out \u00E9 at\u00E9 as 11h. N\u00E3o \u00E9 poss\u00EDvel prever sa\u00EDda ap\u00F3s esse hor\u00E1rio.');return;}
     enviarCheckinLoftcare();
     if (!aceiteContrato) {
       const e = document.getElementById('aceite-erro');
@@ -1725,11 +1745,10 @@ function enviarCheckinLoftcare() {
       if ((el.value||'').trim()) hospedes.push({ nome: el.value.trim(), cpf: v('h-cpf-'+i) });
     });
     var payload = {
-      token: "COLE_O_TOKEN_AQUI",
       unidade: "ADL-103A",
       check_in: (typeof checkinVal !== 'undefined' && checkinVal) ? checkinVal : v('input-checkin'),
       check_out: (typeof checkoutVal !== 'undefined' && checkoutVal) ? checkoutVal : v('input-checkout'),
-      hora_chegada: v('input-hora'),
+      hora_chegada: v('input-hora'), hora_saida: v('input-saida'),
       adultos: parseInt(txt('val-adultos') || '0', 10),
       criancas: parseInt(txt('val-criancas') || '0', 10),
       titular: { nome:v('t-nome'), cpf:v('t-cpf'), rg:v('t-rg'), endereco:v('t-endereco'),
