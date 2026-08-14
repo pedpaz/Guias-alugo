@@ -345,6 +345,7 @@ var IC={
  raio:'<svg class="ico" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
  lixo:'<svg class="ico" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
  info:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+ carro:'<svg class="ico" viewBox="0 0 24 24"><path d="M5 17H3v-5l2.5-5.5A2 2 0 0 1 7.3 5.4h9.4a2 2 0 0 1 1.8 1.1L21 12v5h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="3" y1="12" x2="21" y2="12"/></svg>',
  relogio:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
 };
 
@@ -367,7 +368,8 @@ var TELAS=[
 { id:'chegar', icone:IC.mapa, corpo:function(){
   return _head('chegar') + _ph('fachada')
    + _card(IC.mapa, t('c_endereco'), _row(IC.predio,'DNA SmartStyle',ENDERECO)
-      + _row(IC.relogio,t('c_horarios'),t('chegar_hor')))
+      + _row(IC.relogio,t('c_horarios'),t('chegar_hor'))
+      + _row(IC.carro,t('c_garagem'),t('chegar_gar')))
    + '<a class="btn btn-p" href="'+MAPS+'" target="_blank" rel="noopener">'+IC.mapa+t('chegar_btn')+'</a>'
    + _note('',IC.info,t('chegar_n1'))
    + _note('',IC.info,t('chegar_n2'));
@@ -533,7 +535,8 @@ var SINONIMOS={
 var I18N={
 pt:{
 
- cap_fachada:'A entrada do DNA SmartStyle, na R. T-37', cap_lobby:'O lobby, logo depois da portaria', cap_sala:'A sala, aberta para a cozinha', cap_quarto:'O quarto, com a parede de cimento queimado', cap_varanda:'A varanda, com vista aberta da cidade', cap_cozinha:'O cooktop, a coifa e o purificador', cap_lavaseca:'A lava e seca, na área de serviço', cap_piscina:'A piscina de borda infinita, no rooftop', cap_academia:'A academia do prédio', cap_jogos:'O salão de jogos, com sinuca', cap_gourmet:'O espaço gourmet, com churrasqueira', kicker:'Guia do apartamento', meta:'Setor Bueno · Goiânia', copiar:'Copiar', copiado:'Copiado ✓',
+ cap_fachada:'A entrada do DNA SmartStyle, na R. T-37', cap_lobby:'O lobby, logo depois da portaria', cap_sala:'A sala, aberta para a cozinha', cap_quarto:'O quarto, com a parede de cimento queimado', cap_varanda:'A varanda, com vista aberta da cidade', cap_cozinha:'O cooktop, a coifa e o purificador', cap_lavaseca:'A lava e seca, na área de serviço', cap_piscina:'A piscina de borda infinita, no rooftop', cap_academia:'A academia do prédio', cap_jogos:'O salão de jogos, com sinuca', cap_gourmet:'O espaço gourmet, com churrasqueira',
+ c_garagem:'Garagem', chegar_gar:'Vaga <strong>215</strong>, no 2º pavimento da garagem. O acesso de carros é pela rampa lateral do prédio.', kicker:'Guia do apartamento', meta:'Setor Bueno · Goiânia', copiar:'Copiar', copiado:'Copiado ✓',
  k_porta:'Senha da porta', wifi_sub:'Senha: veiga5300 · toque para copiar',
  ph_busca:'Buscar: toalha, lixo, senha, piscina...', menu:'Menu', checkout:'Check-out',
  rodape:'aluGO · Gestão de imóveis para temporada', nada:'Não encontramos. Chame no WhatsApp que resolvemos.',
@@ -673,7 +676,8 @@ pt:{
 },
 en:{
 
- cap_fachada:'The DNA SmartStyle entrance, on R. T-37', cap_lobby:'The lobby, just past reception', cap_sala:'The living room, open to the kitchen', cap_quarto:'The bedroom, with its polished concrete wall', cap_varanda:'The balcony, with an open city view', cap_cozinha:'The cooktop, hood and water purifier', cap_lavaseca:'The washer dryer, in the utility area', cap_piscina:'The rooftop infinity pool', cap_academia:'The building gym', cap_jogos:'The games room, with a pool table', cap_gourmet:'The gourmet area, with a barbecue', kicker:'Apartment guide', meta:'Setor Bueno · Goiânia', copiar:'Copy', copiado:'Copied ✓',
+ cap_fachada:'The DNA SmartStyle entrance, on R. T-37', cap_lobby:'The lobby, just past reception', cap_sala:'The living room, open to the kitchen', cap_quarto:'The bedroom, with its polished concrete wall', cap_varanda:'The balcony, with an open city view', cap_cozinha:'The cooktop, hood and water purifier', cap_lavaseca:'The washer dryer, in the utility area', cap_piscina:'The rooftop infinity pool', cap_academia:'The building gym', cap_jogos:'The games room, with a pool table', cap_gourmet:'The gourmet area, with a barbecue',
+ c_garagem:'Parking', chegar_gar:'Space <strong>215</strong>, on garage level 2. Cars enter through the side ramp of the building.', kicker:'Apartment guide', meta:'Setor Bueno · Goiânia', copiar:'Copy', copiado:'Copied ✓',
  k_porta:'Door code', wifi_sub:'Password: veiga5300 · tap to copy',
  ph_busca:'Search: towel, trash, code, pool...', menu:'Menu', checkout:'Check-out',
  rodape:'aluGO · Short-stay property management', nada:'Nothing found. Message us on WhatsApp and we will sort it out.',
@@ -813,7 +817,8 @@ en:{
 },
 es:{
 
- cap_fachada:'La entrada del DNA SmartStyle, en la R. T-37', cap_lobby:'El lobby, pasando la portería', cap_sala:'El salón, abierto a la cocina', cap_quarto:'La habitación, con su pared de cemento alisado', cap_varanda:'El balcón, con vista abierta a la ciudad', cap_cozinha:'La vitrocerámica, la campana y el purificador', cap_lavaseca:'El lavasecarropas, en el área de servicio', cap_piscina:'La piscina infinita, en el rooftop', cap_academia:'El gimnasio del edificio', cap_jogos:'El salón de juegos, con mesa de billar', cap_gourmet:'El espacio gourmet, con parrilla', kicker:'Guía del apartamento', meta:'Setor Bueno · Goiânia', copiar:'Copiar', copiado:'Copiado ✓',
+ cap_fachada:'La entrada del DNA SmartStyle, en la R. T-37', cap_lobby:'El lobby, pasando la portería', cap_sala:'El salón, abierto a la cocina', cap_quarto:'La habitación, con su pared de cemento alisado', cap_varanda:'El balcón, con vista abierta a la ciudad', cap_cozinha:'La vitrocerámica, la campana y el purificador', cap_lavaseca:'El lavasecarropas, en el área de servicio', cap_piscina:'La piscina infinita, en el rooftop', cap_academia:'El gimnasio del edificio', cap_jogos:'El salón de juegos, con mesa de billar', cap_gourmet:'El espacio gourmet, con parrilla',
+ c_garagem:'Garaje', chegar_gar:'Plaza <strong>215</strong>, en el 2º nivel del garaje. Los autos entran por la rampa lateral del edificio.', kicker:'Guía del apartamento', meta:'Setor Bueno · Goiânia', copiar:'Copiar', copiado:'Copiado ✓',
  k_porta:'Clave de la puerta', wifi_sub:'Clave: veiga5300 · toca para copiar',
  ph_busca:'Buscar: toalla, basura, clave, piscina...', menu:'Menú', checkout:'Check-out',
  rodape:'aluGO · Gestión de inmuebles para temporada', nada:'No encontramos nada. Escríbenos por WhatsApp y lo resolvemos.',
