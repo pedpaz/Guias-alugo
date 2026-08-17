@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Check-in online · DNA SmartStyle 2003B</title>
+<meta name="theme-color" content="#F7F2EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#F7F2EC; --creme-2:#FFFDFA; --tinta:#2B2622; --tinta-2:#6B615A;
+  --laranja:#E0761A; --laranja-cl:#F3A961; --laranja-bg:#FDF1E4;
+  --linha:#E7DED3; --verde:#1FAA53; --alerta:#C4441B;
+  --r:18px; --sombra:0 2px 10px rgba(43,38,34,.06), 0 12px 34px rgba(43,38,34,.07);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--creme);color:var(--tinta);font-family:Manrope,system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.55;padding-bottom:120px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+.lang{position:sticky;top:0;z-index:60;background:rgba(247,242,236,.93);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linha)}
+.lang .wrap{display:flex;justify-content:flex-end;gap:6px;padding:8px 18px}
+.lang button{padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--tinta-2)}
+.lang button.on{background:var(--tinta);color:var(--creme)}
+
+.capa{padding:30px 0 8px;text-align:center}
+.capa .logo{font-family:Fraunces;font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--laranja);line-height:1}
+.capa .logo span{display:block;font-family:Manrope;font-size:9.5px;letter-spacing:.42em;color:var(--tinta-2);font-weight:700;margin-top:6px}
+.capa h1{font-size:clamp(26px,7vw,36px);margin:18px 0 6px}
+.capa p{margin:0;color:var(--tinta-2);font-size:14px}
+
+/* progresso */
+.prog{display:flex;gap:6px;margin:24px 0 6px}
+.prog div{flex:1;height:5px;border-radius:999px;background:var(--linha);transition:background .25s}
+.prog div.on{background:var(--laranja)}
+.passo{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--laranja);margin-bottom:16px}
+
+.etapa{display:none}
+.etapa.on{display:block;animation:sobe .24s ease}
+@keyframes sobe{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.etapa h2{font-size:clamp(23px,6vw,30px);margin-bottom:6px}
+.etapa .lead{color:var(--tinta-2);font-size:14.5px;margin:0 0 20px}
+
+.campo{margin-bottom:14px}
+.campo label{display:block;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--tinta-2);margin-bottom:6px}
+.campo input,.campo select{width:100%;padding:14px 15px;border:1px solid var(--linha);border-radius:13px;
+  background:var(--creme-2);font-family:inherit;font-size:16px;outline:none;color:var(--tinta)}
+.campo input:focus,.campo select:focus{border-color:var(--laranja)}
+.campo input.erro{border-color:var(--alerta);background:#FEF3F0}
+.campo .msg{font-size:12.5px;color:var(--alerta);margin-top:5px;display:none}
+.campo.mal .msg{display:block}
+.dois{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:430px){.dois{grid-template-columns:1fr}}
+
+.hosp{background:var(--creme-2);border:1px solid var(--linha);border-radius:var(--r);padding:16px;
+  margin-bottom:12px;box-shadow:var(--sombra);position:relative}
+.hosp .cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hosp .cab b{font-family:Fraunces;font-size:16px;font-weight:600}
+.hosp .rm{font-size:12px;font-weight:700;color:var(--alerta)}
+.addh{width:100%;padding:14px;border:1.5px dashed var(--laranja-cl);border-radius:14px;color:var(--laranja);
+  font-weight:800;font-size:14.5px;background:var(--laranja-bg)}
+.lim{font-size:12.5px;color:var(--tinta-2);margin-top:9px;text-align:center}
+
+.ac{border:1px solid var(--linha);border-radius:14px;background:var(--creme-2);margin-bottom:9px;overflow:hidden}
+.ac>button{width:100%;text-align:left;padding:14px 15px;font-weight:700;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;font-size:14.5px}
+.ac>button i{font-style:normal;color:var(--laranja);transition:transform .2s;flex:none}
+.ac.on>button i{transform:rotate(45deg)}
+.ac .corpo{display:none;padding:0 15px 15px;color:var(--tinta-2);font-size:14px}
+.ac.on .corpo{display:block}
+.ac .corpo p{margin:0 0 8px}
+.ac .corpo p:last-child{margin:0}
+
+.decl{background:var(--creme-2);border:1px solid var(--linha);border-radius:var(--r);padding:6px 16px;
+  margin-bottom:14px;box-shadow:var(--sombra)}
+.decl label{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--linha);
+  font-size:14.5px;cursor:pointer}
+.decl label:last-child{border-bottom:0}
+.decl input{width:21px;height:21px;accent-color:var(--laranja);flex:none;margin-top:1px}
+.decl.mal{border-color:var(--alerta)}
+
+.assin{background:var(--creme-2);border:1px solid var(--linha);border-radius:var(--r);padding:16px;
+  box-shadow:var(--sombra);margin-bottom:14px}
+.assin canvas{width:100%;height:170px;border:1px dashed var(--laranja-cl);border-radius:12px;
+  background:#fff;touch-action:none;display:block}
+.assin .barra{display:flex;justify-content:space-between;align-items:center;margin-top:10px;
+  font-size:12.5px;color:var(--tinta-2)}
+.assin .limpar{font-weight:800;color:var(--laranja)}
+
+.resumo{background:var(--laranja-bg);border:1px solid var(--laranja-cl);border-radius:var(--r);padding:16px;margin-bottom:16px}
+.resumo h3{font-size:16px;margin-bottom:9px}
+.resumo dl{margin:0;font-size:14px}
+.resumo dt{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-2);margin-top:9px}
+.resumo dd{margin:2px 0 0}
+
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(255,253,250,.96);
+  backdrop-filter:blur(12px);border-top:1px solid var(--linha);
+  padding:11px 12px calc(11px + env(safe-area-inset-bottom))}
+.nav .in{max-width:640px;margin:0 auto;display:flex;gap:10px}
+.nav button{flex:1;padding:16px;border-radius:14px;font-weight:800;letter-spacing:.03em}
+.nav .volta{border:1.5px solid var(--linha);color:var(--tinta-2);flex:0 0 34%}
+.nav .segue{background:var(--laranja);color:#fff}
+.nav .enviar{background:var(--verde);color:#fff}
+.nav button[disabled]{opacity:.55}
+
+.ok{text-align:center;padding:40px 0}
+.ok .tick{width:78px;height:78px;border-radius:50%;background:var(--verde);color:#fff;font-size:40px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.ok h2{font-size:28px;margin-bottom:10px}
+.ok p{color:var(--tinta-2);margin:0 0 22px}
+.ok a{display:block;padding:16px;border-radius:14px;background:var(--laranja);color:#fff;
+  text-decoration:none;font-weight:800;margin-bottom:11px}
+.ok a.linha{background:none;border:1.5px solid var(--tinta);color:var(--tinta)}
+.rodape{text-align:center;padding:26px 0 10px;color:var(--tinta-2);font-size:11.5px;letter-spacing:.06em}
+.rodape b{font-family:Fraunces;color:var(--tinta);font-size:14px;letter-spacing:.14em;display:block;margin-bottom:4px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="lang"><div class="wrap">
+  <button data-l="pt" class="on">PT</button>
+  <button data-l="en">EN</button>
+  <button data-l="es">ES</button>
+</div></div>
+
+<main class="wrap" id="app">
+  <div class="capa">
+    <div class="logo">DNA<span>SMARTSTYLE</span></div>
+    <h1 data-t="tituloPag"></h1>
+    <p data-t="subPag"></p>
+  </div>
+
+  <div class="prog"><div class="on"></div><div></div><div></div><div></div></div>
+  <div class="passo" id="passoRot"></div>
+
+  <!-- 1 · HOSPEDES -->
+  <section class="etapa on" id="e1">
+    <h2 data-t="e1h"></h2>
+    <p class="lead" data-t="e1lead"></p>
+    <div id="hospedes"></div>
+    <button class="addh" onclick="addHosp()" data-t="addHosp"></button>
+    <div class="lim" data-t="limite"></div>
+  </section>
+
+  <!-- 2 · RESERVA -->
+  <section class="etapa" id="e2">
+    <h2 data-t="e2h"></h2>
+    <p class="lead" data-t="e2lead"></p>
+    <div class="dois">
+      <div class="campo" id="c_in">
+        <label data-t="lIn"></label><input type="date" id="check_in">
+        <div class="msg" data-t="errObrig"></div>
+      </div>
+      <div class="campo" id="c_out">
+        <label data-t="lOut"></label><input type="date" id="check_out">
+        <div class="msg" data-t="errData"></div>
+      </div>
+    </div>
+    <div class="campo" id="c_hora">
+      <label data-t="lHora"></label><input type="time" id="hora_chegada">
+      <div class="msg" data-t="errObrig"></div>
+    </div>
+    <div class="campo">
+      <label data-t="lPlaca"></label>
+      <input type="text" id="placa" maxlength="8" data-ph="phPlaca" style="text-transform:uppercase">
+    </div>
+  </section>
+
+  <!-- 3 · CLAUSULAS -->
+  <section class="etapa" id="e3">
+    <h2 data-t="e3h"></h2>
+    <p class="lead" data-t="e3lead"></p>
+    <div id="clausulas"></div>
+  </section>
+
+  <!-- 4 · DECLARACOES + ASSINATURA -->
+  <section class="etapa" id="e4">
+    <h2 data-t="e4h"></h2>
+    <p class="lead" data-t="e4lead"></p>
+    <div class="decl" id="declBox"></div>
+    <div class="assin">
+      <label style="display:block;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:8px" data-t="lAssin"></label>
+      <canvas id="cv"></canvas>
+      <div class="barra"><span data-t="assinDica"></span><button class="limpar" onclick="limparAssin()" data-t="assinLimpar"></button></div>
+    </div>
+    <div id="resumoBox"></div>
+  </section>
+
+  <!-- SUCESSO -->
+  <section class="etapa" id="e5">
+    <div class="ok">
+      <div class="tick">✓</div>
+      <h2 data-t="okH"></h2>
+      <p data-t="okP"></p>
+      <a href="https://pedpaz.github.io/Guias-alugo/guia-dna-2003B.html" data-t="okGuia"></a>
+      <a class="linha" href="#" onclick="zap(T('zapOi'));return false" data-t="okZap"></a>
+    </div>
+  </section>
+
+  <div class="rodape"><b>aluGO</b><span data-t="rodape"></span></div>
+</main>
+
+<nav class="nav" id="navBar"><div class="in">
+  <button class="volta hide" id="btVolta" onclick="voltar()" data-t="btVolta"></button>
+  <button class="segue" id="btSegue" onclick="avancar()" data-t="btSegue"></button>
+</div></nav>
+
+<script>
+/* ================= CONFIG ================= */
+var UNIDADE  = "DS-2003B";
+var TOKEN    = "COLE_O_TOKEN_AQUI";
+var EP_IN    = "https://loftcare-os.vercel.app/api/public/checkin";
+var WHATS    = "5562982545453";
+var GUIA_URL = "https://pedpaz.github.io/Guias-alugo/guia-dna-2003B.html";
+var CAPACIDADE = 4;
+
+/* ================= TEXTOS ================= */
+var TXT = {
+pt:{
+  tituloPag:'Check-in online',
+  subPag:'DNA SmartStyle · Duplex 2003, Torre B',
+  passos:['Hóspedes','Reserva','Regras','Assinatura'],
+  e1h:'Quem vai se hospedar', e1lead:'Preencha os dados de todos os hóspedes. A portaria usa esta lista para cadastrar o reconhecimento facial de cada um — quem não estiver aqui não entra.',
+  hospTit:'Hóspede', titularTit:'Titular da reserva',
+  lNome:'Nome completo', lCpf:'CPF ou documento', phNome:'como está no documento', phCpf:'000.000.000-00',
+  addHosp:'+ Adicionar hóspede', remover:'remover',
+  limite:'Esta unidade comporta até 4 pessoas.',
+  e2h:'Sua reserva', e2lead:'As datas e o horário previsto de chegada. Se vier de carro, informe a placa para a liberação na garagem.',
+  lIn:'Check-in', lOut:'Check-out', lHora:'Horário previsto de chegada',
+  lPlaca:'Placa do veículo (opcional)', phPlaca:'ABC1D23',
+  e3h:'Regras da estadia', e3lead:'Dez cláusulas, curtas. Toque para ler cada uma — ao avançar, você declara estar de acordo com todas.',
+  e4h:'Declarações e assinatura', e4lead:'Marque as declarações e assine com o dedo no quadro abaixo.',
+  lAssin:'Assinatura do titular', assinDica:'Assine com o dedo', assinLimpar:'limpar',
+  resumoH:'Confira antes de enviar',
+  rTitular:'Titular', rHospedes:'Hóspedes', rDatas:'Período', rHora:'Chegada prevista', rPlaca:'Veículo', rUnidade:'Unidade',
+  btVolta:'Voltar', btSegue:'Continuar', btEnviar:'Enviar check-in',
+  errObrig:'Preencha este campo.', errNome:'Informe o nome completo (nome e sobrenome).',
+  errCpf:'Informe um CPF ou documento válido.', errData:'O check-out precisa ser depois do check-in.',
+  errDecl:'É necessário marcar todas as declarações.', errAssin:'Assine no quadro antes de enviar.',
+  okH:'Check-in enviado!', okP:'Recebemos os seus dados. A portaria já pode cadastrar o reconhecimento facial na sua chegada.',
+  okGuia:'Abrir o guia do apartamento', okZap:'Falar com a aluGO',
+  rodape:'Gestão de imóveis para temporada',
+  zapOi:'Olá! Acabei de fazer o check-in online do DNA SmartStyle 2003B.',
+  zapEnvio:'Check-in online — DNA SmartStyle 2003B',
+  decl:[
+    'Li e concordo com as 10 cláusulas do contrato de hospedagem.',
+    'Estou ciente de que é proibido fumar dentro do apartamento, sob multa de R$ 300,00 mais higienização.',
+    'Estou ciente de que festas, eventos e reuniões não são permitidos, sob multa de R$ 500,00.',
+    'Confirmo que o número de hóspedes declarado é o número real de pessoas que vão se hospedar.',
+    'Estou ciente de que o check-out é até as 12h e que o atraso não autorizado custa R$ 200,00 por hora.',
+    'Declaro que as informações prestadas são verdadeiras e assumo responsabilidade pelos demais hóspedes.'
+  ],
+  clausulas:[
+    {t:'1 · Do imóvel', p:['O apartamento 2003 da Torre B do DNA SmartStyle (R. T-37, 2300, Setor Bueno, Goiânia/GO) é cedido para hospedagem por temporada, mobiliado e equipado, exclusivamente para fins residenciais temporários.','É vedada a sublocação, a cessão a terceiros e o uso comercial do imóvel.']},
+    {t:'2 · Da capacidade', p:['A unidade comporta no máximo <b>4 pessoas</b>: duas na cama queen da suíte e duas no sofá-cama da sala.','A presença de hóspede não declarado acarreta multa de <b>R$ 200,00 por pessoa</b>, sem prejuízo do encerramento imediato da estadia.']},
+    {t:'3 · Do check-in e do check-out', p:['Check-in a partir das <b>15h</b>. Check-out até as <b>12h</b>.','Os horários são fixos e correspondem ao tempo necessário para higienização e troca de enxoval entre estadias. O atraso não autorizado na saída acarreta multa de <b>R$ 200,00 por hora</b>.']},
+    {t:'4 · Da proibição de fumar', p:['É <b>proibido fumar</b> em qualquer área interna do apartamento, incluindo cigarro eletrônico, banheiros e sacadas.','O descumprimento acarreta multa de <b>R$ 300,00</b>, acrescida do custo de higienização de enxoval, cortinas e estofados.']},
+    {t:'5 · Do acesso', p:['O acesso ao prédio é por reconhecimento facial, cadastrado na portaria mediante apresentação de documento com foto e conferência desta lista de hóspedes.','O acesso ao apartamento é por fechadura digital com senha. A senha é de uso pessoal e não deve ser repassada a terceiros. Não há chave ou cartão a devolver no check-out.']},
+    {t:'6 · Das festas e eventos', p:['São <b>proibidas</b> festas, eventos, comemorações e reuniões de pessoas não hospedadas na unidade.','O descumprimento acarreta multa de <b>R$ 500,00</b>, além da reparação integral de eventuais danos e do encerramento imediato da hospedagem.']},
+    {t:'7 · Da conservação e dos danos', p:['O hóspede recebe o imóvel em perfeitas condições e se compromete a devolvê-lo no mesmo estado.','Danos, avarias e itens faltantes serão cobrados pelo valor de reposição. A vistoria de chegada, disponível no guia digital, deve ser enviada em até 3 horas após a entrada; a ausência de envio presume que a unidade foi recebida em conformidade.']},
+    {t:'8 · Do silêncio', p:['O condomínio é residencial. É obrigatório o silêncio entre <b>22h e 8h</b>.','Multas aplicadas pelo condomínio por perturbação do sossego serão repassadas integralmente ao hóspede.']},
+    {t:'9 · Dos animais', p:['<b>Não é permitida</b> a permanência de animais de estimação nesta unidade, de qualquer porte ou espécie.']},
+    {t:'10 · Da responsabilidade', p:['O titular responde por todos os hóspedes declarados e por quaisquer acompanhantes eventuais.','A aluGO não se responsabiliza por objetos pessoais deixados na unidade ou nas áreas comuns, nem por interrupções de serviços públicos ou do condomínio (energia, água, internet, elevadores).','O uso das áreas comuns segue integralmente o regimento interno do condomínio, incluindo a regra de liberação da piscina e do espaço gourmet apenas para estadias de três noites ou mais entre sexta e domingo.']}
+  ]
+},
+en:{
+  tituloPag:'Online check-in',
+  subPag:'DNA SmartStyle · Duplex 2003, Tower B',
+  passos:['Guests','Booking','Rules','Signature'],
+  e1h:'Who is staying', e1lead:'Fill in the details of every guest. The front desk uses this list to register each face — anyone not on it cannot enter.',
+  hospTit:'Guest', titularTit:'Main guest',
+  lNome:'Full name', lCpf:'ID or passport number', phNome:'as printed on the document', phCpf:'document number',
+  addHosp:'+ Add guest', remover:'remove',
+  limite:'This unit sleeps up to 4 people.',
+  e2h:'Your booking', e2lead:'Dates and expected arrival time. If you are coming by car, add the plate for garage clearance.',
+  lIn:'Check-in', lOut:'Check-out', lHora:'Expected arrival time',
+  lPlaca:'Vehicle plate (optional)', phPlaca:'ABC1D23',
+  e3h:'Stay rules', e3lead:'Ten short clauses. Tap to read each one — by continuing, you agree to all of them.',
+  e4h:'Declarations and signature', e4lead:'Tick the declarations and sign with your finger below.',
+  lAssin:'Main guest signature', assinDica:'Sign with your finger', assinLimpar:'clear',
+  resumoH:'Check before sending',
+  rTitular:'Main guest', rHospedes:'Guests', rDatas:'Period', rHora:'Expected arrival', rPlaca:'Vehicle', rUnidade:'Unit',
+  btVolta:'Back', btSegue:'Continue', btEnviar:'Send check-in',
+  errObrig:'Please fill in this field.', errNome:'Enter the full name (first and last).',
+  errCpf:'Enter a valid document number.', errData:'Check-out must be after check-in.',
+  errDecl:'All declarations must be ticked.', errAssin:'Please sign before sending.',
+  okH:'Check-in sent!', okP:'We have received your details. The front desk can now register face recognition when you arrive.',
+  okGuia:'Open the apartment guide', okZap:'Message aluGO',
+  rodape:'Short-stay property management',
+  zapOi:'Hello! I have just completed the online check-in for DNA SmartStyle 2003B.',
+  zapEnvio:'Online check-in — DNA SmartStyle 2003B',
+  decl:[
+    'I have read and agree to the 10 clauses of the accommodation agreement.',
+    'I understand that smoking inside the apartment is prohibited, subject to a R$ 300.00 fine plus deep cleaning.',
+    'I understand that parties, events and gatherings are not allowed, subject to a R$ 500.00 fine.',
+    'I confirm that the number of guests declared is the real number of people staying.',
+    'I understand that check-out is by 12pm and that unauthorised late check-out costs R$ 200.00 per hour.',
+    'I declare that the information provided is true and I take responsibility for the other guests.'
+  ],
+  clausulas:[
+    {t:'1 · The property', p:['Apartment 2003, Tower B, DNA SmartStyle (R. T-37, 2300, Setor Bueno, Goiânia/GO) is provided as a furnished short-stay rental, for temporary residential use only.','Subletting, transfer to third parties and commercial use are not permitted.']},
+    {t:'2 · Capacity', p:['The unit sleeps a maximum of <b>4 people</b>: two in the queen bed upstairs and two on the sofa bed in the living room.','An undeclared guest incurs a fine of <b>R$ 200.00 per person</b> and may lead to immediate termination of the stay.']},
+    {t:'3 · Check-in and check-out', p:['Check-in from <b>3pm</b>. Check-out by <b>12pm</b>.','These times are fixed and match the time needed to clean and change all linen between stays. Unauthorised late departure incurs a fine of <b>R$ 200.00 per hour</b>.']},
+    {t:'4 · No smoking', p:['<b>Smoking is prohibited</b> in every internal area of the apartment, including e-cigarettes, bathrooms and balconies.','Breach incurs a fine of <b>R$ 300.00</b> plus the cost of deep-cleaning linen, curtains and upholstery.']},
+    {t:'5 · Access', p:['Building access is by face recognition, registered at the front desk on presentation of photo ID and verification against this guest list.','Apartment access is by digital lock with a code. The code is personal and must not be shared. There is no key or card to return at check-out.']},
+    {t:'6 · Parties and events', p:['Parties, events, celebrations and gatherings of non-registered people are <b>not allowed</b>.','Breach incurs a fine of <b>R$ 500.00</b>, full repair of any damage and immediate termination of the stay.']},
+    {t:'7 · Care and damage', p:['The guest receives the property in perfect condition and undertakes to return it in the same state.','Damage and missing items are charged at replacement value. The arrival inspection, available in the digital guide, must be sent within 3 hours of arrival; not sending it means the unit was received in order.']},
+    {t:'8 · Quiet hours', p:['This is a residential building. Silence is required between <b>10pm and 8am</b>.','Any fine applied by the building for disturbance will be passed on in full to the guest.']},
+    {t:'9 · Pets', p:['Pets of <b>any size or species are not allowed</b> in this unit.']},
+    {t:'10 · Liability', p:['The main guest is responsible for all declared guests and any occasional visitors.','aluGO is not liable for personal belongings left in the unit or common areas, nor for interruptions to public or building services (power, water, internet, lifts).','Use of the common areas follows the building rules in full, including the rule that the pool and gourmet space are open only to stays of three nights or more from Friday to Sunday.']}
+  ]
+},
+es:{
+  tituloPag:'Check-in online',
+  subPag:'DNA SmartStyle · Dúplex 2003, Torre B',
+  passos:['Huéspedes','Reserva','Reglas','Firma'],
+  e1h:'Quiénes se hospedan', e1lead:'Completa los datos de todos los huéspedes. La portería usa esta lista para registrar el reconocimiento facial de cada uno — quien no esté aquí no entra.',
+  hospTit:'Huésped', titularTit:'Titular de la reserva',
+  lNome:'Nombre completo', lCpf:'Documento de identidad', phNome:'como está en el documento', phCpf:'número del documento',
+  addHosp:'+ Agregar huésped', remover:'quitar',
+  limite:'Esta unidad admite hasta 4 personas.',
+  e2h:'Tu reserva', e2lead:'Las fechas y el horario previsto de llegada. Si vienes en auto, informa la patente para la liberación del garaje.',
+  lIn:'Check-in', lOut:'Check-out', lHora:'Horario previsto de llegada',
+  lPlaca:'Patente del vehículo (opcional)', phPlaca:'ABC1D23',
+  e3h:'Reglas de la estadía', e3lead:'Diez cláusulas, cortas. Toca para leer cada una — al continuar, declaras estar de acuerdo con todas.',
+  e4h:'Declaraciones y firma', e4lead:'Marca las declaraciones y firma con el dedo en el recuadro.',
+  lAssin:'Firma del titular', assinDica:'Firma con el dedo', assinLimpar:'borrar',
+  resumoH:'Revisa antes de enviar',
+  rTitular:'Titular', rHospedes:'Huéspedes', rDatas:'Período', rHora:'Llegada prevista', rPlaca:'Vehículo', rUnidade:'Unidad',
+  btVolta:'Volver', btSegue:'Continuar', btEnviar:'Enviar check-in',
+  errObrig:'Completa este campo.', errNome:'Indica el nombre completo (nombre y apellido).',
+  errCpf:'Indica un documento válido.', errData:'El check-out debe ser después del check-in.',
+  errDecl:'Debes marcar todas las declaraciones.', errAssin:'Firma antes de enviar.',
+  okH:'¡Check-in enviado!', okP:'Recibimos tus datos. La portería ya puede registrar el reconocimiento facial a tu llegada.',
+  okGuia:'Abrir la guía del apartamento', okZap:'Hablar con aluGO',
+  rodape:'Gestión de inmuebles para temporada',
+  zapOi:'¡Hola! Acabo de hacer el check-in online del DNA SmartStyle 2003B.',
+  zapEnvio:'Check-in online — DNA SmartStyle 2003B',
+  decl:[
+    'Leí y acepto las 10 cláusulas del contrato de hospedaje.',
+    'Sé que está prohibido fumar dentro del apartamento, con multa de R$ 300,00 más higienización.',
+    'Sé que no se permiten fiestas, eventos ni reuniones, con multa de R$ 500,00.',
+    'Confirmo que el número de huéspedes declarado es el número real de personas que se hospedarán.',
+    'Sé que el check-out es hasta las 12h y que el retraso no autorizado cuesta R$ 200,00 por hora.',
+    'Declaro que la información es verdadera y asumo responsabilidad por los demás huéspedes.'
+  ],
+  clausulas:[
+    {t:'1 · Del inmueble', p:['El apartamento 2003 de la Torre B del DNA SmartStyle (R. T-37, 2300, Setor Bueno, Goiânia/GO) se cede para hospedaje por temporada, amoblado y equipado, exclusivamente para fines residenciales temporales.','Está prohibido subarrendar, ceder a terceros y el uso comercial del inmueble.']},
+    {t:'2 · De la capacidad', p:['La unidad admite un máximo de <b>4 personas</b>: dos en la cama queen de la suite y dos en el sofá cama de la sala.','La presencia de un huésped no declarado genera multa de <b>R$ 200,00 por persona</b>, sin perjuicio del cierre inmediato de la estadía.']},
+    {t:'3 · Del check-in y check-out', p:['Check-in desde las <b>15h</b>. Check-out hasta las <b>12h</b>.','Los horarios son fijos y corresponden al tiempo necesario para la higienización y el cambio de ropa de cama entre estadías. El retraso no autorizado genera multa de <b>R$ 200,00 por hora</b>.']},
+    {t:'4 · De la prohibición de fumar', p:['Está <b>prohibido fumar</b> en cualquier área interna del apartamento, incluido el cigarrillo electrónico, baños y balcones.','El incumplimiento genera multa de <b>R$ 300,00</b>, más el costo de higienización de ropa de cama, cortinas y tapicería.']},
+    {t:'5 · Del acceso', p:['El acceso al edificio es por reconocimiento facial, registrado en portería con documento con foto y verificación de esta lista de huéspedes.','El acceso al apartamento es por cerradura digital con clave. La clave es de uso personal y no debe compartirse. No hay llave ni tarjeta que devolver al salir.']},
+    {t:'6 · De las fiestas y eventos', p:['Están <b>prohibidas</b> las fiestas, eventos, celebraciones y reuniones de personas no hospedadas en la unidad.','El incumplimiento genera multa de <b>R$ 500,00</b>, además de la reparación integral de los daños y el cierre inmediato del hospedaje.']},
+    {t:'7 · De la conservación y los daños', p:['El huésped recibe el inmueble en perfectas condiciones y se compromete a devolverlo en el mismo estado.','Daños y faltantes se cobran por el valor de reposición. La inspección de llegada, disponible en la guía digital, debe enviarse hasta 3 horas después de la entrada; la ausencia de envío presume que la unidad fue recibida conforme.']},
+    {t:'8 · Del silencio', p:['El condominio es residencial. Es obligatorio el silencio entre las <b>22h y las 8h</b>.','Las multas aplicadas por el condominio por perturbación se trasladarán íntegramente al huésped.']},
+    {t:'9 · De los animales', p:['<b>No se permite</b> la permanencia de mascotas en esta unidad, de ningún tamaño ni especie.']},
+    {t:'10 · De la responsabilidad', p:['El titular responde por todos los huéspedes declarados y por cualquier acompañante eventual.','aluGO no se responsabiliza por objetos personales dejados en la unidad o en las áreas comunes, ni por interrupciones de servicios públicos o del condominio (energía, agua, internet, ascensores).','El uso de las áreas comunes sigue íntegramente el reglamento interno del condominio, incluida la regla de liberación de la piscina y del espacio gourmet solo para estadías de tres noches o más entre viernes y domingo.']}
+  ]
+}
+};
+
+/* ================= ESTADO ================= */
+var L = 'pt', ETAPA = 1, NH = 1, enviando = false;
+function T(k){ return (TXT[L]&&TXT[L][k]!=null)?TXT[L][k]:TXT.pt[k]; }
+
+/* ================= WHATSAPP ================= */
+function abrirWhats(waUrl){
+  var app = waUrl.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');
+  var t = setTimeout(function(){ if(!document.hidden) window.location.href = waUrl; }, 1500);
+  document.addEventListener('visibilitychange', function h(){
+    if(document.hidden){ clearTimeout(t); document.removeEventListener('visibilitychange', h); }
+  });
+  window.location.href = app;
+}
+function zap(txt){ abrirWhats('https://wa.me/'+WHATS+'?text='+encodeURIComponent(txt)); }
+
+/* ================= HOSPEDES ================= */
+function montarHospedes(){
+  var box = document.getElementById('hospedes');
+  var vals = [];
+  for(var i=0;i<NH;i++){
+    var n=document.getElementById('h_nome_'+i), c=document.getElementById('h_cpf_'+i);
+    vals.push({n:n?n.value:'', c:c?c.value:''});
+  }
+  var h='';
+  for(var i=0;i<NH;i++){
+    h+='<div class="hosp"><div class="cab"><b>'+(i===0?T('titularTit'):T('hospTit')+' '+(i+1))+'</b>'+
+       (i>0?'<button class="rm" onclick="rmHosp('+i+')">'+T('remover')+'</button>':'')+'</div>'+
+       '<div class="campo" id="c_h_nome_'+i+'"><label>'+T('lNome')+'</label>'+
+       '<input type="text" id="h_nome_'+i+'" autocomplete="name" placeholder="'+T('phNome')+'" value="'+(vals[i].n||'').replace(/"/g,'&quot;')+'">'+
+       '<div class="msg">'+T('errNome')+'</div></div>'+
+       '<div class="campo" id="c_h_cpf_'+i+'"><label>'+T('lCpf')+'</label>'+
+       '<input type="text" id="h_cpf_'+i+'" inputmode="numeric" placeholder="'+T('phCpf')+'" value="'+(vals[i].c||'').replace(/"/g,'&quot;')+'">'+
+       '<div class="msg">'+T('errCpf')+'</div></div></div>';
+  }
+  box.innerHTML=h;
+  document.querySelector('.addh').style.display = NH>=CAPACIDADE ? 'none' : '';
+}
+function addHosp(){ if(NH<CAPACIDADE){ NH++; montarHospedes(); } }
+function rmHosp(i){
+  var vals=[];
+  for(var k=0;k<NH;k++){ if(k===i) continue;
+    vals.push({n:document.getElementById('h_nome_'+k).value, c:document.getElementById('h_cpf_'+k).value}); }
+  NH--; montarHospedes();
+  vals.forEach(function(v,k){ document.getElementById('h_nome_'+k).value=v.n;
+    document.getElementById('h_cpf_'+k).value=v.c; });
+}
+
+/* ================= CLAUSULAS E DECLARACOES ================= */
+function montarClausulas(){
+  document.getElementById('clausulas').innerHTML = T('clausulas').map(function(c){
+    return '<div class="ac"><button onclick="this.parentNode.classList.toggle(\'on\')">'+
+      '<span>'+c.t+'</span><i>+</i></button><div class="corpo">'+
+      c.p.map(function(x){return '<p>'+x+'</p>';}).join('')+'</div></div>';
+  }).join('');
+}
+function montarDecl(){
+  var marcados=[].slice.call(document.querySelectorAll('#declBox input')).map(function(i){return i.checked;});
+  document.getElementById('declBox').innerHTML = T('decl').map(function(d,i){
+    return '<label><input type="checkbox" data-d="'+i+'"'+(marcados[i]?' checked':'')+'><span>'+d+'</span></label>';
+  }).join('');
+}
+
+/* ================= ASSINATURA ================= */
+var cv, ctx, desenhou=false, ultimo=null;
+function initAssin(){
+  cv=document.getElementById('cv');
+  var r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+  cv.width=Math.round(r.width*dpr); cv.height=Math.round(170*dpr);
+  ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+  ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#2B2622';
+  function pos(e){ var b=cv.getBoundingClientRect();
+    var t=(e.touches&&e.touches[0])||e; return {x:t.clientX-b.left, y:t.clientY-b.top}; }
+  function ini(e){ e.preventDefault(); ultimo=pos(e); desenhou=true; }
+  function mov(e){ if(!ultimo) return; e.preventDefault(); var p=pos(e);
+    ctx.beginPath(); ctx.moveTo(ultimo.x,ultimo.y); ctx.lineTo(p.x,p.y); ctx.stroke(); ultimo=p; }
+  function fim(){ ultimo=null; }
+  cv.addEventListener('pointerdown',ini); cv.addEventListener('pointermove',mov);
+  window.addEventListener('pointerup',fim);
+  cv.addEventListener('touchstart',ini,{passive:false});
+  cv.addEventListener('touchmove',mov,{passive:false});
+  cv.addEventListener('touchend',fim);
+}
+function limparAssin(){ if(ctx){ ctx.clearRect(0,0,cv.width,cv.height); desenhou=false; } }
+
+/* ================= VALIDACAO ================= */
+function marcarErro(idCampo, mal){
+  var c=document.getElementById(idCampo); if(!c) return;
+  c.classList.toggle('mal', !!mal);
+  var i=c.querySelector('input'); if(i) i.classList.toggle('erro', !!mal);
+}
+function soDigitos(s){ return (s||'').replace(/\D/g,''); }
+
+function validar(etapa){
+  var primeiroErro=null;
+  if(etapa===1){
+    for(var i=0;i<NH;i++){
+      var nome=document.getElementById('h_nome_'+i).value.trim();
+      var doc =document.getElementById('h_cpf_'+i).value.trim();
+      var malN = nome.split(/\s+/).length<2 || nome.length<5;
+      var malC = doc.length<5 || (soDigitos(doc).length>0 && soDigitos(doc).length<5);
+      marcarErro('c_h_nome_'+i, malN); marcarErro('c_h_cpf_'+i, malC);
+      if(malN && !primeiroErro) primeiroErro='h_nome_'+i;
+      if(malC && !primeiroErro) primeiroErro='h_cpf_'+i;
+    }
+  }
+  if(etapa===2){
+    var ci=document.getElementById('check_in').value, co=document.getElementById('check_out').value;
+    var ho=document.getElementById('hora_chegada').value;
+    var malI=!ci, malO=!co||(ci&&co<=ci), malH=!ho;
+    marcarErro('c_in',malI); marcarErro('c_out',malO); marcarErro('c_hora',malH);
+    if(malI&&!primeiroErro) primeiroErro='check_in';
+    if(malO&&!primeiroErro) primeiroErro='check_out';
+    if(malH&&!primeiroErro) primeiroErro='hora_chegada';
+  }
+  if(etapa===4){
+    var todos=[].slice.call(document.querySelectorAll('#declBox input'));
+    var falta=todos.some(function(i){return !i.checked;});
+    document.getElementById('declBox').classList.toggle('mal', falta);
+    if(falta){ if(!primeiroErro) primeiroErro='declBox'; alert(T('errDecl')); }
+    else if(!desenhou){ alert(T('errAssin')); primeiroErro='cv'; }
+  }
+  if(primeiroErro){
+    var el=document.getElementById(primeiroErro);
+    if(el){ el.scrollIntoView({behavior:'smooth',block:'center'});
+      if(el.focus && el.tagName==='INPUT') setTimeout(function(){el.focus();},350); }
+    return false;
+  }
+  return true;
+}
+
+/* ================= RESUMO ================= */
+function coletar(){
+  var hs=[];
+  for(var i=0;i<NH;i++) hs.push({nome:document.getElementById('h_nome_'+i).value.trim(),
+                                 cpf:document.getElementById('h_cpf_'+i).value.trim()});
+  return {
+    hospedes:hs,
+    check_in:document.getElementById('check_in').value,
+    check_out:document.getElementById('check_out').value,
+    hora_chegada:document.getElementById('hora_chegada').value,
+    placa:document.getElementById('placa').value.trim().toUpperCase()
+  };
+}
+function montarResumo(){
+  var d=coletar();
+  var h='<div class="resumo"><h3>'+T('resumoH')+'</h3><dl>'+
+    '<dt>'+T('rUnidade')+'</dt><dd>DNA SmartStyle · 2003 Torre B</dd>'+
+    '<dt>'+T('rTitular')+'</dt><dd>'+(d.hospedes[0]?d.hospedes[0].nome:'')+'</dd>';
+  if(d.hospedes.length>1)
+    h+='<dt>'+T('rHospedes')+'</dt><dd>'+d.hospedes.slice(1).map(function(x){return x.nome;}).join('<br>')+'</dd>';
+  h+='<dt>'+T('rDatas')+'</dt><dd>'+fmt(d.check_in)+' → '+fmt(d.check_out)+'</dd>'+
+     '<dt>'+T('rHora')+'</dt><dd>'+(d.hora_chegada||'—')+'</dd>';
+  if(d.placa) h+='<dt>'+T('rPlaca')+'</dt><dd>'+d.placa+'</dd>';
+  h+='</dl></div>';
+  document.getElementById('resumoBox').innerHTML=h;
+}
+function fmt(s){ if(!s) return '—'; var p=s.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+
+/* ================= ENVIO ================= */
+function enviar(){
+  if(!validar(4)) return;
+  if(enviando) return;
+  enviando=true;
+  var bt=document.getElementById('btSegue'); bt.disabled=true;
+  var d=coletar();
+  var assinatura='';
+  try{ assinatura=cv.toDataURL('image/png'); }catch(e){}
+  var payload={
+    token:TOKEN, unidade:UNIDADE, tipo:'termo',
+    check_in:d.check_in, check_out:d.check_out, hora_chegada:d.hora_chegada,
+    titular:{nome:d.hospedes[0].nome, cpf:d.hospedes[0].cpf},
+    hospedes:d.hospedes.slice(1),
+    placa:d.placa, assinatura:assinatura,
+    aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true}
+  };
+  try{
+    fetch(EP_IN,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)}).catch(function(){});
+  }catch(e){}
+
+  var msg=T('zapEnvio')+'\n\n'+
+    d.hospedes.map(function(x,i){return (i===0?'👤 ':'• ')+x.nome+' — '+x.cpf;}).join('\n')+
+    '\n\n📅 '+fmt(d.check_in)+' → '+fmt(d.check_out)+
+    '\n🕒 '+(d.hora_chegada||'—')+
+    (d.placa?'\n🚗 '+d.placa:'')+
+    '\n\n✅ Regras aceitas e termo assinado.';
+
+  mostrar(5);
+  setTimeout(function(){ zap(msg); }, 600);
+}
+
+/* ================= NAVEGACAO ================= */
+function mostrar(n){
+  ETAPA=n;
+  [1,2,3,4,5].forEach(function(i){
+    document.getElementById('e'+i).classList.toggle('on', i===n); });
+  var barras=document.querySelectorAll('.prog div');
+  for(var i=0;i<4;i++) barras[i].classList.toggle('on', i < Math.min(n,4));
+  document.querySelector('.prog').classList.toggle('hide', n===5);
+  document.getElementById('passoRot').textContent = n<5 ? (n+'/4 · '+T('passos')[n-1]) : '';
+  document.getElementById('btVolta').classList.toggle('hide', n===1||n===5);
+  document.getElementById('navBar').classList.toggle('hide', n===5);
+  var bt=document.getElementById('btSegue');
+  bt.textContent = n===4 ? T('btEnviar') : T('btSegue');
+  bt.className = n===4 ? 'enviar' : 'segue';
+  bt.onclick = n===4 ? enviar : avancar;
+  window.scrollTo(0,0);
+  if(n===4){ montarDecl(); montarResumo(); if(!ctx) setTimeout(initAssin,60); }
+}
+function avancar(){ if(!validar(ETAPA)) return; mostrar(ETAPA+1); }
+function voltar(){ if(ETAPA>1) mostrar(ETAPA-1); }
+
+/* ================= IDIOMA ================= */
+function aplicarIdioma(){
+  document.documentElement.lang = L==='pt'?'pt-BR':L;
+  [].forEach.call(document.querySelectorAll('[data-t]'),function(e){
+    var v=T(e.dataset.t); if(typeof v==='string') e.innerHTML=v; });
+  [].forEach.call(document.querySelectorAll('[data-ph]'),function(e){ e.placeholder=T(e.dataset.ph); });
+  montarHospedes(); montarClausulas(); montarDecl();
+  [].forEach.call(document.querySelectorAll('.lang button'),function(b){
+    b.classList.toggle('on', b.dataset.l===L); });
+  mostrar(ETAPA);
+}
+[].forEach.call(document.querySelectorAll('.lang button'),function(b){
+  b.onclick=function(){ L=b.dataset.l; try{localStorage.setItem('alugo_lang',L);}catch(e){} aplicarIdioma(); };
+});
+(function init(){
+  var s=null; try{ s=localStorage.getItem('alugo_lang'); }catch(e){}
+  if(!s){ var n=(navigator.language||'pt').slice(0,2); s=(n==='en'||n==='es')?n:'pt'; }
+  L=s;
+  var hoje=new Date().toISOString().slice(0,10);
+  document.getElementById('check_in').min=hoje;
+  document.getElementById('check_out').min=hoje;
+  document.getElementById('check_in').addEventListener('change',function(){
+    document.getElementById('check_out').min=this.value; });
+  aplicarIdioma();
+})();
+</script>
+</body>
+</html>
