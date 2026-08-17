@@ -259,11 +259,11 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
         <div class="sub" data-t="cSenhaSub"></div>
         <div class="tap" data-t="cTap"></div>
       </button>
-      <button class="copia" onclick="WIFI_SENHA&&copiar(this,WIFI_SENHA)">
-        <div class="rot" data-t="cWifi"></div>
-        <div class="val" id="wifiVal"></div>
-        <div class="sub" id="wifiRede"></div>
-        <div class="tap" data-t="cTap"></div>
+      <button class="copia" id="cartao2" onclick="WIFI_SENHA&&copiar(this,WIFI_SENHA)">
+        <div class="rot" id="c2rot"></div>
+        <div class="val" id="c2val"></div>
+        <div class="sub" id="c2sub"></div>
+        <div class="tap" id="c2tap"></div>
       </button>
     </div>
 
@@ -462,7 +462,8 @@ pt:{
   heroRot:'Guia do apartamento', heroDesce:'role para começar', secaoMenu:'O que você precisa saber',
   apeSub:'DNA SmartStyle · Setor Bueno, Goiânia',
   cSenha:'Senha da porta', cSenhaSub:'fechadura digital do apartamento',
-  cWifi:'Senha do Wi-Fi', cWifiRede:'rede:', cWifiPend:'peça pelo WhatsApp', cTap:'toque para copiar',
+  cWifi:'Senha do Wi-Fi', cWifiRede:'rede:', cWifiPend:'peça pelo WhatsApp',
+  cHoras:'Horários', cHorasVal:'15h / 12h', cHorasSub:'entrada a partir das 15h · saída até as 12h', cTap:'toque para copiar',
   copiado:'copiado ✓',
   buscaPh:'O que você procura? (wi-fi, garagem, check-out…)',
   buscaVazio:'Não achamos essa palavra. Toque no WhatsApp na barra de baixo que a gente responde.',
@@ -506,7 +507,7 @@ pt:{
     ]},
 
   tela_duplex:{titulo:'O duplex', sub:'Dois pavimentos · 4 hóspedes',
-    lead:'Um duplex studio de 68 m²: embaixo a vida social, em cima a suíte. Ar-condicionado em todos os ambientes e TV nos dois pavimentos.',
+    lead:'Um duplex studio de 70 m²: embaixo a vida social, em cima a suíte. Ar-condicionado em todos os ambientes e TV nos dois pavimentos.',
     blocos:[
       {foto:'sala-janela-vista', h:'Pavimento inferior', p:[
         'Sala de estar e jantar integradas, com sofá, poltrona, mesa de vidro para quatro e uma janela ampla com vista aberta da cidade.',
@@ -552,11 +553,11 @@ pt:{
         'Por favor, não deixe sacos no corredor nem na porta — o condomínio não permite.']}
     ]},
 
-  tela_garagem:{titulo:'A garagem', sub:'Vaga 194 · 2º andar',
+  tela_garagem:{titulo:'A garagem', sub:'Vaga 194 · 2º pavimento',
     lead:'Se você veio de carro, a vaga já está reservada para a sua estadia.',
     blocos:[
       {h:'Sua vaga', chave:'194', p:[
-        'A vaga <b>194</b> fica no <b>2º andar</b> da garagem. O acesso de carros é pela rampa lateral do prédio.',
+        'A vaga <b>194</b> fica no <b>2º pavimento</b> da garagem. O acesso de carros é pela rampa lateral do prédio.',
         'Estacione somente na vaga indicada — as demais são de moradores e o condomínio reboca.']},
       {h:'Portão', p:['A liberação do portão é feita pela portaria. Pare em frente ao portão, identifique-se pelo interfone e aguarde a abertura.']}
     ]},
@@ -599,9 +600,10 @@ pt:{
         'Toque na tela da fechadura primeiro — ela precisa estar acesa antes do primeiro número.',
         'Digite 1616 e finalize com * (asterisco). Sem o asterisco a fechadura não valida.',
         'Se a tela nem acende, a pilha pode estar fraca: chame no WhatsApp que resolvemos na hora.']},
-      {q:'O Wi-Fi caiu', r:[
-        'O roteador costuma ficar na sala. Tire da tomada, espere 30 segundos e ligue de novo — aguarde 2 minutos até as luzes estabilizarem.',
-        'Confira se você está conectado à rede certa e se a senha foi digitada sem espaço no fim.']},
+      {q:'Tem Wi-Fi no apartamento?', r:[
+        'A instalação da internet desta unidade ainda está em andamento — no momento o apartamento <b>não tem Wi-Fi</b>.',
+        'O prédio tem boa cobertura de celular em todas as operadoras, e o 4G/5G funciona bem no 20º andar.',
+        'Assim que a internet for instalada, a senha passa a aparecer aqui no guia, no cartão do topo.']},
       {q:'O ar-condicionado não gela', r:[
         'Confira se está no modo <b>Cool / Refrigerar</b> (e não em Fan/Ventilar) e a temperatura abaixo de 23°C.',
         'Feche janelas e cortinas. Com sol batendo, o aparelho não vence.',
@@ -678,7 +680,8 @@ en:{
   heroRot:'Apartment guide', heroDesce:'scroll to start', secaoMenu:'What you need to know',
   apeSub:'DNA SmartStyle · Setor Bueno, Goiânia',
   cSenha:'Door code', cSenhaSub:'apartment digital lock',
-  cWifi:'Wi-Fi password', cWifiRede:'network:', cWifiPend:'ask us on WhatsApp', cTap:'tap to copy',
+  cWifi:'Wi-Fi password', cWifiRede:'network:', cWifiPend:'ask us on WhatsApp',
+  cHoras:'Times', cHorasVal:'3pm / 12pm', cHorasSub:'check-in from 3pm · check-out by 12pm', cTap:'tap to copy',
   copiado:'copied ✓',
   buscaPh:'What are you looking for? (wi-fi, parking, check-out…)',
   buscaVazio:'We could not find that word. Tap WhatsApp in the bar below and we will answer you.',
@@ -722,7 +725,7 @@ en:{
     ]},
 
   tela_duplex:{titulo:'The duplex', sub:'Two floors · 4 guests',
-    lead:'A 68 m² duplex studio: social life downstairs, the suite upstairs. Air conditioning in every room and a TV on both floors.',
+    lead:'A 70 m² duplex studio: social life downstairs, the suite upstairs. Air conditioning in every room and a TV on both floors.',
     blocos:[
       {foto:'sala-janela-vista', h:'Lower floor', p:[
         'Open-plan living and dining room with a sofa, an armchair, a glass table for four and a wide window with an open city view.',
@@ -814,9 +817,10 @@ en:{
         'Touch the lock screen first — it must be lit before the first digit.',
         'Type 1616 and finish with * (asterisk). Without the asterisk the lock will not validate.',
         'If the screen does not light up at all, the battery may be low: message us and we will sort it out.']},
-      {q:'The Wi-Fi is down', r:[
-        'The router is usually in the living room. Unplug it, wait 30 seconds and plug it back in — give it 2 minutes for the lights to settle.',
-        'Check that you are on the right network and that the password has no trailing space.']},
+      {q:'Is there Wi-Fi in the apartment?', r:[
+        'Internet installation for this unit is still in progress — at the moment the apartment <b>has no Wi-Fi</b>.',
+        'Mobile coverage in the building is good on all carriers, and 4G/5G works well on the 20th floor.',
+        'As soon as the internet is installed, the password will appear here in the guide, on the card at the top.']},
       {q:'The air conditioning is not cooling', r:[
         'Make sure it is on <b>Cool</b> mode (not Fan) and set below 23°C.',
         'Close windows and curtains. With sunlight coming in, the unit cannot keep up.',
@@ -893,7 +897,8 @@ es:{
   heroRot:'Guía del apartamento', heroDesce:'desliza para empezar', secaoMenu:'Lo que necesitas saber',
   apeSub:'DNA SmartStyle · Setor Bueno, Goiânia',
   cSenha:'Clave de la puerta', cSenhaSub:'cerradura digital del apartamento',
-  cWifi:'Clave del Wi-Fi', cWifiRede:'red:', cWifiPend:'pídela por WhatsApp', cTap:'toca para copiar',
+  cWifi:'Clave del Wi-Fi', cWifiRede:'red:', cWifiPend:'pídela por WhatsApp',
+  cHoras:'Horarios', cHorasVal:'15h / 12h', cHorasSub:'entrada desde las 15h · salida hasta las 12h', cTap:'toca para copiar',
   copiado:'copiado ✓',
   buscaPh:'¿Qué buscas? (wi-fi, garaje, check-out…)',
   buscaVazio:'No encontramos esa palabra. Toca WhatsApp en la barra de abajo y te respondemos.',
@@ -937,7 +942,7 @@ es:{
     ]},
 
   tela_duplex:{titulo:'El dúplex', sub:'Dos plantas · 4 huéspedes',
-    lead:'Un dúplex studio de 68 m²: abajo la vida social, arriba la suite. Aire acondicionado en todos los ambientes y TV en las dos plantas.',
+    lead:'Un dúplex studio de 70 m²: abajo la vida social, arriba la suite. Aire acondicionado en todos los ambientes y TV en las dos plantas.',
     blocos:[
       {foto:'sala-janela-vista', h:'Planta baja', p:[
         'Sala de estar y comedor integrados, con sofá, sillón, mesa de vidrio para cuatro y una ventana amplia con vista abierta de la ciudad.',
@@ -1029,9 +1034,10 @@ es:{
         'Toca primero la pantalla de la cerradura — debe estar encendida antes del primer número.',
         'Marca 1616 y termina con * (asterisco). Sin el asterisco la cerradura no valida.',
         'Si la pantalla ni enciende, la pila puede estar baja: escríbenos y lo resolvemos.']},
-      {q:'Se cayó el Wi-Fi', r:[
-        'El router suele estar en la sala. Desconéctalo, espera 30 segundos y vuelve a conectarlo — dale 2 minutos hasta que las luces se estabilicen.',
-        'Verifica que estás en la red correcta y que la clave no tenga un espacio al final.']},
+      {q:'¿Hay Wi-Fi en el apartamento?', r:[
+        'La instalación de internet de esta unidad todavía está en curso — por ahora el apartamento <b>no tiene Wi-Fi</b>.',
+        'La cobertura móvil del edificio es buena en todas las operadoras, y el 4G/5G funciona bien en el piso 20.',
+        'En cuanto se instale internet, la clave pasará a aparecer aquí en la guía, en la tarjeta de arriba.']},
       {q:'El aire no enfría', r:[
         'Verifica que esté en modo <b>Cool / Frío</b> (no en Fan) y con temperatura bajo 23°C.',
         'Cierra ventanas y cortinas. Con sol entrando, el equipo no da abasto.',
@@ -1222,9 +1228,16 @@ function aplicarIdioma(){
     var v=t(e.dataset.t); if(typeof v==='string') e.innerHTML=v;
   });
   [].forEach.call(document.querySelectorAll('[data-ph]'),function(e){ e.placeholder=t(e.dataset.ph); });
-  var wv=document.getElementById('wifiVal'), wr=document.getElementById('wifiRede');
-  if(WIFI_SENHA){ wv.textContent = WIFI_SENHA; wr.textContent = t('cWifiRede')+' '+WIFI_REDE; }
-  else{ wv.textContent='—'; wv.style.fontSize='24px'; wr.textContent=t('cWifiPend'); }
+  // cartao 2: senha do Wi-Fi quando existir; enquanto nao houver internet, mostra os horarios
+  var c2r=document.getElementById('c2rot'), c2v=document.getElementById('c2val'),
+      c2s=document.getElementById('c2sub'), c2t=document.getElementById('c2tap');
+  if(WIFI_SENHA){
+    c2r.textContent=t('cWifi'); c2v.textContent=WIFI_SENHA; c2v.style.fontSize='';
+    c2s.textContent=t('cWifiRede')+' '+WIFI_REDE; c2t.textContent=t('cTap');
+  }else{
+    c2r.textContent=t('cHoras'); c2v.textContent=t('cHorasVal'); c2v.style.fontSize='';
+    c2s.textContent=t('cHorasSub'); c2t.textContent='';
+  }
   montarGrade(); montarTelas(); montarIndice();
   [].forEach.call(document.querySelectorAll('.lang button'),function(b){
     b.classList.toggle('on', b.dataset.l===L);
