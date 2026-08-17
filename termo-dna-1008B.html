@@ -62,6 +62,20 @@ header{position:relative;padding:24px 20px 26px;text-align:center;background:
 .card-t .rm{margin-left:auto;border:none;background:none;color:var(--alert);font-size:.58rem;font-weight:800;
   letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;padding:2px 4px}
 
+/* quantidade de hóspedes */
+.pills{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pill{background:var(--bg);border:1px solid var(--rule);border-radius:13px;padding:13px 6px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:2px;transition:.16s}
+.pill b{font-family:var(--fdisplay);font-variation-settings:"opsz" 72;font-weight:600;font-size:1.5rem;color:var(--ink);line-height:1}
+.pill span{font-size:.63rem;color:var(--ink-3);letter-spacing:.3px}
+.pill.on{background:var(--dna);border-color:var(--dna)}
+.pill.on b,.pill.on span{color:#fff}
+.gnum{width:25px;height:25px;border-radius:50%;background:var(--dna);color:#fff;font-size:.72rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ckmini{display:flex;align-items:center;gap:9px;margin-top:12px;cursor:pointer;user-select:none;font-size:.83rem;color:var(--ink-2)}
+.ckmini .box{width:19px;height:19px}
+.ckmini .tick svg{width:11px;height:11px}
+.two{display:grid;grid-template-columns:1.6fr 1fr;gap:9px}
 .f{margin-bottom:13px}
 .f:last-child{margin-bottom:0}
 label{display:block;font-size:.58rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
@@ -179,27 +193,14 @@ footer{text-align:center;padding:26px 20px 30px;border-top:1px solid var(--rule)
 
     <div class="card">
       <div class="card-t">
-        <svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span data-th="c_titular"></span>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span data-th="c_quantos"></span>
       </div>
-      <div class="f"><label data-th="l_nome"></label><input id="t_nome" autocomplete="name"></div>
-      <div class="duo">
-        <div class="f"><label data-th="l_doc"></label><input id="t_cpf" inputmode="text" autocomplete="off"><div class="hint" data-th="h_doc"></div></div>
-        <div class="f"><label data-th="l_tel"></label><input id="t_tel" type="tel" inputmode="tel" autocomplete="tel"></div>
-      </div>
-      <div class="f"><label data-th="l_email"></label><input id="t_email" type="email" inputmode="email" autocomplete="email"></div>
+      <div class="pills" id="pills"></div>
+      <div class="hint" style="margin-top:12px" data-th="h_quantos"></div>
     </div>
 
-    <div id="extras"></div>
-
-    <button class="add" onclick="addHospede()">
-      <svg class="ico" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      <span data-th="b_add"></span>
-    </button>
-    <div class="note">
-      <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-      <div data-th="e1_cap"></div>
-    </div>
+    <div id="guests"></div>
   </section>
 
   <!-- ETAPA 2 · RESERVA -->
@@ -216,11 +217,24 @@ footer{text-align:center;padding:26px 20px 30px;border-top:1px solid var(--rule)
         <div class="f"><label data-th="l_in"></label><input id="r_in" type="date"></div>
         <div class="f"><label data-th="l_out"></label><input id="r_out" type="date"></div>
       </div>
-      <div class="f"><label data-th="l_hora"></label>
-        <select id="r_hora"><option value=""></option></select>
+
+      <div class="f">
+        <label data-th="l_hora"></label>
+        <div class="two">
+          <select id="ch_h"></select>
+          <select id="ch_m"></select>
+        </div>
         <div class="hint" data-th="h_hora"></div>
       </div>
-      <div class="f"><label data-th="l_placa"></label><input id="r_placa" style="text-transform:uppercase"><div class="hint" data-th="h_placa"></div></div>
+
+      <div class="f" style="margin-bottom:0">
+        <label data-th="l_saida"></label>
+        <div class="two">
+          <select id="sa_h"></select>
+          <select id="sa_m"></select>
+        </div>
+        <div class="hint" data-th="h_saida"></div>
+      </div>
     </div>
 
     <div class="note">
@@ -307,20 +321,22 @@ footer{text-align:center;padding:26px 20px 30px;border-top:1px solid var(--rule)
 var UNIDADE='DS-1008B', UNIDADE_N='DNA SmartStyle 1008B', TOKEN='COLE_O_TOKEN_AQUI',
     WPP='5562982545453', API='https://loftcare-os.vercel.app/api/public/checkin',
     GUIA='https://pedpaz.github.io/Guias-alugo/guia-dna-1008B.html',
-    CAPACIDADE=3, CHECKIN='15:00', CHECKOUT='12:00';
+    CAPACIDADE=3, CHECKIN='15:00', CHECKOUT='12:00',
+    HORAS_CHEGADA=[15,16,17,18,19,20,21,22,23,'00+'],   /* entrada a partir das 15h */
+    HORAS_SAIDA=[6,7,8,9,10,11,12];                     /* saída até as 12h */
 
 /* ═══ DICIONÁRIO ═══ */
 var I18N={
 pt:{
- kicker:'Check-in online', titulo:'Termo de estadia', rodape:'aluGO · Gestão de imóveis para temporada',
+
+ c_quantos:'Quantas pessoas vão se hospedar?', h_quantos:'Incluindo você. Todas precisam estar cadastradas — é exigência legal e condição para a portaria liberar o acesso.', so_eu:'só eu', pessoas:'pessoas', c_hospede:'Hóspede', l_crianca:'É criança (menor de 12 anos)', h_tel:'Usamos só para falar com você durante a estadia.', l_saida:'Previsão de saída', h_saida:'O check-out é até as 12h — nos ajuda a organizar a limpeza.', h_hora:'O check-in é a partir das 15h — antes disso o apartamento ainda está sendo preparado.', escolha:'Escolha o horário', depois_meia:'Depois da meia-noite', r_saida:'Saída prevista', kicker:'Check-in online', titulo:'Termo de estadia', rodape:'aluGO · Gestão de imóveis para temporada',
  p1:'Hóspedes', p2:'Reserva', p3:'Regras', p4:'Aceite',
- b_avancar:'Avançar', b_enviar:'Assinar e enviar', b_add:'Adicionar hóspede',
+ b_avancar:'Avançar', b_enviar:'Assinar e enviar',
  c_titular:'Responsável pela reserva', c_datas:'Datas da estadia', c_aceites:'Declarações',
  c_assinatura:'Assinatura', c_hospede:'Hóspede',
- l_nome:'Nome completo', l_doc:'CPF ou passaporte', l_tel:'Telefone / WhatsApp', l_email:'E-mail',
- l_in:'Check-in', l_out:'Check-out', l_hora:'Previsão de chegada', l_placa:'Placa do veículo',
+ l_nome:'Nome completo', l_doc:'CPF ou passaporte', l_tel:'Telefone / WhatsApp',
+ l_in:'Check-in', l_out:'Check-out', l_hora:'Previsão de chegada',
  h_doc:'Estrangeiro: número do passaporte', h_hora:'Serve para organizarmos a portaria — não muda o horário de entrada',
- h_placa:'Opcional. Deixe em branco se vier sem carro.', b_remover:'Remover',
 
  e1_h:'Quem <em>vem</em>', e1_lead:'Precisamos do nome e do documento de cada hóspede, inclusive crianças.',
  e1_alerta:'<strong>É a portaria que depende disso.</strong> A recepção do DNA SmartStyle só cadastra o reconhecimento facial de quem estiver nesta lista. Quem não constar aqui não será autorizado a subir.',
@@ -368,15 +384,15 @@ pt:{
  wpp_tit:'CHECK-IN ONLINE'
 },
 en:{
- kicker:'Online check-in', titulo:'Terms of stay', rodape:'aluGO · Short-stay property management',
+
+ c_quantos:'How many people are staying?', h_quantos:'Including you. Everyone must be registered — it is a legal requirement and the condition for reception to grant access.', so_eu:'just me', pessoas:'people', c_hospede:'Guest', l_crianca:'This is a child (under 12)', h_tel:'We only use it to reach you during your stay.', l_saida:'Expected departure', h_saida:'Check-out is by 12:00 pm — this helps us schedule the cleaning.', h_hora:'Check-in is from 3:00 pm — before that the apartment is still being prepared.', escolha:'Choose a time', depois_meia:'After midnight', r_saida:'Expected departure', kicker:'Online check-in', titulo:'Terms of stay', rodape:'aluGO · Short-stay property management',
  p1:'Guests', p2:'Booking', p3:'Rules', p4:'Signature',
- b_avancar:'Continue', b_enviar:'Sign and send', b_add:'Add guest',
+ b_avancar:'Continue', b_enviar:'Sign and send',
  c_titular:'Lead guest', c_datas:'Stay dates', c_aceites:'Declarations',
  c_assinatura:'Signature', c_hospede:'Guest',
- l_nome:'Full name', l_doc:'Passport or ID number', l_tel:'Phone / WhatsApp', l_email:'Email',
- l_in:'Check-in', l_out:'Check-out', l_hora:'Estimated arrival', l_placa:'Vehicle plate',
+ l_nome:'Full name', l_doc:'Passport or ID number', l_tel:'Phone / WhatsApp',
+ l_in:'Check-in', l_out:'Check-out', l_hora:'Estimated arrival',
  h_doc:'Passport number for non-Brazilian guests', h_hora:'This helps us brief reception — it does not change the check-in time',
- h_placa:'Optional. Leave blank if you are not bringing a car.', b_remover:'Remove',
 
  e1_h:'Who is <em>coming</em>', e1_lead:'We need the name and ID of every guest, children included.',
  e1_alerta:'<strong>Reception depends on this.</strong> The DNA SmartStyle front desk only registers face ID for people on this list. Anyone not listed here will not be allowed upstairs.',
@@ -424,15 +440,15 @@ en:{
  wpp_tit:'ONLINE CHECK-IN'
 },
 es:{
- kicker:'Check-in online', titulo:'Término de estadía', rodape:'aluGO · Gestión de inmuebles para temporada',
+
+ c_quantos:'¿Cuántas personas se van a hospedar?', h_quantos:'Incluyéndote. Todas deben estar registradas — es exigencia legal y condición para que la portería libere el acceso.', so_eu:'solo yo', pessoas:'personas', c_hospede:'Huésped', l_crianca:'Es niño/a (menor de 12 años)', h_tel:'Lo usamos solo para contactarte durante la estadía.', l_saida:'Salida prevista', h_saida:'El check-out es hasta las 12h — nos ayuda a organizar la limpieza.', h_hora:'El check-in es desde las 15h — antes el apartamento aún se está preparando.', escolha:'Elige el horario', depois_meia:'Después de medianoche', r_saida:'Salida prevista', kicker:'Check-in online', titulo:'Término de estadía', rodape:'aluGO · Gestión de inmuebles para temporada',
  p1:'Huéspedes', p2:'Reserva', p3:'Reglas', p4:'Firma',
- b_avancar:'Continuar', b_enviar:'Firmar y enviar', b_add:'Agregar huésped',
+ b_avancar:'Continuar', b_enviar:'Firmar y enviar',
  c_titular:'Responsable de la reserva', c_datas:'Fechas de la estadía', c_aceites:'Declaraciones',
  c_assinatura:'Firma', c_hospede:'Huésped',
- l_nome:'Nombre completo', l_doc:'Pasaporte o documento', l_tel:'Teléfono / WhatsApp', l_email:'Correo electrónico',
- l_in:'Check-in', l_out:'Check-out', l_hora:'Llegada prevista', l_placa:'Patente del vehículo',
+ l_nome:'Nombre completo', l_doc:'Pasaporte o documento', l_tel:'Teléfono / WhatsApp',
+ l_in:'Check-in', l_out:'Check-out', l_hora:'Llegada prevista',
  h_doc:'Extranjeros: número de pasaporte', h_hora:'Nos sirve para avisar a la portería — no cambia el horario de entrada',
- h_placa:'Opcional. Déjalo en blanco si no traes auto.', b_remover:'Quitar',
 
  e1_h:'Quién <em>viene</em>', e1_lead:'Necesitamos el nombre y el documento de cada huésped, incluidos los niños.',
  e1_alerta:'<strong>La portería depende de esto.</strong> La recepción del DNA SmartStyle solo registra el reconocimiento facial de quienes figuren en esta lista. Quien no esté aquí no será autorizado a subir.',
@@ -492,36 +508,80 @@ function setLang(l){ L=l; try{localStorage.setItem('alugo_lang',l);}catch(e){}
   document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.l===l); });
   document.querySelectorAll('[data-t]').forEach(function(e){ e.textContent=t(e.dataset.t); });
   document.querySelectorAll('[data-th]').forEach(function(e){ e.innerHTML=t(e.dataset.th); });
-  montarClausulas(); montarAceites(); montarHoras(); renomearExtras();
+  montarClausulas(); montarAceites(); montarHoras(); montarPills(); montarGuests();
   document.querySelector('#btnAvancar span').textContent = (etapa===4)?t('b_enviar'):t('b_avancar');
   document.getElementById('progL').textContent = t('p'+etapa);
   if(etapa===4) montarResumo();
 }
 
-/* ═══ HÓSPEDES EXTRAS ═══ */
-var nExtras=0;
-function addHospede(){
-  var total=2+nExtras;
-  if(total>CAPACIDADE){ alert(t('v_cap')); return; }
-  nExtras++;
-  var d=document.createElement('div');
-  d.className='card'; d.dataset.hosp='1';
-  d.innerHTML='<div class="card-t"><svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
-    +'<span class="hnome"></span><button class="rm" onclick="rmHospede(this)">'+t('b_remover')+'</button></div>'
-    +'<div class="f"><label class="lnome"></label><input class="h_nome"></div>'
-    +'<div class="f"><label class="ldoc"></label><input class="h_cpf"></div>';
-  document.getElementById('extras').appendChild(d);
-  renomearExtras();
-  d.querySelector('.h_nome').focus();
+/* ═══ HÓSPEDES ═══ */
+var QTD=1;
+function montarPills(){
+  var p=document.getElementById('pills'), h='', i;
+  for(i=1;i<=CAPACIDADE;i++)
+    h+='<button type="button" class="pill'+(i===QTD?' on':'')+'" onclick="setQtd('+i+')"><b>'+i+'</b><span>'+
+       (i===1?t('so_eu'):t('pessoas'))+'</span></button>';
+  p.innerHTML=h;
 }
-function rmHospede(b){ b.closest('[data-hosp]').remove(); nExtras--; renomearExtras(); }
-function renomearExtras(){
-  document.querySelectorAll('[data-hosp]').forEach(function(d,i){
-    d.querySelector('.hnome').textContent=t('c_hospede')+' '+(i+2);
-    d.querySelector('.lnome').textContent=t('l_nome');
-    d.querySelector('.ldoc').textContent=t('l_doc');
-    d.querySelector('.rm').textContent=t('b_remover');
+function setQtd(n){ QTD=n; montarPills(); montarGuests(); }
+function montarGuests(){
+  var box=document.getElementById('guests'), antes=[], i;
+  box.querySelectorAll('[data-g]').forEach(function(c){
+    antes.push({nome:c.querySelector('.gnome').value, doc:c.querySelector('.gdoc').value,
+                tel:(c.querySelector('.gtel')||{}).value||'',
+                crianca:!!(c.querySelector('.gcrianca')||{}).classList &&
+                        (c.querySelector('.gcrianca')||{classList:{contains:function(){return false;}}}).classList.contains('on')});
   });
+  var h='';
+  for(i=0;i<QTD;i++){
+    var d=antes[i]||{nome:'',doc:'',tel:'',crianca:false};
+    h+='<div class="card" data-g="'+i+'">'
+      +'<div class="card-t"><span class="gnum">'+(i+1)+'</span><span>'+(i===0?t('c_titular'):t('c_hospede')+' '+(i+1))+'</span></div>'
+      +'<div class="f"><label>'+t('l_nome')+'</label><input class="gnome" autocomplete="'+(i===0?'name':'off')+'" value="'+d.nome.replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="f"><label>'+t('l_doc')+'</label><input class="gdoc" value="'+d.doc.replace(/"/g,'&quot;')+'"><div class="hint">'+t('h_doc')+'</div></div>';
+    if(i===0){
+      h+='<div class="f" style="margin-bottom:0"><label>'+t('l_tel')+'</label><input class="gtel" type="tel" inputmode="tel" autocomplete="tel" value="'+d.tel.replace(/"/g,'&quot;')+'"><div class="hint">'+t('h_tel')+'</div></div>';
+    } else {
+      h+='<div class="ckmini gcrianca'+(d.crianca?' on':'')+'" onclick="this.classList.toggle(\'on\')">'
+        +'<span class="box"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></span>'
+        +'<span>'+t('l_crianca')+'</span></div>';
+    }
+    h+='</div>';
+  }
+  box.innerHTML=h;
+}
+
+/* ═══ HORÁRIOS ═══ */
+function opcoesHora(lista, sel){
+  var h='<option value="">'+t('escolha')+'</option>', i;
+  for(i=0;i<lista.length;i++){
+    var v=lista[i];
+    h+='<option value="'+v+'">'+(v==='00+'?t('depois_meia'):(v<10?'0'+v:v)+'h')+'</option>';
+  }
+  sel.innerHTML=h;
+}
+function montarHoras(){
+  var a=document.getElementById('ch_h'), b=document.getElementById('sa_h'),
+      va=a.value, vb=b.value;
+  opcoesHora(HORAS_CHEGADA,a); opcoesHora(HORAS_SAIDA,b);
+  a.value=va; b.value=vb;
+  [['ch_m',document.getElementById('ch_m').value],['sa_m',document.getElementById('sa_m').value]].forEach(function(p){
+    var e=document.getElementById(p[0]);
+    e.innerHTML='<option value="00">:00</option><option value="15">:15</option><option value="30">:30</option><option value="45">:45</option>';
+    e.value=p[1]||'00';
+  });
+}
+function horaTexto(hSel,mSel){
+  var h=document.getElementById(hSel).value, m=document.getElementById(mSel).value||'00';
+  if(!h) return '';
+  if(h==='00+') return t('depois_meia');
+  return (h<10?'0'+h:h)+':'+m;
+}
+function horaValor(hSel,mSel){
+  var h=document.getElementById(hSel).value, m=document.getElementById(mSel).value||'00';
+  if(!h) return '';
+  if(h==='00+') return '00:'+m;
+  return (h<10?'0'+h:h)+':'+m;
 }
 
 /* ═══ CLÁUSULAS E ACEITES ═══ */
@@ -543,12 +603,6 @@ function montarAceites(){
       +'<span class="box"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></span>'
       +'<span class="ck-t">'+t(k)+'</span></div>';
   }).join('');
-}
-function montarHoras(){
-  var s=document.getElementById('r_hora'), v=s.value, h='<option value="">—</option>', i;
-  for(i=15;i<=23;i++){ h+='<option value="'+i+':00">'+i+':00 – '+i+':59</option>'; }
-  h+='<option value="00:00">'+(L==='en'?'After midnight':L==='es'?'Después de medianoche':'Depois da meia-noite')+'</option>';
-  s.innerHTML=h; s.value=v;
 }
 
 /* ═══ ASSINATURA ═══ */
@@ -583,13 +637,12 @@ function marcaErro(el){ el.classList.add('erro'); el.addEventListener('input',fu
 function valida(n){
   var i;
   if(n===1){
-    var nm=document.getElementById('t_nome'), cp=document.getElementById('t_cpf');
-    if(!nm.value.trim()){ alert(t('v_titular')); marcaErro(nm); return false; }
-    if(!cp.value.trim()){ alert(t('v_titular')); marcaErro(cp); return false; }
-    var ok=true;
-    document.querySelectorAll('[data-hosp]').forEach(function(d){
-      var a=d.querySelector('.h_nome'), b=d.querySelector('.h_cpf');
-      if(ok && (!a.value.trim()||!b.value.trim())){ ok=false; alert(t('v_hospede')); marcaErro(a.value.trim()?b:a); }
+    var cards=document.querySelectorAll('[data-g]'), ok=true;
+    cards.forEach(function(c,idx){
+      if(!ok) return;
+      var a=c.querySelector('.gnome'), b=c.querySelector('.gdoc');
+      if(!a.value.trim()){ alert(idx===0?t('v_titular'):t('v_hospede')); marcaErro(a); ok=false; return; }
+      if(!b.value.trim()){ alert(idx===0?t('v_titular'):t('v_hospede')); marcaErro(b); ok=false; return; }
     });
     return ok;
   }
@@ -617,9 +670,12 @@ function ir(d){
 
 /* ═══ RESUMO ═══ */
 function hospedes(){
-  var a=[{nome:document.getElementById('t_nome').value.trim(), cpf:document.getElementById('t_cpf').value.trim()}];
-  document.querySelectorAll('[data-hosp]').forEach(function(d){
-    a.push({nome:d.querySelector('.h_nome').value.trim(), cpf:d.querySelector('.h_cpf').value.trim()});
+  var a=[];
+  document.querySelectorAll('[data-g]').forEach(function(c,i){
+    var o={nome:c.querySelector('.gnome').value.trim(), cpf:c.querySelector('.gdoc').value.trim()};
+    if(i===0) o.telefone=(c.querySelector('.gtel')||{value:''}).value.trim();
+    else o.crianca=(c.querySelector('.gcrianca')||{classList:{contains:function(){return false;}}}).classList.contains('on');
+    a.push(o);
   });
   return a;
 }
@@ -631,7 +687,8 @@ function montarResumo(){
    +'<div class="r"><span>'+t('r_titular')+'</span><span>'+(hs[0].nome||'—')+'</span></div>'
    +'<div class="r"><span>'+t('r_hospedes')+'</span><span>'+hs.length+'</span></div>'
    +'<div class="r"><span>'+t('r_periodo')+'</span><span>'+dataBR(document.getElementById('r_in').value)+' → '+dataBR(document.getElementById('r_out').value)+'</span></div>'
-   +'<div class="r"><span>'+t('r_chegada')+'</span><span>'+(document.getElementById('r_hora').value||'—')+'</span></div>';
+   +'<div class="r"><span>'+t('r_chegada')+'</span><span>'+(horaTexto('ch_h','ch_m')||'—')+'</span></div>'
+   +'<div class="r"><span>'+t('r_saida')+'</span><span>'+(horaTexto('sa_h','sa_m')||'—')+'</span></div>';
 }
 
 /* ═══ WHATSAPP · webview-safe ═══ */
@@ -645,14 +702,13 @@ function montarMsg(){
   var hs=hospedes(), m='📋 *'+t('wpp_tit')+'*\n━━━━━━━━━━━━━━\n\n';
   m+='🏢 '+UNIDADE_N+'\n🔖 '+UNIDADE+'\n\n';
   m+='📅 '+dataBR(document.getElementById('r_in').value)+' → '+dataBR(document.getElementById('r_out').value)+'\n';
-  var hr=document.getElementById('r_hora').value; if(hr) m+='🕒 '+t('r_chegada')+': '+hr+'\n';
+  var hc=horaTexto('ch_h','ch_m'), hsai=horaTexto('sa_h','sa_m');
+  if(hc)   m+='🕒 '+t('r_chegada')+': '+hc+'\n';
+  if(hsai) m+='🚪 '+t('r_saida')+': '+hsai+'\n';
   m+='\n👤 *'+t('r_hospedes')+' ('+hs.length+')*\n';
-  hs.forEach(function(h,i){ m+=(i+1)+'. '+h.nome+' — '+h.cpf+'\n'; });
-  var tel=document.getElementById('t_tel').value.trim(), em=document.getElementById('t_email').value.trim(),
-      pl=document.getElementById('r_placa').value.trim().toUpperCase();
+  hs.forEach(function(h,i){ m+=(i+1)+'. '+h.nome+' — '+h.cpf+(h.crianca?' ('+t('l_crianca')+')':'')+'\n'; });
+  var tel=hs[0].telefone||'';
   if(tel) m+='\n📱 '+tel;
-  if(em) m+='\n✉️ '+em;
-  if(pl) m+='\n🚗 '+pl;
   m+='\n\n✅ '+(L==='en'?'All ten clauses accepted and signed.':L==='es'?'Las diez cláusulas aceptadas y firmadas.':'Dez cláusulas aceitas e assinadas.');
   m+='\n\n_aluGO_';
   return m;
@@ -664,14 +720,16 @@ function enviar(){
     token:TOKEN, unidade:UNIDADE, tipo:'termo',
     check_in:document.getElementById('r_in').value,
     check_out:document.getElementById('r_out').value,
-    hora_chegada:document.getElementById('r_hora').value,
-    titular:{nome:hs[0].nome, cpf:hs[0].cpf,
-             telefone:document.getElementById('t_tel').value.trim(),
-             email:document.getElementById('t_email').value.trim()},
+    hora_chegada:horaValor('ch_h','ch_m'),
+    hora_chegada_texto:horaTexto('ch_h','ch_m'),
+    hora_saida:horaValor('sa_h','sa_m'),
+    hora_saida_texto:horaTexto('sa_h','sa_m'),
+    qtd_hospedes:hs.length,
+    titular:{nome:hs[0].nome, cpf:hs[0].cpf, telefone:hs[0].telefone||''},
     hospedes:hs.slice(1),
-    placa:document.getElementById('r_placa').value.trim().toUpperCase(),
     assinatura:(function(){ try{ return cv.toDataURL('image/png'); }catch(e){ return ''; } })(),
-    aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true, sem_pets:true}
+    aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true, sem_pets:true},
+    idioma:L
   };
   try{
     fetch(API,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
@@ -699,6 +757,7 @@ document.querySelectorAll('.lang button').forEach(function(b){ b.onclick=functio
   c.addEventListener('touchend',sigEnd);
   window.addEventListener('resize',function(){ if(etapa===4 && !temSig) initSig(); });
 })();
+setQtd(1);
 setLang(L);
 mostrar(1);
 </script>
