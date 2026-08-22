@@ -957,8 +957,11 @@ function coletar(){
 }
 function enviarSistema(p){
   try {
-    fetch(ENDPOINT, { method:'POST', keepalive:true,
-      headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(p) }).catch(function(){});
+    var _b = JSON.stringify(p);
+    if(!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, new Blob([_b],{type:'text/plain;charset=UTF-8'})))){
+      fetch(ENDPOINT, { method:'POST', keepalive:true,
+        headers:{ 'Content-Type':'text/plain;charset=UTF-8' }, body: _b }).catch(function(){});
+    }
   } catch(e){}
 }
 function mensagem(p){
