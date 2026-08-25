@@ -386,7 +386,7 @@ var CFG = {
   checkout:  '12h',
   wifiRede:  'cantinn',
   wifiSenha: 'Cantinn7',
-  senhaPorta:'9830',
+  senhaPorta:'9830*',
   capacidade: 5,
   fotoHero:  'hero-sala-mesa-posta',
   heroPos:   '64% 50%'
@@ -445,7 +445,7 @@ pt: {
         { mapa:true },
         { h:'De carro' },
         { p:['A entrada do prédio fica na própria T-55. Se for de carro, avise a portaria pelo interfone da guarita.'] },
-        { dest:{ tipo:'aviso', t:'Garagem — como funciona', p:'A garagem é <b>rotativa</b>: não existe vaga fixa da unidade e o uso está <b>sujeito à disponibilidade</b>. Para usar, são dois passos: <b>1)</b> na chegada, cadastre o carro na recepção; <b>2)</b> a cada entrada, mande uma mensagem no WhatsApp da portaria quando estiver em frente ao portão — <i>“Sou hóspede da unidade 757, carro [modelo], cor [cor], placa [placa]”</i>. Peça o número da portaria no nosso WhatsApp que enviamos na hora. Em dia cheio pode não haver vaga; o Marista tem estacionamentos pagos a poucos metros.' } },
+        { dest:{ tipo:'aviso', t:'Garagem — como funciona', p:'A garagem é <b>rotativa</b>: não existe vaga fixa da unidade e o uso está <b>sujeito à disponibilidade</b>. Para usar, são dois passos: <b>1)</b> na chegada, cadastre o carro na recepção; <b>2)</b> a cada entrada, mande uma mensagem no WhatsApp da portaria quando estiver em frente ao portão — <i>“Sou hóspede da unidade 757, carro [modelo], cor [cor], placa [placa]”</i>. WhatsApp da portaria: <b>(62) 9991-8605</b>. O uso da garagem é <b>gratuito</b>. Em dia cheio pode não haver vaga; o Marista tem estacionamentos pagos a poucos metros.' } },
         { h:'De aplicativo' },
         { p:['Peça o carro para <b>“Blend Smart Style, Rua T-55, 95”</b>. Motoristas conhecem o prédio pela fachada de pedra e pelo letreiro BLEND na entrada.'] }
       ]
@@ -474,7 +474,7 @@ pt: {
       lead:'A porta do 757 tem fechadura digital. Não há chave para retirar nem devolver.',
       blocos:[
         { chaveGrande:{ k:'Senha da porta', vKey:'senhaPorta' } },
-        { p:['Digite a senha no teclado da fechadura e empurre a porta. Se errar, aguarde alguns segundos e tente de novo.'] },
+        { p:['Digite a senha <b>com o asterisco no final</b> e empurre a porta. O <b>*</b> é o que confirma a digitação — sem ele a fechadura não abre. Se errar, aguarde alguns segundos e tente de novo.'] },
         { dest:{ tipo:'ok', t:'Nada a devolver no check-out', p:'Como a fechadura é por senha, você não precisa passar na recepção para devolver chave ou cartão ao ir embora.' } },
         { h:'Logo na entrada' },
         { p:['A bancada com o espelho redondo fica no hall de entrada — é ali que está a gaveta com o <b>secador de cabelo</b>.'] }
@@ -544,17 +544,19 @@ pt: {
     lazer: {
       titulo:'Academia & lazer',
       sub:'O que mais tem no prédio',
-      lead:'Academia equipada, espaço gourmet com churrasqueira, salão de jogos, coliving e bicicletário.',
+      lead:'Academia, restaurante no complexo, espaço gourmet com churrasqueira, salão de jogos, coliving e bicicletário.',
       blocos:[
         { h:'Academia' },
         { p:['Esteiras, bicicletas, peso livre e halteres. Ao terminar, organize os equipamentos que usou.'] },
+        { h:'Café da manhã, almoço e jantar' },
+        { p:['No mesmo complexo funciona um restaurante que serve <b>café da manhã em buffet</b>, além de almoço e jantar. Resolve a primeira refeição do dia a poucos passos, sem procurar padaria.','O consumo é <b>pago no local</b> e não está incluso na diária. Horários e valores são informados na recepção.'] },
         { h:'Salão de jogos e espaço gourmet' },
         { p:['Mesa de sinuca, mesas para refeição e churrasqueira. Ótimo para uma noite em grupo sem sair do prédio.'] },
         { h:'Coliving' },
         { p:['Sala de convivência ampla, com sofás e mesas — funciona como uma extensão da sala do apê.'] },
         { h:'Bicicletário' },
         { p:['Espaço coberto para bicicletas, com acesso pela garagem.'] },
-        { dest:{ tipo:'aviso', t:'O que está liberado para você', p:'A <b>academia é liberada</b> para hóspedes — pode usar à vontade. As <b>salas de reunião</b> e o <b>salão de festas</b> funcionam <b>mediante reserva na recepção</b> e podem ter custo por uso: confirme na recepção antes de reservar. Qualquer dúvida, nos chame no WhatsApp.' } }
+        { dest:{ tipo:'aviso', t:'O que está liberado para você', p:'A <b>academia é liberada</b> para hóspedes — pode usar à vontade. O <b>coworking</b> pode ser usado <b>conforme a disponibilidade</b>: pergunte na portaria antes de subir. As <b>salas de reunião</b> e o <b>salão de festas</b> funcionam <b>mediante reserva</b>, e o valor de uso deve ser <b>verificado na portaria</b>. Qualquer dúvida, nos chame no WhatsApp.' } }
       ]
     },
 
@@ -692,7 +694,7 @@ en: {
         { mapa:true },
         { h:'By car' },
         { p:['The entrance is on T-55 itself. If you arrive by car, let the front desk know through the gate intercom.'] },
-        { dest:{ tipo:'aviso', t:'Parking — how it works', p:'The garage is <b>rotating</b>: no space is assigned to the unit and use is <b>subject to availability</b>. Two steps: <b>1)</b> on arrival, register your car at reception; <b>2)</b> every time you drive in, message the front desk on WhatsApp while you are at the gate — <i>“I am a guest in unit 757, car [model], colour [colour], plate [plate]”</i>. Ask us for the front-desk number and we will send it straight away. On busy days there may be no space; there are paid car parks a few metres away in Marista.' } },
+        { dest:{ tipo:'aviso', t:'Parking — how it works', p:'The garage is <b>rotating</b>: no space is assigned to the unit and use is <b>subject to availability</b>. Two steps: <b>1)</b> on arrival, register your car at reception; <b>2)</b> every time you drive in, message the front desk on WhatsApp while you are at the gate — <i>“I am a guest in unit 757, car [model], colour [colour], plate [plate]”</i>. Front-desk WhatsApp: <b>+55 62 9991-8605</b>. Parking is <b>free of charge</b>. On busy days there may be no space; there are paid car parks a few metres away in Marista.' } },
         { h:'By ride app' },
         { p:['Set the destination to <b>“Blend Smart Style, Rua T-55, 95”</b>. Drivers know the building by its stone façade and the BLEND sign at the entrance.'] }
       ]
@@ -721,7 +723,7 @@ en: {
       lead:'Apartment 757 has a digital lock. There is no key to collect or return.',
       blocos:[
         { chaveGrande:{ k:'Door code', vKey:'senhaPorta' } },
-        { p:['Type the code on the lock keypad and push the door. If it fails, wait a few seconds and try again.'] },
+        { p:['Type the code <b>including the asterisk at the end</b> and push the door. The <b>*</b> confirms the entry — without it the lock will not open. If it fails, wait a few seconds and try again.'] },
         { dest:{ tipo:'ok', t:'Nothing to return at check-out', p:'Because the lock is code-based, you do not need to stop at reception to hand back a key or card when you leave.' } },
         { h:'Right at the entrance' },
         { p:['The counter with the round mirror is in the entrance hall — the <b>hair dryer</b> is in the drawer there.'] }
@@ -791,17 +793,19 @@ en: {
     lazer: {
       titulo:'Gym & leisure',
       sub:'What else the building has',
-      lead:'Equipped gym, barbecue lounge, games room, coliving space and bike storage.',
+      lead:'Equipped gym, a restaurant in the complex, barbecue lounge, games room, coliving space and bike storage.',
       blocos:[
         { h:'Gym' },
         { p:['Treadmills, bikes, free weights and dumbbells. Please rack what you use.'] },
+        { h:'Breakfast, lunch and dinner' },
+        { p:['There is a restaurant in the same complex serving a <b>breakfast buffet</b>, as well as lunch and dinner. It solves your first meal of the day a few steps away.','Meals are <b>paid on site</b> and are not included in the nightly rate. Opening hours and prices are confirmed at reception.'] },
         { h:'Games room and barbecue lounge' },
         { p:['Pool table, dining tables and a barbecue. Great for an evening with the group without leaving the building.'] },
         { h:'Coliving' },
         { p:['A large shared lounge with sofas and tables — an extension of your own living room.'] },
         { h:'Bike storage' },
         { p:['Covered bike parking, accessed from the garage.'] },
-        { dest:{ tipo:'aviso', t:'What is open to you', p:'The <b>gym is open</b> to guests — use it freely. The <b>meeting rooms</b> and the <b>party room</b> work <b>by booking at reception</b> and may carry a fee: check with reception before booking. Any doubts, message us on WhatsApp.' } }
+        { dest:{ tipo:'aviso', t:'What is open to you', p:'The <b>gym is open</b> to guests — use it freely. The <b>coworking</b> can be used <b>subject to availability</b>: ask the front desk first. The <b>meeting rooms</b> and the <b>party room</b> work <b>by booking</b>, and the fee should be <b>checked with the front desk</b>. Any doubts, message us on WhatsApp.' } }
       ]
     },
 
@@ -939,7 +943,7 @@ es: {
         { mapa:true },
         { h:'En coche' },
         { p:['La entrada está en la propia T-55. Si llegas en coche, avisa a la portería por el interfono de la garita.'] },
-        { dest:{ tipo:'aviso', t:'Garaje — cómo funciona', p:'El garaje es <b>rotativo</b>: no hay plaza fija de la unidad y el uso está <b>sujeto a disponibilidad</b>. Dos pasos: <b>1)</b> al llegar, registra el coche en recepción; <b>2)</b> cada vez que entres, escribe al WhatsApp de portería cuando estés frente al portón — <i>“Soy huésped de la unidad 757, coche [modelo], color [color], matrícula [matrícula]”</i>. Pídenos el número de portería y te lo enviamos al momento. En días llenos puede no haber plaza; el Marista tiene aparcamientos de pago a pocos metros.' } },
+        { dest:{ tipo:'aviso', t:'Garaje — cómo funciona', p:'El garaje es <b>rotativo</b>: no hay plaza fija de la unidad y el uso está <b>sujeto a disponibilidad</b>. Dos pasos: <b>1)</b> al llegar, registra el coche en recepción; <b>2)</b> cada vez que entres, escribe al WhatsApp de portería cuando estés frente al portón — <i>“Soy huésped de la unidad 757, coche [modelo], color [color], matrícula [matrícula]”</i>. WhatsApp de portería: <b>+55 62 9991-8605</b>. El uso del garaje es <b>gratuito</b>. En días llenos puede no haber plaza; el Marista tiene aparcamientos de pago a pocos metros.' } },
         { h:'En app de transporte' },
         { p:['Pon como destino <b>“Blend Smart Style, Rua T-55, 95”</b>. Los conductores reconocen el edificio por la fachada de piedra y el rótulo BLEND en la entrada.'] }
       ]
@@ -968,7 +972,7 @@ es: {
       lead:'El 757 tiene cerradura digital. No hay llave que recoger ni devolver.',
       blocos:[
         { chaveGrande:{ k:'Clave de la puerta', vKey:'senhaPorta' } },
-        { p:['Marca la clave en el teclado de la cerradura y empuja la puerta. Si falla, espera unos segundos e inténtalo de nuevo.'] },
+        { p:['Marca la clave <b>con el asterisco al final</b> y empuja la puerta. El <b>*</b> es lo que confirma la entrada — sin él la cerradura no abre. Si falla, espera unos segundos e inténtalo de nuevo.'] },
         { dest:{ tipo:'ok', t:'Nada que devolver en el check-out', p:'Como la cerradura es por clave, no necesitas pasar por recepción para devolver llave o tarjeta al irte.' } },
         { h:'Nada más entrar' },
         { p:['La encimera con el espejo redondo está en el hall de entrada — ahí, en el cajón, está el <b>secador de pelo</b>.'] }
@@ -1038,17 +1042,19 @@ es: {
     lazer: {
       titulo:'Gimnasio y ocio',
       sub:'Qué más tiene el edificio',
-      lead:'Gimnasio equipado, zona gourmet con barbacoa, sala de juegos, coliving y aparcabicis.',
+      lead:'Gimnasio, restaurante en el complejo, zona gourmet con barbacoa, sala de juegos, coliving y aparcabicis.',
       blocos:[
         { h:'Gimnasio' },
         { p:['Cintas, bicicletas, peso libre y mancuernas. Al terminar, ordena lo que hayas usado.'] },
+        { h:'Desayuno, almuerzo y cena' },
+        { p:['En el mismo complejo funciona un restaurante que sirve <b>desayuno bufé</b>, además de almuerzo y cena. Resuelve la primera comida del día a pocos pasos.','El consumo se <b>paga en el local</b> y no está incluido en la tarifa. Horarios y precios se confirman en recepción.'] },
         { h:'Sala de juegos y zona gourmet' },
         { p:['Mesa de billar, mesas para comer y barbacoa. Ideal para una noche en grupo sin salir del edificio.'] },
         { h:'Coliving' },
         { p:['Amplia sala de convivencia con sofás y mesas — una extensión del salón del piso.'] },
         { h:'Aparcabicis' },
         { p:['Espacio cubierto para bicicletas, con acceso desde el garaje.'] },
-        { dest:{ tipo:'aviso', t:'Qué tienes disponible', p:'El <b>gimnasio está liberado</b> para huéspedes — puedes usarlo sin más. Las <b>salas de reunión</b> y el <b>salón de fiestas</b> funcionan <b>con reserva en recepción</b> y pueden tener coste por uso: confírmalo en recepción antes de reservar. Cualquier duda, escríbenos por WhatsApp.' } }
+        { dest:{ tipo:'aviso', t:'Qué tienes disponible', p:'El <b>gimnasio está liberado</b> para huéspedes — puedes usarlo sin más. El <b>coworking</b> se usa <b>según disponibilidad</b>: pregunta en portería antes de subir. Las <b>salas de reunión</b> y el <b>salón de fiestas</b> funcionan <b>con reserva</b>, y el coste debe <b>consultarse en portería</b>. Cualquier duda, escríbenos por WhatsApp.' } }
       ]
     },
 
@@ -1162,7 +1168,7 @@ var SINONIMOS = {
     interior: ['cama','camas','quarto','dormir','quantas pessoas','capacidade','sofa cama','colchao','toalha','lencol','enxoval','roupa de cama','ar condicionado','ar','split','tv','televisao','banheiro','box','chuveiro','closet','armario','blackout','cortina','tomada','voltagem','220','110'],
     cozinha:  ['cozinha','cooktop','fogao','coifa','microondas','micro-ondas','geladeira','cafeteira','cafe','agua','purificador','panela','louca','prato','talher','taca','copo','tabua de passar','ferro','passar roupa','lixo','cozinhar'],
     trabalhar:['coworking','trabalhar','trabalho','escritorio','sala de reuniao','reuniao','mesa','wifi trabalho','lavanderia','lavar roupa','quanto custa lavar','preco lavanderia','maquina de lavar','secadora','secar roupa','locker','armario de encomenda'],
-    lazer:    ['academia','gym','esteira','peso','musculacao','piscina','jogos','sinuca','bilhar','gourmet','churrasqueira','churrasco','bicicletario','bicicleta','lazer','area comum'],
+    lazer:    ['academia','gym','esteira','peso','musculacao','piscina','jogos','sinuca','bilhar','gourmet','churrasqueira','churrasco','bicicletario','bicicleta','lazer','area comum','restaurante','cafe da manha','cafe','almoco','jantar','comer','refeicao','buffet','bufe'],
     regras:   ['regras','fumar','cigarro','vape','festa','evento','barulho','silencio','pet','cachorro','gato','animal','multa','visita','convidado','hospede extra'],
     problema: ['problema','nao funciona','quebrado','defeito','porta nao abre','wifi caiu','internet caiu','sem internet','ar nao gela','faltou luz','disjuntor','energia','chuveiro frio','agua fria','tv sem sinal','trancado','ajuda','socorro'],
     bairro:   ['bairro','marista','restaurante','comer','bar','mercado','supermercado','farmacia','padaria','shopping','parque','vaca brava','buritis','feira da lua','o que fazer','passear'],
@@ -1176,7 +1182,7 @@ var SINONIMOS = {
     interior: ['bed','beds','bedroom','sleep','how many people','capacity','sofa bed','mattress','towel','sheet','linen','air conditioning','ac','tv','bathroom','shower','wardrobe','closet','blackout','socket','plug','voltage','220'],
     cozinha:  ['kitchen','cooktop','stove','hood','microwave','fridge','coffee','water','purifier','pan','plate','cutlery','glass','ironing board','iron','rubbish','trash','cook'],
     trabalhar:['coworking','work','office','desk','meeting room','laundry','laundry price','washing machine','dryer','locker'],
-    lazer:    ['gym','treadmill','weights','pool','games','billiards','barbecue','bbq','coliving','bike','leisure','common area'],
+    lazer:    ['gym','treadmill','weights','pool','games','billiards','barbecue','bbq','coliving','bike','leisure','common area','restaurant','breakfast','lunch','dinner','buffet','meal','eat'],
     regras:   ['rules','smoking','smoke','party','event','noise','quiet','pet','dog','cat','fine','guest','visitor'],
     problema: ['problem','not working','broken','door not opening','wifi down','no internet','ac not cooling','power out','breaker','cold shower','no signal','locked out','help'],
     bairro:   ['neighbourhood','neighborhood','restaurant','eat','bar','supermarket','pharmacy','bakery','mall','park','what to do'],
@@ -1190,7 +1196,7 @@ var SINONIMOS = {
     interior: ['cama','camas','dormitorio','dormir','cuantas personas','capacidad','sofa cama','colchon','toalla','sabana','ropa de cama','aire acondicionado','aire','tv','bano','ducha','armario','blackout','enchufe','voltaje','220'],
     cozinha:  ['cocina','vitroceramica','campana','microondas','nevera','cafetera','cafe','agua','purificador','olla','plato','cubierto','copa','tabla de planchar','plancha','basura','cocinar'],
     trabalhar:['coworking','trabajar','oficina','escritorio','sala de reunion','lavanderia','precio lavanderia','lavadora','secadora','casillero'],
-    lazer:    ['gimnasio','cinta','pesas','piscina','juegos','billar','barbacoa','coliving','bicicleta','ocio','zona comun'],
+    lazer:    ['gimnasio','cinta','pesas','piscina','juegos','billar','barbacoa','coliving','bicicleta','ocio','zona comun','restaurante','desayuno','almuerzo','cena','bufe','comer','comida'],
     regras:   ['normas','fumar','cigarro','fiesta','evento','ruido','silencio','mascota','perro','gato','multa','visita','invitado'],
     problema: ['problema','no funciona','roto','la puerta no abre','se cayo el wifi','sin internet','el aire no enfria','se fue la luz','automatico','ducha fria','sin senal','me quede fuera','ayuda'],
     bairro:   ['barrio','restaurante','comer','bar','supermercado','farmacia','panaderia','centro comercial','parque','que hacer'],
