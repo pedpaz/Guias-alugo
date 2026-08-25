@@ -77,6 +77,9 @@ button{font-family:inherit}
 .cp-k .ico{width:13px;height:13px;color:var(--alerta)}
 .cp-v{font-family:var(--disp);font-weight:500;font-size:1.32rem;line-height:1.12;color:var(--tinta);word-break:break-word}
 .cp-v.vazio{font-size:.92rem;font-family:var(--corpo);font-weight:600;color:var(--tinta-3)}
+.cp-lin{display:flex;align-items:baseline;gap:7px;margin-bottom:4px}
+.cp-lb{font-size:.5rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3);flex:0 0 auto}
+.cp-dado{font-family:var(--disp);font-weight:500;font-size:1.12rem;line-height:1.15;color:var(--tinta);word-break:break-all;text-transform:none}
 .cp-tag{font-size:.5rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   color:var(--tinta-3);margin-top:6px}
 .cp.ok{border-left-color:var(--verde)}
@@ -422,7 +425,7 @@ pt: {
   voltar:'Voltar ao menu',
   barraCheckout:'Check-out',
   barraWpp:'WhatsApp',
-  copiar:'copiar',
+  copiar:'copiar', redeK:'Rede', senhaK:'Senha', copiarSenha:'toque para copiar a senha',
   copiado:'copiado ✓',
   wifiK:'Wi-Fi',
   wifiVazio:'peça no WhatsApp',
@@ -671,7 +674,7 @@ en: {
   voltar:'Back to menu',
   barraCheckout:'Check-out',
   barraWpp:'WhatsApp',
-  copiar:'copy',
+  copiar:'copy', redeK:'Network', senhaK:'Password', copiarSenha:'tap to copy the password',
   copiado:'copied ✓',
   wifiK:'Wi-Fi',
   wifiVazio:'ask on WhatsApp',
@@ -920,7 +923,7 @@ es: {
   voltar:'Volver al menú',
   barraCheckout:'Check-out',
   barraWpp:'WhatsApp',
-  copiar:'copiar',
+  copiar:'copiar', redeK:'Red', senhaK:'Clave', copiarSenha:'toca para copiar la clave',
   copiado:'copiado ✓',
   wifiK:'Wifi',
   wifiVazio:'pide por WhatsApp',
@@ -1259,7 +1262,7 @@ function render(){
   document.getElementById('rod1').textContent = T.rodape1;
   document.getElementById('rod2').textContent = T.rodape2;
 
-  cartaoCopia('cpWifi', T.wifiK, CFG.wifiSenha, T, CFG.wifiRede ? CFG.wifiRede : '', T.wifiVazio,
+  cartaoWifi('cpWifi', T,
     '<path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M1.4 9a16 16 0 0 1 21.2 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><path d="M12 20h.01"/>');
   cartaoCopia('cpPorta', T.portaK, CFG.senhaPorta, T, '', T.portaVazio,
     '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>');
@@ -1288,6 +1291,27 @@ function render(){
   if (document.getElementById('tela').classList.contains('on') && telaAtual) abrirTela(telaAtual);
 }
 
+function cartaoWifi(id, T, icone){
+  var el = document.getElementById(id);
+  var rede  = CFG.wifiRede  && CFG.wifiRede.indexOf('__')  === -1 ? CFG.wifiRede  : '';
+  var senha = CFG.wifiSenha && CFG.wifiSenha.indexOf('__') === -1 ? CFG.wifiSenha : '';
+  var tem = rede || senha;
+  el.className = 'cp' + (tem ? '' : ' ok');
+  if(!tem){
+    el.innerHTML = '<div class="cp-k">' + svg(icone) + esc(T.wifiK) + '</div>' +
+      '<div class="cp-v vazio">' + esc(T.wifiVazio) + '</div>';
+    el.onclick = function(){ wpp(); };
+    return;
+  }
+  /* rede e senha rotuladas, cada uma na propria linha, sem uppercase:
+     nome de rede e senha sao case-sensitive e nao podem ser reescritos pelo CSS. */
+  var h = '<div class="cp-k">' + svg(icone) + esc(T.wifiK) + '</div>';
+  if(rede)  h += '<div class="cp-lin"><span class="cp-lb">' + esc(T.redeK)  + '</span><span class="cp-dado">' + esc(rede)  + '</span></div>';
+  if(senha) h += '<div class="cp-lin"><span class="cp-lb">' + esc(T.senhaK) + '</span><span class="cp-dado">' + esc(senha) + '</span></div>';
+  if(senha) h += '<div class="cp-tag">' + esc(T.copiarSenha) + '</div>';
+  el.innerHTML = h;
+  el.onclick = senha ? function(){ copiar(senha, el, T); } : function(){ wpp(); };
+}
 function cartaoCopia(id, k, valor, T, extra, vazio, icone){
   var el = document.getElementById(id);
   var tem = valor && valor.indexOf('__') === -1;
@@ -1466,12 +1490,18 @@ function wpp(msg){
   abrirWhats('https://wa.me/' + CFG.wpp + '?text=' + encodeURIComponent(t));
 }
 function avisarCheckout(){
+  /* mesmo padrao do termo: o beacon sobrevive a navegacao para o WhatsApp. */
   try {
-    fetch(CFG.apiCheckout, {
-      method:'POST', keepalive:true,
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ token: CFG.token, unidade: CFG.unidade })
-    }).catch(function(){});
+    var corpo = JSON.stringify({ token: CFG.token, unidade: CFG.unidade });
+    var blobCo = new Blob([corpo], { type:'application/json' });
+    var okBeaconCo = navigator.sendBeacon && navigator.sendBeacon(CFG.apiCheckout, blobCo);
+    if(!okBeaconCo){
+      fetch(CFG.apiCheckout, {
+        method:'POST', keepalive:true,
+        headers:{ 'Content-Type':'application/json' },
+        body: corpo
+      }).catch(function(){});
+    }
   } catch(e){}
   var ok = document.getElementById('coOk');
   if (ok) ok.classList.add('on');
