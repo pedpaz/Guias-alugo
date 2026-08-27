@@ -251,7 +251,7 @@ var MARCA_ALUGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABPCAYAAAB
 var CFG = {
   unidade:'BLE-757',
   nome:'Blend Smart Style · 757',
-  token:'COLE_O_TOKEN_AQUI',
+  
   api:'https://loftcare-os.vercel.app/api/public/checkin',
   wpp:'5562982545453',
   guia:'https://pedpaz.github.io/Guias-alugo/guia-blend-757.html',
@@ -582,7 +582,7 @@ function enviar(){
   if(!temSig){ erro(t.erros.assinatura); return; }
   erro(null);
   var payload={
-    token:CFG.token, unidade:CFG.unidade, tipo:'termo',
+    unidade:CFG.unidade, tipo:'termo',
     check_in:$('checkIn').value, check_out:$('checkOut').value,
     hora_chegada:$('horaChegada').value,
     titular:{ nome:hosps[0].nome.trim(), cpf:hosps[0].cpf.trim() },
@@ -593,10 +593,7 @@ function enviar(){
               sem_festas:!!aceites.sem_festas, capacidade:!!aceites.capacidade,
               checkout:!!aceites.checkout }
   };
-  try{
-    fetch(CFG.api,{ method:'POST', keepalive:true,
-      headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }).catch(function(){});
-  }catch(e){}
+  try{ var _b=JSON.stringify(payload); if(!(navigator.sendBeacon&&navigator.sendBeacon(CFG.api,new Blob([_b],{type:'text/plain;charset=UTF-8'})))){ fetch(CFG.api,{ method:'POST', keepalive:true, headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:_b }).catch(function(){}); } }catch(e){}
   document.querySelectorAll('.et').forEach(function(s){ s.classList.remove('on'); });
   document.querySelector('.stepper').style.display='none';
   $('stLbl').style.display='none';

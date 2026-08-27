@@ -253,7 +253,6 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 <script>
 /* ================= CONFIG ================= */
 var UNIDADE  = "DS-2003B";
-var TOKEN    = "COLE_O_TOKEN_AQUI";
 var EP_IN    = "https://loftcare-os.vercel.app/api/public/checkin";
 var WHATS    = "5562982545453";
 var GUIA_URL = "https://pedpaz.github.io/Guias-alugo/guia-dna-2003B.html";
@@ -576,17 +575,14 @@ function enviar(){
   var assinatura='';
   try{ assinatura=cv.toDataURL('image/png'); }catch(e){}
   var payload={
-    token:TOKEN, unidade:UNIDADE, tipo:'termo',
+    unidade:UNIDADE, tipo:'termo',
     check_in:d.check_in, check_out:d.check_out, hora_chegada:d.hora_chegada,
     titular:{nome:d.hospedes[0].nome, cpf:d.hospedes[0].cpf},
     hospedes:d.hospedes.slice(1),
     placa:d.placa, assinatura:assinatura,
     aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true}
   };
-  try{
-    fetch(EP_IN,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)}).catch(function(){});
-  }catch(e){}
+  try{ var _b=JSON.stringify(payload); if(!(navigator.sendBeacon&&navigator.sendBeacon(EP_IN,new Blob([_b],{type:'text/plain;charset=UTF-8'})))){ fetch(EP_IN,{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:_b}).catch(function(){}); } }catch(e){}
 
   var msg=T('zapEnvio')+'\n\n'+
     d.hospedes.map(function(x,i){return (i===0?'👤 ':'• ')+x.nome+' — '+x.cpf;}).join('\n')+

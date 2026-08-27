@@ -2482,7 +2482,7 @@ function renumerateGuests() {
   });
 }
 
-addGuestBtn.addEventListener('click', addGuestRow);
+if (addGuestBtn) addGuestBtn.addEventListener('click', addGuestRow);
 
 function maskCPF(e) {
   let v = e.target.value.replace(/\D/g, '').slice(0, 11);
