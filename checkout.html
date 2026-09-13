@@ -118,7 +118,6 @@ footer b{color:var(--amber);}
 <script>
 var WPP='5562982545453';
 var ENDPOINT='https://loftcare-os.vercel.app/api/public/checkout';
-var TOKEN='COLE_O_TOKEN_AQUI';
 
 var UNITS={
   'ADL-103A':{nome:'Aldeia do Lago · 103A', chave:'Deixar a chave no local combinado'},
@@ -131,6 +130,8 @@ var UNITS={
   'SM-504T' :{nome:'Metropolitan Sidney · 504T', chave:'Cartão de energia deixado na porta'},
   'SM-1202O':{nome:'Metropolitan Sidney · 1202O', chave:'Cartão de energia deixado na porta'},
   'QS-1310' :{nome:'QS Marista · Suíte 1310', chave:'Cartão de acesso devolvido na recepção'},
+  'QS-1701' :{nome:'QS Marista · Suíte 1701', chave:'Cartão magnético devolvido na recepção'},
+  'QS-402'  :{nome:'QS Marista · Suíte 402', chave:'Cartão magnético devolvido na recepção'},
   'WB-2903' :{nome:'Walk Bueno · Duplex 2903', chave:'Controle da garagem devolvido na mesa de espelhos do hall'},
   'CP-1113' :{nome:'Crystal Place · Flat 1113', chave:'Cartão magnético devolvido na recepção'},
   'CP-1313' :{nome:'Crystal Place · Flat 1313', chave:'Chave devolvida na recepção'},
@@ -179,7 +180,7 @@ function enviarSistema(){
     fetch(ENDPOINT,{
       method:'POST', keepalive:true,
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ token:TOKEN, unidade:UCODE })
+      body: JSON.stringify({ unidade:UCODE })
     }).catch(function(){});
   }catch(e){}
 }
