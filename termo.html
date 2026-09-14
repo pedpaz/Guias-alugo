@@ -89,6 +89,9 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 .hosp .cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .hosp .cab b{font-family:Fraunces;font-size:16px;font-weight:600}
 .hosp .rm{font-size:12px;font-weight:700;color:var(--alerta)}
+.doctipo{display:inline-flex;gap:4px;padding:3px;border-radius:999px;background:var(--campo);border:1px solid var(--linha);margin-bottom:8px}
+.doctipo button{padding:5px 13px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--tinta-2)}
+.doctipo button.on{background:var(--tinta);color:#fff}
 .hosp .crianca{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--tinta-2);margin:-4px 0 4px;cursor:pointer}
 .hosp .crianca input{width:19px;height:19px;accent-color:var(--verde);margin:0}
 .addh{width:100%;padding:14px;border:1.5px dashed var(--verde-cl);border-radius:14px;color:var(--verde-esc);
@@ -296,8 +299,9 @@ var TXT = {
   e1h:"Quem vai se hospedar",
   e1lead:"Preencha os dados de todos os hóspedes, inclusive crianças. É com esta lista que o prédio libera a entrada — quem não estiver aqui não entra.",
   hospTit:"Hóspede", titularTit:"Titular da reserva",
-  lNome:"Nome completo", lCpf:"CPF ou passaporte", lTel:"Celular com DDD",
-  phNome:"como está no documento", phCpf:"000.000.000-00 ou nº do passaporte", phTel:"(62) 9 9999-9999",
+  lNome:"Nome completo", lDoc:"Documento", passaporte:"Passaporte", lTel:"Celular com DDD",
+  phNome:"como está no documento", phPass:"número do passaporte", phTel:"(62) 9 9999-9999",
+  errPass:"Informe o número do passaporte.",
   crianca:"É criança (documento opcional)",
   addHosp:"+ Adicionar hóspede", remover:"remover",
   limite:"Esta unidade comporta até {capacidade} pessoa(s).",
@@ -331,8 +335,9 @@ var TXT = {
   e1h:"Who is staying",
   e1lead:"Fill in the details of every guest, children included. The building uses this list to let you in — anyone not listed cannot come in.",
   hospTit:"Guest", titularTit:"Main guest",
-  lNome:"Full name", lCpf:"ID or passport number", lTel:"Mobile number",
-  phNome:"as it appears on your document", phCpf:"document or passport number", phTel:"+1 555 000 0000",
+  lNome:"Full name", lDoc:"Document", passaporte:"Passport", lTel:"Mobile number",
+  phNome:"as it appears on your document", phPass:"passport number", phTel:"+1 555 000 0000",
+  errPass:"Enter the passport number.",
   crianca:"This is a child (document optional)",
   addHosp:"+ Add guest", remover:"remove",
   limite:"This unit sleeps up to {capacidade} guest(s).",
@@ -366,8 +371,9 @@ var TXT = {
   e1h:"Quién se hospeda",
   e1lead:"Completa los datos de todos los huéspedes, incluidos los niños. Con esta lista el edificio libera el ingreso — quien no esté aquí no entra.",
   hospTit:"Huésped", titularTit:"Titular de la reserva",
-  lNome:"Nombre completo", lCpf:"Documento o pasaporte", lTel:"Celular",
-  phNome:"como aparece en el documento", phCpf:"número del documento o pasaporte", phTel:"+54 9 11 0000 0000",
+  lNome:"Nombre completo", lDoc:"Documento", passaporte:"Pasaporte", lTel:"Celular",
+  phNome:"como aparece en el documento", phPass:"número del pasaporte", phTel:"+54 9 11 0000 0000",
+  errPass:"Indica el número del pasaporte.",
   crianca:"Es un niño (documento opcional)",
   addHosp:"+ Añadir huésped", remover:"quitar",
   limite:"Esta unidad admite hasta {capacidade} persona(s).",
@@ -437,29 +443,43 @@ function abrirWhats(waUrl){
 function zap(txt){ abrirWhats('https://wa.me/'+WHATS+'?text='+encodeURIComponent(txt)); }
 
 /* ================= HOSPEDES ================= */
+var DOC = [];   /* tipo de documento por hóspede: 'cpf' | 'pass' */
 function lerHosp(){
   var v=[];
   for(var i=0;i<NH;i++){
     var n=document.getElementById('h_nome_'+i), c=document.getElementById('h_cpf_'+i), k=document.getElementById('h_cri_'+i), t=document.getElementById('h_tel_'+i);
-    v.push({n:n?n.value:'', c:c?c.value:'', k:k?k.checked:false, t:t?t.value:''});
+    v.push({n:n?n.value:'', c:c?c.value:'', k:k?k.checked:false, t:t?t.value:'', d:DOC[i]||'cpf'});
   }
   return v;
 }
 function esc(s){ return (s||'').replace(/"/g,'&quot;'); }
+/* Máscara do CPF: 000.000.000-00 enquanto digita. */
+function mascaraCpf(el){
+  var d=soDigitos(el.value).slice(0,11), s=d;
+  if(d.length>9) s=d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6,9)+'-'+d.slice(9);
+  else if(d.length>6) s=d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6);
+  else if(d.length>3) s=d.slice(0,3)+'.'+d.slice(3);
+  el.value=s;
+}
+function setDoc(i,tipo){ DOC[i]=tipo; var v=lerHosp(); v[i].c=''; montarHospedes(v); var el=document.getElementById('h_cpf_'+i); if(el) el.focus(); }
 function montarHospedes(vals){
   vals = vals || lerHosp();
   var h='';
   for(var i=0;i<NH;i++){
-    var v=vals[i]||{};
+    var v=vals[i]||{}; var pass=(v.d||DOC[i])==='pass'; DOC[i]=pass?'pass':'cpf';
     h+='<div class="hosp"><div class="cab"><b>'+(i===0?T('titularTit'):T('hospTit')+' '+(i+1))+'</b>'+
        (i>0?'<button class="rm" onclick="rmHosp('+i+')">'+T('remover')+'</button>':'')+'</div>'+
        '<div class="campo" id="c_h_nome_'+i+'"><label>'+T('lNome')+'</label>'+
        '<input type="text" id="h_nome_'+i+'" autocomplete="name" placeholder="'+T('phNome')+'" value="'+esc(v.n)+'">'+
        '<div class="msg">'+T('errNome')+'</div></div>';
     if(i>0) h+='<label class="crianca"><input type="checkbox" id="h_cri_'+i+'"'+(v.k?' checked':'')+' onchange="montarHospedes()"><span>'+T('crianca')+'</span></label>';
-    h+='<div class="campo" id="c_h_cpf_'+i+'"><label>'+T('lCpf')+'</label>'+
-       '<input type="text" id="h_cpf_'+i+'" autocomplete="off" placeholder="'+T('phCpf')+'" value="'+esc(v.c)+'">'+
-       '<div class="msg">'+T('errCpf')+'</div></div>';
+    h+='<div class="campo" id="c_h_cpf_'+i+'"><label>'+T('lDoc')+'</label>'+
+       '<div class="doctipo"><button type="button" class="'+(pass?'':'on')+'" onclick="setDoc('+i+',\'cpf\')">CPF</button>'+
+       '<button type="button" class="'+(pass?'on':'')+'" onclick="setDoc('+i+',\'pass\')">'+T('passaporte')+'</button></div>'+
+       (pass
+         ? '<input type="text" id="h_cpf_'+i+'" autocomplete="off" autocapitalize="characters" placeholder="'+T('phPass')+'" value="'+esc(v.c)+'">'
+         : '<input type="text" id="h_cpf_'+i+'" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" oninput="mascaraCpf(this)" value="'+esc(v.c)+'">')+
+       '<div class="msg">'+(pass?T('errPass'):T('errCpf'))+'</div></div>';
     if(i===0 && U.pede_telefone) h+='<div class="campo" id="c_h_tel_0"><label>'+T('lTel')+'</label>'+
        '<input type="tel" id="h_tel_0" inputmode="tel" autocomplete="tel" placeholder="'+T('phTel')+'" value="'+esc(v.t)+'">'+
        '<div class="msg">'+T('errTel')+'</div></div>';
@@ -469,7 +489,7 @@ function montarHospedes(vals){
   document.querySelector('.addh').style.display = NH>=U.capacidade ? 'none' : '';
 }
 function addHosp(){ if(NH<U.capacidade){ var v=lerHosp(); NH++; montarHospedes(v); } }
-function rmHosp(i){ var v=lerHosp(); v.splice(i,1); NH--; montarHospedes(v); }
+function rmHosp(i){ var v=lerHosp(); v.splice(i,1); DOC.splice(i,1); NH--; montarHospedes(v); }
 
 /* ================= CLAUSULAS E DECLARACOES ================= */
 function montarClausulas(){
@@ -505,8 +525,8 @@ function limparAssin(){ if(ctx){ ctx.clearRect(0,0,cv.width,cv.height); desenhou
 /* ================= VALIDACAO ================= */
 function marcarErro(id,mal){ var c=document.getElementById(id); if(!c) return; c.classList.toggle('mal',!!mal); var i=c.querySelector('input'); if(i) i.classList.toggle('erro',!!mal); }
 function soDigitos(s){ return (s||'').replace(/\D/g,''); }
-/* CPF (11 dígitos, com ou sem pontuação) ou passaporte (tem letras, 5+ caracteres). */
-function docOk(d){ d=(d||'').trim(); if(/[A-Za-z]/.test(d)) return d.replace(/[^A-Za-z0-9]/g,'').length>=5; return soDigitos(d).length===11; }
+/* CPF = 11 dígitos (a máscara cuida da pontuação); passaporte = 5+ letras/números. */
+function docOk(d,tipo){ d=(d||'').trim(); if(tipo==='pass') return d.replace(/[^A-Za-z0-9]/g,'').length>=5; return soDigitos(d).length===11; }
 
 function validar(etapa){
   var primeiro=null;
@@ -516,7 +536,7 @@ function validar(etapa){
       var doc=document.getElementById('h_cpf_'+i).value.trim();
       var cri=i>0 && document.getElementById('h_cri_'+i) && document.getElementById('h_cri_'+i).checked;
       var malN=nome.split(/\s+/).length<2||nome.length<5;
-      var malC=cri ? (doc.length>0 && !docOk(doc)) : !docOk(doc);
+      var malC=cri ? (doc.length>0 && !docOk(doc,DOC[i])) : !docOk(doc,DOC[i]);
       marcarErro('c_h_nome_'+i,malN); marcarErro('c_h_cpf_'+i,malC);
       if(malN&&!primeiro) primeiro='h_nome_'+i;
       if(malC&&!primeiro) primeiro='h_cpf_'+i;
@@ -545,7 +565,7 @@ function validar(etapa){
 
 /* ================= RESUMO ================= */
 function coletar(){
-  var hs=lerHosp().map(function(v){ return {nome:v.n.trim(), cpf:v.c.trim(), crianca:!!v.k}; });
+  var hs=lerHosp().map(function(v){ var o={nome:v.n.trim(), cpf:v.c.trim(), crianca:!!v.k}; if(v.d==='pass'){ o.documento_tipo='passaporte'; o.passaporte=o.cpf; } return o; });
   return {
     hospedes:hs,
     telefone: U.pede_telefone ? soDigitos(document.getElementById('h_tel_0').value) : '',
