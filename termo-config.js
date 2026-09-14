@@ -80,6 +80,16 @@ window.CLAUSULAS = [
         en: "Breaching this incurs a fine of <b>{multa_festa}</b>, plus full repair of any damage and immediate termination of the stay.",
         es: "El incumplimiento genera una multa de <b>{multa_festa}</b>, además de la reparación integral de los daños y del cierre inmediato del hospedaje." }
     ] },
+  { id: "trajes",
+    t: { pt: "Dos trajes de banho", en: "Swimwear", es: "De los trajes de baño" },
+    p: [
+      { pt: "É <b>proibido circular em trajes de banho</b> (biquíni, sunga, maiô, sem camisa) nas dependências do condomínio: portaria, recepção, elevadores, corredores e garagem. Da piscina até o apartamento, use uma saída de banho ou camiseta.",
+        en: "<b>Walking around in swimwear</b> (bikini, trunks, swimsuit, shirtless) is <b>not allowed</b> in the building's common areas: lobby, front desk, lifts, corridors and garage. Between the pool and the apartment, wear a cover-up or a t-shirt.",
+        es: "Está <b>prohibido circular en traje de baño</b> (bikini, bañador, malla, sin camiseta) por las dependencias del condominio: portería, recepción, ascensores, pasillos y cochera. De la piscina al apartamento, usa una salida de baño o una camiseta." },
+      { pt: "Multas aplicadas pelo condomínio por descumprimento serão repassadas integralmente ao hóspede.",
+        en: "Any fine applied by the building for breaching this will be passed on in full to the guest.",
+        es: "Las multas aplicadas por el condominio por incumplimiento se trasladarán íntegramente al huésped." }
+    ] },
   { id: "danos",
     t: { pt: "Da conservação e dos danos", en: "Care and damage", es: "De la conservación y los daños" },
     p: [

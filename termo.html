@@ -98,15 +98,26 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   font-weight:800;font-size:14.5px;background:var(--verde-bg)}
 .lim{font-size:12.5px;color:var(--tinta-2);margin-top:9px;text-align:center}
 
-.ac{border:1px solid var(--linha);border-radius:14px;background:var(--papel);margin-bottom:9px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
-.ac.on{border-color:var(--verde-cl);box-shadow:var(--s1)}
-.ac>button{width:100%;text-align:left;padding:14px 15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14.5px}
-.ac>button i{font-style:normal;color:var(--verde);transition:transform .2s;flex:none}
-.ac.on>button i{transform:rotate(45deg)}
-.ac .corpo{display:none;padding:0 15px 15px;color:var(--tinta-2);font-size:14px}
-.ac.on .corpo{display:block}
-.ac .corpo p{margin:0 0 8px}
-.ac .corpo p:last-child{margin:0}
+/* horários de chegada em botões */
+.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.horas button{padding:11px 4px;border:1px solid var(--linha);border-radius:11px;background:var(--campo);font-size:14.5px;font-weight:700;color:var(--tinta);font-variant-numeric:tabular-nums}
+.horas button.on{background:var(--verde);border-color:var(--verde);color:#fff}
+.horas button.noite{grid-column:span 2;font-size:13px}
+.campo.mal .horas button{border-color:var(--alerta)}
+
+/* regras: todas abertas, leitura corrida */
+.regra{border:1px solid var(--linha);border-radius:14px;background:var(--papel);margin-bottom:9px;padding:13px 15px}
+.regra h3{font-family:Manrope;font-size:14.5px;font-weight:800;margin:0 0 6px;color:var(--tinta)}
+.regra p{margin:0 0 7px;color:var(--tinta-2);font-size:14px;line-height:1.55}
+.regra p:last-child{margin:0}
+.regra.destaque{border-color:#F0B8B4;background:#FFF5F4}
+.regra.destaque h3{color:var(--alerta)}
+.fumar{display:flex;gap:12px;align-items:flex-start;background:var(--alerta);color:#fff;border-radius:14px;padding:14px 15px;margin-bottom:12px;font-size:14px;line-height:1.45}
+.fumar .ico{font-size:26px;line-height:1;flex:none}
+.fumar b{display:block;font-size:15px;margin-bottom:2px}
+.aceita{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:15px 16px;border-radius:16px;background:var(--verde-bg);border:1.5px solid var(--verde-cl);font-size:15px;font-weight:700;cursor:pointer}
+.aceita input{width:22px;height:22px;accent-color:var(--verde);flex:none;margin-top:1px}
+.aceita.mal{border-color:var(--alerta);background:#FEF3F0}
 
 .decl{background:var(--papel);border:1px solid var(--linha);border-radius:16px;padding:6px 16px;margin-bottom:14px;box-shadow:var(--s1)}
 .decl label{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--linha);font-size:14.5px;cursor:pointer}
@@ -214,9 +225,11 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
       </div>
     </div>
     <div class="campo" id="c_hora">
-      <label data-t="lHora"></label><input type="time" id="hora_chegada">
-      <div class="dica" id="dicaHora"></div>
-      <div class="msg" data-t="errObrig"></div>
+      <label data-t="lHora"></label>
+      <input type="hidden" id="hora_chegada">
+      <div class="dica" id="dicaHora" style="margin:0 0 8px"></div>
+      <div class="horas" id="horas"></div>
+      <div class="msg" data-t="errHora"></div>
     </div>
     <div class="campo hide" id="c_placa">
       <label data-t="lPlaca"></label>
@@ -227,7 +240,9 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   <section class="etapa" id="e3">
     <h2 data-t="e3h"></h2>
     <p class="lead" id="e3lead"></p>
+    <div class="fumar"><span class="ico">🚭</span><div><b data-t="fumarTit"></b><span id="fumarTxt"></span></div></div>
     <div id="clausulas"></div>
+    <label class="aceita" id="aceitaBox"><input type="checkbox" id="aceitaRegras"><span data-t="aceitaRegras"></span></label>
   </section>
 
   <section class="etapa" id="e4">
@@ -309,7 +324,10 @@ var TXT = {
   e2placa:" Se vier de carro, informe a placa — o prédio precisa identificar o veículo.",
   lIn:"Check-in", lOut:"Check-out", lHora:"Horário previsto de chegada", dicaHora:"Check-in a partir das {checkin}.",
   lPlaca:"Placa do veículo (opcional)", phPlaca:"ABC1D23",
-  e3h:"Regras da estadia", e3lead:"{n} cláusulas, curtas. Toque para ler cada uma — ao avançar, você declara estar de acordo com todas.",
+  e3h:"Regras da estadia", e3lead:"Leia com atenção: são {n} regras curtas. No final, confirme que está de acordo com todas.",
+  fumarTit:"Proibido fumar dentro do apartamento", fumarTxt:"Inclui cigarro eletrônico, varanda e banheiro. Multa de {multa_fumar} mais higienização.",
+  aceitaRegras:"Li e estou de acordo com todas as regras da estadia.", errRegras:"Marque que está de acordo com as regras para continuar.",
+  meiaNoite:"Depois da meia-noite", errHora:"Escolha o horário previsto de chegada.",
   e4h:"Declarações e assinatura", e4lead:"Marque as declarações e assine com o dedo no quadro abaixo.",
   lAssin:"Assinatura do titular", assinDica:"Assine com o dedo", assinLimpar:"limpar",
   resumoH:"Confira antes de enviar", rTitular:"Titular", rHospedes:"Hóspedes", rDatas:"Período", rHora:"Chegada prevista", rPlaca:"Veículo", rTel:"Celular", rUnidade:"Unidade",
@@ -345,7 +363,10 @@ var TXT = {
   e2placa:" If you're coming by car, add the plate — the building needs to identify the vehicle.",
   lIn:"Check-in", lOut:"Check-out", lHora:"Estimated arrival time", dicaHora:"Check-in from {checkin}.",
   lPlaca:"Vehicle plate (optional)", phPlaca:"ABC1D23",
-  e3h:"Stay rules", e3lead:"{n} short clauses. Tap to read each one — by continuing, you declare you agree with all of them.",
+  e3h:"Stay rules", e3lead:"Please read carefully: {n} short rules. At the end, confirm you agree with all of them.",
+  fumarTit:"No smoking inside the apartment", fumarTxt:"Includes e-cigarettes, balcony and bathroom. {multa_fumar} fine plus deep cleaning.",
+  aceitaRegras:"I have read and agree with all the stay rules.", errRegras:"Tick that you agree with the rules to continue.",
+  meiaNoite:"After midnight", errHora:"Choose your estimated arrival time.",
   e4h:"Declarations and signature", e4lead:"Tick the declarations and sign with your finger in the box below.",
   lAssin:"Main guest's signature", assinDica:"Sign with your finger", assinLimpar:"clear",
   resumoH:"Check before sending", rTitular:"Main guest", rHospedes:"Guests", rDatas:"Dates", rHora:"Estimated arrival", rPlaca:"Vehicle", rTel:"Mobile", rUnidade:"Unit",
@@ -381,7 +402,10 @@ var TXT = {
   e2placa:" Si vienes en coche, indica la patente — el edificio necesita identificar el vehículo.",
   lIn:"Check-in", lOut:"Check-out", lHora:"Horario previsto de llegada", dicaHora:"Check-in a partir de las {checkin}.",
   lPlaca:"Patente del vehículo (opcional)", phPlaca:"ABC1D23",
-  e3h:"Reglas de la estadía", e3lead:"{n} cláusulas, cortas. Toca para leer cada una — al continuar, declaras estar de acuerdo con todas.",
+  e3h:"Reglas de la estadía", e3lead:"Lee con atención: son {n} reglas cortas. Al final, confirma que estás de acuerdo con todas.",
+  fumarTit:"Prohibido fumar dentro del apartamento", fumarTxt:"Incluye cigarrillo electrónico, balcón y baño. Multa de {multa_fumar} más higienización.",
+  aceitaRegras:"Leí y estoy de acuerdo con todas las reglas de la estadía.", errRegras:"Marca que estás de acuerdo con las reglas para continuar.",
+  meiaNoite:"Después de la medianoche", errHora:"Elige el horario previsto de llegada.",
   e4h:"Declaraciones y firma", e4lead:"Marca las declaraciones y firma con el dedo en el recuadro de abajo.",
   lAssin:"Firma del titular", assinDica:"Firma con el dedo", assinLimpar:"borrar",
   resumoH:"Revisa antes de enviar", rTitular:"Titular", rHospedes:"Huéspedes", rDatas:"Período", rHora:"Llegada prevista", rPlaca:"Vehículo", rTel:"Celular", rUnidade:"Unidad",
@@ -424,9 +448,28 @@ function clausulasAtuais(){
   var todas=base.concat(extras);
   return todas.map(function(c,i){
     var t=tx(c.t), ps=(c.p||[]).map(function(p){return fill(tx(p));}).filter(function(p){return p;});
-    return {t:(i+1)+' · '+fill(t), p:ps};
+    return {id:c.id||'', t:(i+1)+' · '+fill(t), p:ps};
   });
 }
+
+/* ================= HORÁRIO DE CHEGADA (botões a partir do check-in do apê) ================= */
+function horaCheckin(){ var m=/(\d{1,2})(?::?(\d{2}))?/.exec(String(U.checkin||'15h')); return m?[+m[1], +(m[2]||0)]:[15,0]; }
+function montarHoras(){
+  var ini=horaCheckin(), h=ini[0], mi=ini[1]>=30?30:0, atual=document.getElementById('hora_chegada').value, html='';
+  while(h<24){
+    var v=(h<10?'0':'')+h+':'+(mi?'30':'00');
+    html+='<button type="button" data-h="'+v+'" class="'+(v===atual?'on':'')+'" onclick="setHora(this)">'+v+'</button>';
+    if(mi){ h++; mi=0; } else mi=30;
+  }
+  html+='<button type="button" data-h="00:00" class="noite '+(atual==='00:00'?'on':'')+'" onclick="setHora(this)">'+T('meiaNoite')+'</button>';
+  document.getElementById('horas').innerHTML=html;
+}
+function setHora(b){
+  document.getElementById('hora_chegada').value=b.dataset.h;
+  [].forEach.call(document.querySelectorAll('#horas button'),function(x){ x.classList.toggle('on',x===b); });
+  marcarErro('c_hora',false);
+}
+function horaTexto(v){ return v==='00:00' ? T('meiaNoite') : v; }
 function declAtuais(){
   var base=T('decl').slice();
   (U.decl_extra||[]).forEach(function(d){ base.splice(base.length-1,0,fill(tx(d))); });
@@ -494,9 +537,10 @@ function rmHosp(i){ var v=lerHosp(); v.splice(i,1); DOC.splice(i,1); NH--; monta
 /* ================= CLAUSULAS E DECLARACOES ================= */
 function montarClausulas(){
   document.getElementById('clausulas').innerHTML = clausulasAtuais().map(function(c){
-    return '<div class="ac"><button onclick="this.parentNode.classList.toggle(\'on\')"><span>'+c.t+'</span><i>+</i></button>'+
-      '<div class="corpo">'+c.p.map(function(x){return '<p>'+x+'</p>';}).join('')+'</div></div>';
+    return '<div class="regra'+(c.id==='fumar'||c.id==='festas'||c.id==='trajes'?' destaque':'')+'"><h3>'+c.t+'</h3>'+
+      c.p.map(function(x){return '<p>'+x+'</p>';}).join('')+'</div>';
   }).join('');
+  document.getElementById('fumarTxt').innerHTML=T('fumarTxt');
 }
 function montarDecl(){
   var marcados=[].slice.call(document.querySelectorAll('#declBox input')).map(function(i){return i.checked;});
@@ -550,7 +594,12 @@ function validar(etapa){
     var ci=document.getElementById('check_in').value, co=document.getElementById('check_out').value, ho=document.getElementById('hora_chegada').value;
     var malI=!ci, malO=!co||(ci&&co<=ci), malH=!ho;
     marcarErro('c_in',malI); marcarErro('c_out',malO); marcarErro('c_hora',malH);
-    if(malI&&!primeiro) primeiro='check_in'; if(malO&&!primeiro) primeiro='check_out'; if(malH&&!primeiro) primeiro='hora_chegada';
+    if(malI&&!primeiro) primeiro='check_in'; if(malO&&!primeiro) primeiro='check_out'; if(malH&&!primeiro) primeiro='horas';
+  }
+  if(etapa===3){
+    var ok=document.getElementById('aceitaRegras').checked;
+    document.getElementById('aceitaBox').classList.toggle('mal',!ok);
+    if(!ok){ aviso(T('errRegras')); primeiro='aceitaBox'; }
   }
   if(etapa===4){
     var todos=[].slice.call(document.querySelectorAll('#declBox input'));
@@ -582,7 +631,7 @@ function montarResumo(){
     '<dt>'+T('rTitular')+'</dt><dd>'+(d.hospedes[0]?d.hospedes[0].nome:'')+'</dd>';
   if(d.telefone) h+='<dt>'+T('rTel')+'</dt><dd>'+d.telefone+'</dd>';
   if(d.hospedes.length>1) h+='<dt>'+T('rHospedes')+'</dt><dd>'+d.hospedes.slice(1).map(function(x){return x.nome;}).join('<br>')+'</dd>';
-  h+='<dt>'+T('rDatas')+'</dt><dd>'+fmt(d.check_in)+' → '+fmt(d.check_out)+'</dd><dt>'+T('rHora')+'</dt><dd>'+(d.hora_chegada||'—')+'</dd>';
+  h+='<dt>'+T('rDatas')+'</dt><dd>'+fmt(d.check_in)+' → '+fmt(d.check_out)+'</dd><dt>'+T('rHora')+'</dt><dd>'+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+'</dd>';
   if(d.placa) h+='<dt>'+T('rPlaca')+'</dt><dd>'+d.placa+'</dd>';
   h+='</dl></div>';
   document.getElementById('resumoBox').innerHTML=h;
@@ -601,7 +650,7 @@ function enviar(){
   if(d.telefone) titular.telefone=d.telefone;
   var payload={
     unidade:U.code, tipo:'termo', idioma:L,
-    check_in:d.check_in, check_out:d.check_out, hora_chegada:d.hora_chegada,
+    check_in:d.check_in, check_out:d.check_out, hora_chegada:d.hora_chegada, hora_chegada_texto:horaTexto(d.hora_chegada),
     titular:titular,
     hospedes:d.hospedes.slice(1),
     qtd_hospedes:d.hospedes.length, telefone:d.telefone||undefined,
@@ -613,7 +662,7 @@ function enviar(){
   var msg=T('zapEnvio')+'\n\n'+
     d.hospedes.map(function(x,i){return (i===0?'👤 ':'• ')+x.nome+' — '+(x.cpf||(x.crianca?'criança':'—'));}).join('\n')+
     (d.telefone?'\n📱 '+d.telefone:'')+
-    '\n\n📅 '+fmt(d.check_in)+' → '+fmt(d.check_out)+'\n🕒 '+(d.hora_chegada||'—')+
+    '\n\n📅 '+fmt(d.check_in)+' → '+fmt(d.check_out)+'\n🕒 '+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+
     (d.placa?'\n🚗 '+d.placa:'')+'\n\n✅ Regras aceitas e termo assinado.';
   mostrar(5);
   setTimeout(function(){ zap(msg); },600);
@@ -654,7 +703,7 @@ function aplicarIdioma(){
   document.getElementById('okP').textContent=T('okP');
   document.getElementById('c_placa').classList.toggle('hide',!U.pede_placa);
   var g=document.getElementById('okGuia'); if(U.guia){ g.href=BASE+U.guia; g.classList.remove('hide'); } else g.classList.add('hide');
-  montarHospedes(); montarClausulas(); montarDecl();
+  montarHospedes(); montarHoras(); montarClausulas(); montarDecl();
   [].forEach.call(document.querySelectorAll('.lang button'),function(b){ b.classList.toggle('on',b.dataset.l===L); });
   mostrar(ETAPA);
 }
