@@ -105,8 +105,10 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 .rel-tit{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:10px}
 .rel-mostra{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:4px}
 .rel-mostra span{font-size:40px;font-weight:700;color:var(--tinta-2)}
-.rel-mostra button{min-width:88px;padding:6px 10px;border-radius:12px;font-size:44px;font-weight:700;line-height:1;color:var(--tinta);background:var(--campo);font-variant-numeric:tabular-nums}
-.rel-mostra button.on{background:var(--verde);color:#fff}
+.rel-mostra input{width:96px;padding:6px 10px;border:2px solid transparent;border-radius:12px;font-family:inherit;font-size:44px;font-weight:700;line-height:1;text-align:center;color:var(--tinta);background:var(--campo);font-variant-numeric:tabular-nums;outline:none}
+.rel-mostra input.on{background:var(--verde);color:#fff}
+.rel-mostra input.on::placeholder{color:rgba(255,255,255,.7)}
+.rel-mostra input:focus{border-color:var(--verde-esc)}
 .rel-dica{text-align:center;font-size:12.5px;color:var(--tinta-3);min-height:18px;margin-bottom:6px}
 .rel-dial{position:relative;width:260px;height:260px;margin:0 auto 8px;border-radius:50%;background:var(--campo)}
 .rel-dial button{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;font-size:14.5px;font-weight:700;color:var(--tinta);display:flex;align-items:center;justify-content:center;z-index:2;font-variant-numeric:tabular-nums}
@@ -296,7 +298,7 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   <div class="rel" role="dialog" aria-modal="true" aria-labelledby="relTit">
     <div class="rel-tit" id="relTit" data-t="relTit"></div>
     <div class="rel-mostra">
-      <button type="button" id="relH" class="on" onclick="relModo('h')">--</button><span>:</span><button type="button" id="relM" onclick="relModo('m')">--</button>
+      <input id="relH" class="on" inputmode="numeric" maxlength="2" placeholder="--" autocomplete="off" onfocus="relModo('h');this.select()" oninput="relDigita('h',this)"><span>:</span><input id="relM" inputmode="numeric" maxlength="2" placeholder="--" autocomplete="off" onfocus="relModo('m');this.select()" oninput="relDigita('m',this)">
     </div>
     <div class="rel-dica" id="relDica"></div>
     <div class="rel-dial" id="relDial"><div class="rel-ponteiro" id="relPont"></div><div class="rel-centro"></div></div>
@@ -512,34 +514,47 @@ function abrirRelogio(id,tipo){
 }
 function fecharRelogio(ok){
   if(ok){
-    if(REL.h==null){ REL.modo='h'; relDesenhar(); return; }
+    if(REL.h==null){ REL.modo='h'; relDesenhar(); document.getElementById('relH').focus(); return; }
     if(REL.m==null) REL.m=0;
-    document.getElementById(REL.campo).value=(REL.h<10?'0':'')+REL.h+':'+(REL.m<10?'0':'')+REL.m;
-    marcarErro(REL.campo==='hora_chegada'?'c_hora':'c_saida',false);
+    var v=(REL.h<10?'0':'')+REL.h+':'+(REL.m<10?'0':'')+REL.m, campo=REL.campo;
+    document.getElementById(campo).value=v;
+    /* Relógio é livre; se o horário fere a regra do apê, o campo já fica vermelho com o motivo. */
+    var chegada=campo==='hora_chegada', mal=chegada?!chegadaOk(v):!saidaOk(v);
+    document.getElementById(chegada?'msgHora':'msgSaida').textContent=chegada?T('errHoraMin'):T('errHoraMax');
+    marcarErro(chegada?'c_hora':'c_saida',mal);
   }
   document.getElementById('relFundo').classList.add('hide');
 }
 function relModo(m){ REL.modo=m; relDesenhar(); }
-function relSetH(h){ REL.h=h; if(REL.m!=null && !minutoPermitido(h,REL.m)) REL.m=null; REL.modo='m'; relDesenhar(); }
+function relSetH(h){ REL.h=h; REL.modo='m'; relDesenhar(); }
 function relSetM(m){ REL.m=m; relDesenhar(); }
+/* Digitou no quadrado de cima: aceita só números, limita 0-23 / 0-59 e reflete no mostrador. */
+function relDigita(tipo,el){
+  var d=soDigitos(el.value).slice(0,2); el.value=d;
+  if(d===''){ if(tipo==='h') REL.h=null; else REL.m=null; relDesenhar(); return; }
+  var n=+d, max=tipo==='h'?23:59; if(n>max){ n=max; el.value=String(n); }
+  if(tipo==='h') REL.h=n; else REL.m=n;
+  relDesenhar();
+  if(tipo==='h' && (d.length===2 || n>2)) document.getElementById('relM').focus();
+}
 function relPos(i,r){ var a=(i/12)*2*Math.PI-Math.PI/2; return {x:130+r*Math.cos(a), y:130+r*Math.sin(a)}; }
 function relDesenhar(){
-  var html='', ang=0, len=0;
-  document.getElementById('relH').textContent=REL.h==null?'--':(REL.h<10?'0':'')+REL.h;
-  document.getElementById('relM').textContent=REL.m==null?'--':(REL.m<10?'0':'')+REL.m;
-  document.getElementById('relH').classList.toggle('on',REL.modo==='h');
-  document.getElementById('relM').classList.toggle('on',REL.modo==='m');
+  var html='', ang=0, len=0, eH=document.getElementById('relH'), eM=document.getElementById('relM');
+  /* Não reescreve o quadrado em que a pessoa está digitando. */
+  if(document.activeElement!==eH) eH.value=REL.h==null?'':(REL.h<10?'0':'')+REL.h;
+  if(document.activeElement!==eM) eM.value=REL.m==null?'':(REL.m<10?'0':'')+REL.m;
+  eH.classList.toggle('on',REL.modo==='h'); eM.classList.toggle('on',REL.modo==='m');
   if(REL.modo==='h'){
-    /* anel de fora: 1 a 12 · anel de dentro: 13 a 23 e 00 (igual ao Android) */
+    /* anel de fora: 1 a 12 · anel de dentro: 13 a 23 e 00 (igual ao Android). Livre — a regra do apê é conferida depois. */
     for(var h=0;h<24;h++){
       var ext=h>=1&&h<=12, p=relPos(h%12, ext?105:68), lbl=ext?String(h):((h<10?'0':'')+h);
-      html+='<button type="button" class="'+(ext?'':'int')+(REL.h===h?' on':'')+'" style="left:'+p.x.toFixed(1)+'px;top:'+p.y.toFixed(1)+'px"'+(horaPermitida(h)?'':' disabled')+' onclick="relSetH('+h+')">'+lbl+'</button>';
+      html+='<button type="button" class="'+(ext?'':'int')+(REL.h===h?' on':'')+'" style="left:'+p.x.toFixed(1)+'px;top:'+p.y.toFixed(1)+'px" onclick="relSetH('+h+')">'+lbl+'</button>';
     }
     if(REL.h!=null){ ang=(REL.h%12)*30; len=(REL.h>=1&&REL.h<=12)?105:68; }
   } else {
     for(var i=0;i<12;i++){
-      var m=i*5, q=relPos(i,105), ok=REL.h!=null&&minutoPermitido(REL.h,m);
-      html+='<button type="button" class="'+(REL.m===m?'on':'')+'" style="left:'+q.x.toFixed(1)+'px;top:'+q.y.toFixed(1)+'px"'+(ok?'':' disabled')+' onclick="relSetM('+m+')">'+(m<10?'0':'')+m+'</button>';
+      var m=i*5, q=relPos(i,105);
+      html+='<button type="button" class="'+(REL.m===m?'on':'')+'" style="left:'+q.x.toFixed(1)+'px;top:'+q.y.toFixed(1)+'px" onclick="relSetM('+m+')">'+(m<10?'0':'')+m+'</button>';
     }
     if(REL.m!=null){ ang=(REL.m/5)*30; len=105; }
   }
