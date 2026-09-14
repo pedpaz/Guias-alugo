@@ -291,7 +291,7 @@ var U = null;
 /* ================= TEXTOS FIXOS (iguais pra todos os apês) ================= */
 var TXT = {
  pt:{
-  heroRot:"Check-in online", tituloPag:"Boas-vindas", subPag:"{predio} · {unidade} · {bairro}",
+  heroRot:"Check-in online", tituloPag:"Boas-vindas", subPag:"{endereco}",
   passos:["Hóspedes","Reserva","Regras","Assinatura"],
   e1h:"Quem vai se hospedar",
   e1lead:"Preencha os dados de todos os hóspedes, inclusive crianças. É com esta lista que o prédio libera a entrada — quem não estiver aqui não entra.",
@@ -326,7 +326,7 @@ var TXT = {
   ]
  },
  en:{
-  heroRot:"Online check-in", tituloPag:"Welcome", subPag:"{predio} · {unidade} · {bairro}",
+  heroRot:"Online check-in", tituloPag:"Welcome", subPag:"{endereco}",
   passos:["Guests","Booking","Rules","Signature"],
   e1h:"Who is staying",
   e1lead:"Fill in the details of every guest, children included. The building uses this list to let you in — anyone not listed cannot come in.",
@@ -361,7 +361,7 @@ var TXT = {
   ]
  },
  es:{
-  heroRot:"Check-in online", tituloPag:"Bienvenidos", subPag:"{predio} · {unidade} · {bairro}",
+  heroRot:"Check-in online", tituloPag:"Bienvenidos", subPag:"{endereco}",
   passos:["Huéspedes","Reserva","Reglas","Firma"],
   e1h:"Quién se hospeda",
   e1lead:"Completa los datos de todos los huéspedes, incluidos los niños. Con esta lista el edificio libera el ingreso — quien no esté aquí no entra.",
@@ -505,7 +505,8 @@ function limparAssin(){ if(ctx){ ctx.clearRect(0,0,cv.width,cv.height); desenhou
 /* ================= VALIDACAO ================= */
 function marcarErro(id,mal){ var c=document.getElementById(id); if(!c) return; c.classList.toggle('mal',!!mal); var i=c.querySelector('input'); if(i) i.classList.toggle('erro',!!mal); }
 function soDigitos(s){ return (s||'').replace(/\D/g,''); }
-function docOk(d){ d=(d||'').trim(); if(d.length<5) return false; var n=soDigitos(d); if(n.length===d.length) return n.length===11; return /[A-Za-z]/.test(d) && d.replace(/[^A-Za-z0-9]/g,'').length>=5; }
+/* CPF (11 dígitos, com ou sem pontuação) ou passaporte (tem letras, 5+ caracteres). */
+function docOk(d){ d=(d||'').trim(); if(/[A-Za-z]/.test(d)) return d.replace(/[^A-Za-z0-9]/g,'').length>=5; return soDigitos(d).length===11; }
 
 function validar(etapa){
   var primeiro=null;
