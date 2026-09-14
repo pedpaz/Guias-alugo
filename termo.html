@@ -98,12 +98,26 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   font-weight:800;font-size:14.5px;background:var(--verde-bg)}
 .lim{font-size:12.5px;color:var(--tinta-2);margin-top:9px;text-align:center}
 
-/* horários de chegada em botões */
-.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.horas button{padding:11px 4px;border:1px solid var(--linha);border-radius:11px;background:var(--campo);font-size:14.5px;font-weight:700;color:var(--tinta);font-variant-numeric:tabular-nums}
-.horas button.on{background:var(--verde);border-color:var(--verde);color:#fff}
-.horas button.noite{grid-column:span 2;font-size:13px}
-.campo.mal .horas button{border-color:var(--alerta)}
+/* relógio redondo */
+.relogio-campo{cursor:pointer;font-variant-numeric:tabular-nums;font-weight:700;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235E645F' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:20px}
+.rel-fundo{position:fixed;inset:0;z-index:900;background:rgba(16,22,19,.55);display:flex;align-items:flex-end;justify-content:center;padding:0 12px calc(12px + env(safe-area-inset-bottom))}
+.rel{width:100%;max-width:340px;background:var(--creme);border-radius:22px;padding:18px 18px 12px;box-shadow:var(--s3);animation:sobe .2s ease}
+.rel-tit{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:10px}
+.rel-mostra{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:4px}
+.rel-mostra span{font-size:40px;font-weight:700;color:var(--tinta-2)}
+.rel-mostra button{min-width:88px;padding:6px 10px;border-radius:12px;font-size:44px;font-weight:700;line-height:1;color:var(--tinta);background:var(--campo);font-variant-numeric:tabular-nums}
+.rel-mostra button.on{background:var(--verde);color:#fff}
+.rel-dica{text-align:center;font-size:12.5px;color:var(--tinta-3);min-height:18px;margin-bottom:6px}
+.rel-dial{position:relative;width:260px;height:260px;margin:0 auto 8px;border-radius:50%;background:var(--campo)}
+.rel-dial button{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;font-size:14.5px;font-weight:700;color:var(--tinta);display:flex;align-items:center;justify-content:center;z-index:2;font-variant-numeric:tabular-nums}
+.rel-dial button.int{font-size:12.5px;color:var(--tinta-2)}
+.rel-dial button.on{background:var(--verde);color:#fff}
+.rel-dial button[disabled]{color:#C9CBC5;cursor:default}
+.rel-ponteiro{position:absolute;left:50%;top:50%;width:2px;height:0;background:var(--verde);transform-origin:top center;z-index:1}
+.rel-centro{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--verde);z-index:1}
+.rel-botoes{display:flex;justify-content:flex-end;gap:6px}
+.rel-botoes button{padding:11px 18px;border-radius:12px;font-weight:800;color:var(--tinta-2)}
+.rel-botoes button.ok{background:var(--verde);color:#fff}
 
 /* regras: todas abertas, leitura corrida */
 .regra{border:1px solid var(--linha);border-radius:14px;background:var(--papel);margin-bottom:9px;padding:13px 15px}
@@ -220,7 +234,8 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
         <div class="msg" data-t="errObrig"></div>
       </div>
       <div class="campo" id="c_hora">
-        <label data-t="lHora"></label><input type="time" id="hora_chegada" step="300">
+        <label data-t="lHora"></label>
+        <input type="text" id="hora_chegada" readonly inputmode="none" placeholder="--:--" class="relogio-campo" onclick="abrirRelogio('hora_chegada','chegada')">
         <div class="dica" id="dicaHora"></div>
         <div class="msg" id="msgHora"></div>
       </div>
@@ -231,7 +246,8 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
         <div class="msg" data-t="errData"></div>
       </div>
       <div class="campo" id="c_saida">
-        <label data-t="lSaida"></label><input type="time" id="hora_saida" step="300">
+        <label data-t="lSaida"></label>
+        <input type="text" id="hora_saida" readonly inputmode="none" placeholder="--:--" class="relogio-campo" onclick="abrirRelogio('hora_saida','saida')">
         <div class="dica" id="dicaSaida"></div>
         <div class="msg" id="msgSaida"></div>
       </div>
@@ -274,6 +290,22 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   </div>
   <div class="rodape"><img src="assets/alugo.png" alt="aluGO"><span data-t="rodape"></span></div>
 </main>
+
+<!-- Relógio redondo (estilo Android): escolhe a hora no mostrador, depois os minutos. -->
+<div class="rel-fundo hide" id="relFundo" onclick="if(event.target===this)fecharRelogio(false)">
+  <div class="rel" role="dialog" aria-modal="true" aria-labelledby="relTit">
+    <div class="rel-tit" id="relTit" data-t="relTit"></div>
+    <div class="rel-mostra">
+      <button type="button" id="relH" class="on" onclick="relModo('h')">--</button><span>:</span><button type="button" id="relM" onclick="relModo('m')">--</button>
+    </div>
+    <div class="rel-dica" id="relDica"></div>
+    <div class="rel-dial" id="relDial"><div class="rel-ponteiro" id="relPont"></div><div class="rel-centro"></div></div>
+    <div class="rel-botoes">
+      <button type="button" onclick="fecharRelogio(false)" data-t="btCancelar"></button>
+      <button type="button" class="ok" onclick="fecharRelogio(true)">OK</button>
+    </div>
+  </div>
+</div>
 
 <nav class="nav" id="navBar"><div class="in">
   <button class="volta hide" id="btVolta" onclick="voltar()" data-t="btVolta"></button>
@@ -331,6 +363,7 @@ var TXT = {
   e3h:"Regras da estadia", e3lead:"Leia com atenção: são {n} regras curtas. No final, confirme que está de acordo com todas.",
   fumarTit:"Proibido fumar dentro do apartamento", fumarTxt:"Inclui cigarro eletrônico, varanda e banheiro. Multa de {multa_fumar} mais higienização.",
   meiaNoite:"Depois da meia-noite", lSaida:"Horário previsto de saída", dicaSaida:"Check-out até as {checkout}.",
+  relTit:"Selecione o horário", btCancelar:"Cancelar",
   errHoraMin:"O check-in é a partir das {checkin}.", errHoraMax:"O check-out é até as {checkout}.",
   e4h:"Declarações e assinatura", e4lead:"Marque as declarações e assine com o dedo no quadro abaixo.",
   lAssin:"Assinatura do titular", assinDica:"Assine com o dedo", assinLimpar:"limpar",
@@ -370,6 +403,7 @@ var TXT = {
   e3h:"Stay rules", e3lead:"Please read carefully: {n} short rules. At the end, confirm you agree with all of them.",
   fumarTit:"No smoking inside the apartment", fumarTxt:"Includes e-cigarettes, balcony and bathroom. {multa_fumar} fine plus deep cleaning.",
   meiaNoite:"After midnight", lSaida:"Estimated departure time", dicaSaida:"Check-out by {checkout}.",
+  relTit:"Select the time", btCancelar:"Cancel",
   errHoraMin:"Check-in is from {checkin}.", errHoraMax:"Check-out is by {checkout}.",
   e4h:"Declarations and signature", e4lead:"Tick the declarations and sign with your finger in the box below.",
   lAssin:"Main guest's signature", assinDica:"Sign with your finger", assinLimpar:"clear",
@@ -409,6 +443,7 @@ var TXT = {
   e3h:"Reglas de la estadía", e3lead:"Lee con atención: son {n} reglas cortas. Al final, confirma que estás de acuerdo con todas.",
   fumarTit:"Prohibido fumar dentro del apartamento", fumarTxt:"Incluye cigarrillo electrónico, balcón y baño. Multa de {multa_fumar} más higienización.",
   meiaNoite:"Después de la medianoche", lSaida:"Horario previsto de salida", dicaSaida:"Check-out hasta las {checkout}.",
+  relTit:"Elige el horario", btCancelar:"Cancelar",
   errHoraMin:"El check-in es a partir de las {checkin}.", errHoraMax:"El check-out es hasta las {checkout}.",
   e4h:"Declaraciones y firma", e4lead:"Marca las declaraciones y firma con el dedo en el recuadro de abajo.",
   lAssin:"Firma del titular", assinDica:"Firma con el dedo", assinLimpar:"borrar",
@@ -464,6 +499,53 @@ function horaCheckout(){ return horaNum(U.checkout||'11h'); }
 function chegadaOk(v){ var n=horaNum(v); if(n==null) return false; return n<6*60 || n>=horaCheckin(); }
 function saidaOk(v){ var n=horaNum(v); if(n==null) return false; return n<=horaCheckout(); }
 function horaTexto(v){ var n=horaNum(v); return (n!=null && n<6*60) ? T('meiaNoite')+' ('+v+')' : v; }
+
+/* ================= RELÓGIO REDONDO (hora no mostrador, depois minutos) ================= */
+var REL={campo:null,tipo:null,h:null,m:null,modo:'h'};
+function horaPermitida(h){ if(REL.tipo==='chegada') return h<6 || h*60>=horaCheckin(); return h*60<=horaCheckout(); }
+function minutoPermitido(h,m){ var t=h*60+m; if(REL.tipo==='chegada') return h<6 || t>=horaCheckin(); return t<=horaCheckout(); }
+function abrirRelogio(id,tipo){
+  REL.campo=id; REL.tipo=tipo; var n=horaNum(document.getElementById(id).value);
+  REL.h=n!=null?Math.floor(n/60):null; REL.m=n!=null?n%60:null; REL.modo='h';
+  document.getElementById('relDica').textContent = tipo==='chegada'?T('dicaHora'):T('dicaSaida');
+  document.getElementById('relFundo').classList.remove('hide'); relDesenhar();
+}
+function fecharRelogio(ok){
+  if(ok){
+    if(REL.h==null){ REL.modo='h'; relDesenhar(); return; }
+    if(REL.m==null) REL.m=0;
+    document.getElementById(REL.campo).value=(REL.h<10?'0':'')+REL.h+':'+(REL.m<10?'0':'')+REL.m;
+    marcarErro(REL.campo==='hora_chegada'?'c_hora':'c_saida',false);
+  }
+  document.getElementById('relFundo').classList.add('hide');
+}
+function relModo(m){ REL.modo=m; relDesenhar(); }
+function relSetH(h){ REL.h=h; if(REL.m!=null && !minutoPermitido(h,REL.m)) REL.m=null; REL.modo='m'; relDesenhar(); }
+function relSetM(m){ REL.m=m; relDesenhar(); }
+function relPos(i,r){ var a=(i/12)*2*Math.PI-Math.PI/2; return {x:130+r*Math.cos(a), y:130+r*Math.sin(a)}; }
+function relDesenhar(){
+  var html='', ang=0, len=0;
+  document.getElementById('relH').textContent=REL.h==null?'--':(REL.h<10?'0':'')+REL.h;
+  document.getElementById('relM').textContent=REL.m==null?'--':(REL.m<10?'0':'')+REL.m;
+  document.getElementById('relH').classList.toggle('on',REL.modo==='h');
+  document.getElementById('relM').classList.toggle('on',REL.modo==='m');
+  if(REL.modo==='h'){
+    /* anel de fora: 1 a 12 · anel de dentro: 13 a 23 e 00 (igual ao Android) */
+    for(var h=0;h<24;h++){
+      var ext=h>=1&&h<=12, p=relPos(h%12, ext?105:68), lbl=ext?String(h):((h<10?'0':'')+h);
+      html+='<button type="button" class="'+(ext?'':'int')+(REL.h===h?' on':'')+'" style="left:'+p.x.toFixed(1)+'px;top:'+p.y.toFixed(1)+'px"'+(horaPermitida(h)?'':' disabled')+' onclick="relSetH('+h+')">'+lbl+'</button>';
+    }
+    if(REL.h!=null){ ang=(REL.h%12)*30; len=(REL.h>=1&&REL.h<=12)?105:68; }
+  } else {
+    for(var i=0;i<12;i++){
+      var m=i*5, q=relPos(i,105), ok=REL.h!=null&&minutoPermitido(REL.h,m);
+      html+='<button type="button" class="'+(REL.m===m?'on':'')+'" style="left:'+q.x.toFixed(1)+'px;top:'+q.y.toFixed(1)+'px"'+(ok?'':' disabled')+' onclick="relSetM('+m+')">'+(m<10?'0':'')+m+'</button>';
+    }
+    if(REL.m!=null){ ang=(REL.m/5)*30; len=105; }
+  }
+  html+='<div class="rel-ponteiro" style="height:'+(len?len-18:0)+'px;transform:rotate('+(ang+180)+'deg)"></div><div class="rel-centro"></div>';
+  document.getElementById('relDial').innerHTML=html;
+}
 function declAtuais(){
   var base=T('decl').slice();
   (U.decl_extra||[]).forEach(function(d){ base.splice(base.length-1,0,fill(tx(d))); });
