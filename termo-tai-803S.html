@@ -367,7 +367,7 @@ function enviarCheckinLoftcare(){
     var g=[]; for(var i=1;i<=gc;i++){var n=document.getElementById('nome'+i),cc=document.getElementById('cpf'+i);
       if(n&&n.value.trim())g.push({nome:n.value.trim(),cpf:cc?cc.value.trim():''});}
     var t=g[0]||{};
-    var payload={ token:"COLE_O_TOKEN_AQUI", unidade:"TR-803S", tipo:"termo",
+    var payload={ unidade:"TR-803S", tipo:"termo",
       check_in:(document.getElementById('cin')||{}).value||'',
       check_out:(document.getElementById('cout')||{}).value||'',
       hora_chegada:(document.getElementById('chora')||{}).value||'',
