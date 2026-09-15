@@ -366,7 +366,7 @@ var TXT = {
   e4h:"Declarações e assinatura", e4lead:"Marque as declarações e assine com o dedo no quadro abaixo.",
   lAssin:"Assinatura do titular", assinDica:"Assine com o dedo", assinLimpar:"limpar",
   resumoH:"Confira antes de enviar", rTitular:"Titular", rHospedes:"Hóspedes", rDatas:"Período", rHora:"Chegada prevista", rPlaca:"Veículo", rTel:"Celular", rUnidade:"Unidade",
-  btVolta:"Voltar", btSegue:"Continuar", btEnviar:"Enviar check-in",
+  btVolta:"Voltar", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
   errObrig:"Preencha este campo.", errNome:"Informe o nome completo (nome e sobrenome).", errCpf:"Informe um CPF ou passaporte válido.",
   errTel:"Informe um celular válido, com DDD.", errData:"O check-out precisa ser depois do check-in.", errDecl:"É necessário marcar todas as declarações.", errAssin:"Assine no quadro antes de enviar.",
   okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okZap:"Falar com a aluGO",
@@ -417,7 +417,7 @@ var TXT = {
   e4h:"Declarations and signature", e4lead:"Tick the declarations and sign with your finger in the box below.",
   lAssin:"Main guest's signature", assinDica:"Sign with your finger", assinLimpar:"clear",
   resumoH:"Check before sending", rTitular:"Main guest", rHospedes:"Guests", rDatas:"Dates", rHora:"Estimated arrival", rPlaca:"Vehicle", rTel:"Mobile", rUnidade:"Unit",
-  btVolta:"Back", btSegue:"Continue", btEnviar:"Send check-in",
+  btVolta:"Back", btSegue:"Continue", btEnviar:"Send check-in", btEnviando:"Sending…",
   errObrig:"Please fill in this field.", errNome:"Enter the full name (first and last).", errCpf:"Enter a valid ID or passport number.",
   errTel:"Enter a valid mobile number.", errData:"Check-out must be after check-in.", errDecl:"You need to tick every declaration.", errAssin:"Please sign in the box before sending.",
   okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
@@ -468,7 +468,7 @@ var TXT = {
   e4h:"Declaraciones y firma", e4lead:"Marca las declaraciones y firma con el dedo en el recuadro de abajo.",
   lAssin:"Firma del titular", assinDica:"Firma con el dedo", assinLimpar:"borrar",
   resumoH:"Revisa antes de enviar", rTitular:"Titular", rHospedes:"Huéspedes", rDatas:"Período", rHora:"Llegada prevista", rPlaca:"Vehículo", rTel:"Celular", rUnidade:"Unidad",
-  btVolta:"Volver", btSegue:"Continuar", btEnviar:"Enviar check-in",
+  btVolta:"Volver", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
   errObrig:"Completa este campo.", errNome:"Indica el nombre completo (nombre y apellido).", errCpf:"Indica un documento o pasaporte válido.",
   errTel:"Indica un celular válido.", errData:"El check-out debe ser posterior al check-in.", errDecl:"Es necesario marcar todas las declaraciones.", errAssin:"Firma en el recuadro antes de enviar.",
   okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
@@ -765,7 +765,7 @@ function enviar(){
   enviando=true;
   document.getElementById('btSegue').disabled=true;
   var d=coletar(), assinatura='';
-  try{ assinatura=cv.toDataURL('image/png'); }catch(e){}
+  assinatura=assinaturaPequena();
   var titular={nome:d.hospedes[0].nome, cpf:d.hospedes[0].cpf};
   if(d.telefone) titular.telefone=d.telefone;
   var payload={
@@ -777,11 +777,47 @@ function enviar(){
     assinatura:assinatura,
     aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true}
   };
-  try{ var _b=JSON.stringify(payload); if(!(navigator.sendBeacon&&navigator.sendBeacon(EP_IN,new Blob([_b],{type:'text/plain;charset=UTF-8'})))){ fetch(EP_IN,{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:_b}).catch(function(){}); } }catch(e){}
-
   var msg=mensagemZap(d);
-  mostrar(5);
-  setTimeout(function(){ zap(msg); },600);
+  document.getElementById('btSegue').textContent=T('btEnviando');
+  /* Espera o sistema confirmar (até 8s) e só então abre o WhatsApp. */
+  enviarSistema(payload, function(){
+    mostrar(5);
+    setTimeout(function(){ zap(msg); },400);
+  });
+}
+
+/* ================= ENVIO PRO SISTEMA =================
+   Incidente 15/09/2026: o envio usava sendBeacon/keepalive, que o navegador
+   limita a 64 KB — com a assinatura em tela de iPhone (3x) o pacote passava
+   disso e era DESCARTADO em silêncio; o WhatsApp abria normal e o sistema
+   nunca recebia o termo. Agora: assinatura reduzida + fetch comum (sem
+   limite) + espera a resposta; se falhar, reenvia sem a assinatura. */
+function assinaturaPequena(){
+  try{
+    if(!cv) return '';
+    var W=480, H=Math.round(W*cv.height/cv.width), c2=document.createElement('canvas');
+    c2.width=W; c2.height=H;
+    var x=c2.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,W,H); x.drawImage(cv,0,0,W,H);
+    return c2.toDataURL('image/jpeg',0.6);
+  }catch(e){ try{ return cv.toDataURL('image/png'); }catch(e2){ return ''; } }
+}
+function enviarSistema(payload, depois){
+  var feito=false;
+  function fim(){ if(!feito){ feito=true; depois(); } }
+  var guarda=setTimeout(fim, 8000);
+  function post(p, opts){
+    return fetch(EP_IN, Object.assign({method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:JSON.stringify(p)}, opts||{}));
+  }
+  try{
+    post(payload).then(function(r){
+      if(r && r.ok){ clearTimeout(guarda); fim(); return; }
+      throw new Error('resposta '+(r&&r.status));
+    }).catch(function(){
+      /* 2ª tentativa: sem a assinatura (pacote pequeno), em modo keepalive. */
+      var p2={}; for(var k in payload) if(k!=='assinatura') p2[k]=payload[k]; p2.assinatura_omitida=true;
+      post(p2,{keepalive:true}).then(function(){ clearTimeout(guarda); fim(); }, function(){ clearTimeout(guarda); fim(); });
+    });
+  }catch(e){ clearTimeout(guarda); fim(); }
 }
 
 /* ================= MENSAGEM DO WHATSAPP (o hóspede envia — vale como declaração) ================= */
