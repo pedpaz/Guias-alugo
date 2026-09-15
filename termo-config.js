@@ -232,7 +232,7 @@ window.UNIDADES = {
   "QS-1701": { predio: "QS Marista", unidade: "Suíte 1701", bairro: "Setor Marista",
     endereco: "Rua 145, nº 120, Setor Marista, Goiânia/GO", capacidade: 2,
     camas: { pt: ", em 1 cama de casal", en: ", in 1 double bed", es: ", en 1 cama de matrimonio" },
-    checkin: "15h", checkout: "12h", pede_placa: true,
+    checkin: "15h", checkout: "12h",
     acesso: ACESSO.cartao, acesso2: ACESSO.cartao2, areas_comuns: AREAS.marista, estacionamento: AREAS.manobrista,
     decl_extra: [ { pt: "Estou ciente de que o cartão magnético de acesso deve ser devolvido na recepção no check-out.",
                     en: "I understand the access keycard must be returned to the front desk at check-out.",
@@ -241,7 +241,7 @@ window.UNIDADES = {
   "QS-402": { predio: "QS Marista", unidade: "Suíte 402", bairro: "Setor Marista",
     endereco: "Rua 145, nº 120, Setor Marista, Goiânia/GO", capacidade: 4,
     camas: { pt: ", em 1 cama de casal e 1 de solteiro", en: ", in 1 double and 1 single bed", es: ", en 1 cama de matrimonio y 1 individual" },
-    checkin: "15h", checkout: "12h", pede_placa: true,
+    checkin: "15h", checkout: "12h",
     acesso: ACESSO.cartao, acesso2: ACESSO.cartao2, areas_comuns: AREAS.marista, estacionamento: AREAS.manobrista,
     decl_extra: [ { pt: "Estou ciente de que o cartão magnético de acesso deve ser devolvido na recepção no check-out.",
                     en: "I understand the access keycard must be returned to the front desk at check-out.",
@@ -270,12 +270,12 @@ window.UNIDADES = {
   /* ---- Dna Smart / DNA SmartStyle (fechadura digital) ---- */
   "DS-407B": { predio: "Dna Smart", unidade: "Flat 407B", bairro: "Setor Bueno",
     endereco: "Edifício Dna Smart, Setor Bueno, Goiânia/GO", capacidade: 4,
-    checkin: "15h", checkout: "12h", pede_placa: true,
+    checkin: "15h", checkout: "12h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio },
   "DS-2003B": { predio: "DNA SmartStyle", unidade: "Duplex 2003 · Torre B", bairro: "Setor Bueno",
     endereco: "R. T-37, 2300, Setor Bueno, Goiânia/GO", capacidade: 4,
     camas: { pt: ", em 1 cama queen na suíte e 1 sofá-cama na sala", en: ", in 1 queen bed in the suite and 1 sofa bed in the living room", es: ", en 1 cama queen en la suite y 1 sofá cama en la sala" },
-    checkin: "15h", checkout: "12h", pede_placa: true, silencio: "22h e 8h",
+    checkin: "15h", checkout: "12h", silencio: "22h e 8h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.dna,
     guia: "guia-dna-2003B.html" },
   "DS-1008B": { predio: "DNA SmartStyle", unidade: "Apto 1008B", bairro: "Setor Bueno",
@@ -291,13 +291,13 @@ window.UNIDADES = {
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
     endereco: "Edifício Tai Residencial, Setor Bueno, Goiânia/GO", capacidade: 4,
-    checkin: "15h", checkout: "12h", pede_placa: true,
+    checkin: "15h", checkout: "12h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio },
 
   /* ---- Blend Smart Style ---- */
   "BLE-757": { predio: "Blend Smart Style", unidade: "Apto 757", bairro: "Setor Marista",
     endereco: "R. T-55, 95, Setor Marista, Goiânia/GO", capacidade: 5,
-    checkin: "15h", checkout: "12h", pede_placa: true, silencio: "22h e 8h",
+    checkin: "15h", checkout: "12h", silencio: "22h e 8h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
     guia: "guia-blend-757.html" },
 

@@ -254,10 +254,6 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
         <div class="msg" id="msgSaida"></div>
       </div>
     </div>
-    <div class="campo hide" id="c_placa">
-      <label data-t="lPlaca"></label>
-      <input type="text" id="placa" maxlength="8" data-ph="phPlaca" style="text-transform:uppercase">
-    </div>
   </section>
 
   <section class="etapa" id="e3">
@@ -376,7 +372,18 @@ var TXT = {
   okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okZap:"Falar com a aluGO",
   rodape:"Gestão de imóveis para temporada",
   zapOi:"Olá! Acabei de fazer o check-in online do {unidade} · {predio}.",
-  zapEnvio:"Check-in online — {unidade} · {predio}",
+  zapTit:"TERMO DE ESTADIA", zapAndar:"{n}º andar", zapHosp:"HÓSPEDES", zapTitular:"Titular", zapHospN:"Hóspede", zapCrianca:"criança, sem documento", zapCel:"cel", zapAs:"às",
+  zapAceite:"CIÊNCIA E ACEITE", zapAssinado:"Assinado por", zapEm:"Em", zapRodape:"Aceite registrado via termo online aluGO",
+  zapItens:[
+   "Li e concordo com o termo de estadia da aluGO",
+   "!*PROIBIDO FUMAR* no apartamento (cigarro, narguilé, vape) — multa {multa_fumar} + higienização",
+   "Festas, eventos e visitas para pernoite proibidos — multa {multa_festa} + danos",
+   "Só as pessoas listadas acima vão se hospedar (máx. {capacidade}; excedente {multa_extra})",
+   "Check-out até as {checkout} (atraso {multa_atraso})",
+   "*VISTORIA DE ENTRADA:* envio fotos ou vídeo de qualquer avaria em até 3 horas após entrar. Se não enviar, confirmo que recebi o apartamento em perfeitas condições e respondo pelos danos apurados na saída",
+   "Danos, avarias e itens faltantes são cobrados pelo valor de reposição",
+   "Silêncio entre {silencio} · sem circular em trajes de banho nas áreas comuns"
+  ],
   decl:[
    "Li e concordo com as {n} cláusulas do contrato de hospedagem.",
    "Estou ciente de que é proibido fumar dentro da unidade, sob multa de {multa_fumar} mais higienização.",
@@ -416,7 +423,18 @@ var TXT = {
   okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
   rodape:"Short-stay property management",
   zapOi:"Hi! I've just completed the online check-in for {unidade} · {predio}.",
-  zapEnvio:"Online check-in — {unidade} · {predio}",
+  zapTit:"STAY AGREEMENT", zapAndar:"floor {n}", zapHosp:"GUESTS", zapTitular:"Main guest", zapHospN:"Guest", zapCrianca:"child, no document", zapCel:"mobile", zapAs:"at",
+  zapAceite:"ACKNOWLEDGEMENT AND ACCEPTANCE", zapAssinado:"Signed by", zapEm:"On", zapRodape:"Acceptance recorded via aluGO online agreement",
+  zapItens:[
+   "I have read and agree with the aluGO stay agreement",
+   "!*NO SMOKING* inside the apartment (cigarettes, hookah, vape) — {multa_fumar} fine + deep cleaning",
+   "Parties, events and overnight visitors are not allowed — {multa_festa} fine + damages",
+   "Only the people listed above will stay (max. {capacidade}; extra guest {multa_extra})",
+   "Check-out by {checkout} (late departure {multa_atraso})",
+   "*ARRIVAL INSPECTION:* I will send photos or a video of any damage within 3 hours of arriving. If I don't, I confirm I received the apartment in perfect condition and I am liable for damage found at check-out",
+   "Damage, breakage and missing items are charged at replacement value",
+   "Quiet hours {silencio} · no swimwear in the common areas"
+  ],
   decl:[
    "I have read and agree with the {n} clauses of the accommodation contract.",
    "I understand smoking inside the unit is prohibited, with a {multa_fumar} fine plus deep cleaning.",
@@ -456,7 +474,18 @@ var TXT = {
   okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
   rodape:"Gestión de inmuebles para temporada",
   zapOi:"¡Hola! Acabo de hacer el check-in online de {unidade} · {predio}.",
-  zapEnvio:"Check-in online — {unidade} · {predio}",
+  zapTit:"TÉRMINO DE ESTADÍA", zapAndar:"piso {n}", zapHosp:"HUÉSPEDES", zapTitular:"Titular", zapHospN:"Huésped", zapCrianca:"niño, sin documento", zapCel:"cel", zapAs:"a las",
+  zapAceite:"CONOCIMIENTO Y ACEPTACIÓN", zapAssinado:"Firmado por", zapEm:"El", zapRodape:"Aceptación registrada vía término online aluGO",
+  zapItens:[
+   "Leí y estoy de acuerdo con el término de estadía de aluGO",
+   "!*PROHIBIDO FUMAR* en el apartamento (cigarrillo, narguile, vape) — multa {multa_fumar} + higienización",
+   "Fiestas, eventos y visitas para pernoctar prohibidos — multa {multa_festa} + daños",
+   "Solo las personas listadas arriba se hospedarán (máx. {capacidade}; excedente {multa_extra})",
+   "Check-out hasta las {checkout} (retraso {multa_atraso})",
+   "*INSPECCIÓN DE ENTRADA:* envío fotos o video de cualquier avería dentro de las 3 horas de entrar. Si no envío, confirmo que recibí el apartamento en perfectas condiciones y respondo por los daños detectados a la salida",
+   "Daños, averías y faltantes se cobran por su valor de reposición",
+   "Silencio entre {silencio} · sin circular en traje de baño por las áreas comunes"
+  ],
   decl:[
    "Leí y estoy de acuerdo con las {n} cláusulas del contrato de hospedaje.",
    "Sé que está prohibido fumar dentro de la unidad, con multa de {multa_fumar} más higienización.",
@@ -713,7 +742,7 @@ function coletar(){
     check_out:document.getElementById('check_out').value,
     hora_chegada:document.getElementById('hora_chegada').value,
     hora_saida:document.getElementById('hora_saida').value,
-    placa: U.pede_placa ? document.getElementById('placa').value.trim().toUpperCase() : ''
+    placa: ''
   };
 }
 function montarResumo(){
@@ -724,7 +753,6 @@ function montarResumo(){
   if(d.telefone) h+='<dt>'+T('rTel')+'</dt><dd>'+d.telefone+'</dd>';
   if(d.hospedes.length>1) h+='<dt>'+T('rHospedes')+'</dt><dd>'+d.hospedes.slice(1).map(function(x){return x.nome;}).join('<br>')+'</dd>';
   h+='<dt>'+T('rDatas')+'</dt><dd>'+fmt(d.check_in)+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'')+' → '+fmt(d.check_out)+' '+(d.hora_saida||'')+'</dd>';
-  if(d.placa) h+='<dt>'+T('rPlaca')+'</dt><dd>'+d.placa+'</dd>';
   h+='</dl></div>';
   document.getElementById('resumoBox').innerHTML=h;
 }
@@ -746,18 +774,41 @@ function enviar(){
     titular:titular,
     hospedes:d.hospedes.slice(1),
     qtd_hospedes:d.hospedes.length, telefone:d.telefone||undefined,
-    placa:d.placa, assinatura:assinatura,
+    assinatura:assinatura,
     aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true}
   };
   try{ var _b=JSON.stringify(payload); if(!(navigator.sendBeacon&&navigator.sendBeacon(EP_IN,new Blob([_b],{type:'text/plain;charset=UTF-8'})))){ fetch(EP_IN,{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:_b}).catch(function(){}); } }catch(e){}
 
-  var msg=T('zapEnvio')+'\n\n'+
-    d.hospedes.map(function(x,i){return (i===0?'👤 ':'• ')+x.nome+' — '+(x.cpf||(x.crianca?'criança':'—'));}).join('\n')+
-    (d.telefone?'\n📱 '+d.telefone:'')+
-    '\n\n📅 '+fmt(d.check_in)+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'')+' → '+fmt(d.check_out)+' '+(d.hora_saida||'')+
-    (d.placa?'\n🚗 '+d.placa:'')+'\n\n✅ Regras aceitas e termo assinado.';
+  var msg=mensagemZap(d);
   mostrar(5);
   setTimeout(function(){ zap(msg); },600);
+}
+
+/* ================= MENSAGEM DO WHATSAPP (o hóspede envia — vale como declaração) ================= */
+function andarDoApe(){
+  if(U.andar!=null) return U.andar;
+  var n=parseInt((U.code||'').replace(/^[A-Z]+-/,''),10);
+  return (isNaN(n)||n<100) ? null : Math.floor(n/100);
+}
+function agoraBR(){
+  try{ return new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).replace(',',' '+T('zapAs')); }
+  catch(e){ return new Date().toLocaleString(); }
+}
+function mensagemZap(d){
+  var linha='————————————————————————';
+  var andar=andarDoApe(), tit=d.hospedes[0]||{};
+  var cab='*'+T('zapTit')+' — '+tx(U.predio).toUpperCase()+' · '+tx(U.unidade).toUpperCase()+'*'+
+    (andar!=null?'\n'+((TXT[L]&&TXT[L].zapAndar)||TXT.pt.zapAndar).replace('{n}',String(andar)):'')+
+    '\n📍 '+tx(U.endereco);
+  var hosp='*'+T('zapHosp')+':*\n'+T('zapTitular')+': '+tit.nome+' — '+(tit.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+(tit.cpf||'—')+
+    (d.telefone?' — '+T('zapCel')+' '+d.telefone:'')+
+    d.hospedes.slice(1).map(function(x,i){ return '\n'+T('zapHospN')+' '+(i+2)+': '+x.nome+' — '+(x.cpf?((x.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+x.cpf):T('zapCrianca')); }).join('');
+  var datas='*'+T('lIn')+':* '+fmt(d.check_in)+' '+T('zapAs')+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+
+    '\n*'+T('lOut')+':* '+fmt(d.check_out)+' '+T('zapAs')+' '+(d.hora_saida||'—');
+  var itens=T('zapItens').map(function(s){ return (s.indexOf('!')===0?'⚠️ '+s.slice(1):'✓ '+s); }).join('\n');
+  var aceite='*'+T('zapAceite')+':*\n'+itens;
+  var rod='*'+T('zapAssinado')+':* '+tit.nome+'\n*'+T('zapEm')+':* '+agoraBR()+'\n_'+T('zapRodape')+'_';
+  return [cab, linha, hosp, '', datas, linha, aceite, linha, rod].join('\n');
 }
 
 /* ================= NAVEGACAO ================= */
@@ -789,11 +840,10 @@ function aplicarIdioma(){
   document.getElementById('subPag').textContent=T('subPag');
   document.getElementById('chipUn').textContent=tx(U.predio)+' · '+tx(U.unidade);
   document.getElementById('limite').textContent=T('limite');
-  document.getElementById('e2lead').textContent=T('e2lead')+(U.pede_placa?T('e2placa'):'');
+  document.getElementById('e2lead').textContent=T('e2lead');
   document.getElementById('dicaHora').textContent=T('dicaHora');
   document.getElementById('e3lead').textContent=T('e3lead');
   document.getElementById('okP').textContent=T('okP');
-  document.getElementById('c_placa').classList.toggle('hide',!U.pede_placa);
   var g=document.getElementById('okGuia'); if(U.guia){ g.href=BASE+U.guia; g.classList.remove('hide'); } else g.classList.add('hide');
   document.getElementById('dicaSaida').textContent=T('dicaSaida');
   montarHospedes(); montarClausulas(); montarDecl();
