@@ -141,6 +141,14 @@ window.CLAUSULAS = [
    --------------------------------------------------------------------- */
 /* Textos de acesso reutilizados (3 idiomas). */
 var ACESSO = {
+  aldeia: {
+    pt: "O acesso ao condomínio é pela <b>guarita</b>, mediante apresentação de documento com foto e conferência desta lista de hóspedes; a guarita entrega as <b>pulseiras</b> de acesso às áreas comuns. A chave do apartamento é retirada na recepção do condomínio.",
+    en: "Access to the resort is through the <b>gatehouse</b>, on presentation of a photo ID and a check against this guest list; the gatehouse hands out the <b>wristbands</b> for the common areas. The apartment key is collected at the resort's front desk.",
+    es: "El acceso al condominio es por la <b>garita</b>, presentando documento con foto y verificando esta lista de huéspedes; la garita entrega las <b>pulseras</b> de acceso a las áreas comunes. La llave del apartamento se retira en la recepción del condominio." },
+  aldeia2: {
+    pt: "<b>A chave e as pulseiras devem ser devolvidas no check-out.</b> A não devolução acarreta o custo de reposição.",
+    en: "<b>The key and the wristbands must be returned at check-out.</b> Failure to return them incurs the replacement cost.",
+    es: "<b>La llave y las pulseras deben devolverse al hacer el check-out.</b> La no devolución genera el costo de reposición." },
   fechadura: {
     pt: "O prédio cadastra o reconhecimento facial de cada hóspede na entrada, mediante documento com foto e conferência desta lista. O acesso ao apartamento é por <b>fechadura digital</b> com senha pessoal, enviada após a confirmação do cadastro; a senha é trocada a cada reserva e não deve ser repassada a terceiros.",
     en: "The building registers each guest's facial recognition at the entrance, on presentation of a photo ID and a check against this list. Access to the apartment is by <b>digital lock</b> with a personal code, sent once your registration is confirmed; the code changes every booking and must not be shared.",
@@ -173,6 +181,10 @@ var ACESSO = {
 
 /* Áreas comuns / estacionamento reutilizados. */
 var AREAS = {
+  aldeia: {
+    pt: "O uso das áreas comuns segue o regulamento interno do condomínio, inclusive quanto ao silêncio e às piscinas. A churrasqueira é permitida mediante custo adicional e consulta prévia. A pesca é permitida nas áreas do condomínio, sem o equipamento. Após o check-out não é permitida a permanência no imóvel nem nas áreas comuns e piscinas.",
+    en: "Use of the common areas follows the resort's internal rules, including quiet hours and the pools. The barbecue is allowed at an extra cost and on prior request. Fishing is allowed within the resort, equipment not included. After check-out, staying in the apartment or in the common areas and pools is not permitted.",
+    es: "El uso de las áreas comunes sigue el reglamento interno del condominio, incluidos el silencio y las piscinas. La parrilla se permite con costo adicional y consulta previa. La pesca está permitida en las áreas del condominio, sin el equipo. Tras el check-out no se permite la permanencia en el inmueble ni en las áreas comunes y piscinas." },
   dna: {
     pt: "O uso das áreas comuns segue o regimento do condomínio. Piscina e espaço gourmet ficam liberados, de sexta a domingo, apenas para estadias de 3 noites ou mais; o salão de festas não está disponível para hospedagem por temporada.",
     en: "Use of the common areas follows the building's rules. The pool and gourmet area are available, Friday to Sunday, only for stays of 3 nights or more; the party room is not available for short stays.",
@@ -208,6 +220,39 @@ function crystal(unidade, tipo){
     capacidade: 4, checkin: "14h", checkout: "11h",
     acesso: ACESSO[tipo], acesso2: ACESSO[tipo+"2"], areas_comuns: AREAS.condominio,
     guia: "guia-crystal-" + unidade.replace(/\D/g,"") + ".html" };
+}
+
+/* ---- Flat Aldeia do Lago (Caldas Novas) ----------------------------------
+   Duas regras que só existem aqui e vinham do formulário antigo
+   (checkin-aldeia-*.html): a taxa de acesso das pulseiras, paga em DINHEIRO
+   na guarita, e o apê NÃO incluir roupa de cama. Migrado em 17/09/2026. */
+function aldeia(unidade, capacidade, taxa, guia){
+  var taxaTxt = "R$ " + taxa + ",00";
+  return {
+    predio: "Flat Aldeia do Lago", unidade: unidade, bairro: "Caldas Novas",
+    endereco: "Aldeia do Lago, Caldas Novas/GO",
+    capacidade: capacidade, checkin: "14h", checkout: "11h",
+    acesso: ACESSO.aldeia, acesso2: ACESSO.aldeia2, areas_comuns: AREAS.aldeia,
+    clausulas_extra: [
+      { t: { pt: "Da taxa de acesso (pulseiras)", en: "Access fee (wristbands)", es: "De la tasa de acceso (pulseras)" },
+        p: [ { pt: "O condomínio cobra uma <b>taxa de acesso de " + taxaTxt + " por estadia</b> para este imóvel, paga <b>somente em dinheiro na guarita</b> — não há máquina de cartão nem cobrança por Pix. A taxa é do condomínio e não está inclusa na diária.",
+               en: "The resort charges an <b>access fee of " + taxaTxt + " per stay</b> for this unit, paid <b>in cash at the gatehouse only</b> — no card machine and no Pix. The fee belongs to the resort and is not included in the nightly rate.",
+               es: "El condominio cobra una <b>tasa de acceso de " + taxaTxt + " por estadía</b> para este inmueble, pagada <b>solo en efectivo en la garita</b> — no hay terminal de tarjeta ni cobro por Pix. La tasa es del condominio y no está incluida en la tarifa." } ] },
+      { t: { pt: "Da roupa de cama", en: "Bed linen", es: "De la ropa de cama" },
+        p: [ { pt: "O imóvel <b>não inclui roupa de cama</b>. O(A) LOCATÁRIO(A) deve trazer a sua ou alugá-la na recepção do condomínio, conforme disponibilidade.",
+               en: "The unit <b>does not include bed linen</b>. Guests must bring their own or rent it at the resort's front desk, subject to availability.",
+               es: "El inmueble <b>no incluye ropa de cama</b>. El(La) LOCATARIO(A) debe traer la suya o alquilarla en la recepción del condominio, según disponibilidad." } ] }
+    ],
+    decl_extra: [
+      { pt: "Estou ciente da taxa de acesso (pulseiras) de " + taxaTxt + " por estadia, paga em dinheiro na guarita do condomínio.",
+        en: "I am aware of the access fee (wristbands) of " + taxaTxt + " per stay, paid in cash at the resort's gatehouse.",
+        es: "Estoy al tanto de la tasa de acceso (pulseras) de " + taxaTxt + " por estadía, pagada en efectivo en la garita del condominio." },
+      { pt: "Estou ciente de que o apartamento não inclui roupa de cama.",
+        en: "I am aware the apartment does not include bed linen.",
+        es: "Estoy al tanto de que el apartamento no incluye ropa de cama." }
+    ],
+    guia: guia
+  };
 }
 
 window.UNIDADES = {
@@ -308,5 +353,10 @@ window.UNIDADES = {
     checkin: "14h", checkout: "11h", pede_telefone: true,
     acesso: ACESSO.fechadura, acesso2: AREAS.garagem_winner, areas_comuns: AREAS.condominio,
     sem: ["animais"], clausulas_extra: [ PETS_WINNER ],
-    guia: "guia-winner-503C.html" }
+    guia: "guia-winner-503C.html" },
+
+  /* ---- Flat Aldeia do Lago · Caldas Novas (guarita + pulseiras) ---- */
+  "ADL-103A": aldeia("Apto 103A · 1 quarto", 5, 40, "guia-aldeia-103a.html"),
+  "ADL-405A": aldeia("Apto 405A · 1 quarto", 5, 40, "guia-aldeia-405a.html"),
+  "ADL-306H": aldeia("Apto 306H · 2 quartos", 8, 50, "guia-aldeia-306h.html")
 };
