@@ -224,6 +224,7 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
     <p class="lead" data-t="e1lead"></p>
     <div id="hospedes"></div>
     <button class="addh" onclick="addHosp()" data-t="addHosp"></button>
+    <div id="enderecoBox"></div>
     <div class="lim" id="limite"></div>
   </section>
 
@@ -349,6 +350,10 @@ var TXT = {
   e1lead:"Preencha os dados de todos os hóspedes, inclusive crianças. É com esta lista que o prédio libera a entrada — quem não estiver aqui não entra.",
   hospTit:"Hóspede", titularTit:"Titular da reserva",
   lNome:"Nome completo", lDoc:"Documento", passaporte:"Passaporte", lTel:"Celular com DDD",
+  endTit:"Dados do titular para a portaria", endSub:"O condomínio exige estes dados para liberar a entrada.",
+  lRg:"RG", lEnd:"Endereço (rua e número)", lBairro:"Bairro", lCidade:"Cidade", lUf:"Estado", lCep:"CEP", ufSel:"Selecione",
+  errRg:"Informe o RG.", errCampo:"Preencha este campo.", errCep:"Informe o CEP com 8 números.",
+  rRg:"RG", rEnd:"Endereço", zapEnd:"Endereço", zapCidade:"Cidade", zapGrupo:"GRUPO", zapAdultos:"Adultos", zapCriancas:"Crianças",
   phNome:"como está no documento", phPass:"número do passaporte", phTel:"(62) 9 9999-9999",
   errPass:"Informe o número do passaporte.",
   crianca:"É criança (documento opcional)",
@@ -403,6 +408,10 @@ var TXT = {
   e1lead:"Fill in the details of every guest, children included. The building uses this list to let you in — anyone not listed cannot come in.",
   hospTit:"Guest", titularTit:"Main guest",
   lNome:"Full name", lDoc:"Document", passaporte:"Passport", lTel:"Mobile number",
+  endTit:"Main guest details for the gatehouse", endSub:"The resort requires these details to grant access.",
+  lRg:"ID number (RG)", lEnd:"Address (street and number)", lBairro:"District", lCidade:"City", lUf:"State", lCep:"Postal code", ufSel:"Select",
+  errRg:"Enter the ID number.", errCampo:"Fill in this field.", errCep:"Enter the 8-digit postal code.",
+  rRg:"ID", rEnd:"Address", zapEnd:"Address", zapCidade:"City", zapGrupo:"GROUP", zapAdultos:"Adults", zapCriancas:"Children",
   phNome:"as it appears on your document", phPass:"passport number", phTel:"+1 555 000 0000",
   errPass:"Enter the passport number.",
   crianca:"This is a child (document optional)",
@@ -457,6 +466,10 @@ var TXT = {
   e1lead:"Completa los datos de todos los huéspedes, incluidos los niños. Con esta lista el edificio libera el ingreso — quien no esté aquí no entra.",
   hospTit:"Huésped", titularTit:"Titular de la reserva",
   lNome:"Nombre completo", lDoc:"Documento", passaporte:"Pasaporte", lTel:"Celular",
+  endTit:"Datos del titular para la portería", endSub:"El condominio exige estos datos para liberar la entrada.",
+  lRg:"Documento de identidad (RG)", lEnd:"Dirección (calle y número)", lBairro:"Barrio", lCidade:"Ciudad", lUf:"Estado", lCep:"Código postal", ufSel:"Selecciona",
+  errRg:"Indica el documento.", errCampo:"Completa este campo.", errCep:"Indica el código postal de 8 números.",
+  rRg:"Documento", rEnd:"Dirección", zapEnd:"Dirección", zapCidade:"Ciudad", zapGrupo:"GRUPO", zapAdultos:"Adultos", zapCriancas:"Niños",
   phNome:"como aparece en el documento", phPass:"número del pasaporte", phTel:"+54 9 11 0000 0000",
   errPass:"Indica el número del pasaporte.",
   crianca:"Es un niño (documento opcional)",
@@ -660,6 +673,32 @@ function montarHospedes(vals){
   document.getElementById('hospedes').innerHTML=h;
   document.querySelector('.addh').style.display = NH>=U.capacidade ? 'none' : '';
 }
+/* ===== Endereço do titular (só unidades com pede_endereco — Aldeia do Lago) =====
+   Fica FORA do #hospedes pra não perder o que foi digitado quando a lista de
+   hóspedes é redesenhada. Estrangeiro (passaporte) não tem RG/UF/CEP. */
+var UFS=['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
+var END_IDS=['e_rg','e_end','e_bairro','e_cidade','e_uf','e_cep'];
+function lerEndereco(){
+  var o={}; END_IDS.forEach(function(id){ var el=document.getElementById(id); o[id]=el?el.value:''; }); return o;
+}
+function mascaraCep(el){ var d=soDigitos(el.value).slice(0,8); el.value = d.length>5 ? d.slice(0,5)+'-'+d.slice(5) : d; }
+function montarEndereco(){
+  var box=document.getElementById('enderecoBox'); if(!box) return;
+  if(!U.pede_endereco){ box.innerHTML=''; return; }
+  var v=lerEndereco();
+  function campo(id,label,attrs,err){ return '<div class="campo" id="c_'+id+'"><label>'+label+'</label><input type="text" id="'+id+'" '+attrs+' value="'+esc(v[id])+'"><div class="msg">'+err+'</div></div>'; }
+  box.innerHTML='<div class="hosp"><div class="cab"><b>'+T('endTit')+'</b></div>'+
+    '<p class="lead" style="margin:0 0 10px">'+T('endSub')+'</p>'+
+    campo('e_rg',T('lRg'),'autocomplete="off"',T('errRg'))+
+    campo('e_end',T('lEnd'),'autocomplete="street-address"',T('errCampo'))+
+    campo('e_bairro',T('lBairro'),'autocomplete="address-level3"',T('errCampo'))+
+    campo('e_cidade',T('lCidade'),'autocomplete="address-level2"',T('errCampo'))+
+    '<div class="campo" id="c_e_uf"><label>'+T('lUf')+'</label><select id="e_uf"><option value="">'+T('ufSel')+'</option>'+
+      UFS.map(function(u){ return '<option value="'+u+'"'+(v.e_uf===u?' selected':'')+'>'+u+'</option>'; }).join('')+
+    '</select><div class="msg">'+T('errCampo')+'</div></div>'+
+    campo('e_cep',T('lCep'),'inputmode="numeric" maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" autocomplete="postal-code"',T('errCep'))+
+  '</div>';
+}
 function addHosp(){ if(NH<U.capacidade){ var v=lerHosp(); NH++; montarHospedes(v); } }
 function rmHosp(i){ var v=lerHosp(); v.splice(i,1); DOC.splice(i,1); NH--; montarHospedes(v); }
 
@@ -719,6 +758,22 @@ function validar(etapa){
       }
     }
   }
+  if(etapa===1 && U.pede_endereco){
+    var e=lerEndereco(), estrangeiro=DOC[0]==='pass';
+    var regras=[
+      ['e_rg',     !estrangeiro && e.e_rg.trim().length<4],
+      ['e_end',    e.e_end.trim().length<5],
+      ['e_bairro', !estrangeiro && e.e_bairro.trim().length<2],
+      ['e_cidade', e.e_cidade.trim().length<2],
+      ['e_uf',     !estrangeiro && !e.e_uf],
+      ['e_cep',    !estrangeiro && soDigitos(e.e_cep).length!==8]
+    ];
+    regras.forEach(function(r){
+      marcarErro('c_'+r[0],r[1]);
+      var sel=document.getElementById(r[0]); if(sel&&sel.tagName==='SELECT') sel.classList.toggle('erro',!!r[1]);
+      if(r[1]&&!primeiro) primeiro=r[0];
+    });
+  }
   if(etapa===2){
     var ci=document.getElementById('check_in').value, co=document.getElementById('check_out').value;
     var ho=document.getElementById('hora_chegada').value, hs=document.getElementById('hora_saida').value;
@@ -737,7 +792,7 @@ function validar(etapa){
     if(falta){ if(!primeiro) primeiro='declBox'; aviso(T('errDecl')); }
     else if(!desenhou){ aviso(T('errAssin')); primeiro='cv'; }
   }
-  if(primeiro){ var el=document.getElementById(primeiro); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); if(el.focus&&el.tagName==='INPUT') setTimeout(function(){el.focus();},350); } return false; }
+  if(primeiro){ var el=document.getElementById(primeiro); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); if(el.focus&&(el.tagName==='INPUT'||el.tagName==='SELECT')) setTimeout(function(){el.focus();},350); } return false; }
   return true;
 }
 
@@ -751,7 +806,10 @@ function coletar(){
     check_out:document.getElementById('check_out').value,
     hora_chegada:document.getElementById('hora_chegada').value,
     hora_saida:document.getElementById('hora_saida').value,
-    placa: ''
+    placa: '',
+    endereco: U.pede_endereco ? (function(){ var e=lerEndereco(); return { rg:e.e_rg.trim(), endereco:e.e_end.trim(), bairro:e.e_bairro.trim(), cidade:e.e_cidade.trim(), estado:e.e_uf, cep:e.e_cep.trim() }; })() : null,
+    adultos: hs.filter(function(x){ return !x.crianca; }).length,
+    criancas: hs.filter(function(x){ return !!x.crianca; }).length
   };
 }
 function montarResumo(){
@@ -760,6 +818,10 @@ function montarResumo(){
     '<dt>'+T('rUnidade')+'</dt><dd>'+tx(U.predio)+' · '+tx(U.unidade)+'</dd>'+
     '<dt>'+T('rTitular')+'</dt><dd>'+(d.hospedes[0]?d.hospedes[0].nome:'')+'</dd>';
   if(d.telefone) h+='<dt>'+T('rTel')+'</dt><dd>'+d.telefone+'</dd>';
+  if(d.endereco){
+    if(d.endereco.rg) h+='<dt>'+T('rRg')+'</dt><dd>'+d.endereco.rg+'</dd>';
+    h+='<dt>'+T('rEnd')+'</dt><dd>'+[d.endereco.endereco,d.endereco.bairro].filter(Boolean).join(', ')+'<br>'+d.endereco.cidade+(d.endereco.estado?' - '+d.endereco.estado:'')+(d.endereco.cep?' · '+d.endereco.cep:'')+'</dd>';
+  }
   if(d.hospedes.length>1) h+='<dt>'+T('rHospedes')+'</dt><dd>'+d.hospedes.slice(1).map(function(x){return x.nome;}).join('<br>')+'</dd>';
   h+='<dt>'+T('rDatas')+'</dt><dd>'+fmt(d.check_in)+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'')+' → '+fmt(d.check_out)+' '+(d.hora_saida||'')+'</dd>';
   h+='</dl></div>';
@@ -777,12 +839,14 @@ function enviar(){
   assinatura=assinaturaPequena();
   var titular={nome:d.hospedes[0].nome, cpf:d.hospedes[0].cpf};
   if(d.telefone) titular.telefone=d.telefone;
+  if(d.endereco){ ['rg','endereco','bairro','cidade','estado','cep'].forEach(function(k){ if(d.endereco[k]) titular[k]=d.endereco[k]; }); }
   var payload={
     unidade:U.code, tipo:'termo', idioma:L,
     check_in:d.check_in, check_out:d.check_out, hora_chegada:d.hora_chegada, hora_chegada_texto:horaTexto(d.hora_chegada), hora_saida:d.hora_saida,
     titular:titular,
     hospedes:d.hospedes.slice(1),
     qtd_hospedes:d.hospedes.length, telefone:d.telefone||undefined,
+    adultos: U.pede_endereco ? d.adultos : undefined, criancas: U.pede_endereco ? d.criancas : undefined,
     assinatura:assinatura,
     aceites:{contrato:true, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true}
   };
@@ -847,16 +911,26 @@ function mensagemZap(d){
     '\n📍 '+tx(U.endereco);
   var hosp='*'+T('zapHosp')+':*\n'+T('zapTitular')+': '+tit.nome+' — '+(tit.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+(tit.cpf||'—')+
     (d.telefone?' — '+T('zapCel')+' '+d.telefone:'')+
+    (d.endereco ? (
+      (d.endereco.rg?'\nRG: '+d.endereco.rg:'')+
+      '\n'+T('zapEnd')+': '+[d.endereco.endereco,d.endereco.bairro].filter(Boolean).join(', ')+
+      '\n'+T('zapCidade')+': '+d.endereco.cidade+(d.endereco.estado?' - '+d.endereco.estado:'')+(d.endereco.cep?' — CEP: '+d.endereco.cep:'')
+    ) : '')+
     d.hospedes.slice(1).map(function(x,i){ return '\n'+T('zapHospN')+' '+(i+2)+': '+x.nome+' — '+(x.cpf?((x.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+x.cpf):T('zapCrianca')); }).join('');
   var datas='*'+T('lIn')+':* '+fmt(d.check_in)+' '+T('zapAs')+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+
     '\n*'+T('lOut')+':* '+fmt(d.check_out)+' '+T('zapAs')+' '+(d.hora_saida||'—');
   var guiaUrl=''; try{ if(U.guia) guiaUrl=new URL(U.guia, location.href).href; }catch(e){ guiaUrl=''; }
   var guia=guiaUrl?('📘 *'+T('zapGuiaTit')+'*\n'+T('zapGuiaTxt')+'\n👉 '+guiaUrl):'';
-  var lista=T('zapItens').slice(); if(guiaUrl) lista.push(T('zapGuiaItem'));
+  var lista=T('zapItens').slice();
+  /* Unidade sem a cláusula de trajes (Caldas Novas): o último item do aceite
+     é "Silêncio … · sem circular em trajes de banho…" — fica só o silêncio. */
+  if((U.sem||[]).indexOf('trajes')>=0 && lista.length){ var ult=lista.length-1; lista[ult]=lista[ult].split(' · ')[0]; }
+  if(guiaUrl) lista.push(T('zapGuiaItem'));
   var itens=lista.map(function(s){ return (s.indexOf('!')===0?'⚠️ '+s.slice(1):'✓ '+s); }).join('\n');
   var aceite='*'+T('zapAceite')+':*\n'+itens;
   var rod='*'+T('zapAssinado')+':* '+tit.nome+'\n*'+T('zapEm')+':* '+agoraBR()+'\n_'+T('zapRodape')+'_';
-  var partes=[cab, linha, hosp, '', datas, linha];
+  var grupo = U.pede_endereco ? '*'+T('zapGrupo')+':* '+T('zapAdultos')+' '+d.adultos+' · '+T('zapCriancas')+' '+d.criancas : '';
+  var partes = grupo ? [cab, linha, hosp, '', grupo, '', datas, linha] : [cab, linha, hosp, '', datas, linha];
   if(guia){ partes.push(guia); partes.push(linha); }
   return partes.concat([aceite, linha, rod]).join('\n');
 }
@@ -896,7 +970,7 @@ function aplicarIdioma(){
   document.getElementById('okP').textContent=T('okP');
   var g=document.getElementById('okGuia'); if(U.guia){ g.href=BASE+U.guia; g.classList.remove('hide'); } else g.classList.add('hide');
   document.getElementById('dicaSaida').textContent=T('dicaSaida');
-  montarHospedes(); montarClausulas(); montarDecl();
+  montarHospedes(); montarEndereco(); montarClausulas(); montarDecl();
   [].forEach.call(document.querySelectorAll('.lang button'),function(b){ b.classList.toggle('on',b.dataset.l===L); });
   mostrar(ETAPA);
 }

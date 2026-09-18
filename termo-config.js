@@ -136,7 +136,8 @@ window.CLAUSULAS = [
    Campos:
      predio, unidade (rótulo), bairro, endereco, capacidade, camas (" , em 1 cama de casal"),
      checkin, checkout, multas..., silencio, guia (arquivo do guia),
-     pede_placa, pede_telefone, acesso / acesso2 (texto da cláusula de acesso),
+     pede_placa, pede_telefone, pede_endereco (RG + endereço do titular + adultos/crianças),
+     acesso / acesso2 (texto da cláusula de acesso),
      areas_comuns, estacionamento, sem: [ids], clausulas_extra: [{t,p}], decl_extra: [texto]
    --------------------------------------------------------------------- */
 /* Textos de acesso reutilizados (3 idiomas). */
@@ -232,6 +233,11 @@ function aldeia(unidade, capacidade, taxa, guia){
     predio: "Flat Aldeia do Lago", unidade: unidade, bairro: "Caldas Novas",
     endereco: "Aldeia do Lago, Caldas Novas/GO",
     capacidade: capacidade, checkin: "14h", checkout: "11h",
+    // A portaria do Aldeia exige RG e endereço completo do titular e a
+    // contagem de adultos/crianças (pulseiras). Vinha no formulário antigo.
+    pede_endereco: true,
+    // Caldas Novas é estância de águas quentes: a regra de trajes de banho não vale.
+    sem: ["trajes"],
     acesso: ACESSO.aldeia, acesso2: ACESSO.aldeia2, areas_comuns: AREAS.aldeia,
     clausulas_extra: [
       { t: { pt: "Da taxa de acesso (pulseiras)", en: "Access fee (wristbands)", es: "De la tasa de acceso (pulseras)" },
