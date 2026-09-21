@@ -353,7 +353,7 @@ var TXT = {
   endTit:"Dados do titular para a portaria", endSub:"O condomínio exige estes dados para liberar a entrada.",
   lRg:"RG", lEnd:"Endereço (rua e número)", lBairro:"Bairro", lCidade:"Cidade", lUf:"Estado", lCep:"CEP", ufSel:"Selecione",
   errRg:"Informe o RG.", errCampo:"Preencha este campo.", errCep:"Informe o CEP com 8 números.",
-  rRg:"RG", rEnd:"Endereço", zapEnd:"Endereço", zapCidade:"Cidade", zapGrupo:"GRUPO", zapAdultos:"Adultos", zapCriancas:"Crianças",
+  rRg:"RG", rEnd:"Endereço", zapEnd:"Endereço", zapCidade:"Cidade", zapGrupo:"COMPOSIÇÃO DO GRUPO", zapAdultos:"Adultos", zapCriancas:"Crianças",
   phNome:"como está no documento", phPass:"número do passaporte", phTel:"(62) 9 9999-9999",
   errPass:"Informe o número do passaporte.",
   crianca:"É criança (documento opcional)",
@@ -411,7 +411,7 @@ var TXT = {
   endTit:"Main guest details for the gatehouse", endSub:"The resort requires these details to grant access.",
   lRg:"ID number (RG)", lEnd:"Address (street and number)", lBairro:"District", lCidade:"City", lUf:"State", lCep:"Postal code", ufSel:"Select",
   errRg:"Enter the ID number.", errCampo:"Fill in this field.", errCep:"Enter the 8-digit postal code.",
-  rRg:"ID", rEnd:"Address", zapEnd:"Address", zapCidade:"City", zapGrupo:"GROUP", zapAdultos:"Adults", zapCriancas:"Children",
+  rRg:"ID", rEnd:"Address", zapEnd:"Address", zapCidade:"City", zapGrupo:"GROUP COMPOSITION", zapAdultos:"Adults", zapCriancas:"Children",
   phNome:"as it appears on your document", phPass:"passport number", phTel:"+1 555 000 0000",
   errPass:"Enter the passport number.",
   crianca:"This is a child (document optional)",
@@ -469,7 +469,7 @@ var TXT = {
   endTit:"Datos del titular para la portería", endSub:"El condominio exige estos datos para liberar la entrada.",
   lRg:"Documento de identidad (RG)", lEnd:"Dirección (calle y número)", lBairro:"Barrio", lCidade:"Ciudad", lUf:"Estado", lCep:"Código postal", ufSel:"Selecciona",
   errRg:"Indica el documento.", errCampo:"Completa este campo.", errCep:"Indica el código postal de 8 números.",
-  rRg:"Documento", rEnd:"Dirección", zapEnd:"Dirección", zapCidade:"Ciudad", zapGrupo:"GRUPO", zapAdultos:"Adultos", zapCriancas:"Niños",
+  rRg:"Documento", rEnd:"Dirección", zapEnd:"Dirección", zapCidade:"Ciudad", zapGrupo:"COMPOSICIÓN DEL GRUPO", zapAdultos:"Adultos", zapCriancas:"Niños",
   phNome:"como aparece en el documento", phPass:"número del pasaporte", phTel:"+54 9 11 0000 0000",
   errPass:"Indica el número del pasaporte.",
   crianca:"Es un niño (documento opcional)",
@@ -929,8 +929,12 @@ function mensagemZap(d){
   var itens=lista.map(function(s){ return (s.indexOf('!')===0?'⚠️ '+s.slice(1):'✓ '+s); }).join('\n');
   var aceite='*'+T('zapAceite')+':*\n'+itens;
   var rod='*'+T('zapAssinado')+':* '+tit.nome+'\n*'+T('zapEm')+':* '+agoraBR()+'\n_'+T('zapRodape')+'_';
-  var grupo = U.pede_endereco ? '*'+T('zapGrupo')+':* '+T('zapAdultos')+' '+d.adultos+' · '+T('zapCriancas')+' '+d.criancas : '';
-  var partes = grupo ? [cab, linha, hosp, '', grupo, '', datas, linha] : [cab, linha, hosp, '', datas, linha];
+  /* Aldeia do Lago: a portaria pede adultos e crianças ANTES dos nomes — é
+     como vinha no formulário antigo, e o Pedro preenche nessa ordem. */
+  var grupo = U.pede_endereco
+    ? '\u{1F465} *'+T('zapGrupo')+'*\n\u2022 '+T('zapAdultos')+': '+d.adultos+'\n\u2022 '+T('zapCriancas')+': '+d.criancas
+    : '';
+  var partes = grupo ? [cab, linha, grupo, '', hosp, '', datas, linha] : [cab, linha, hosp, '', datas, linha];
   if(guia){ partes.push(guia); partes.push(linha); }
   return partes.concat([aceite, linha, rod]).join('\n');
 }
