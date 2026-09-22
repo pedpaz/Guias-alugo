@@ -94,8 +94,11 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 .doctipo button.on{background:var(--tinta);color:#fff}
 .hosp .crianca{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--tinta-2);margin:-4px 0 4px;cursor:pointer}
 .hosp .crianca input{width:19px;height:19px;accent-color:var(--verde);margin:0}
-.addh{width:100%;padding:14px;border:1.5px dashed var(--verde-cl);border-radius:14px;color:var(--verde-esc);
-  font-weight:800;font-size:14.5px;background:var(--verde-bg)}
+.addh{width:100%;padding:14px;border:none;border-radius:12px;color:#fff;
+  font-weight:600;font-size:15px;background:var(--laranja);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.addh:active{background:var(--laranja-esc)}
+.addh::before{content:"+";font-size:19px;font-weight:300;line-height:1}
+.addh-dica{text-align:center;font-size:12px;color:#a2793f;line-height:1.4;margin:9px 0 4px;padding:0 8px}
 .lim{font-size:12.5px;color:var(--tinta-2);margin-top:9px;text-align:center}
 
 /* relógio redondo */
@@ -182,6 +185,12 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
   border-radius:14px;padding:13px 16px;font-size:14.5px;font-weight:600;line-height:1.35;box-shadow:0 10px 28px rgba(0,0,0,.28);
   opacity:0;transform:translateY(-14px);pointer-events:none;transition:opacity .2s,transform .2s}
 #aviso.on{opacity:1;transform:translateY(0)}
+
+#okGuia{display:flex;align-items:center;gap:12px;background:var(--laranja);color:#fff;border-radius:13px;padding:14px 15px;text-decoration:none;margin:14px 0 10px;text-align:left}
+#okGuia .ic,.okZapBtn .ic{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
+#okGuia .tt,.okZapBtn .tt{display:block;font-size:14.5px;font-weight:600}
+#okGuia .sb,.okZapBtn .sb{display:block;font-size:11.5px;opacity:.9;margin-top:1px}
+a.okZapBtn{display:flex;align-items:center;gap:12px;background:var(--verde);color:#fff;border-radius:13px;padding:14px 15px;text-decoration:none;text-align:left}
 </style>
 </head>
 <body>
@@ -223,7 +232,7 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
     <h2 data-t="e1h"></h2>
     <p class="lead" data-t="e1lead"></p>
     <div id="hospedes"></div>
-    <button class="addh" onclick="addHosp()" data-t="addHosp"></button>
+    <button class="addh" onclick="addHosp()" data-t="addHosp"></button><div class="addh-dica" data-t="addHospDica"></div>
     <div id="enderecoBox"></div>
     <div class="lim" id="limite"></div>
   </section>
@@ -276,13 +285,12 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
     <div id="resumoBox"></div>
   </section>
 
-  <section class="etapa" id="e5">
+  <section class="etapa" id="e5"><div style="padding:4px 0"><div style="font-size:10.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--tinta-3);margin-bottom:4px" data-t="prontoEye"></div><h2 data-t="prontoH" style="margin-bottom:3px"></h2><p style="font-size:13px;color:var(--tinta-2);line-height:1.5;margin:0 0 18px" data-t="prontoP"></p><div style="display:flex;gap:13px;align-items:center;padding:13px;background:var(--verde-bg);border-radius:13px;margin-bottom:10px"><div style="flex-shrink:0;width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1B9E4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><div><div style="font-size:14px;font-weight:600;color:var(--tinta)" data-t="prontoWaT"></div><div style="font-size:12px;color:var(--tinta-2);line-height:1.4" data-t="prontoWaS"></div></div></div><div style="display:flex;gap:13px;align-items:center;padding:13px;background:var(--laranja-bg);border-radius:13px;margin-bottom:16px"><div style="flex-shrink:0;width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#C96A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div><div style="font-size:14px;font-weight:600;color:var(--tinta)" data-t="prontoGuT"></div><div style="font-size:12px;color:#7a5327;line-height:1.4" data-t="prontoGuS"></div></div></div><div style="text-align:center;font-size:12px;color:var(--tinta-3);line-height:1.5;padding:0 6px" data-t="prontoNota"></div></div></section><section class="etapa" id="e6">
     <div class="ok">
       <div class="tick">✓</div>
       <h2 data-t="okH"></h2>
       <p id="okP"></p>
-      <a href="#" id="okGuia" data-t="okGuia"></a>
-      <a class="linha" href="#" onclick="zap(T('zapOi'));return false" data-t="okZap"></a>
+      <a href="#" id="okGuia"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span><span class="tt" data-t="okGuia"></span><span class="sb" data-t="okGuiaSub"></span></span></a><a class="okZapBtn" href="#" onclick="zap(T('zapOi'));return false"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span><span class="tt" data-t="okZap"></span><span class="sb" data-t="okZapSub"></span></span></a>
     </div>
   </section>
 
@@ -357,7 +365,7 @@ var TXT = {
   phNome:"como está no documento", phPass:"número do passaporte", phTel:"(62) 9 9999-9999",
   errPass:"Informe o número do passaporte.",
   crianca:"É criança (documento opcional)",
-  addHosp:"+ Adicionar hóspede", remover:"remover",
+  addHosp:"Adicionar hóspede", addHospDica:"Vai com acompanhantes? Cadastre todos — cada um precisa constar no termo", remover:"remover",
   limite:"Esta unidade comporta até {capacidade} pessoa(s).",
   e2h:"Sua reserva", e2lead:"As datas e o horário previsto de chegada.",
   e2placa:" Se vier de carro, informe a placa — o prédio precisa identificar o veículo.",
@@ -374,7 +382,7 @@ var TXT = {
   btVolta:"Voltar", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
   errObrig:"Preencha este campo.", errNome:"Informe o nome completo (nome e sobrenome).", errCpf:"Informe um CPF ou passaporte válido.",
   errTel:"Informe um celular válido, com DDD.", errData:"O check-out precisa ser depois do check-in.", errDecl:"É necessário marcar todas as declarações.", errAssin:"Assine no quadro antes de enviar.",
-  okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okZap:"Falar com a aluGO",
+  prontoEye:"Último passo", prontoH:"Tudo pronto para enviar", prontoP:"Ao enviar, o WhatsApp abre com a sua mensagem pronta:", prontoWaT:"Confirme sua chegada", prontoWaS:"É só apertar enviar no WhatsApp", prontoGuT:"O link do guia vai na mensagem", prontoGuS:"Guarde-o! Tem Wi-Fi, acesso, regras e dicas", prontoNota:"Antes de qualquer dúvida, dê uma olhada no guia — quase tudo já está lá 💛", okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okGuiaSub:"Wi-Fi, acesso, regras e dicas", okZapSub:"Tirar uma dúvida", okZap:"Falar com a aluGO",
   rodape:"Gestão de imóveis para temporada",
   zapOi:"Olá! Acabei de fazer o check-in online do {unidade} · {predio}.",
   zapTit:"TERMO DE ESTADIA", zapAndar:"{n}º andar", zapHosp:"HÓSPEDES", zapTitular:"Titular", zapHospN:"Hóspede", zapCrianca:"criança, sem documento", zapCel:"cel", zapAs:"às",
@@ -415,7 +423,7 @@ var TXT = {
   phNome:"as it appears on your document", phPass:"passport number", phTel:"+1 555 000 0000",
   errPass:"Enter the passport number.",
   crianca:"This is a child (document optional)",
-  addHosp:"+ Add guest", remover:"remove",
+  addHosp:'Add guest', addHospDica:'Bringing others? Add everyone — each guest must be on the agreement', remover:"remove",
   limite:"This unit sleeps up to {capacidade} guest(s).",
   e2h:"Your booking", e2lead:"Dates and your estimated arrival time.",
   e2placa:" If you're coming by car, add the plate — the building needs to identify the vehicle.",
@@ -432,7 +440,7 @@ var TXT = {
   btVolta:"Back", btSegue:"Continue", btEnviar:"Send check-in", btEnviando:"Sending…",
   errObrig:"Please fill in this field.", errNome:"Enter the full name (first and last).", errCpf:"Enter a valid ID or passport number.",
   errTel:"Enter a valid mobile number.", errData:"Check-out must be after check-in.", errDecl:"You need to tick every declaration.", errAssin:"Please sign in the box before sending.",
-  okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
+  prontoEye:"Last step", prontoH:"Ready to send", prontoP:"When you send, WhatsApp opens with your message ready:", prontoWaT:"Confirm your arrival", prontoWaS:"Just tap send on WhatsApp", prontoGuT:"The guide link is in the message", prontoGuS:"Save it! Wi-Fi, access, rules and tips", prontoNota:"Before asking anything, take a look at the guide — almost everything is there 💛", okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
   rodape:"Short-stay property management",
   zapOi:"Hi! I've just completed the online check-in for {unidade} · {predio}.",
   zapTit:"STAY AGREEMENT", zapAndar:"floor {n}", zapHosp:"GUESTS", zapTitular:"Main guest", zapHospN:"Guest", zapCrianca:"child, no document", zapCel:"mobile", zapAs:"at",
@@ -473,7 +481,7 @@ var TXT = {
   phNome:"como aparece en el documento", phPass:"número del pasaporte", phTel:"+54 9 11 0000 0000",
   errPass:"Indica el número del pasaporte.",
   crianca:"Es un niño (documento opcional)",
-  addHosp:"+ Añadir huésped", remover:"quitar",
+  addHosp:'Añadir huésped', addHospDica:'¿Vienen acompañantes? Agrégalos a todos — cada uno debe constar en el término', remover:"quitar",
   limite:"Esta unidad admite hasta {capacidade} persona(s).",
   e2h:"Tu reserva", e2lead:"Las fechas y el horario previsto de llegada.",
   e2placa:" Si vienes en coche, indica la patente — el edificio necesita identificar el vehículo.",
@@ -490,7 +498,7 @@ var TXT = {
   btVolta:"Volver", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
   errObrig:"Completa este campo.", errNome:"Indica el nombre completo (nombre y apellido).", errCpf:"Indica un documento o pasaporte válido.",
   errTel:"Indica un celular válido.", errData:"El check-out debe ser posterior al check-in.", errDecl:"Es necesario marcar todas las declaraciones.", errAssin:"Firma en el recuadro antes de enviar.",
-  okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
+  prontoEye:"Último paso", prontoH:"Todo listo para enviar", prontoP:"Al enviar, WhatsApp se abre con tu mensaje listo:", prontoWaT:"Confirma tu llegada", prontoWaS:"Solo toca enviar en WhatsApp", prontoGuT:"El enlace de la guía va en el mensaje", prontoGuS:"¡Guárdalo! Wi-Fi, acceso, reglas y consejos", prontoNota:"Antes de preguntar algo, mira la guía — casi todo ya está ahí 💛", okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
   rodape:"Gestión de inmuebles para temporada",
   zapOi:"¡Hola! Acabo de hacer el check-in online de {unidade} · {predio}.",
   zapTit:"TÉRMINO DE ESTADÍA", zapAndar:"piso {n}", zapHosp:"HUÉSPEDES", zapTitular:"Titular", zapHospN:"Huésped", zapCrianca:"niño, sin documento", zapCel:"cel", zapAs:"a las",
@@ -945,17 +953,17 @@ function mensagemZap(d){
 /* ================= NAVEGACAO ================= */
 function mostrar(n){
   ETAPA=n;
-  [1,2,3,4,5].forEach(function(i){ document.getElementById('e'+i).classList.toggle('on',i===n); });
+  [1,2,3,4,5,6].forEach(function(i){ document.getElementById('e'+i).classList.toggle('on',i===n); });
   var barras=document.querySelectorAll('.prog div');
   for(var i=0;i<4;i++) barras[i].classList.toggle('on', i<Math.min(n,4));
-  document.querySelector('.prog').classList.toggle('hide',n===5);
+  document.querySelector('.prog').classList.toggle('hide',n>=5);
   document.getElementById('passoRot').textContent = n<5 ? (n+'/4 · '+T('passos')[n-1]) : '';
-  document.getElementById('btVolta').classList.toggle('hide',n===1||n===5);
-  document.getElementById('navBar').classList.toggle('hide',n===5);
+  document.getElementById('btVolta').classList.toggle('hide',n===1||n===6);
+  document.getElementById('navBar').classList.toggle('hide',n===6);
   var bt=document.getElementById('btSegue');
-  bt.textContent = n===4?T('btEnviar'):T('btSegue');
-  bt.className = n===4?'enviar':'segue';
-  bt.onclick = n===4?enviar:avancar;
+  bt.textContent = n===5?T('btEnviar'):T('btSegue');
+  bt.className = n===5?'enviar':'segue';
+  bt.onclick = n===5?enviar:avancar;
   if(INICIADO){ var pn=document.querySelector('.painel'); window.scrollTo({top:pn?pn.offsetTop-14:0,behavior:'auto'}); }
   INICIADO=true;
   if(n===4){ montarDecl(); montarResumo(); if(!ctx) setTimeout(initAssin,60); }
