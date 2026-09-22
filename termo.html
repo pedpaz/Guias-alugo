@@ -351,7 +351,7 @@ var TXT = {
   hospTit:"Hóspede", titularTit:"Titular da reserva",
   lNome:"Nome completo", lDoc:"Documento", passaporte:"Passaporte", lTel:"Celular com DDD",
   endTit:"Dados do titular para a portaria", endSub:"O condomínio exige estes dados para liberar a entrada.",
-  lRg:"RG", lEnd:"Endereço (rua e número)", lBairro:"Bairro", lCidade:"Cidade", lUf:"Estado", lCep:"CEP", ufSel:"Selecione",
+  lRg:"RG", lEnd:"Endereço (rua e número)", lBairro:"Bairro", lCidade:"Cidade", lUf:"Estado", lCep:"CEP", ufSel:"Selecione", phEstado:"Estado / Província",
   errRg:"Informe o RG.", errCampo:"Preencha este campo.", errCep:"Informe o CEP com 8 números.",
   rRg:"RG", rEnd:"Endereço", zapEnd:"Endereço", zapCidade:"Cidade", zapGrupo:"COMPOSIÇÃO DO GRUPO", zapAdultos:"Adultos", zapCriancas:"Crianças",
   phNome:"como está no documento", phPass:"número do passaporte", phTel:"(62) 9 9999-9999",
@@ -409,7 +409,7 @@ var TXT = {
   hospTit:"Guest", titularTit:"Main guest",
   lNome:"Full name", lDoc:"Document", passaporte:"Passport", lTel:"Mobile number",
   endTit:"Main guest details for the gatehouse", endSub:"The resort requires these details to grant access.",
-  lRg:"ID number (RG)", lEnd:"Address (street and number)", lBairro:"District", lCidade:"City", lUf:"State", lCep:"Postal code", ufSel:"Select",
+  lRg:"ID number (RG)", lEnd:"Address (street and number)", lBairro:"District", lCidade:"City", lUf:"State", lCep:"Postal code", ufSel:"Select", phEstado:"State / Province",
   errRg:"Enter the ID number.", errCampo:"Fill in this field.", errCep:"Enter the 8-digit postal code.",
   rRg:"ID", rEnd:"Address", zapEnd:"Address", zapCidade:"City", zapGrupo:"GROUP COMPOSITION", zapAdultos:"Adults", zapCriancas:"Children",
   phNome:"as it appears on your document", phPass:"passport number", phTel:"+1 555 000 0000",
@@ -467,7 +467,7 @@ var TXT = {
   hospTit:"Huésped", titularTit:"Titular de la reserva",
   lNome:"Nombre completo", lDoc:"Documento", passaporte:"Pasaporte", lTel:"Celular",
   endTit:"Datos del titular para la portería", endSub:"El condominio exige estos datos para liberar la entrada.",
-  lRg:"Documento de identidad (RG)", lEnd:"Dirección (calle y número)", lBairro:"Barrio", lCidade:"Ciudad", lUf:"Estado", lCep:"Código postal", ufSel:"Selecciona",
+  lRg:"Documento de identidad (RG)", lEnd:"Dirección (calle y número)", lBairro:"Barrio", lCidade:"Ciudad", lUf:"Estado", lCep:"Código postal", ufSel:"Selecciona", phEstado:"Estado / Provincia",
   errRg:"Indica el documento.", errCampo:"Completa este campo.", errCep:"Indica el código postal de 8 números.",
   rRg:"Documento", rEnd:"Dirección", zapEnd:"Dirección", zapCidade:"Ciudad", zapGrupo:"COMPOSICIÓN DEL GRUPO", zapAdultos:"Adultos", zapCriancas:"Niños",
   phNome:"como aparece en el documento", phPass:"número del pasaporte", phTel:"+54 9 11 0000 0000",
@@ -646,7 +646,7 @@ function mascaraCpf(el){
   else if(d.length>3) s=d.slice(0,3)+'.'+d.slice(3);
   el.value=s;
 }
-function setDoc(i,tipo){ DOC[i]=tipo; var v=lerHosp(); v[i].c=''; montarHospedes(v); var el=document.getElementById('h_cpf_'+i); if(el) el.focus(); }
+function setDoc(i,tipo){ DOC[i]=tipo; var v=lerHosp(); v[i].c=''; montarHospedes(v); if(i===0 && typeof montarEndereco==='function'){ montarEndereco(); } var el=document.getElementById('h_cpf_'+i); if(el) el.focus(); }
 function montarHospedes(vals){
   vals = vals || lerHosp();
   var h='';
@@ -693,10 +693,13 @@ function montarEndereco(){
     campo('e_end',T('lEnd'),'autocomplete="street-address"',T('errCampo'))+
     campo('e_bairro',T('lBairro'),'autocomplete="address-level3"',T('errCampo'))+
     campo('e_cidade',T('lCidade'),'autocomplete="address-level2"',T('errCampo'))+
-    '<div class="campo" id="c_e_uf"><label>'+T('lUf')+'</label><select id="e_uf"><option value="">'+T('ufSel')+'</option>'+
-      UFS.map(function(u){ return '<option value="'+u+'"'+(v.e_uf===u?' selected':'')+'>'+u+'</option>'; }).join('')+
-    '</select><div class="msg">'+T('errCampo')+'</div></div>'+
-    campo('e_cep',T('lCep'),'inputmode="numeric" maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" autocomplete="postal-code"',T('errCep'))+
+    '<div class="campo" id="c_e_uf"><label>'+T('lUf')+'</label>'+
+      ( (DOC[0]==='pass')
+        ? '<input type="text" id="e_uf" autocomplete="address-level1" placeholder="'+T('phEstado')+'" value="'+esc(v.e_uf||'')+'">'
+        : '<select id="e_uf"><option value="">'+T('ufSel')+'</option>'+UFS.map(function(u){ return '<option value="'+u+'"'+(v.e_uf===u?' selected':'')+'>'+u+'</option>'; }).join('')+'</select>'
+      )+
+    '<div class="msg">'+T('errCampo')+'</div></div>'+
+    campo('e_cep',T('lCep'), (DOC[0]==='pass' ? 'maxlength="12" placeholder="ZIP / Postal code" autocomplete="postal-code"' : 'inputmode="numeric" maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" autocomplete="postal-code"'),T('errCep'))+
   '</div>';
 }
 function addHosp(){ if(NH<U.capacidade){ var v=lerHosp(); NH++; montarHospedes(v); } }
