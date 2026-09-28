@@ -361,8 +361,18 @@ window.UNIDADES = {
     sem: ["animais"], clausulas_extra: [ PETS_WINNER ],
     guia: "guia-winner-503C.html" },
 
+  /* ---- FR Bueno (fechadura digital) — o guia usa o código FRB-1003A; o sistema, FB-1003A ---- */
+  "FRB-1003A": { predio: "FR Bueno", unidade: "Apto 1003A", bairro: "Setor Bueno",
+    endereco: "Edifício FR Bueno, Setor Bueno, Goiânia/GO", capacidade: 4,
+    checkin: "15h", checkout: "12h",
+    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-fr-bueno-1003A.html" },
+
   /* ---- Flat Aldeia do Lago · Caldas Novas (guarita + pulseiras) ---- */
   "ADL-103A": aldeia("Apto 103A · 1 quarto", 5, 40, "guia-aldeia-103a.html"),
   "ADL-405A": aldeia("Apto 405A · 1 quarto", 5, 40, "guia-aldeia-405a.html"),
   "ADL-306H": aldeia("Apto 306H · 2 quartos", 8, 50, "guia-aldeia-306h.html")
 };
+
+/* FR Bueno 1003A: os dois códigos (guia e sistema aluGO) abrem o mesmo termo. */
+window.UNIDADES["FB-1003A"] = window.UNIDADES["FRB-1003A"];
