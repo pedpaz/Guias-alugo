@@ -320,9 +320,10 @@ window.UNIDADES = {
 
   /* ---- Dna Smart / DNA SmartStyle (fechadura digital) ---- */
   "DS-407B": { predio: "Dna Smart", unidade: "Flat 407B", bairro: "Setor Bueno",
-    endereco: "Edifício Dna Smart, Setor Bueno, Goiânia/GO", capacidade: 4,
+    endereco: "R. T-37, 2300, Setor Bueno, Goiânia/GO", capacidade: 4,
     checkin: "15h", checkout: "12h",
-    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio },
+    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-dna-407B.html" },
   "DS-2003B": { predio: "DNA SmartStyle", unidade: "Duplex 2003 · Torre B", bairro: "Setor Bueno",
     endereco: "R. T-37, 2300, Setor Bueno, Goiânia/GO", capacidade: 4,
     camas: { pt: ", em 1 cama queen na suíte e 1 sofá-cama na sala", en: ", in 1 queen bed in the suite and 1 sofa bed in the living room", es: ", en 1 cama queen en la suite y 1 sofá cama en la sala" },
@@ -341,9 +342,10 @@ window.UNIDADES = {
 
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
-    endereco: "Edifício Tai Residencial, Setor Bueno, Goiânia/GO", capacidade: 4,
+    endereco: "R. T-53, 804, Setor Bueno, Goiânia/GO", capacidade: 4,
     checkin: "15h", checkout: "12h",
-    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio },
+    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-tai-803S.html" },
 
   /* ---- Blend Smart Style ---- */
   "BLE-757": { predio: "Blend Smart Style", unidade: "Apto 757", bairro: "Setor Marista",
