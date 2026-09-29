@@ -187,9 +187,9 @@ var AREAS = {
     en: "Use of the common areas follows the resort's internal rules, including quiet hours and the pools. The barbecue is allowed at an extra cost and on prior request. Fishing is allowed within the resort, equipment not included. After check-out, staying in the apartment or in the common areas and pools is not permitted.",
     es: "El uso de las áreas comunes sigue el reglamento interno del condominio, incluidos el silencio y las piscinas. La parrilla se permite con costo adicional y consulta previa. La pesca está permitida en las áreas del condominio, sin el equipo. Tras el check-out no se permite la permanencia en el inmueble ni en las áreas comunes y piscinas." },
   dna: {
-    pt: "O uso das áreas comuns segue o regimento do condomínio. Piscina e espaço gourmet ficam liberados, de sexta a domingo, apenas para estadias de 3 noites ou mais; o salão de festas não está disponível para hospedagem por temporada.",
-    en: "Use of the common areas follows the building's rules. The pool and gourmet area are available, Friday to Sunday, only for stays of 3 nights or more; the party room is not available for short stays.",
-    es: "El uso de las áreas comunes sigue el reglamento del condominio. La piscina y el espacio gourmet quedan liberados, de viernes a domingo, solo para estadías de 3 noches o más; el salón de fiestas no está disponible para hospedaje temporario." },
+    pt: "O uso das áreas comuns segue o regimento do condomínio. Piscina e espaço gourmet ficam liberados, de sexta a domingo, apenas para estadias de 2 noites ou mais; o salão de festas não está disponível para hospedagem por temporada.",
+    en: "Use of the common areas follows the building's rules. The pool and gourmet area are available, Friday to Sunday, only for stays of 2 nights or more; the party room is not available for short stays.",
+    es: "El uso de las áreas comunes sigue el reglamento del condominio. La piscina y el espacio gourmet quedan liberados, de viernes a domingo, solo para estadías de 2 noches o más; el salón de fiestas no está disponible para hospedaje temporario." },
   marista: {
     pt: "O uso das áreas comuns — piscina da cobertura, academia, sauna, salas de reunião e espaço gourmet — segue o regimento interno do condomínio. Horários, necessidade de reserva e eventual custo são confirmados na recepção.",
     en: "Use of the common areas — rooftop pool, gym, sauna, meeting rooms and gourmet space — follows the building's internal rules. Opening hours, booking requirements and any cost are confirmed at the front desk.",
