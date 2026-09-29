@@ -256,6 +256,7 @@ footer{text-align:center;padding:26px 20px 34px;border-top:1px solid var(--rule)
 
 @media(max-width:360px){.instant,.grid{grid-template-columns:1fr}}
 </style>
+<script src="assets/fechadura-anim.js" defer></script>
 </head>
 <body>
 
@@ -388,7 +389,8 @@ var TELAS=[
    + '<button class="btn btn-o" onclick="copiar(\'134679*\')">'+IC.porta+t('apto_copiar')+'</button>'
    + _card(IC.escudo,t('c_passo'),_steps(_L('apto_p',4)))
    + _note('',IC.info,t('apto_n1'))
-   + _note('danger',IC.alerta,t('apto_n2'));
+   + _note('danger',IC.alerta,t('apto_n2'))
+   + '<fechadura-anim senha="134679*" cor="#E0761A" lang="'+L+'"></fechadura-anim>';
 }},
 { id:'casa', icone:IC.sofa, corpo:function(){
   return _head('casa') + _ph('sala')
@@ -451,6 +453,7 @@ var TELAS=[
   return _head('problema')
    + _acc([[t('pb1_t'),t('pb1_b')],[t('pb2_t'),t('pb2_b')],[t('pb3_t'),t('pb3_b')],
            [t('pb4_t'),t('pb4_b')],[t('pb5_t'),t('pb5_b')],[t('pb6_t'),t('pb6_b')]])
+   + '<fechadura-anim senha="134679*" cor="#E0761A" lang="'+L+'"></fechadura-anim>'
    + _note('',IC.info,t('problema_n1'))
    + '<button class="btn btn-w" onclick="wpp()">'+IC.wpp+t('problema_btn')+'</button>';
 }},

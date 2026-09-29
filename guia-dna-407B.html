@@ -262,6 +262,7 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 .rodape img{width:132px;margin:0 auto 8px;opacity:.97}
 .rodape .sub{color:rgba(255,255,255,.62);font-size:12.5px;letter-spacing:.02em}
 </style>
+<script src="assets/fechadura-anim.js" defer></script>
 </head>
 <body>
 <div id="aviso" role="alert" aria-live="assertive"></div>
@@ -439,13 +440,13 @@ var TELAS = [
   {id:'chegar',   n:'01', capa:'predio-fachada', corpo:function(d){ return blocos(d)+
      '<a class="btn laranja" target="_blank" rel="noopener" href="'+MAPA_URL+'">'+d.btnMapa+'</a>'; }},
   {id:'predio',   n:'02', capa:'predio-entrada', corpo:blocos},
-  {id:'porta',    n:'03', corpo:blocos},
+  {id:'porta',    n:'03', corpo:function(d){ return blocos(d)+'<fechadura-anim senha="'+SENHA+'" cor="#E0761A" lang="'+L+'"></fechadura-anim>'; }},
   {id:'ape',      n:'04', capa:'ape-geral',      corpo:blocos},
   {id:'cozinha',  n:'05', capa:'ape-cozinha',    corpo:blocos},
   {id:'garagem',  n:'06', corpo:blocos},
   {id:'lazer',    n:'07', capa:'predio-piscina', corpo:blocos},
   {id:'regras',   n:'08', corpo:blocos},
-  {id:'problema', n:'09', tipo:'alerta', corpo:function(d){ return blocos(d)+acordeoes(d)+
+  {id:'problema', n:'09', tipo:'alerta', corpo:function(d){ return blocos(d)+acordeoes(d)+'<fechadura-anim senha="'+SENHA+'" cor="#E0761A" lang="'+L+'"></fechadura-anim>'+
      '<a class="btn laranja" href="#" onclick="zap(TXT[L].zapOi);return false">'+d.btnZap+'</a>'; }},
   {id:'bairro',   n:'10', capa:'vista',          corpo:blocos},
   {id:'checkin',  n:'11', larga:true, corpo:function(d){ return blocos(d)+
