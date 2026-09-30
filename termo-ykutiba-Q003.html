@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E1C27">
+<title>Termo de Check-in · Ykutiba Casa Q003</title>
+<link rel="apple-touch-icon" href="assets/ykutiba/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--noite:#0E1C27;--noite2:#16303f;--linha:rgba(244,236,221,.12);--linha2:rgba(244,236,221,.22);
+--ouro:#E8A24C;--damasco:#F1C08A;--agua:#4FA6A2;--mare:#2C7E80;--areia:#F4ECDD;
+--t2:#B9C4CB;--t3:#8395A0;--fdisp:'Fraunces',serif;--fbody:'Manrope',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--noite);color:var(--areia);font-family:var(--fbody);font-size:15px;line-height:1.6;
+background-image:radial-gradient(120% 80% at 50% 0%,rgba(232,162,76,.07),transparent 60%)}
+.wrap{max-width:640px;margin:0 auto;padding:28px 20px calc(120px + env(safe-area-inset-bottom))}
+header{text-align:center;padding:14px 0 22px;border-bottom:1px solid var(--linha)}
+.eyebrow{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--agua);font-weight:700}
+h1{font-family:var(--fdisp);font-weight:400;font-size:clamp(26px,7vw,34px);line-height:1.15;margin-top:8px}
+.sub{color:var(--t2);font-size:13.5px;margin-top:8px}
+.mark{display:flex;justify-content:center;margin-bottom:8px}
+.card{background:linear-gradient(160deg,rgba(27,43,55,.6),rgba(18,32,41,.6));border:1px solid var(--linha);
+border-radius:18px;padding:20px 18px;margin-top:20px}
+.card h2{font-family:var(--fdisp);font-weight:400;font-size:20px;color:var(--areia);display:flex;align-items:center;gap:9px}
+.card h2 .num{width:26px;height:26px;border-radius:50%;background:var(--ouro);color:var(--noite);
+font-family:var(--fbody);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.card>p.hint{color:var(--t3);font-size:12.5px;margin-top:6px}
+.f{margin-top:15px}
+.f label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.f input,.f select,.f textarea{width:100%;background:rgba(10,22,30,.75);border:1px solid var(--linha2);color:var(--areia);
+border-radius:11px;padding:13px 14px;font-family:var(--fbody);font-size:15px;outline:none;transition:.2s}
+.f input:focus,.f select:focus{border-color:var(--ouro);background:rgba(10,22,30,.95)}
+.f input::placeholder{color:#5d6f7b}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.callout{display:flex;gap:11px;align-items:flex-start;background:rgba(79,166,162,.09);border:1px solid rgba(79,166,162,.28);
+border-radius:13px;padding:13px 14px;margin-top:15px;font-size:13px;color:#cfe4e2}
+.callout b{color:var(--areia)}
+.occ{border:1px solid var(--linha);border-radius:13px;padding:13px;margin-top:11px;position:relative;background:rgba(10,22,30,.4)}
+.occ .oh{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.occ .on{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ouro)}
+.occ .del{background:transparent;border:0;color:var(--t3);font-size:12px;font-weight:700;cursor:pointer;padding:2px 6px}
+.addbtn{width:100%;margin-top:12px;background:transparent;border:1px dashed var(--linha2);color:var(--damasco);
+border-radius:12px;padding:13px;font-family:var(--fbody);font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.addbtn:hover{border-color:var(--ouro);color:var(--ouro)}
+.termo{background:rgba(244,236,221,.95);color:#2b2118;border-radius:14px;padding:18px 16px;margin-top:15px;
+font-size:12.5px;line-height:1.65;max-height:220px;overflow-y:auto;border:1px solid rgba(232,162,76,.5)}
+.termo b{color:#a9642b}
+.chk{display:flex;gap:11px;align-items:flex-start;margin-top:15px;cursor:pointer;padding:13px;border-radius:12px;
+border:1px solid var(--linha2);background:rgba(10,22,30,.5);transition:.2s}
+.chk.on{border-color:var(--agua);background:rgba(79,166,162,.1)}
+.chk .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--linha2);display:flex;
+align-items:center;justify-content:center;transition:.2s;margin-top:1px}
+.chk.on .box{background:var(--agua);border-color:var(--agua)}
+.chk .box svg{opacity:0;transition:.2s}.chk.on .box svg{opacity:1}
+.chk span{font-size:13.5px;color:var(--t2)}.chk.on span{color:var(--areia)}
+.sigwrap{margin-top:15px}
+.sigbox{background:rgba(244,236,221,.97);border-radius:12px;border:1px solid var(--linha2);position:relative;overflow:hidden}
+#sig{width:100%;height:170px;display:block;touch-action:none;cursor:crosshair}
+.sighint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#a2957f;
+font-size:13px;pointer-events:none;font-weight:600}
+.sigbox.drawn .sighint{display:none}
+.sigbar{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.sigbar small{color:var(--t3);font-size:11.5px}
+.clearsig{background:transparent;border:0;color:var(--damasco);font-size:12.5px;font-weight:700;cursor:pointer;padding:4px}
+.send{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+background:linear-gradient(transparent,rgba(14,28,39,.96) 26%);z-index:20}
+.sendin{max-width:640px;margin:0 auto}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border:0;border-radius:14px;
+font-family:var(--fbody);font-weight:800;font-size:15.5px;cursor:pointer;transition:.2s;
+background:linear-gradient(180deg,#4FA6A2,#3C8E8A);color:var(--noite);box-shadow:0 10px 30px rgba(79,166,162,.28)}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn:not(:disabled):hover{transform:translateY(-1px)}
+.btn svg{width:20px;height:20px;fill:var(--noite)}
+.status{text-align:center;font-size:12px;color:var(--t3);margin-top:9px;min-height:16px}
+.status.ok{color:var(--agua)}.status.err{color:#e59b8a}
+footer{text-align:center;color:var(--t3);font-size:11px;margin-top:26px;padding-top:18px;border-top:1px solid var(--linha)}
+.err{border-color:#c96a52 !important}
+.done{text-align:center;padding:40px 20px}
+.done h2{font-family:var(--fdisp);font-weight:400;font-size:28px;margin:14px 0 8px}
+.done p{color:var(--t2);font-size:14px}
+.done .again{margin-top:22px;background:transparent;border:1px solid var(--linha2);color:var(--areia);
+border-radius:12px;padding:12px 20px;font-family:var(--fbody);font-weight:700;cursor:pointer}
+.btn-alt{background:var(--ouro);color:var(--noite);box-shadow:0 10px 30px rgba(232,162,76,.24);margin-bottom:9px}
+.btn-alt svg{fill:var(--noite)}
+
+/* ===== documento imprimível (formulário do condomínio) ===== */
+#doc{display:none}
+@media print{
+  @page{size:A4;margin:10mm 12mm}
+  body{background:#fff !important;color:#000 !important;background-image:none !important}
+  .wrap,.send,footer{display:none !important}
+  #doc{display:block !important;font-family:Arial,Helvetica,sans-serif;color:#000;font-size:9pt;line-height:1.3}
+  #doc .dt{text-align:center;font-style:italic;font-weight:bold;font-size:10.5pt;margin-bottom:8px}
+  #doc .lbl{font-weight:bold}
+  #doc .ln{border-bottom:1px solid #000;display:inline-block;min-width:50px;padding:0 3px}
+  #doc .sec{font-weight:bold;text-decoration:underline;margin:8px 0 3px}
+  #doc p{margin:2px 0}
+  #doc .grid2{display:flex;gap:18px}
+  #doc .grid2>div{flex:1}
+  #doc .cap{margin:7px 0 2px;font-weight:bold;font-size:8.5pt;line-height:1.25}
+  #doc table{width:100%;border-collapse:collapse;margin-top:4px}
+  #doc th,#doc td{border:1px solid #000;padding:2px 5px;font-size:8.5pt;text-align:left;height:15px}
+  #doc th{font-weight:bold}
+  #doc .termo-t{text-align:center;font-weight:bold;margin:11px 0 6px;font-size:9.5pt}
+  #doc .termo-p{text-align:justify;margin-bottom:5px;font-size:8.7pt;line-height:1.32}
+  #doc .sigarea{margin-top:16px;text-align:center;page-break-inside:avoid}
+  #doc .sigimg{max-height:42px;display:block;margin:0 auto -4px}
+  #doc .sigline{border-top:1px solid #000;width:260px;margin:0 auto;padding-top:3px;font-size:8.5pt}
+  #doc .local{margin-top:12px;text-align:center;font-size:9pt}
+}
+</style></head>
+<body>
+
+<div class="wrap" id="form">
+<header>
+  <div class="mark">
+    <svg viewBox="0 0 100 100" width="52" height="52"><defs><radialGradient id="s" cx=".5" cy=".4" r=".62">
+    <stop offset="0" stop-color="#F1C08A"/><stop offset="1" stop-color="#E8A24C"/></radialGradient></defs>
+    <path d="M32 54 A18 18 0 0 1 68 54 Z" fill="url(#s)"/>
+    <line x1="24" y1="54" x2="76" y2="54" stroke="#F4ECDD" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M26 63 q6 -4 12 0 t12 0 t12 0 t12 0" fill="none" stroke="#4FA6A2" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M30 70 q5 -3.5 10 0 t10 0 t10 0 t10 0" fill="none" stroke="#2C7E80" stroke-width="2.4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="eyebrow">Residencial Ykutiba · Casa Q003</div>
+  <h1>Termo de check-in</h1>
+  <p class="sub">Preencha os dados abaixo. Ao final, envie para o anfitrião — nós encaminhamos à portaria do condomínio.</p>
+</header>
+
+<!-- 1. RESPONSÁVEL -->
+<div class="card">
+  <h2><span class="num">1</span> Responsável pela locação</h2>
+  <p class="hint">Quem assina o termo e responde pela unidade durante a estadia.</p>
+  <div class="f"><label>Nome completo</label><input id="r_nome" type="text" placeholder="Seu nome completo" autocomplete="name"></div>
+  <div class="row">
+    <div class="f"><label>RG</label><input id="r_rg" type="text" placeholder="00.000.000-0"></div>
+    <div class="f"><label>CPF</label><input id="r_cpf" type="text" inputmode="numeric" placeholder="000.000.000-00"></div>
+  </div>
+  <div class="f"><label>Telefone (WhatsApp)</label><input id="r_tel" type="tel" inputmode="tel" placeholder="(00) 90000-0000"></div>
+  <div class="f"><label>E-mail <span style="text-transform:none;letter-spacing:0;font-weight:500">(opcional)</span></label><input id="r_email" type="email" placeholder="voce@email.com" autocomplete="email"></div>
+</div>
+
+<!-- 2. PERÍODO -->
+<div class="card">
+  <h2><span class="num">2</span> Período da hospedagem</h2>
+  <div class="row">
+    <div class="f"><label>Data de entrada</label><input id="p_din" type="date"></div>
+    <div class="f"><label>Horário de chegada</label><input id="p_hin" type="time" value="15:00"></div>
+  </div>
+  <div class="row">
+    <div class="f"><label>Data de saída</label><input id="p_dout" type="date"></div>
+    <div class="f"><label>Horário de saída</label><input id="p_hout" type="time" value="11:00"></div>
+  </div>
+  <div class="callout"><div>🕒</div><div>Check-in a partir das <b>15h</b> · Check-out até as <b>11h</b>.</div></div>
+</div>
+
+<!-- 3. VEÍCULO -->
+<div class="card">
+  <h2><span class="num">3</span> Veículo</h2>
+  <p class="hint">Para liberação na portaria. Se vier sem carro, marque a opção abaixo.</p>
+  <div class="chk" id="semCarroChk"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0E1C27" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span><span>Vou chegar <b>sem veículo</b></span></div>
+  <div id="carroFields">
+    <div class="f"><label>Veículo (modelo/cor)</label><input id="v_modelo" type="text" placeholder="Ex.: Fiat Argo prata"></div>
+    <div class="f"><label>Placa</label><input id="v_placa" type="text" placeholder="ABC0D00" style="text-transform:uppercase"></div>
+  </div>
+</div>
+
+<!-- 4. OCUPANTES -->
+<div class="card">
+  <h2><span class="num">4</span> Ocupantes</h2>
+  <p class="hint">Liste todos que vão ficar na casa durante o período (incluindo você).</p>
+  <div class="row">
+    <div class="f"><label>Adultos</label><input id="o_adultos" type="number" min="1" max="12" value="2" inputmode="numeric"></div>
+    <div class="f"><label>Crianças</label><input id="o_criancas" type="number" min="0" max="12" value="0" inputmode="numeric"></div>
+  </div>
+  <div class="callout"><div>👥</div><div>Capacidade definida pelo Regulamento Interno: <b>até 3 pessoas por quarto</b> (entre adultos e crianças).</div></div>
+  <div id="occList"></div>
+  <button class="addbtn" id="addOcc" type="button">+ Adicionar ocupante</button>
+</div>
+
+<!-- 5. TERMO -->
+<div class="card">
+  <h2><span class="num">5</span> Termo de responsabilidade</h2>
+  <p class="hint">Inquilino · Aluguel de temporada</p>
+  <div class="termo" id="termoTexto">
+    <p>Eu, <b id="t_nome">_______</b>, RG <b id="t_rg">_______</b>, inscrito no CPF sob o nº <b id="t_cpf">_______</b>, ao alugar a unidade <b>Q003</b> do Condomínio Residencial Ykutiba, localizado na Rua da Igreja, S/N – Imbassaí – Mata de São João/BA, pelo período de <b id="t_per">___/___/___ à ___/___/___</b>, declaro estar ciente das normas do Regulamento Interno (que recebi resumidamente juntamente com esta autorização), responsabilizando-me pelos danos que vierem a ocorrer provocados por mim e demais ocupantes da unidade no período acima citado, bem como também tenho ciência que o condomínio não se responsabiliza por materiais de qualquer natureza deixados em suas dependências antes, durante e após o período de locação.</p>
+    <p style="margin-top:10px">Declaro ainda que assumo completa responsabilidade por quaisquer infrações às normas da Convenção e do Regulamento Interno que venham a ocorrer no período de locação.</p>
+    <p style="margin-top:10px">Por ser expressão da verdade, firmo o presente.</p>
+    <p style="margin-top:12px;text-align:right;font-size:12px">Imbassaí (BA), <b id="t_data">___/___/______</b></p>
+  </div>
+  <div class="chk" id="aceiteChk"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0E1C27" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span><span><b>Li e concordo</b> com o Termo de Responsabilidade e com o Regulamento Interno do condomínio.</span></div>
+
+  <div class="sigwrap">
+    <label style="display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:6px">Assinatura</label>
+    <div class="sigbox" id="sigBox"><canvas id="sig"></canvas><div class="sighint">Assine aqui com o dedo</div></div>
+    <div class="sigbar"><small>Ela aparece impressa no PDF que vai para a portaria.</small><button class="clearsig" id="clearSig" type="button">Limpar</button></div>
+  </div>
+</div>
+
+<footer>Casa Q003 · Residencial Ykutiba — Imbassaí, Bahia · aluGO <span style="opacity:.5">· termo v2</span></footer>
+</div>
+
+<div id="doc">
+  <div class="dt">Informe de aluguel/Empréstimo</div>
+  <p><span class="lbl">Nome proprietário:</span> <span class="ln" id="d_prop" style="min-width:300px">&nbsp;</span></p>
+  <p><span class="lbl">Unidade:</span> <span class="ln" id="d_unidade" style="min-width:120px">&nbsp;</span></p>
+
+  <div class="sec">Dados da locação:</div>
+  <p><span class="lbl">Nome do responsável pela locação (inquilino):</span> <span class="ln" id="d_nome" style="min-width:240px">&nbsp;</span></p>
+  <p><span class="lbl">Documento de identificação:</span> <span class="ln" id="d_doc" style="min-width:300px">&nbsp;</span></p>
+  <div class="grid2">
+    <p><span class="lbl">Veículo:</span> <span class="ln" id="d_veic" style="min-width:150px">&nbsp;</span></p>
+    <p><span class="lbl">Placa:</span> <span class="ln" id="d_placa" style="min-width:120px">&nbsp;</span></p>
+  </div>
+  <div class="grid2">
+    <p><span class="lbl">Data de entrada:</span> <span class="ln" id="d_din" style="min-width:110px">&nbsp;</span></p>
+    <p><span class="lbl">Horário de chegada:</span> <span class="ln" id="d_hin" style="min-width:80px">&nbsp;</span></p>
+  </div>
+  <div class="grid2">
+    <p><span class="lbl">Data de saída:</span> <span class="ln" id="d_dout" style="min-width:110px">&nbsp;</span></p>
+    <p><span class="lbl">Horário de saída:</span> <span class="ln" id="d_hout" style="min-width:80px">&nbsp;</span></p>
+  </div>
+  <div class="grid2">
+    <p><span class="lbl">Quantidade de adultos:</span> <span class="ln" id="d_ad" style="min-width:50px">&nbsp;</span></p>
+    <p><span class="lbl">Quantidade de crianças:</span> <span class="ln" id="d_cr" style="min-width:50px">&nbsp;</span></p>
+  </div>
+
+  <div class="cap">Capacidade definida por Regulamento Interno: até 3 pessoas por quarto<br>(entre adultos e crianças)</div>
+  <div class="cap">Favor listar abaixo os nomes dos ocupantes durante o período da hospedagem:</div>
+  <table>
+    <thead><tr><th style="width:46%">Nome</th><th style="width:28%">Documento</th><th style="width:26%">Telefone</th></tr></thead>
+    <tbody id="d_tbody"></tbody>
+  </table>
+
+  <div class="termo-t">Termo de Responsabilidade – Inquilino Aluguel de temporada</div>
+  <p class="termo-p">Eu, <span class="ln" id="d_t_nome" style="min-width:230px">&nbsp;</span> e RG: <span class="ln" id="d_t_rg" style="min-width:130px">&nbsp;</span> inscrito no CPF sob o nº <span class="ln" id="d_t_cpf" style="min-width:140px">&nbsp;</span> ao alugar a unidade <span class="ln" id="d_t_un" style="min-width:70px">&nbsp;</span> do Condomínio Residencial Ykutiba, localizado na rua da Igreja, S/N – Imbassaí – Mata de São João/BA, pelo período de <span class="ln" id="d_t_di" style="min-width:100px">&nbsp;</span> à <span class="ln" id="d_t_df" style="min-width:100px">&nbsp;</span>, declaro estar ciente das normas do Regulamento Interno (que recebi resumidamente juntamente com esta autorização), que responsabilizando-me pelos danos que vierem a ocorrer provocados por mim e demais ocupantes da unidade no período acima citado, bem como também tenho ciência que o condomínio não se responsabiliza por materiais de qualquer natureza deixados em suas dependências antes, durante e após o período de locação.</p>
+  <p class="termo-p">Declaro ainda que assumo completa responsabilidade por quaisquer infrações às normas da Convenção e no regulamento interno que venham ocorrer no período de locação.</p>
+  <p class="termo-p">Por ser expressão da verdade, firmo o presente.</p>
+
+  <div class="local">Imbassaí (BA), <span class="ln" id="d_dia" style="min-width:34px">&nbsp;</span>/<span class="ln" id="d_mes" style="min-width:34px">&nbsp;</span>/<span class="ln" id="d_ano" style="min-width:56px">&nbsp;</span>.</div>
+
+  <div class="sigarea">
+    <img id="d_sig" class="sigimg" alt="" style="display:none">
+    <div class="sigline" id="d_signame">&nbsp;</div>
+  </div>
+</div>
+
+<div class="send" id="sendBar">
+  <div class="sendin">
+    <button class="btn btn-alt" id="pdfBtn" type="button" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0E1C27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+      1 · Gerar PDF para a portaria
+    </button>
+    <button class="btn" id="sendBtn" type="button" disabled>
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.1 14.9l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 0112 4zm4.5 10.3c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2l-.1-.4-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 00-.7.3c-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6 1.8 2.9 4.4 4c1.6.7 2.2.7 3 .6.5 0 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
+      2 · Enviar ao anfitrião (WhatsApp)
+    </button>
+    <div class="status" id="status">Preencha os campos e assine para liberar o envio.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ======================= CONFIGURAÇÃO ======================= */
+  var WPP = "5562982545453";           // WhatsApp do anfitrião (aluGO)
+  var UNIDADE = "Q003";
+  var PROPRIETARIO = "Meyre Anne Vieira Ferreira Souza";   // proprietária da unidade
+
+  // loftcare-os (Supabase). Preencha para gravar automaticamente.
+  var SUPABASE_URL  = "";              // ex.: "https://xxxxx.supabase.co"
+  var SUPABASE_KEY  = "";              // anon key
+  var SUPABASE_TABLE = "alugo_checkin_termos";
+  /* =========================================================== */
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- máscaras simples ---------- */
+  function maskCPF(v){v=v.replace(/\D/g,"").slice(0,11);
+    return v.replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d{1,2})$/,"$1-$2");}
+  function maskTel(v){v=v.replace(/\D/g,"").slice(0,11);
+    if(v.length<=10)return v.replace(/(\d{2})(\d)/,"($1) $2").replace(/(\d{4})(\d)/,"$1-$2");
+    return v.replace(/(\d{2})(\d)/,"($1) $2").replace(/(\d{5})(\d)/,"$1-$2");}
+  $("r_cpf").addEventListener("input",function(){this.value=maskCPF(this.value);check();});
+  $("r_tel").addEventListener("input",function(){this.value=maskTel(this.value);check();});
+
+  /* ---------- sem veículo ---------- */
+  var semCarro=false;
+  $("semCarroChk").addEventListener("click",function(){
+    semCarro=!semCarro; this.classList.toggle("on",semCarro);
+    $("carroFields").style.display = semCarro ? "none" : "";
+    check();
+  });
+
+  /* ---------- ocupantes ---------- */
+  var occ=[];
+  function occRow(i){
+    var d=document.createElement("div"); d.className="occ";
+    d.innerHTML='<div class="oh"><span class="on">Ocupante '+(i+1)+'</span>'+
+      '<button class="del" type="button" data-i="'+i+'">remover</button></div>'+
+      '<div class="f"><label>Nome</label><input type="text" data-f="nome" data-i="'+i+'" placeholder="Nome completo"></div>'+
+      '<div class="row"><div class="f"><label>Documento</label><input type="text" data-f="doc" data-i="'+i+'" placeholder="RG ou CPF"></div>'+
+      '<div class="f"><label>Telefone</label><input type="tel" data-f="tel" data-i="'+i+'" placeholder="(00) 90000-0000"></div></div>';
+    return d;
+  }
+  function renderOcc(){
+    var L=$("occList"); L.innerHTML="";
+    occ.forEach(function(o,i){
+      var r=occRow(i); L.appendChild(r);
+      r.querySelectorAll("input").forEach(function(inp){
+        var f=inp.getAttribute("data-f");
+        inp.value=o[f]||"";
+        inp.addEventListener("input",function(){
+          if(f==="tel") this.value=maskTel(this.value);
+          occ[i][f]=this.value; check();
+        });
+      });
+      r.querySelector(".del").addEventListener("click",function(){
+        occ.splice(i,1); renderOcc(); check();
+      });
+    });
+  }
+  $("addOcc").addEventListener("click",function(){
+    if(occ.length>=11){return;}
+    occ.push({nome:"",doc:"",tel:""}); renderOcc(); check();
+  });
+  occ.push({nome:"",doc:"",tel:""}); renderOcc();
+
+  /* ---------- termo dinâmico ---------- */
+  function br(d){ if(!d) return null; var p=d.split("-"); return p[2]+"/"+p[1]+"/"+p[0]; }
+  function refreshTermo(){
+    $("t_nome").textContent = $("r_nome").value || "_______";
+    $("t_rg").textContent   = $("r_rg").value   || "_______";
+    $("t_cpf").textContent  = $("r_cpf").value  || "_______";
+    var di=br($("p_din").value), df=br($("p_dout").value);
+    $("t_per").textContent  = (di&&df) ? (di+" à "+df) : "___/___/___ à ___/___/___";
+    var h=new Date();
+    $("t_data").textContent = String(h.getDate()).padStart(2,"0")+"/"+String(h.getMonth()+1).padStart(2,"0")+"/"+h.getFullYear();
+  }
+
+  /* ---------- aceite ---------- */
+  var aceite=false;
+  $("aceiteChk").addEventListener("click",function(){
+    aceite=!aceite; this.classList.toggle("on",aceite); check();
+  });
+
+  /* ---------- assinatura ---------- */
+  var cv=$("sig"), ctx=cv.getContext("2d"), drawing=false, hasSig=false;
+  function fitCanvas(){
+    var r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+    var data = hasSig ? cv.toDataURL() : null;
+    cv.width=r.width*dpr; cv.height=r.height*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.lineJoin="round"; ctx.strokeStyle="#2b2118";
+    if(data){var im=new Image();im.onload=function(){ctx.drawImage(im,0,0,r.width,r.height);};im.src=data;}
+  }
+  window.addEventListener("resize",fitCanvas);
+  setTimeout(fitCanvas,60);
+  function pos(e){
+    var r=cv.getBoundingClientRect();
+    var t=(e.touches&&e.touches[0])||e;
+    return {x:t.clientX-r.left, y:t.clientY-r.top};
+  }
+  function start(e){e.preventDefault();drawing=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);}
+  function move(e){if(!drawing)return;e.preventDefault();var p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+    if(!hasSig){hasSig=true;$("sigBox").classList.add("drawn");check();}}
+  function end(){drawing=false;}
+  cv.addEventListener("mousedown",start); cv.addEventListener("mousemove",move);
+  window.addEventListener("mouseup",end);
+  cv.addEventListener("touchstart",start,{passive:false});
+  cv.addEventListener("touchmove",move,{passive:false});
+  cv.addEventListener("touchend",end);
+  $("clearSig").addEventListener("click",function(){
+    ctx.clearRect(0,0,cv.width,cv.height); hasSig=false;
+    $("sigBox").classList.remove("drawn"); check();
+  });
+
+  /* ---------- validação ---------- */
+  var req=["r_nome","r_rg","r_cpf","r_tel","p_din","p_dout"];
+  function valid(){
+    var ok=true;
+    req.forEach(function(id){ if(!$(id).value.trim()) ok=false; });
+    if(!semCarro && !$("v_placa").value.trim()) ok=false;
+    if(!aceite || !hasSig) ok=false;
+    return ok;
+  }
+  function check(){
+    refreshTermo();
+    var ok=valid();
+    $("sendBtn").disabled=!ok;
+    $("pdfBtn").disabled=!ok;
+    var s=$("status");
+    if(ok){ s.textContent="Tudo certo — gere o PDF e/ou envie ao anfitrião."; s.className="status ok"; }
+    else { s.textContent="Preencha os campos, aceite o termo e assine."; s.className="status"; }
+  }
+  ["r_nome","r_rg","r_email","p_din","p_hin","p_dout","p_hout","v_modelo","v_placa","o_adultos","o_criancas"]
+    .forEach(function(id){ $(id).addEventListener("input",check); });
+
+  /* ---------- payload ---------- */
+  function payload(){
+    return {
+      unidade: UNIDADE,
+      proprietario: PROPRIETARIO || null,
+      responsavel_nome: $("r_nome").value.trim(),
+      responsavel_rg: $("r_rg").value.trim(),
+      responsavel_cpf: $("r_cpf").value.trim(),
+      responsavel_telefone: $("r_tel").value.trim(),
+      responsavel_email: $("r_email").value.trim() || null,
+      data_entrada: $("p_din").value,
+      hora_chegada: $("p_hin").value,
+      data_saida: $("p_dout").value,
+      hora_saida: $("p_hout").value,
+      veiculo_modelo: semCarro ? null : ($("v_modelo").value.trim() || null),
+      veiculo_placa: semCarro ? null : ($("v_placa").value.trim().toUpperCase() || null),
+      sem_veiculo: semCarro,
+      qtd_adultos: parseInt($("o_adultos").value||"0",10),
+      qtd_criancas: parseInt($("o_criancas").value||"0",10),
+      ocupantes: occ.filter(function(o){return o.nome && o.nome.trim();}),
+      aceite_termo: aceite,
+      assinatura_base64: hasSig ? cv.toDataURL("image/png") : null,
+      enviado_em: new Date().toISOString(),
+      user_agent: navigator.userAgent
+    };
+  }
+
+  /* ---------- WhatsApp ---------- */
+  function texto(p){
+    var L=[];
+    L.push("*TERMO DE CHECK-IN — YKUTIBA CASA Q003*");
+    L.push("");
+    L.push("*Responsável:* "+p.responsavel_nome);
+    L.push("*RG:* "+p.responsavel_rg+"  |  *CPF:* "+p.responsavel_cpf);
+    L.push("*Telefone:* "+p.responsavel_telefone);
+    if(p.responsavel_email) L.push("*E-mail:* "+p.responsavel_email);
+    L.push("");
+    L.push("*Entrada:* "+br(p.data_entrada)+" às "+p.hora_chegada);
+    L.push("*Saída:* "+br(p.data_saida)+" às "+p.hora_saida);
+    L.push("");
+    if(p.sem_veiculo){ L.push("*Veículo:* sem veículo"); }
+    else { L.push("*Veículo:* "+(p.veiculo_modelo||"-")+"  |  *Placa:* "+(p.veiculo_placa||"-")); }
+    L.push("");
+    L.push("*Adultos:* "+p.qtd_adultos+"  |  *Crianças:* "+p.qtd_criancas);
+    if(p.ocupantes.length){
+      L.push("");
+      L.push("*Ocupantes:*");
+      p.ocupantes.forEach(function(o,i){
+        L.push((i+1)+". "+o.nome+(o.doc?" — "+o.doc:"")+(o.tel?" — "+o.tel:""));
+      });
+    }
+    L.push("");
+    L.push("📘 *GUIA DA CASA — LEITURA OBRIGATÓRIA*");
+    L.push("Declaro que recebi o guia interativo da casa e vou consultá-lo *antes de chamar o anfitrião*. Nele estão: acesso, Wi-Fi, regras do condomínio, uso dos equipamentos e check-out. Não posso alegar desconhecimento do que consta nele.");
+    L.push("👉 "+new URL("guia-ykutiba-Q003.html",location.href).href);
+    L.push("");
+    L.push("✅ Li e aceito o Termo de Responsabilidade e o Regulamento Interno.");
+    L.push("✍️ Assinado digitalmente em "+new Date().toLocaleDateString("pt-BR")+".");
+    return L.join("\n");
+  }
+
+  /* ---------- Supabase (loftcare-os) ---------- */
+  function salvar(p){
+    /* Manda pro sistema da aluGO pelo MESMO caminho dos outros termos
+       (15/09/2026). Antes gravava numa tabela do Supabase com chave pública —
+       a chave ficou vazia e nada era salvo; a chave pública também foi
+       trancada no sistema. Reenvia sem assinatura se o pacote falhar. */
+    var EP = "https://loftcare-os.vercel.app/api/public/checkin";
+    var hosp = (p.ocupantes||[]).map(function(o){ return { nome:o.nome, cpf:o.doc||"", telefone:o.tel||"" }; });
+    var q = {
+      unidade:"YK-Q03", tipo:"termo", idioma:"pt",
+      check_in:p.data_entrada, check_out:p.data_saida, hora_chegada:p.hora_chegada, hora_saida:p.hora_saida,
+      titular:{ nome:p.responsavel_nome, cpf:p.responsavel_cpf, rg:p.responsavel_rg, telefone:p.responsavel_telefone, email:p.responsavel_email||undefined },
+      telefone:p.responsavel_telefone, email:p.responsavel_email||undefined,
+      hospedes:hosp, qtd_hospedes:(p.qtd_adultos||0)+(p.qtd_criancas||0), qtd_adultos:p.qtd_adultos, qtd_criancas:p.qtd_criancas,
+      veiculo: p.sem_veiculo ? "sem veículo" : ((p.veiculo_modelo||"")+" "+(p.veiculo_placa||"")).trim(),
+      aceites:{ contrato:!!p.aceite_termo, nao_fumar:true, sem_festas:true, capacidade:true, checkout:true },
+      assinatura: p.assinatura_base64 ? assinaturaPequena() : ""
+    };
+    function post(body,opts){
+      return fetch(EP, Object.assign({ method:"POST", headers:{"Content-Type":"text/plain;charset=UTF-8"}, body:JSON.stringify(body) }, opts||{}));
+    }
+    return post(q).then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return {saved:true}; })
+      .catch(function(){
+        var q2={}; for(var k in q) if(k!=="assinatura") q2[k]=q[k]; q2.assinatura_omitida=true;
+        return post(q2,{keepalive:true}).then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return {saved:true}; });
+      });
+  }
+  function assinaturaPequena(){
+    try{
+      var W=480, H=Math.round(W*cv.height/cv.width), c2=document.createElement("canvas");
+      c2.width=W; c2.height=H; var x=c2.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,W,H); x.drawImage(cv,0,0,W,H);
+      return c2.toDataURL("image/jpeg",0.6);
+    }catch(e){ return ""; }
+  }
+
+  /* ---------- documento imprimível (formulário do condomínio) ---------- */
+  function txt(id,v){ var e=$(id); if(e) e.textContent = (v===null||v===undefined||v==="") ? "\u00A0" : v; }
+  function fillDoc(){
+    var p=payload();
+    txt("d_prop", PROPRIETARIO || "\u00A0");
+    txt("d_unidade", UNIDADE);
+    txt("d_nome", p.responsavel_nome);
+    txt("d_doc", "RG " + (p.responsavel_rg||"-") + "  |  CPF " + (p.responsavel_cpf||"-"));
+    txt("d_veic", p.sem_veiculo ? "Sem veículo" : (p.veiculo_modelo||"-"));
+    txt("d_placa", p.sem_veiculo ? "—" : (p.veiculo_placa||"-"));
+    txt("d_din", br(p.data_entrada)); txt("d_hin", p.hora_chegada);
+    txt("d_dout", br(p.data_saida));  txt("d_hout", p.hora_saida);
+    txt("d_ad", p.qtd_adultos);       txt("d_cr", p.qtd_criancas);
+
+    // tabela de ocupantes (mínimo 10 linhas, como no formulário original)
+    var tb=$("d_tbody"); tb.innerHTML="";
+    var linhas = Math.max(10, p.ocupantes.length);
+    for(var i=0;i<linhas;i++){
+      var o=p.ocupantes[i]||{};
+      var tr=document.createElement("tr");
+      tr.innerHTML="<td>"+(o.nome||"&nbsp;")+"</td><td>"+(o.doc||"&nbsp;")+"</td><td>"+(o.tel||"&nbsp;")+"</td>";
+      tb.appendChild(tr);
+    }
+
+    // termo
+    txt("d_t_nome", p.responsavel_nome);
+    txt("d_t_rg", p.responsavel_rg);
+    txt("d_t_cpf", p.responsavel_cpf);
+    txt("d_t_un", UNIDADE);
+    txt("d_t_di", br(p.data_entrada));
+    txt("d_t_df", br(p.data_saida));
+
+    var h=new Date();
+    txt("d_dia", String(h.getDate()).padStart(2,"0"));
+    txt("d_mes", String(h.getMonth()+1).padStart(2,"0"));
+    txt("d_ano", String(h.getFullYear()));
+
+    // assinatura
+    var im=$("d_sig");
+    if(hasSig){ im.src=cv.toDataURL("image/png"); im.style.display=""; }
+    else { im.style.display="none"; }
+    txt("d_signame", p.responsavel_nome || "Assinatura do responsável");
+  }
+  $("pdfBtn").addEventListener("click",function(){
+    if(!valid()) return;
+    fillDoc();
+    setTimeout(function(){ window.print(); }, 120);
+  });
+
+  /* ---------- envio ---------- */
+  $("sendBtn").addEventListener("click",function(){
+    if(!valid()) return;
+    var p=payload();
+    fillDoc();                       // garante o documento pronto antes de trocar a tela
+    var s=$("status");
+    s.textContent="Registrando..."; s.className="status";
+    $("sendBtn").disabled=true; $("pdfBtn").disabled=true;
+
+    salvar(p).catch(function(e){
+      try{ localStorage.setItem("ykt_termo_"+Date.now(), JSON.stringify(p)); }catch(_){}
+      console.warn("Falha ao gravar no loftcare-os:",e);
+      return {failed:true};
+    }).then(function(){
+      window.open("https://wa.me/"+WPP+"?text="+encodeURIComponent(texto(p)),"_blank");
+      document.getElementById("form").innerHTML =
+        '<div class="done"><div class="mark">'+
+        '<svg viewBox="0 0 100 100" width="64" height="64"><circle cx="50" cy="50" r="42" fill="none" stroke="#4FA6A2" stroke-width="4"/>'+
+        '<path d="M32 52 l12 12 l26 -28" fill="none" stroke="#4FA6A2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+        '</div><h2>Termo enviado!</h2><p>Agora gere o PDF do formulário — é ele que a portaria do condomínio precisa.</p>'+
+        '<button class="btn btn-alt" id="pdfDone" type="button" style="max-width:340px;margin:22px auto 0">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="#0E1C27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>'+
+        ' Gerar PDF para a portaria</button>'+
+        '<button class="again" id="retry" type="button">Abrir o WhatsApp de novo</button></div>';
+      $("sendBar").style.display="none";
+      var pd=document.getElementById("pdfDone");
+      if(pd) pd.addEventListener("click",function(){ window.print(); });
+      var rt=document.getElementById("retry");
+      if(rt) rt.addEventListener("click",function(){
+        window.open("https://wa.me/"+WPP+"?text="+encodeURIComponent(texto(p)),"_blank");
+      });
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  check();
+})();
+</script>
+</body></html>

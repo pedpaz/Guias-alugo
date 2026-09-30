@@ -177,7 +177,15 @@ var ACESSO = {
   recepcao: {
     pt: "O prédio cadastra o reconhecimento facial de cada hóspede na recepção, mediante documento com foto e conferência desta lista. Quem não estiver na lista não entra.",
     en: "The building registers each guest's facial recognition at the front desk, on presentation of a photo ID and a check against this list. Anyone not on the list cannot come in.",
-    es: "El edificio registra el reconocimiento facial de cada huésped en recepción, con documento con foto y verificación de esta lista. Quien no esté en la lista no entra." }
+    es: "El edificio registra el reconocimiento facial de cada huésped en recepción, con documento con foto y verificación de esta lista. Quien no esté en la lista no entra." },
+  privilege: {
+    pt: "O acesso ao condomínio é pela <b>portaria (24h)</b>. A aluGO envia esta lista de hóspedes à recepção antes da chegada; cada hóspede apresenta documento com foto e cadastra o <b>reconhecimento facial</b>, que libera a entrada, o clube e o portão da praia. O cadastro é pessoal e intransferível, e quem não estiver na lista não entra.",
+    en: "Access to the condominium is through the <b>24-hour gatehouse</b>. aluGO sends this guest list to the front desk before arrival; each guest shows a photo ID and registers their <b>facial recognition</b>, which opens the entrance, the clubhouse and the beach gate. The registration is personal and non-transferable, and anyone not on the list cannot come in.",
+    es: "El acceso al condominio es por la <b>portería (24h)</b>. aluGO envía esta lista de huéspedes a la recepción antes de la llegada; cada huésped presenta documento con foto y registra su <b>reconocimiento facial</b>, que libera la entrada, el club y el portón de la playa. El registro es personal e intransferible, y quien no esté en la lista no entra." },
+  privilege2: {
+    pt: "As instruções de acesso à casa são enviadas pelo WhatsApp no dia do check-in e não devem ser repassadas a terceiros.",
+    en: "Instructions to access the house are sent on WhatsApp on check-in day and must not be shared.",
+    es: "Las instrucciones de acceso a la casa se envían por WhatsApp el día del check-in y no deben compartirse." }
 };
 
 /* Áreas comuns / estacionamento reutilizados. */
@@ -198,6 +206,10 @@ var AREAS = {
     pt: "O uso das áreas comuns segue o regimento interno do condomínio, inclusive quanto a horários e à proibição de fumar.",
     en: "Use of the common areas follows the building's internal rules, including opening hours and the smoking ban.",
     es: "El uso de las áreas comunes sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar." },
+  privilege: {
+    pt: "O uso do clube, das piscinas, quadras, academia e demais áreas comuns segue o regimento interno do condomínio, inclusive quanto ao horário de silêncio e à proibição de vidro nas piscinas. Os lagos são decorativos: não é permitido entrar, pescar ou alimentar os peixes.",
+    en: "Use of the clubhouse, pools, courts, gym and other common areas follows the condominium's internal rules, including quiet hours and the ban on glass at the pools. The lakes are ornamental: entering, fishing or feeding the fish is not allowed.",
+    es: "El uso del club, las piscinas, canchas, gimnasio y demás áreas comunes sigue el reglamento interno del condominio, incluidos el horario de silencio y la prohibición de vidrio en las piscinas. Los lagos son decorativos: no se permite entrar, pescar ni alimentar a los peces." },
   manobrista: {
     pt: "O estacionamento com manobrista e o café da manhã do restaurante do mezanino são <b>serviços pagos à parte</b>, não inclusos na diária, sujeitos à disponibilidade.",
     en: "Valet parking and breakfast at the mezzanine restaurant are <b>paid services</b>, not included in the nightly rate, subject to availability.",
@@ -369,6 +381,24 @@ window.UNIDADES = {
     checkin: "15h", checkout: "12h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
     guia: "guia-fr-bueno-1003A.html" },
+
+  /* ---- Imbassaí Privilege · Mata de São João/BA (casa com piscina; reconhecimento facial) ---- */
+  "IP-I07": { predio: "Imbassaí Privilege", unidade: "Village I07", bairro: "Imbassaí",
+    endereco: "Rua Imbassaí, s/n, Imbassaí, Mata de São João/BA", capacidade: 6,
+    camas: { pt: " adultas (limite do regimento do condomínio; crianças conforme a reserva)",
+             en: " adults (limit set by the condominium rules; children as per the booking)",
+             es: " adultas (límite del reglamento del condominio; niños según la reserva)" },
+    checkin: "15h", checkout: "11h", silencio: "22h e 8h",
+    sem: ["trajes"],
+    acesso: ACESSO.privilege, acesso2: ACESSO.privilege2, areas_comuns: AREAS.privilege,
+    clausulas_extra: [ { t: { pt: "Da piscina privativa", en: "Private pool", es: "De la piscina privada" },
+      p: [ { pt: "É proibido o uso de copos, garrafas ou qualquer objeto de <b>vidro</b> na borda da piscina. Crianças devem estar <b>sempre acompanhadas por um adulto</b> na piscina, que é de uso exclusivo dos hóspedes da reserva e utilizada por sua conta e risco.",
+             en: "Glasses, bottles or any <b>glass</b> objects are not allowed at the pool edge. Children must <b>always be accompanied by an adult</b> at the pool, which is for the exclusive use of the booking's guests and used at their own risk.",
+             es: "Está prohibido el uso de vasos, botellas o cualquier objeto de <b>vidrio</b> en el borde de la piscina. Los niños deben estar <b>siempre acompañados por un adulto</b> en la piscina, de uso exclusivo de los huéspedes de la reserva y utilizada bajo su propio riesgo." } ] } ],
+    decl_extra: [ { pt: "Estou ciente de que cada hóspede faz o reconhecimento facial na portaria e de que o condomínio limita a casa a 6 adultos.",
+                    en: "I understand each guest registers facial recognition at the gatehouse and that the condominium limits the house to 6 adults.",
+                    es: "Sé que cada huésped registra su reconocimiento facial en la portería y que el condominio limita la casa a 6 adultos." } ],
+    guia: "guia-privilege-I07.html" },
 
   /* ---- Flat Aldeia do Lago · Caldas Novas (guarita + pulseiras) ---- */
   "ADL-103A": aldeia("Apto 103A · 1 quarto", 5, 40, "guia-aldeia-103a.html"),
