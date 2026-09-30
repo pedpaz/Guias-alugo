@@ -13,13 +13,14 @@ Este é o repositório principal com os guias interativos e o check-in online de
 | `termo.html` | **Formulário único** de check-in. Abre como `termo.html?u=CÓDIGO`. |
 | `termo-config.js` | Tabela com o que muda de uma unidade para outra: prédio, endereço, capacidade, horários, acesso, cláusulas e link do guia. |
 | `termo-<prédio>-<unidade>.html` | Atalho que redireciona para `termo.html?u=CÓDIGO`. Mantém válidos os links antigos das mensagens automáticas. |
-| `assets/` | Arquivos compartilhados (logo aluGO, animação da fechadura) e uma subpasta por unidade quando ela tem mídia própria (`assets/privilege-i07/`, `assets/ykutiba/`). |
+| `assets/` | Arquivos compartilhados por todos (logo aluGO, animação da fechadura). |
+| `<unidade>-*.png / .mp4` | Mídia própria de uma unidade, solta na raiz com o nome da unidade na frente (ex.: `privilege-I07-icon-192.png`, `ykutiba-Q003-condominio.mp4`). Sem subpastas: o upload pelo site do GitHub não cria pastas. |
 
 O código da unidade é o mesmo da Stays e do loftcare-os (ex.: `TR-803S`, `IP-I07`). O termo grava no loftcare-os (`/api/public/checkin`) com esse código.
 
 ## Como adicionar uma unidade nova
 
-1. Suba o guia como `guia-<prédio>-<unidade>.html`. Se ele tiver vídeo ou ícones próprios, coloque em `assets/<unidade>/`.
+1. Suba o guia como `guia-<prédio>-<unidade>.html`. Se ele tiver vídeo ou ícones próprios, suba soltos na raiz com o nome da unidade na frente.
 2. No `termo-config.js`, dentro de `window.UNIDADES`, crie a entrada com o código. Copie uma unidade parecida e ajuste.
    - Se o acesso ou as áreas comuns forem novos, crie um item em `ACESSO` / `AREAS` e reaproveite nas outras unidades do mesmo prédio.
 3. Crie o atalho `termo-<prédio>-<unidade>.html`: copie um existente e troque o código.
