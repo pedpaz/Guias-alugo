@@ -388,7 +388,7 @@ window.UNIDADES = {
     camas: { pt: " adultas (limite do regimento do condomínio; crianças conforme a reserva)",
              en: " adults (limit set by the condominium rules; children as per the booking)",
              es: " adultas (límite del reglamento del condominio; niños según la reserva)" },
-    checkin: "15h", checkout: "11h", silencio: "22h e 8h",
+    checkin: "15h", checkout: "12h", silencio: "22h e 8h",
     sem: ["trajes"],
     acesso: ACESSO.privilege, acesso2: ACESSO.privilege2, areas_comuns: AREAS.privilege,
     clausulas_extra: [ { t: { pt: "Da piscina privativa", en: "Private pool", es: "De la piscina privada" },
