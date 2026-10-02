@@ -290,6 +290,17 @@ window.UNIDADES = {
     endereco: "Edifício Metropolitan Sidney, Jardim Goiás, Goiânia/GO", capacidade: 4,
     checkin: "14h", checkout: "11h", acesso: ACESSO.recepcao, areas_comuns: AREAS.condominio,
     guia: "guia-sidney-504T.html" },
+  /* Studios Red Velvet (sublocação, desde 05/10/2026): fechadura digital, nada a devolver */
+  "SM-501T": { predio: "Metropolitan Sidney", unidade: "Studio Red Velvet 501T", bairro: "Jardim Goiás",
+    endereco: "Rua 65, nº 71, Jardim Goiás, Goiânia/GO", capacidade: 2,
+    camas: { pt: ", em 1 cama queen", en: ", in 1 queen bed", es: ", en 1 cama queen" },
+    checkin: "14h", checkout: "11h", acesso: ACESSO.recepcao, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-sidney-501T.html" },
+  "SM-501O": { predio: "Metropolitan Sidney", unidade: "Studio Red Velvet 501O", bairro: "Jardim Goiás",
+    endereco: "Rua 65, nº 71, Jardim Goiás, Goiânia/GO", capacidade: 2,
+    camas: { pt: ", em 1 cama queen", en: ", in 1 queen bed", es: ", en 1 cama queen" },
+    checkin: "14h", checkout: "11h", acesso: ACESSO.recepcao, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-sidney-501O.html" },
 
   /* ---- QS Marista (hotel: recepção 24h + cartão) ---- */
   "QS-1701": { predio: "QS Marista", unidade: "Suíte 1701", bairro: "Setor Marista",
