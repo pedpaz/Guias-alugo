@@ -207,9 +207,13 @@ var AREAS = {
     en: "Use of the common areas follows the building's internal rules, including opening hours and the smoking ban.",
     es: "El uso de las áreas comunes sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar." },
   privilege: {
-    pt: "O uso do clube, das piscinas, quadras, academia e demais áreas comuns segue o regimento interno do condomínio, inclusive quanto ao horário de silêncio e à proibição de vidro nas piscinas. Os lagos são decorativos: não é permitido entrar, pescar ou alimentar os peixes.",
-    en: "Use of the clubhouse, pools, courts, gym and other common areas follows the condominium's internal rules, including quiet hours and the ban on glass at the pools. The lakes are ornamental: entering, fishing or feeding the fish is not allowed.",
-    es: "El uso del club, las piscinas, canchas, gimnasio y demás áreas comunes sigue el reglamento interno del condominio, incluidos el horario de silencio y la prohibición de vidrio en las piscinas. Los lagos son decorativos: no se permite entrar, pescar ni alimentar a los peces." },
+    pt: "O uso do clube, das piscinas, quadras, academia e demais áreas comuns segue o regimento interno do condomínio, inclusive quanto ao horário de silêncio e à proibição de vidro nas piscinas. As piscinas funcionam das 6h às 22h; a academia e a quadra de tênis dependem de reserva. O <b>salão de festas, a área gourmet e o bicicletário não estão disponíveis</b> para hospedagem por temporada. É proibido o uso de <b>caixa de som</b> ou som veicular nas áreas comuns. Entregadores não entram no condomínio: os pedidos são retirados na portaria. Visitantes, somados aos hóspedes, não podem exceder a capacidade da unidade. Os lagos são decorativos: não é permitido entrar, pescar ou alimentar os peixes.",
+    en: "Use of the clubhouse, pools, courts, gym and other common areas follows the condominium's internal rules, including quiet hours and the ban on glass at the pools. The pools are open from 6am to 10pm; the gym and the tennis court require booking. The <b>party room, the gourmet area and the bicycle storage are not available</b> for short stays. <b>Speakers</b> and car audio are not allowed in the common areas. Delivery couriers cannot enter the condominium: orders are collected at the gatehouse. Visitors, added to the guests, may not exceed the capacity of the unit. The lakes are ornamental: entering, fishing or feeding the fish is not allowed.",
+    es: "El uso del club, las piscinas, canchas, gimnasio y demás áreas comunes sigue el reglamento interno del condominio, incluidos el horario de silencio y la prohibición de vidrio en las piscinas. Las piscinas funcionan de 6h a 22h; el gimnasio y la cancha de tenis requieren reserva. El <b>salón de fiestas, el área gourmet y el bicicletero no están disponibles</b> para hospedaje temporario. Está prohibido el uso de <b>parlantes</b> o sonido de vehículos en las áreas comunes. Los repartidores no ingresan al condominio: los pedidos se retiran en la portería. Las visitas, sumadas a los huéspedes, no pueden superar la capacidad de la unidad. Los lagos son decorativos: no se permite entrar, pescar ni alimentar a los peces." },
+  privilege_vagas: {
+    pt: "A unidade dispõe de <b>2 vagas</b>: um veículo por vaga, com a credencial do condomínio visível no painel. Não é permitido usar as vagas de visitantes nem estacionar nas vias internas. A velocidade máxima no condomínio é de 20 km/h.",
+    en: "The unit has <b>2 parking spaces</b>: one vehicle per space, with the condominium pass visible on the dashboard. Visitor spaces may not be used and parking on the internal roads is not allowed. The speed limit in the condominium is 20 km/h.",
+    es: "La unidad cuenta con <b>2 plazas</b>: un vehículo por plaza, con la credencial del condominio visible en el tablero. No se permite usar las plazas de visitantes ni estacionar en las vías internas. La velocidad máxima en el condominio es de 20 km/h." },
   manobrista: {
     pt: "O estacionamento com manobrista e o café da manhã do restaurante do mezanino são <b>serviços pagos à parte</b>, não inclusos na diária, sujeitos à disponibilidade.",
     en: "Valet parking and breakfast at the mezzanine restaurant are <b>paid services</b>, not included in the nightly rate, subject to availability.",
@@ -395,20 +399,20 @@ window.UNIDADES = {
 
   /* ---- Imbassaí Privilege · Mata de São João/BA (casa com piscina; reconhecimento facial) ---- */
   "IP-I07": { predio: "Imbassaí Privilege", unidade: "Village I07", bairro: "Imbassaí",
-    endereco: "Rua Imbassaí, s/n, Imbassaí, Mata de São João/BA", capacidade: 6,
-    camas: { pt: " adultas (limite do regimento do condomínio; crianças conforme a reserva)",
-             en: " adults (limit set by the condominium rules; children as per the booking)",
-             es: " adultas (límite del reglamento del condominio; niños según la reserva)" },
+    endereco: "Rua Imbassaí, s/n, Imbassaí, Mata de São João/BA", capacidade: 7,
+    camas: { pt: ", sendo até 6 adultos e 1 criança de até 12 anos (limite do regimento do condomínio)",
+             en: ": up to 6 adults and 1 child up to 12 years old (limit set by the condominium rules)",
+             es: ", siendo hasta 6 adultos y 1 niño de hasta 12 años (límite del reglamento del condominio)" },
     checkin: "15h", checkout: "12h", silencio: "22h e 8h",
     sem: ["trajes"],
-    acesso: ACESSO.privilege, acesso2: ACESSO.privilege2, areas_comuns: AREAS.privilege,
+    acesso: ACESSO.privilege, acesso2: ACESSO.privilege2, areas_comuns: AREAS.privilege, estacionamento: AREAS.privilege_vagas,
     clausulas_extra: [ { t: { pt: "Da piscina privativa", en: "Private pool", es: "De la piscina privada" },
       p: [ { pt: "É proibido o uso de copos, garrafas ou qualquer objeto de <b>vidro</b> na borda da piscina. Crianças devem estar <b>sempre acompanhadas por um adulto</b> na piscina, que é de uso exclusivo dos hóspedes da reserva e utilizada por sua conta e risco.",
              en: "Glasses, bottles or any <b>glass</b> objects are not allowed at the pool edge. Children must <b>always be accompanied by an adult</b> at the pool, which is for the exclusive use of the booking's guests and used at their own risk.",
              es: "Está prohibido el uso de vasos, botellas o cualquier objeto de <b>vidrio</b> en el borde de la piscina. Los niños deben estar <b>siempre acompañados por un adulto</b> en la piscina, de uso exclusivo de los huéspedes de la reserva y utilizada bajo su propio riesgo." } ] } ],
-    decl_extra: [ { pt: "Estou ciente de que cada hóspede faz o reconhecimento facial na portaria e de que o condomínio limita a casa a 6 adultos.",
-                    en: "I understand each guest registers facial recognition at the gatehouse and that the condominium limits the house to 6 adults.",
-                    es: "Sé que cada huésped registra su reconocimiento facial en la portería y que el condominio limita la casa a 6 adultos." } ],
+    decl_extra: [ { pt: "Estou ciente de que cada hóspede faz o reconhecimento facial na portaria e de que o regimento do condomínio limita a casa a 6 adultos e 1 criança de até 12 anos e não permite animais de estimação.",
+                    en: "I understand each guest registers facial recognition at the gatehouse and that the condominium rules limit the house to 6 adults and 1 child up to 12 years old and do not allow pets.",
+                    es: "Sé que cada huésped registra su reconocimiento facial en la portería y que el reglamento del condominio limita la casa a 6 adultos y 1 niño de hasta 12 años y no permite mascotas." } ],
     guia: "guia-privilege-I07.html" },
 
   /* ---- Flat Aldeia do Lago · Caldas Novas (guarita + pulseiras) ---- */
