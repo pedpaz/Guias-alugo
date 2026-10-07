@@ -306,6 +306,13 @@ window.UNIDADES = {
     checkin: "14h", checkout: "11h", acesso: ACESSO.recepcao, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
     guia: "guia-sidney-501O.html" },
 
+  /* ---- Metropolitan Barcelona (mesmo complexo do Sidney, outro prédio): fechadura digital, nada a devolver ---- */
+  "MB-1806A": { predio: "Metropolitan Barcelona", unidade: "Apartamento 1806 A", bairro: "Jardim Goiás",
+    endereco: "Av. Dep. Jamel Cecílio, nº 2690, Jardim Goiás, Goiânia/GO", capacidade: 2,
+    camas: { pt: ", em 1 cama de casal", en: ", in 1 double bed", es: ", en 1 cama de matrimonio" },
+    checkin: "14h", checkout: "11h", acesso: ACESSO.recepcao, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    guia: "guia-barcelona-1806A.html" },
+
   /* ---- QS Marista (hotel: recepção 24h + cartão) ---- */
   "QS-1701": { predio: "QS Marista", unidade: "Suíte 1701", bairro: "Setor Marista",
     endereco: "Rua 145, nº 120, Setor Marista, Goiânia/GO", capacidade: 2,
