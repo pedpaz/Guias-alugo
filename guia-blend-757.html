@@ -382,7 +382,6 @@ var CFG = {
   maps:      'https://maps.app.goo.gl/2pff5tPFPwcxACKz8',
   wpp:       '5562982545453',
   wppFmt:    '(62) 98254-5453',
-  token:     'COLE_O_TOKEN_AQUI',
   apiCheckout: 'https://loftcare-os.vercel.app/api/public/checkout',
   termo:     'https://pedpaz.github.io/Guias-alugo/termo-blend-757.html',
   checkin:   '15h',
@@ -1492,7 +1491,7 @@ function wpp(msg){
 function avisarCheckout(){
   /* mesmo padrao do termo: o beacon sobrevive a navegacao para o WhatsApp. */
   try {
-    var corpo = JSON.stringify({ token: CFG.token, unidade: CFG.unidade });
+    var corpo = JSON.stringify({ unidade: CFG.unidade });
     var blobCo = new Blob([corpo], { type:'application/json' });
     var okBeaconCo = navigator.sendBeacon && navigator.sendBeacon(CFG.apiCheckout, blobCo);
     if(!okBeaconCo){

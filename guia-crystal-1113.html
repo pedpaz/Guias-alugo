@@ -2461,7 +2461,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 </script>
 
 <script>
-function avisarCheckoutLoftcare(){try{var p={token:"COLE_O_TOKEN_AQUI",unidade:"CP-1113"};fetch("https://loftcare-os.vercel.app/api/public/checkout",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(){});}catch(e){}}
+function avisarCheckoutLoftcare(){try{var p={unidade:"CP-1113"};fetch("https://loftcare-os.vercel.app/api/public/checkout",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(){});}catch(e){}}
 function avisarCheckout(){avisarCheckoutLoftcare();var msg="👋 Olá! Acabei de fazer o *check-out* do *Flat 1113 · Crystal Place*. Deixei tudo em ordem, muito obrigado(a)! 🔑";var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);(function(w){var app=w.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=w;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;})(W);}
 window.avisarCheckout=avisarCheckout;
 </script>
