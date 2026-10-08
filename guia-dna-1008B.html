@@ -319,7 +319,7 @@ footer{text-align:center;padding:26px 20px 34px;border-top:1px solid var(--rule)
 
 <script>
 /* ═══ CONFIG ═══ */
-var UNIDADE='DS-1008B', UNIDADE_N='DNA SmartStyle 1008B', TOKEN='COLE_O_TOKEN_AQUI',
+var UNIDADE='DS-1008B', UNIDADE_N='DNA SmartStyle 1008B',
     WPP='5562982545453', API='https://loftcare-os.vercel.app/api/public/checkout',
     MAPS='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA',
     TERMO='https://pedpaz.github.io/Guias-alugo/termo-dna-1008B.html';
@@ -1021,7 +1021,7 @@ function wpp(){ abrirWhats('https://wa.me/'+WPP+'?text='+encodeURIComponent(t('w
 /* ═══ CHECK-OUT ═══ */
 function avisarCheckout(){
   try{ fetch(API,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({token:TOKEN,unidade:UNIDADE})}).catch(function(){}); }catch(e){}
+    body:JSON.stringify({unidade:UNIDADE})}).catch(function(){}); }catch(e){}
   var d=document.getElementById('coDone'); if(d) d.classList.add('on');
   var m='🚪 *CHECK-OUT*\n━━━━━━━━━━━━━━\n\n🏢 '+UNIDADE_N+'\n🔖 '+UNIDADE+'\n\n'+t('co_msg')+'\n\n_'+t('co_msg2')+'_';
   setTimeout(function(){ abrirWhats('https://wa.me/'+WPP+'?text='+encodeURIComponent(m)); },350);

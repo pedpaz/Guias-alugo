@@ -2208,7 +2208,7 @@ function enviarVistoriaAlugo(){
   msg+='\n_\uD83D\uDCF8 Reforce com fotos na sequ\u00EAncia._';
   abrirWppAlugo(msg);
 }
-function avisarCheckoutLoftcare(){try{var p={token:"COLE_O_TOKEN_AQUI",unidade:"ADL-306H"};fetch("https://loftcare-os.vercel.app/api/public/checkout",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(){});}catch(e){}}
+function avisarCheckoutLoftcare(){try{var p={unidade:"ADL-306H"};fetch("https://loftcare-os.vercel.app/api/public/checkout",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(){});}catch(e){}}
 function avisarCheckout(){avisarCheckoutLoftcare();abrirWppAlugo('\uD83D\uDC4B Ol\u00E1! Acabei de fazer o *check-out* do *Aldeia do Lago \u00B7 Apto 306H*. Chave entregue na recep\u00E7\u00E3o e tudo em ordem. Obrigado(a)! \uD83D\uDD11');}
 function abrirWppAlugo(msg){var W='https://wa.me/5562982545453?text='+encodeURIComponent(msg);var app=W.replace('https://wa.me/','whatsapp://send?phone=').replace('?text=','&text=');var t=setTimeout(function(){if(!document.hidden)window.location.href=W;},1500);document.addEventListener('visibilitychange',function h(){if(document.hidden){clearTimeout(t);document.removeEventListener('visibilitychange',h);}});window.location.href=app;}
 window.enviarVistoriaAlugo=enviarVistoriaAlugo;window.avisarCheckout=avisarCheckout;

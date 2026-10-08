@@ -2121,7 +2121,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 function toggleCheck(item){item.classList.toggle('done');}
 function avisarCheckoutLoftcare(){
   try{
-    var payload = { token: "COLE_O_TOKEN_AQUI", unidade: "QS-1310" };
+    var payload = { unidade: "QS-1310" };
     fetch("https://loftcare-os.vercel.app/api/public/checkout", {
       method:"POST", keepalive:true, headers:{"Content-Type":"application/json"},
       body: JSON.stringify(payload)

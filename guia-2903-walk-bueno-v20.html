@@ -2847,7 +2847,7 @@ function copyPix() {
 function toggleCheck(item) { item.classList.toggle('done'); }
 function avisarCheckoutLoftcare(){
   try{
-    var payload = { token: "COLE_O_TOKEN_AQUI", unidade: "WB-2903" };
+    var payload = { unidade: "WB-2903" };
     fetch("https://loftcare-os.vercel.app/api/public/checkout", {
       method:"POST", keepalive:true, headers:{"Content-Type":"application/json"},
       body: JSON.stringify(payload)

@@ -313,7 +313,6 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 <script>
 /* ================= CONFIG ================= */
 var UNIDADE   = "DS-2003B";
-var TOKEN     = "COLE_O_TOKEN_AQUI";
 var EP_OUT    = "https://loftcare-os.vercel.app/api/public/checkout";
 var WHATS     = "5562982545453";
 var TERMO_URL = "https://pedpaz.github.io/Guias-alugo/termo-dna-2003B.html";
@@ -339,7 +338,7 @@ function zap(txt){ abrirWhats('https://wa.me/'+WHATS+'?text='+encodeURIComponent
 function avisarCheckout(){
   try{
     fetch(EP_OUT,{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({token:TOKEN,unidade:UNIDADE})}).catch(function(){});
+      body:JSON.stringify({unidade:UNIDADE})}).catch(function(){});
   }catch(e){}
   zap(TXT[L].zapCheckout);
 }

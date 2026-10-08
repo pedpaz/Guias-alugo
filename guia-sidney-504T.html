@@ -2298,7 +2298,7 @@ function enviarVistoria(){
 function toggleCheck(item){item.classList.toggle('done');}
 function avisarCheckoutLoftcare(){
   try{
-    var payload = { token: "COLE_O_TOKEN_AQUI", unidade: "SM-504T" };
+    var payload = { unidade: "SM-504T" };
     fetch("https://loftcare-os.vercel.app/api/public/checkout", {
       method:"POST", keepalive:true, headers:{"Content-Type":"application/json"},
       body: JSON.stringify(payload)
