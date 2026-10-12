@@ -183,9 +183,9 @@ var ACESSO = {
     en: "Access to the condominium is through the <b>24-hour gatehouse</b>. aluGO sends this guest list to the front desk before arrival; each guest shows a photo ID and registers their <b>facial recognition</b>, which opens the entrance, the clubhouse and the beach gate. The registration is personal and non-transferable, and anyone not on the list cannot come in.",
     es: "El acceso al condominio es por la <b>portería (24h)</b>. aluGO envía esta lista de huéspedes a la recepción antes de la llegada; cada huésped presenta documento con foto y registra su <b>reconocimiento facial</b>, que libera la entrada, el club y el portón de la playa. El registro es personal e intransferible, y quien no esté en la lista no entra." },
   privilege2: {
-    pt: "As instruções de acesso à casa são enviadas pelo WhatsApp no dia do check-in e não devem ser repassadas a terceiros.",
-    en: "Instructions to access the house are sent on WhatsApp on check-in day and must not be shared.",
-    es: "Las instrucciones de acceso a la casa se envían por WhatsApp el día del check-in y no deben compartirse." }
+    pt: "A chave da casa fica num <b>cofre na parte externa</b>. A senha do cofre aparece na sua área da estadia e é enviada pelo WhatsApp no dia do check-in: abra o cofre, pegue a chave e, na saída, coloque-a de volta no cofre. Não repasse a senha a terceiros.",
+    en: "The house key is in a <b>lockbox outside the house</b>. The lockbox code is shown in your stay area and sent on WhatsApp on check-in day: open the lockbox, take the key and, when you leave, put it back in the lockbox. Do not share the code.",
+    es: "La llave de la casa está en una <b>caja de seguridad en la parte exterior</b>. La clave de la caja aparece en su área de estadía y se envía por WhatsApp el día del check-in: abra la caja, tome la llave y, al salir, vuélvala a guardar en la caja. No comparta la clave." }
 };
 
 /* Áreas comuns / estacionamento reutilizados. */
