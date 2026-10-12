@@ -433,7 +433,15 @@ body.noscroll{overflow:hidden}
     <a class="maplink" id="mapsBtn" target="_blank" rel="noopener"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4.5-4.7 7-8.3 7-11.5a7 7 0 10-14 0c0 3.2 2.5 6.8 7 11.5z"/><circle cx="12" cy="9.5" r="2.4"/></svg></span><span class="mt">Abrir no Google Maps<small>Imbassaí Privilege · portaria</small></span><span class="ma">&rarr;</span></a>
     <a class="maplink" id="wazeBtn" target="_blank" rel="noopener"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a8 8 0 1115.5-3c0 3-2 5-5 5.5M9 19a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM17 19a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M10 10h.01M15 10h.01M10 13c1 1 3 1 4 0"/></svg></span><span class="mt">Abrir no Waze<small>Navegação até a portaria</small></span><span class="ma">&rarr;</span></a>
     <div class="callout"><div class="ico">🪪</div><div>Na portaria, informe que está hospedado na <b>Village I07</b>. Seu cadastro já terá sido enviado por nós. Todos os hóspedes fazem o <b>reconhecimento facial</b> — ele é pessoal e libera a entrada, o clube e o acesso à praia durante a estadia.</div></div>
-    <div class="callout"><div class="ico">🔑</div><div id="chavesTxt">As instruções de acesso à casa chegam pelo WhatsApp no dia do check-in.</div></div>
+    <div class="callout"><div class="ico">🔑</div><div><div id="chavesTxt">A chave fica num cofre na parte externa da casa.</div>
+      <ol style="margin:10px 0 0 18px;padding:0;line-height:1.55">
+        <li>Vá até o <b>cofre, na parte externa da casa</b>.</li>
+        <li>Gire os números até formar a <b>senha do cofre</b> (ela fica na sua área da estadia e chega pelo WhatsApp no dia do check-in).</li>
+        <li>Abra o cofre e <b>pegue a chave</b>.</li>
+        <li>Na saída, <b>coloque a chave de volta no cofre</b> e feche. Não há chave reserva.</li>
+      </ol>
+      <img src="privilege-I07-cofre.jpg" alt="Cofre de chave com senha de quatro números, na parede externa da casa" loading="lazy" style="display:block;width:100%;max-width:300px;margin:12px 0 0;border-radius:12px">
+      <div style="font-size:12px;opacity:.75;margin-top:6px">O vídeo de como abrir o cofre está na sua área da estadia, depois do check-in online.</div></div></div>
     <div class="callout"><div class="ico">💳</div><div>A vila <b>não tem caixa eletrônico</b> e aplicativos de corrida são instáveis por aqui. Chegue com o transfer combinado e um pouco de dinheiro/Pix à mão.</div></div>
     <h3 style="font-family:var(--fdisp);font-weight:400;font-size:22px;margin:26px 0 4px">Transfer &amp; traslado</h3>
     <div id="transferList"></div>
@@ -750,7 +758,7 @@ body.noscroll{overflow:hidden}
   var WIFI_REDE = "krfibrai7";
   var WIFI_SENHA = "12345678";
   var PORTARIA_TEL = "557199118490";            // Portaria Imbassaí (passado pela proprietária)
-  var CHAVES_TXT = "A chave da casa fica num cofre. A senha do cofre chega pelo WhatsApp no dia do check-in. Ao sair, devolva a chave ao cofre — não há chave reserva.";
+  var CHAVES_TXT = "A chave da casa fica num cofre na parte externa da casa. A senha do cofre aparece na sua área da estadia (alugo.net.br/estadia) depois do check-in online e também chega pelo WhatsApp no dia do check-in. Gire os números até a senha, abra o cofre e pegue a chave. Ao sair, coloque a chave de volta no cofre — não há chave reserva.";
   var RESTAURANTE = { nome:"", whatsapp:"", horario:"" };   // PENDENTE — Pedro levanta
   var LAT = -12.5052744, LNG = -37.9656397;  // portaria (Google)
   var TRANSFERS = [
