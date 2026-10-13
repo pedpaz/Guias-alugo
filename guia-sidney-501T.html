@@ -456,28 +456,29 @@ var TELAS = [
      '<a class="btn laranja" target="_blank" rel="noopener" href="'+MAPA_URL+'">'+d.btnMapa+'</a>'; }},
   {id:'predio',   n:'02', capa:'predio-lobby',   corpo:blocos},
   {id:'porta',    n:'03', capa:'ape-entrada',    corpo:blocos},
-  {id:'ape',      n:'04', capa:'ape-geral',      corpo:blocos},
-  {id:'cozinha',  n:'05', capa:'ape-cozinha',    corpo:blocos},
-  {id:'garagem',  n:'06', corpo:blocos},
-  {id:'lazer',    n:'07', capa:'predio-piscina', corpo:blocos},
-  {id:'roupas',   n:'08', capa:'predio-lavanderia', corpo:blocos},
-  {id:'regras',   n:'09', capa:'ape-estar',      corpo:blocos},
-  {id:'problema', n:'10', tipo:'alerta', corpo:function(d){ return blocos(d)+acordeoes(d)+
+  {id:'luz',      n:'04', capa:'ape-energia-cartao', corpo:blocos},
+  {id:'ape',      n:'05', capa:'ape-geral',      corpo:blocos},
+  {id:'cozinha',  n:'06', capa:'ape-cozinha',    corpo:blocos},
+  {id:'garagem',  n:'07', corpo:blocos},
+  {id:'lazer',    n:'08', capa:'predio-piscina', corpo:blocos},
+  {id:'roupas',   n:'09', capa:'predio-lavanderia', corpo:blocos},
+  {id:'regras',   n:'10', capa:'ape-estar',      corpo:blocos},
+  {id:'problema', n:'11', tipo:'alerta', corpo:function(d){ return blocos(d)+acordeoes(d)+
      '<a class="btn laranja" href="#" onclick="zap(TXT[L].zapOi);return false">'+d.btnZap+'</a>'; }},
-  {id:'bairro',   n:'11', capa:'vista',          corpo:blocos},
-  {id:'checkin',  n:'12', larga:true, corpo:function(d){ return blocos(d)+
+  {id:'bairro',   n:'12', capa:'vista',          corpo:blocos},
+  {id:'checkin',  n:'13', larga:true, corpo:function(d){ return blocos(d)+
      '<a class="btn laranja" target="_blank" rel="noopener" href="'+TERMO_URL+'">'+d.btnTermo+'</a>'+
      '<div class="bloco"><h3>'+d.vistH+'</h3><p>'+d.vistP+'</p><div class="vist">'+
        d.vistItens.map(function(i){return '<label><input type="checkbox" data-item="'+i+'"><span>'+i+'</span></label>';}).join('')+
        '<textarea id="vistObs" placeholder="'+d.vistPh+'"></textarea></div>'+
      '<a class="btn linha" href="#" onclick="enviarVistoria();return false" style="margin-top:13px">'+d.vistBtn+'</a>'+
      '<p style="font-size:13px;color:var(--tinta-2);margin:10px 0 0">'+d.vistNota+'</p></div>'; }},
-  {id:'saida',    n:'13', saida:true, corpo:function(d){ return blocos(d)+
+  {id:'saida',    n:'14', saida:true, corpo:function(d){ return blocos(d)+
      '<div class="co"><span class="selo">'+d.coSelo+'</span><h3>'+d.coH+'</h3><p>'+d.coP+'</p>'+
      '<button class="co-btn" onclick="avisarCheckout()">'+d.coBtn+'</button></div>'; }}
 ];
 
-var SINONIMOS = {"pt": {"chegar": ["endereco", "rua", "rua 65", "onde fica", "mapa", "uber", "taxi", "99", "localizacao", "jardim goias", "aeroporto", "rodoviaria", "como chego", "serra dourada", "show", "jogo"], "predio": ["portaria", "recepcao", "documento", "rg", "identidade", "entrar", "chegada", "madrugada", "24h", "facial", "reconhecimento facial", "cadastro", "visita", "visitante", "elevador"], "porta": ["senha", "senha da porta", "fechadura", "fechadura digital", "asterisco", "estrela", "como entro", "abrir a porta", "andar", "5 andar", "quinto andar", "501", "ala", "ala t", "esquerda", "direita", "nao abre", "numeros aleatorios", "intelbras", "energia", "cartao", "cartao de energia", "ligar a energia", "ligar energia", "sem luz", "luz nao liga", "luz nao acende", "ar nao liga", "ar condicionado nao liga", "correntinha", "corrente", "energy card", "poupa energia"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "rede", "internet", "senha do wifi", "quarto", "cama", "sofa", "ar condicionado", "ar", "tv", "toalha", "toalhas", "enxoval", "closet", "armario", "guarda roupa", "vista", "220v", "tomada", "voltagem", "secador", "banheiro", "chuveiro", "cortina", "luz", "pendente", "iluminacao", "trabalho", "mesa"], "cozinha": ["geladeira", "microondas", "micro-ondas", "cooktop", "fogao", "cafe", "cafeteira", "liquidificador", "torradeira", "panela", "louca", "talher", "copo", "cozinhar", "lixo", "bancada"], "garagem": ["estacionamento", "vaga", "garagem", "subsolo", "carro", "onde estaciono", "parking", "portao", "placa", "moto"], "lazer": ["piscina", "borda infinita", "academia", "sauna", "hidromassagem", "jacuzzi", "rooftop", "cobertura", "terraco", "deck", "mall", "restaurante", "lazer", "nadar", "malhar", "horario", "horario da piscina", "segunda", "segunda-feira", "fechada", "shopping do predio", "lojas", "cafe", "segundo andar", "2 andar", "acesso ao mall", "como chegar no mall"], "roupas": ["maquina de lavar", "lavar roupa", "lavanderia", "secar", "ferro", "ferro de passar", "passar roupa", "aplicativo", "agendar", "sabao", "taxa"], "regras": ["fumar", "cigarro", "narguile", "vape", "festa", "barulho", "silencio", "pet", "cachorro", "gato", "visita", "multa", "regra", "hospede extra", "excedente", "capacidade", "late checkout", "delivery", "ifood", "entrega", "entregador", "pedido", "motoboy", "regimento", "condominio"], "problema": ["nao abre", "wifi caiu", "internet", "ar nao gela", "sem luz", "luz", "energia", "cartao", "chuveiro frio", "tv sem sinal", "toalha", "problema", "ajuda", "manutencao", "socorro", "portao nao abre", "disjuntor", "ar nao liga", "ar condicionado nao liga", "luz nao liga", "luz nao acende", "cartao de energia"], "bairro": ["bairro", "jardim goias", "parque", "parque flamboyant", "flamboyant", "shopping", "farmacia", "mercado", "padaria", "emporio", "onde comer", "restaurante", "serra dourada", "goiania arena", "oscar niemeyer"], "checkin": ["check-in", "checkin", "termo", "contrato", "cadastro", "vistoria", "documento", "cpf", "assinar", "formulario"], "saida": ["check-out", "checkout", "saida", "sair", "que horas saio", "ir embora", "late", "devolver", "nada a devolver"]}, "en": {"chegar": ["address", "street", "where is", "map", "uber", "taxi", "location", "airport", "bus station", "how to get", "stadium", "concert"], "predio": ["front desk", "reception", "id", "document", "entrance", "24h", "facial recognition", "face", "registration", "visitor", "lift", "elevator"], "porta": ["code", "door code", "lock", "digital lock", "star", "asterisk", "how do i get in", "floor", "5th floor", "501", "wing", "left", "right", "wont open", "random digits", "power", "power card", "energy card", "key card", "card", "turn on the power", "no power", "lights", "lights wont turn on", "ac wont turn on", "chain"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "network", "internet", "wifi password", "room", "bed", "sofa", "air conditioning", "ac", "tv", "towel", "towels", "linen", "closet", "wardrobe", "view", "220v", "outlet", "voltage", "hair dryer", "bathroom", "shower", "blind", "light", "desk"], "cozinha": ["fridge", "microwave", "cooktop", "stove", "coffee", "coffee maker", "blender", "toaster", "pans", "dishes", "cutlery", "glasses", "cook", "bin", "rubbish", "worktop"], "garagem": ["parking", "space", "garage", "basement", "car", "where to park", "gate", "plate", "motorcycle"], "lazer": ["pool", "infinity", "gym", "fitness", "sauna", "hot tub", "jacuzzi", "rooftop", "terrace", "deck", "mall", "restaurant", "swim", "opening hours", "hours", "monday", "closed", "shops", "cafe", "second floor", "2nd floor", "mall access", "how to get to the mall"], "roupas": ["washing machine", "laundry", "wash", "dry", "iron", "ironing", "app"], "regras": ["smoking", "smoke", "vape", "hookah", "party", "noise", "quiet", "pet", "dog", "cat", "visitor", "fine", "rules", "extra guest", "capacity", "late checkout", "delivery", "courier", "food delivery", "order"], "problema": ["wont open", "wifi down", "internet", "ac not cooling", "no power", "power", "card", "cold shower", "no tv signal", "towel", "problem", "help", "maintenance", "gate wont open", "breaker", "ac wont turn on", "lights wont turn on", "power card"], "bairro": ["neighborhood", "neighbourhood", "jardim goias", "park", "flamboyant", "mall", "pharmacy", "market", "bakery", "where to eat", "restaurant", "stadium", "arena"], "checkin": ["check-in", "online check in", "form", "contract", "registration", "inspection", "id", "sign"], "saida": ["check-out", "checkout", "leaving", "what time", "late", "return", "nothing to return"]}, "es": {"chegar": ["direccion", "calle", "donde queda", "mapa", "uber", "taxi", "ubicacion", "aeropuerto", "terminal", "como llego", "estadio", "show"], "predio": ["recepcion", "porteria", "documento", "identificacion", "entrar", "llegada", "24h", "reconocimiento facial", "registro", "visita", "ascensor"], "porta": ["clave", "contrasena", "cerradura", "cerradura digital", "asterisco", "estrella", "como entro", "piso", "piso 5", "501", "ala", "izquierda", "derecha", "no abre", "numeros aleatorios", "energia", "tarjeta", "tarjeta de energia", "encender la energia", "sin luz", "luz no enciende", "aire no enciende", "cadena", "cadenita"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "red", "internet", "clave del wifi", "habitacion", "cama", "sofa", "aire acondicionado", "aire", "tv", "toalla", "toallas", "ropa de cama", "vestidor", "closet", "armario", "vista", "220v", "enchufe", "voltaje", "secador", "bano", "ducha", "cortina", "luz", "escritorio"], "cozinha": ["heladera", "nevera", "microondas", "anafe", "cocina", "cafe", "cafetera", "licuadora", "tostadora", "ollas", "vajilla", "cubiertos", "vasos", "cocinar", "basura", "mesada"], "garagem": ["estacionamiento", "cochera", "garaje", "subsuelo", "auto", "coche", "donde estaciono", "porton", "patente", "moto"], "lazer": ["piscina", "borde infinito", "gimnasio", "sauna", "hidromasaje", "jacuzzi", "azotea", "terraza", "deck", "mall", "restaurante", "nadar", "horario", "lunes", "cerrada", "tiendas", "cafe", "segundo piso", "piso 2", "acceso al mall", "como llegar al mall"], "roupas": ["lavarropas", "lavadora", "lavanderia", "secar", "plancha", "planchar", "aplicacion"], "regras": ["fumar", "cigarro", "vape", "narguile", "fiesta", "ruido", "silencio", "mascota", "perro", "gato", "visita", "multa", "regla", "huesped extra", "capacidad", "salida tarde", "delivery", "repartidor", "pedido", "entrega"], "problema": ["no abre", "wifi caido", "internet", "aire no enfria", "sin luz", "luz", "energia", "tarjeta", "ducha fria", "tv sin senal", "toalla", "problema", "ayuda", "mantenimiento", "porton no abre", "termica", "aire no enciende", "luz no enciende", "tarjeta de energia"], "bairro": ["barrio", "jardim goias", "parque", "flamboyant", "centro comercial", "farmacia", "mercado", "panaderia", "donde comer", "restaurante", "estadio", "arena"], "checkin": ["check-in", "registro", "formulario", "contrato", "inspeccion", "documento", "firmar"], "saida": ["check-out", "salida", "salir", "a que hora", "tarde", "devolver", "nada que devolver"]}};
+var SINONIMOS = {"pt": {"chegar": ["endereco", "rua", "rua 65", "onde fica", "mapa", "uber", "taxi", "99", "localizacao", "jardim goias", "aeroporto", "rodoviaria", "como chego", "serra dourada", "show", "jogo"], "predio": ["portaria", "recepcao", "documento", "rg", "identidade", "entrar", "chegada", "madrugada", "24h", "facial", "reconhecimento facial", "cadastro", "visita", "visitante", "elevador"], "porta": ["senha", "senha da porta", "fechadura", "fechadura digital", "asterisco", "estrela", "como entro", "abrir a porta", "andar", "5 andar", "quinto andar", "501", "ala", "ala t", "esquerda", "direita", "nao abre", "numeros aleatorios", "intelbras", "energy card"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "rede", "internet", "senha do wifi", "quarto", "cama", "sofa", "ar condicionado", "ar", "tv", "toalha", "toalhas", "enxoval", "closet", "armario", "guarda roupa", "vista", "220v", "tomada", "voltagem", "secador", "banheiro", "chuveiro", "cortina", "luz", "pendente", "iluminacao", "trabalho", "mesa"], "cozinha": ["geladeira", "microondas", "micro-ondas", "cooktop", "fogao", "cafe", "cafeteira", "liquidificador", "torradeira", "panela", "louca", "talher", "copo", "cozinhar", "lixo", "bancada"], "garagem": ["estacionamento", "vaga", "garagem", "subsolo", "carro", "onde estaciono", "parking", "portao", "placa", "moto"], "lazer": ["piscina", "borda infinita", "academia", "sauna", "hidromassagem", "jacuzzi", "rooftop", "cobertura", "terraco", "deck", "mall", "restaurante", "lazer", "nadar", "malhar", "horario", "horario da piscina", "segunda", "segunda-feira", "fechada", "shopping do predio", "lojas", "cafe", "segundo andar", "2 andar", "acesso ao mall", "como chegar no mall"], "roupas": ["maquina de lavar", "lavar roupa", "lavanderia", "secar", "ferro", "ferro de passar", "passar roupa", "aplicativo", "agendar", "sabao", "taxa"], "regras": ["fumar", "cigarro", "narguile", "vape", "festa", "barulho", "silencio", "pet", "cachorro", "gato", "visita", "multa", "regra", "hospede extra", "excedente", "capacidade", "late checkout", "delivery", "ifood", "entrega", "entregador", "pedido", "motoboy", "regimento", "condominio"], "problema": ["nao abre", "wifi caiu", "internet", "ar nao gela", "sem luz", "luz", "energia", "cartao", "chuveiro frio", "tv sem sinal", "toalha", "problema", "ajuda", "manutencao", "socorro", "portao nao abre", "disjuntor", "ar nao liga", "ar condicionado nao liga", "luz nao liga", "luz nao acende", "cartao de energia"], "bairro": ["bairro", "jardim goias", "parque", "parque flamboyant", "flamboyant", "shopping", "farmacia", "mercado", "padaria", "emporio", "onde comer", "restaurante", "serra dourada", "goiania arena", "oscar niemeyer"], "checkin": ["check-in", "checkin", "termo", "contrato", "cadastro", "vistoria", "documento", "cpf", "assinar", "formulario"], "saida": ["check-out", "checkout", "saida", "sair", "que horas saio", "ir embora", "late", "devolver", "nada a devolver"], "luz": ["energia", "cartao", "cartao de energia", "ligar a energia", "ligar energia", "sem luz", "luz nao liga", "luz nao acende", "ar nao liga", "ar condicionado nao liga", "correntinha", "corrente", "poupa energia", "luz", "acender", "ligar a luz", "acender a luz", "leitor", "interruptor"]}, "en": {"chegar": ["address", "street", "where is", "map", "uber", "taxi", "location", "airport", "bus station", "how to get", "stadium", "concert"], "predio": ["front desk", "reception", "id", "document", "entrance", "24h", "facial recognition", "face", "registration", "visitor", "lift", "elevator"], "porta": ["code", "door code", "lock", "digital lock", "star", "asterisk", "how do i get in", "floor", "5th floor", "501", "wing", "left", "right", "wont open", "random digits", "power card", "key card", "turn on the power", "lights wont turn on", "ac wont turn on"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "network", "internet", "wifi password", "room", "bed", "sofa", "air conditioning", "ac", "tv", "towel", "towels", "linen", "closet", "wardrobe", "view", "220v", "outlet", "voltage", "hair dryer", "bathroom", "shower", "blind", "light", "desk"], "cozinha": ["fridge", "microwave", "cooktop", "stove", "coffee", "coffee maker", "blender", "toaster", "pans", "dishes", "cutlery", "glasses", "cook", "bin", "rubbish", "worktop"], "garagem": ["parking", "space", "garage", "basement", "car", "where to park", "gate", "plate", "motorcycle"], "lazer": ["pool", "infinity", "gym", "fitness", "sauna", "hot tub", "jacuzzi", "rooftop", "terrace", "deck", "mall", "restaurant", "swim", "opening hours", "hours", "monday", "closed", "shops", "cafe", "second floor", "2nd floor", "mall access", "how to get to the mall"], "roupas": ["washing machine", "laundry", "wash", "dry", "iron", "ironing", "app"], "regras": ["smoking", "smoke", "vape", "hookah", "party", "noise", "quiet", "pet", "dog", "cat", "visitor", "fine", "rules", "extra guest", "capacity", "late checkout", "delivery", "courier", "food delivery", "order"], "problema": ["wont open", "wifi down", "internet", "ac not cooling", "no power", "power", "card", "cold shower", "no tv signal", "towel", "problem", "help", "maintenance", "gate wont open", "breaker", "ac wont turn on", "lights wont turn on", "power card"], "bairro": ["neighborhood", "neighbourhood", "jardim goias", "park", "flamboyant", "mall", "pharmacy", "market", "bakery", "where to eat", "restaurant", "stadium", "arena"], "checkin": ["check-in", "online check in", "form", "contract", "registration", "inspection", "id", "sign"], "saida": ["check-out", "checkout", "leaving", "what time", "late", "return", "nothing to return"], "luz": ["power", "energy card", "card", "no power", "lights", "chain", "light", "turn on the lights", "ac not working", "reader"]}, "es": {"chegar": ["direccion", "calle", "donde queda", "mapa", "uber", "taxi", "ubicacion", "aeropuerto", "terminal", "como llego", "estadio", "show"], "predio": ["recepcion", "porteria", "documento", "identificacion", "entrar", "llegada", "24h", "reconocimiento facial", "registro", "visita", "ascensor"], "porta": ["clave", "contrasena", "cerradura", "cerradura digital", "asterisco", "estrella", "como entro", "piso", "piso 5", "501", "ala", "izquierda", "derecha", "no abre", "numeros aleatorios", "encender la energia", "luz no enciende", "cadenita"], "ape": ["studio", "red velvet", "wifi", "wi-fi", "red", "internet", "clave del wifi", "habitacion", "cama", "sofa", "aire acondicionado", "aire", "tv", "toalla", "toallas", "ropa de cama", "vestidor", "closet", "armario", "vista", "220v", "enchufe", "voltaje", "secador", "bano", "ducha", "cortina", "luz", "escritorio"], "cozinha": ["heladera", "nevera", "microondas", "anafe", "cocina", "cafe", "cafetera", "licuadora", "tostadora", "ollas", "vajilla", "cubiertos", "vasos", "cocinar", "basura", "mesada"], "garagem": ["estacionamiento", "cochera", "garaje", "subsuelo", "auto", "coche", "donde estaciono", "porton", "patente", "moto"], "lazer": ["piscina", "borde infinito", "gimnasio", "sauna", "hidromasaje", "jacuzzi", "azotea", "terraza", "deck", "mall", "restaurante", "nadar", "horario", "lunes", "cerrada", "tiendas", "cafe", "segundo piso", "piso 2", "acceso al mall", "como llegar al mall"], "roupas": ["lavarropas", "lavadora", "lavanderia", "secar", "plancha", "planchar", "aplicacion"], "regras": ["fumar", "cigarro", "vape", "narguile", "fiesta", "ruido", "silencio", "mascota", "perro", "gato", "visita", "multa", "regla", "huesped extra", "capacidad", "salida tarde", "delivery", "repartidor", "pedido", "entrega"], "problema": ["no abre", "wifi caido", "internet", "aire no enfria", "sin luz", "luz", "energia", "tarjeta", "ducha fria", "tv sin senal", "toalla", "problema", "ayuda", "mantenimiento", "porton no abre", "termica", "aire no enciende", "luz no enciende", "tarjeta de energia"], "bairro": ["barrio", "jardim goias", "parque", "flamboyant", "centro comercial", "farmacia", "mercado", "panaderia", "donde comer", "restaurante", "estadio", "arena"], "checkin": ["check-in", "registro", "formulario", "contrato", "inspeccion", "documento", "firmar"], "saida": ["check-out", "salida", "salir", "a que hora", "tarde", "devolver", "nada que devolver"], "luz": ["energia", "tarjeta", "tarjeta de energia", "sin luz", "aire no enciende", "cadena", "luz", "encender", "encender la luz", "lector"]}};
 
 var TXT = {
  "pt": {
@@ -624,41 +625,10 @@ var TXT = {
      ]
     },
     {
-     "foto": "ape-energia",
      "dest": true,
-     "h": "Ligue a energia com o cartão",
+     "h": "Entrou e está sem luz?",
      "p": [
-      "Aqui a energia funciona como em hotel: as luzes e o ar-condicionado só ligam com o <b>cartão</b> encaixado no leitor. É um sistema de economia, para nada ficar ligado com o apartamento vazio.",
-      "Na foto: <b>1</b> o leitor de energia, na parede ao lado da porta · <b>2</b> a correntinha que prende o cartão · <b>3</b> a fechadura, onde a correntinha está presa."
-     ]
-    },
-    {
-     "foto": "ape-energia-cartao",
-     "h": "Ao entrar: passo a passo",
-     "p": [
-      "<b>1.</b> Entre e <b>feche a porta</b>.",
-      "<b>2.</b> Pegue o cartão, que fica pendurado na correntinha.",
-      "<b>3.</b> Encaixe o cartão no leitor, de cima para baixo e até o fim, com a face <b>“ESTE LADO PARA FRENTE”</b> virada para você.",
-      "<b>4.</b> Pronto: luzes e ar-condicionado já funcionam. Não ligou? Tire o cartão, confira o lado e encaixe de novo."
-     ]
-    },
-    {
-     "foto": "ape-energia-aviso",
-     "dest": true,
-     "h": "Antes de abrir a porta, tire o cartão",
-     "p": [
-      "O cartão está preso à <b>porta</b> pela correntinha, e o leitor está preso à <b>parede</b>. Se a porta for aberta com o cartão encaixado, a corrente estica e <b>arranca o leitor da parede</b>.",
-      "<b>1.</b> Puxe o cartão para cima e solte: ele fica pendurado na correntinha.",
-      "<b>2.</b> Só então abra a porta.",
-      "Vale para qualquer abertura: sair, receber uma entrega ou abrir para alguém. A placa na porta lembra: <b>“Ao sair retire o cartão”</b>."
-     ]
-    },
-    {
-     "h": "Dúvidas sobre o cartão",
-     "ul": [
-      "<b>A luz apagou quando tirei o cartão.</b> É normal: sem ele a energia desliga, e volta quando você encaixa de novo.",
-      "<b>Posso deixar o cartão no leitor para o ar ficar ligado enquanto saio?</b> Não. O cartão é preso à porta: para ela abrir, ele precisa sair do leitor.",
-      "<b>O cartão ou a correntinha soltou?</b> Não force. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Chame a gente pelo WhatsApp</a>."
+      "É o cartão de energia. Veja o passo a passo em <a href=\"#\" onclick=\"abrir('luz');return false\">Como ligar a luz</a>."
      ]
     },
     {
@@ -1004,7 +974,7 @@ var TXT = {
     {
      "q": "Sem luz, ou o ar-condicionado não liga",
      "r": [
-      "Confira primeiro o <b>cartão de energia</b>: ele precisa estar encaixado até o fim no leitor branco ao lado da porta, com a face “ESTE LADO PARA FRENTE” virada para você. Sem ele, luz e ar-condicionado não funcionam. Veja o passo a passo com fotos em <a href=\"#\" onclick=\"abrir('porta');return false\">Chegar ao apartamento</a>.",
+      "Confira primeiro o <b>cartão de energia</b>: ele precisa estar encaixado até o fim no leitor branco ao lado da porta, com a face “ESTE LADO PARA FRENTE” virada para você. Sem ele, luz e ar-condicionado não funcionam. Veja o passo a passo com fotos em <a href=\"#\" onclick=\"abrir('luz');return false\">Chegar ao apartamento</a>.",
       "Veja também se a falta é só aqui ou no prédio todo (a portaria sabe na hora) e se algum disjuntor desarmou.",
       "Se estiver tudo normal e continuar sem luz, chame a gente."
      ]
@@ -1134,6 +1104,51 @@ var TXT = {
      "h": "A estadia termina na saída do prédio",
      "p": [
       "Depois do check-out, não é possível permanecer nas áreas comuns. Se precisar de mais tempo no dia da saída, fale com a gente <b>antes</b>."
+     ]
+    }
+   ]
+  },
+  "tela_luz": {
+   "titulo": "Como ligar a luz",
+   "sub": "Cartão de energia ao lado da porta",
+   "lead": "A luz e o ar-condicionado só ligam com o cartão encaixado no leitor, ao lado da porta. Leva 5 segundos.",
+   "blocos": [
+    {
+     "foto": "ape-energia",
+     "dest": true,
+     "h": "Ligue a energia com o cartão",
+     "p": [
+      "Aqui a energia funciona como em hotel: as luzes e o ar-condicionado só ligam com o <b>cartão</b> encaixado no leitor. É um sistema de economia, para nada ficar ligado com o apartamento vazio.",
+      "Na foto: <b>1</b> o leitor de energia, na parede ao lado da porta · <b>2</b> a correntinha que prende o cartão · <b>3</b> a fechadura, onde a correntinha está presa."
+     ]
+    },
+    {
+     "foto": "ape-energia-cartao",
+     "h": "Ao entrar: passo a passo",
+     "p": [
+      "<b>1.</b> Entre e <b>feche a porta</b>.",
+      "<b>2.</b> Pegue o cartão, que fica pendurado na correntinha.",
+      "<b>3.</b> Encaixe o cartão no leitor, de cima para baixo e até o fim, com a face <b>“ESTE LADO PARA FRENTE”</b> virada para você.",
+      "<b>4.</b> Pronto: luzes e ar-condicionado já funcionam. Não ligou? Tire o cartão, confira o lado e encaixe de novo."
+     ]
+    },
+    {
+     "foto": "ape-energia-aviso",
+     "dest": true,
+     "h": "Antes de abrir a porta, tire o cartão",
+     "p": [
+      "O cartão está preso à <b>porta</b> pela correntinha, e o leitor está preso à <b>parede</b>. Se a porta for aberta com o cartão encaixado, a corrente estica e <b>arranca o leitor da parede</b>.",
+      "<b>1.</b> Puxe o cartão para cima e solte: ele fica pendurado na correntinha.",
+      "<b>2.</b> Só então abra a porta.",
+      "Vale para qualquer abertura: sair, receber uma entrega ou abrir para alguém. A placa na porta lembra: <b>“Ao sair retire o cartão”</b>."
+     ]
+    },
+    {
+     "h": "Dúvidas sobre o cartão",
+     "ul": [
+      "<b>A luz apagou quando tirei o cartão.</b> É normal: sem ele a energia desliga, e volta quando você encaixa de novo.",
+      "<b>Posso deixar o cartão no leitor para o ar ficar ligado enquanto saio?</b> Não. O cartão é preso à porta: para ela abrir, ele precisa sair do leitor.",
+      "<b>O cartão ou a correntinha soltou?</b> Não force. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Chame a gente pelo WhatsApp</a>."
      ]
     }
    ]
@@ -1283,41 +1298,10 @@ var TXT = {
      ]
     },
     {
-     "foto": "ape-energia",
      "dest": true,
-     "h": "Turn the power on with the card",
+     "h": "No power when you walk in?",
      "p": [
-      "Power here works as in a hotel: lights and air conditioning only come on with the <b>card</b> in its reader. It is an energy-saving system, so nothing stays on while the apartment is empty.",
-      "In the photo: <b>1</b> the power reader, on the wall next to the door · <b>2</b> the small chain that holds the card · <b>3</b> the door lock, where the chain is attached."
-     ]
-    },
-    {
-     "foto": "ape-energia-cartao",
-     "h": "Coming in: step by step",
-     "p": [
-      "<b>1.</b> Come in and <b>close the door</b>.",
-      "<b>2.</b> Take the card, which hangs from the chain.",
-      "<b>3.</b> Slide the card down into the reader, all the way, with the side printed <b>“ESTE LADO PARA FRENTE”</b> (this side forward) facing you.",
-      "<b>4.</b> Done: lights and air conditioning now work. Nothing happened? Take the card out, check the side and slide it in again."
-     ]
-    },
-    {
-     "foto": "ape-energia-aviso",
-     "dest": true,
-     "h": "Take the card out before opening the door",
-     "p": [
-      "The card is chained to the <b>door</b>, and the reader is fixed to the <b>wall</b>. If the door is opened with the card still in the reader, the chain pulls tight and <b>rips the reader off the wall</b>.",
-      "<b>1.</b> Pull the card up and let go: it stays hanging on the chain.",
-      "<b>2.</b> Only then open the door.",
-      "This applies every time the door opens: going out, taking a delivery or letting someone in. The sign on the door says the same: <b>“Ao sair retire o cartão”</b> (remove the card when leaving)."
-     ]
-    },
-    {
-     "h": "Questions about the card",
-     "ul": [
-      "<b>The lights went off when I took the card out.</b> That is normal: without it the power goes off, and it comes back when you slide the card in again.",
-      "<b>Can I leave the card in so the air conditioning stays on while I am out?</b> No. The card is chained to the door: for the door to open, it has to come out of the reader.",
-      "<b>The card or the chain came loose?</b> Do not force it. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Message us on WhatsApp</a>."
+      "It's the energy card. See the step by step in <a href=\"#\" onclick=\"abrir('luz');return false\">Turning on the lights</a>."
      ]
     },
     {
@@ -1663,7 +1647,7 @@ var TXT = {
     {
      "q": "No power, or the air conditioning won't turn on",
      "r": [
-      "First check the <b>power card</b>: it must be all the way into the white reader next to the door, with the side printed “ESTE LADO PARA FRENTE” facing you. Without it, lights and air conditioning do not work. See the steps with photos in <a href=\"#\" onclick=\"abrir('porta');return false\">Getting to the apartment</a>.",
+      "First check the <b>power card</b>: it must be all the way into the white reader next to the door, with the side printed “ESTE LADO PARA FRENTE” facing you. Without it, lights and air conditioning do not work. See the steps with photos in <a href=\"#\" onclick=\"abrir('luz');return false\">Getting to the apartment</a>.",
       "Also check whether it is only here or the whole building (the front desk will know) and whether a breaker has tripped.",
       "If all looks normal and there is still no power, message us."
      ]
@@ -1793,6 +1777,51 @@ var TXT = {
      "h": "The stay ends when you leave the building",
      "p": [
       "After check-out you cannot stay in the common areas. If you need more time on your last day, talk to us <b>beforehand</b>."
+     ]
+    }
+   ]
+  },
+  "tela_luz": {
+   "titulo": "Turning on the lights",
+   "sub": "Energy card next to the door",
+   "lead": "Lights and air conditioning only work with the card in the reader, next to the door. It takes 5 seconds.",
+   "blocos": [
+    {
+     "foto": "ape-energia",
+     "dest": true,
+     "h": "Turn the power on with the card",
+     "p": [
+      "Power here works as in a hotel: lights and air conditioning only come on with the <b>card</b> in its reader. It is an energy-saving system, so nothing stays on while the apartment is empty.",
+      "In the photo: <b>1</b> the power reader, on the wall next to the door · <b>2</b> the small chain that holds the card · <b>3</b> the door lock, where the chain is attached."
+     ]
+    },
+    {
+     "foto": "ape-energia-cartao",
+     "h": "Coming in: step by step",
+     "p": [
+      "<b>1.</b> Come in and <b>close the door</b>.",
+      "<b>2.</b> Take the card, which hangs from the chain.",
+      "<b>3.</b> Slide the card down into the reader, all the way, with the side printed <b>“ESTE LADO PARA FRENTE”</b> (this side forward) facing you.",
+      "<b>4.</b> Done: lights and air conditioning now work. Nothing happened? Take the card out, check the side and slide it in again."
+     ]
+    },
+    {
+     "foto": "ape-energia-aviso",
+     "dest": true,
+     "h": "Take the card out before opening the door",
+     "p": [
+      "The card is chained to the <b>door</b>, and the reader is fixed to the <b>wall</b>. If the door is opened with the card still in the reader, the chain pulls tight and <b>rips the reader off the wall</b>.",
+      "<b>1.</b> Pull the card up and let go: it stays hanging on the chain.",
+      "<b>2.</b> Only then open the door.",
+      "This applies every time the door opens: going out, taking a delivery or letting someone in. The sign on the door says the same: <b>“Ao sair retire o cartão”</b> (remove the card when leaving)."
+     ]
+    },
+    {
+     "h": "Questions about the card",
+     "ul": [
+      "<b>The lights went off when I took the card out.</b> That is normal: without it the power goes off, and it comes back when you slide the card in again.",
+      "<b>Can I leave the card in so the air conditioning stays on while I am out?</b> No. The card is chained to the door: for the door to open, it has to come out of the reader.",
+      "<b>The card or the chain came loose?</b> Do not force it. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Message us on WhatsApp</a>."
      ]
     }
    ]
@@ -1942,41 +1971,10 @@ var TXT = {
      ]
     },
     {
-     "foto": "ape-energia",
      "dest": true,
-     "h": "Enciende la energía con la tarjeta",
+     "h": "¿Entraste y no hay luz?",
      "p": [
-      "Aquí la energía funciona como en un hotel: las luces y el aire acondicionado solo encienden con la <b>tarjeta</b> colocada en el lector. Es un sistema de ahorro, para que nada quede encendido con el apartamento vacío.",
-      "En la foto: <b>1</b> el lector de energía, en la pared junto a la puerta · <b>2</b> la cadenita que sujeta la tarjeta · <b>3</b> la cerradura, donde está sujeta la cadenita."
-     ]
-    },
-    {
-     "foto": "ape-energia-cartao",
-     "h": "Al entrar: paso a paso",
-     "p": [
-      "<b>1.</b> Entra y <b>cierra la puerta</b>.",
-      "<b>2.</b> Toma la tarjeta, que cuelga de la cadenita.",
-      "<b>3.</b> Coloca la tarjeta en el lector, de arriba hacia abajo y hasta el fondo, con la cara <b>“ESTE LADO PARA FRENTE”</b> (este lado al frente) hacia ti.",
-      "<b>4.</b> Listo: las luces y el aire acondicionado ya funcionan. ¿No encendió? Saca la tarjeta, revisa el lado y colócala de nuevo."
-     ]
-    },
-    {
-     "foto": "ape-energia-aviso",
-     "dest": true,
-     "h": "Antes de abrir la puerta, saca la tarjeta",
-     "p": [
-      "La tarjeta está sujeta a la <b>puerta</b> por la cadenita, y el lector está fijo a la <b>pared</b>. Si se abre la puerta con la tarjeta puesta, la cadena se tensa y <b>arranca el lector de la pared</b>.",
-      "<b>1.</b> Tira de la tarjeta hacia arriba y suéltala: queda colgando de la cadenita.",
-      "<b>2.</b> Solo entonces abre la puerta.",
-      "Vale para cualquier apertura: salir, recibir un pedido o abrirle a alguien. El cartel de la puerta lo recuerda: <b>“Ao sair retire o cartão”</b> (al salir, retira la tarjeta)."
-     ]
-    },
-    {
-     "h": "Dudas sobre la tarjeta",
-     "ul": [
-      "<b>La luz se apagó cuando saqué la tarjeta.</b> Es normal: sin ella la energía se apaga, y vuelve cuando la colocas de nuevo.",
-      "<b>¿Puedo dejar la tarjeta puesta para que el aire siga encendido mientras salgo?</b> No. La tarjeta está sujeta a la puerta: para que abra, tiene que salir del lector.",
-      "<b>¿Se soltó la tarjeta o la cadenita?</b> No la fuerces. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Escríbenos por WhatsApp</a>."
+      "Es la tarjeta de energía. Mira el paso a paso en <a href=\"#\" onclick=\"abrir('luz');return false\">Cómo encender la luz</a>."
      ]
     },
     {
@@ -2322,7 +2320,7 @@ var TXT = {
     {
      "q": "No hay luz, o el aire acondicionado no enciende",
      "r": [
-      "Revisa primero la <b>tarjeta de energía</b>: debe estar colocada hasta el fondo en el lector blanco junto a la puerta, con la cara “ESTE LADO PARA FRENTE” hacia ti. Sin ella, la luz y el aire acondicionado no funcionan. Mira el paso a paso con fotos en <a href=\"#\" onclick=\"abrir('porta');return false\">Llegar al apartamento</a>.",
+      "Revisa primero la <b>tarjeta de energía</b>: debe estar colocada hasta el fondo en el lector blanco junto a la puerta, con la cara “ESTE LADO PARA FRENTE” hacia ti. Sin ella, la luz y el aire acondicionado no funcionan. Mira el paso a paso con fotos en <a href=\"#\" onclick=\"abrir('luz');return false\">Llegar al apartamento</a>.",
       "Mira también si el corte es solo aquí o en todo el edificio (la portería lo sabe) y si saltó alguna térmica.",
       "Si todo está normal y sigue sin luz, avísanos."
      ]
@@ -2455,6 +2453,51 @@ var TXT = {
      ]
     }
    ]
+  },
+  "tela_luz": {
+   "titulo": "Cómo encender la luz",
+   "sub": "Tarjeta de energía junto a la puerta",
+   "lead": "La luz y el aire acondicionado solo funcionan con la tarjeta en el lector, junto a la puerta. Lleva 5 segundos.",
+   "blocos": [
+    {
+     "foto": "ape-energia",
+     "dest": true,
+     "h": "Enciende la energía con la tarjeta",
+     "p": [
+      "Aquí la energía funciona como en un hotel: las luces y el aire acondicionado solo encienden con la <b>tarjeta</b> colocada en el lector. Es un sistema de ahorro, para que nada quede encendido con el apartamento vacío.",
+      "En la foto: <b>1</b> el lector de energía, en la pared junto a la puerta · <b>2</b> la cadenita que sujeta la tarjeta · <b>3</b> la cerradura, donde está sujeta la cadenita."
+     ]
+    },
+    {
+     "foto": "ape-energia-cartao",
+     "h": "Al entrar: paso a paso",
+     "p": [
+      "<b>1.</b> Entra y <b>cierra la puerta</b>.",
+      "<b>2.</b> Toma la tarjeta, que cuelga de la cadenita.",
+      "<b>3.</b> Coloca la tarjeta en el lector, de arriba hacia abajo y hasta el fondo, con la cara <b>“ESTE LADO PARA FRENTE”</b> (este lado al frente) hacia ti.",
+      "<b>4.</b> Listo: las luces y el aire acondicionado ya funcionan. ¿No encendió? Saca la tarjeta, revisa el lado y colócala de nuevo."
+     ]
+    },
+    {
+     "foto": "ape-energia-aviso",
+     "dest": true,
+     "h": "Antes de abrir la puerta, saca la tarjeta",
+     "p": [
+      "La tarjeta está sujeta a la <b>puerta</b> por la cadenita, y el lector está fijo a la <b>pared</b>. Si se abre la puerta con la tarjeta puesta, la cadena se tensa y <b>arranca el lector de la pared</b>.",
+      "<b>1.</b> Tira de la tarjeta hacia arriba y suéltala: queda colgando de la cadenita.",
+      "<b>2.</b> Solo entonces abre la puerta.",
+      "Vale para cualquier apertura: salir, recibir un pedido o abrirle a alguien. El cartel de la puerta lo recuerda: <b>“Ao sair retire o cartão”</b> (al salir, retira la tarjeta)."
+     ]
+    },
+    {
+     "h": "Dudas sobre la tarjeta",
+     "ul": [
+      "<b>La luz se apagó cuando saqué la tarjeta.</b> Es normal: sin ella la energía se apaga, y vuelve cuando la colocas de nuevo.",
+      "<b>¿Puedo dejar la tarjeta puesta para que el aire siga encendido mientras salgo?</b> No. La tarjeta está sujeta a la puerta: para que abra, tiene que salir del lector.",
+      "<b>¿Se soltó la tarjeta o la cadenita?</b> No la fuerces. <a href=\"#\" onclick=\"zap(TXT[L].zapOi);return false\">Escríbenos por WhatsApp</a>."
+     ]
+    }
+   ]
   }
  }
 };
@@ -2478,6 +2521,7 @@ var ICONES = {
   garagem:'<path d="M5 17h14M6 17v2M18 17v2"/><path d="M4 14l1.6-5A2 2 0 017.5 7.6h9A2 2 0 0118.4 9L20 14"/><path d="M4 14h16v3H4z"/>',
   lazer:'<path d="M3 17c2 1.4 4 1.4 6 0s4-1.4 6 0 4 1.4 6 0"/><path d="M3 21c2 1.4 4 1.4 6 0s4-1.4 6 0 4 1.4 6 0"/><path d="M8 13V5a2 2 0 114 0M14 13V5"/>',
   regras:'<path d="M6 3h9l5 5v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v6h6"/><path d="M9 13h6M9 17h4"/>',
+  luz:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.6 1 2.5h6c0-.9.2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
   problema:'<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>',
   checkin:'<path d="M9 11l2.5 2.5L16 8"/><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4"/>'
 };
