@@ -33,6 +33,9 @@ TEMAS = {
  'noite': tema('Cidade à noite', f'{T_}/dna2003.webp', '#0B1020', '#C8743A',
     V('#0B1020','#F1F4FB','rgba(214,222,240,.74)','rgba(255,170,110,.06)','rgba(200,220,255,.13)','3,5,12','rgba(8,12,24,.9)','#B8632A','#D9833F','#FDF0E6'),
     fechadura=True),
+ 'ripado': tema('Ripado e LED', f'{T_}/dna1008.webp', '#121110', '#D9822B',
+    V('#121110','#F7F3EE','rgba(236,226,214,.74)','rgba(255,180,100,.07)','rgba(255,215,160,.15)','4,3,2','rgba(16,14,12,.9)','#C2701F','#E08A3A','#FFF2E4'),
+    fechadura=True),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -97,6 +100,9 @@ UNIDADES = {
   '2003B': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-2003B.html', base_ref='978a1cb', tema='noite', hero='sala-estar-jantar',
      mapa={'entrar': ['ape'], 'ape': ['duplex', 'cozinha']},
      ui=ui_unidade({'pt':'Duplex 2003','en':'Duplex 2003','es':'Dúplex 2003'}, {'pt':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower B · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
+        vaga_sub={'pt':'2º pavimento da garagem','en':'Garage level 2','es':'2º nivel del garaje'})),
+  '1008B': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-1008B.html', base_ref='ab7adad', tema='ripado', hero='sala',
+     ui=ui_unidade({'pt':'Apartamento 1008','en':'Apartment 1008','es':'Apartamento 1008'}, {'pt':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower B · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
         vaga_sub={'pt':'2º pavimento da garagem','en':'Garage level 2','es':'2º nivel del garaje'})),
 }
 
