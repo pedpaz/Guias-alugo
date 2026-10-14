@@ -76,25 +76,25 @@ COPA = {'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama, Wi-Fi, TV, banhe
 SAIDA_11H = [('12h', '11h'), ('12 pm', '11 am')]
 
 UNIDADES = {
-  '501T': dict(arq='guia-sidney-501T.html', base_ref='ec0964c^', tema='veludo', ui=ui_sidney('T')),
-  '501O': dict(arq='guia-sidney-501O.html', base_ref='e9bacd1', tema='veludo', ui=ui_sidney('O')),
-  '1806A': dict(arq='guia-barcelona-1806A.html', base_ref='978a1cb', tema='seda',
+  '501T': dict(endereco='Rua 65, nº 71 · Jardim Goiás', arq='guia-sidney-501T.html', base_ref='ec0964c^', tema='veludo', ui=ui_sidney('T')),
+  '501O': dict(endereco='Rua 65, nº 71 · Jardim Goiás', arq='guia-sidney-501O.html', base_ref='e9bacd1', tema='veludo', ui=ui_sidney('O')),
+  '1806A': dict(endereco='Av. Dep. Jamel Cecílio, 2690 · Jardim Goiás', arq='guia-barcelona-1806A.html', base_ref='978a1cb', tema='seda',
      ui=ui_unidade('1806 A', 'Metropolitan Barcelona · Jardim Goiás, Goiânia', 14, 11,
         vaga_sub={'pt':'Subsolo 2 · cartão do portão no apê','en':'Basement 2 · gate card in the flat','es':'Subsuelo 2 · tarjeta del portón en el depto'},
         extra={'pt':{'vagaVal':'491'},'en':{'vagaVal':'491'},'es':{'vagaVal':'491'}})),
-  '1003A': dict(arq='guia-fr-bueno-1003A.html', base_ref='978a1cb', tema='agua',
+  '1003A': dict(endereco='Avenida T-9, nº 728 · Setor Bueno', arq='guia-fr-bueno-1003A.html', base_ref='978a1cb', tema='agua',
      ui=ui_unidade('Studio 1003A', 'FR Bueno Municipal · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL,
         extra={'pt':{'vagaVal':'093'},'en':{'vagaVal':'093'},'es':{'vagaVal':'093'}})),
-  '1701': dict(arq='guia-marista-1701.html', base_ref='978a1cb', tema='travertino',
+  '1701': dict(endereco='Rua 145, nº 120 · Setor Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1701.html', base_ref='978a1cb', tema='travertino',
      troca_dados=SAIDA_11H, ui=ui_unidade('Suíte 1701', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra=COPA)),
-  '402': dict(arq='guia-marista-402.html', base_ref='978a1cb', tema='travertino',
+  '402': dict(endereco='Rua 145, nº 120 · Setor Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-402.html', base_ref='978a1cb', tema='travertino',
      troca_dados=SAIDA_11H, ui=ui_unidade('Suíte 402', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra=COPA)),
-  '803S': dict(arq='guia-tai-803S.html', base_ref='978a1cb', tema='carvalho',
+  '803S': dict(endereco='R. T-53, 804 · Setor Bueno', arq='guia-tai-803S.html', base_ref='978a1cb', tema='carvalho',
      ui=ui_unidade('Flat 803S', 'Tai Residências · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL)),
-  '407B': dict(arq='guia-dna-407B.html', base_ref='978a1cb', tema='marmore',
+  '407B': dict(endereco='R. T-37, 2300 · Setor Bueno', arq='guia-dna-407B.html', base_ref='978a1cb', tema='marmore',
      ui=ui_unidade({'pt':'Flat 407 · Torre B','en':'Flat 407 · Tower B','es':'Flat 407 · Torre B'}, 'DNA SmartStyle · Setor Bueno, Goiânia', 15, 12,
         vaga_sub={'pt':'Subsolo S2 · controle no apê','en':'Basement S2 · remote in the flat','es':'Subsuelo S2 · control en el depto'})),
-  '2003B': dict(arq='guia-dna-2003B.html', base_ref='978a1cb', tema='noite', hero='sala-estar-jantar',
+  '2003B': dict(endereco='R. T-37, 2300 · Setor Bueno', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-2003B.html', base_ref='978a1cb', tema='noite', hero='sala-estar-jantar',
      mapa={'entrar': ['ape'], 'ape': ['duplex', 'cozinha']},
      ui=ui_unidade({'pt':'Duplex 2003','en':'Duplex 2003','es':'Dúplex 2003'}, {'pt':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower B · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
         vaga_sub={'pt':'2º pavimento da garagem','en':'Garage level 2','es':'2º nivel del garaje'})),
@@ -115,6 +115,9 @@ def montar(chave):
     tema_js = {'nome': T['nome'], 'cor': T['cor'], 'fechadura': T['fechadura'], 'autoSub': T['autoSub']}
     if U.get('mapa'): tema_js['mapa'] = U['mapa']
     if U.get('hero'): tema_js['hero'] = U['hero']
+    if U.get('maps'): tema_js['mapsUrl'] = U['maps']
+    if U.get('endereco'):
+        for l in U['ui']: U['ui'][l]['endereco'] = U['endereco']
     # correções de conteúdo pedidas pelo Pedro (só dentro do bloco de dados)
     if U.get('troca_dados'):
         a = s.index('<script id="dados"'); b = s.index('</script>', a); d = s[a:b]

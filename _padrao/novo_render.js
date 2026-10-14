@@ -62,9 +62,12 @@ function montarHome(){
   document.getElementById('cWifiVal').classList.toggle('longo', (WIFI_SENHA||'').length>12);
   document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : u('wifiRedeSub');
   // energia: cartão "Sem luz?" só onde existe a tela do cartão de energia; senão, 220V
-  var temLuz=!!telaDef('luz');
-  document.querySelector('.e-luz').classList.toggle('esconde', !temLuz);
-  document.querySelector('.e-volt').classList.toggle('esconde', temLuz);
+  // "Sem luz?" só onde existe o cartão de energia (faixa larga abaixo do essencial)
+  document.querySelector('.e-luz').classList.toggle('esconde', !telaDef('luz'));
+  // localização: endereço curto + abre o mapa
+  var mapa=TEMA.mapsUrl||((typeof MAPA_URL!=='undefined')?MAPA_URL:''), cl=document.getElementById('cLocal');
+  document.getElementById('cLocalEnd').textContent=u('endereco')||((t('tela_chegar')||{}).sub||'');
+  if(mapa){ cl.href=mapa; cl.onclick=null; } else { cl.removeAttribute('target'); cl.onclick=function(){ abrir('chegar'); return false; }; }
   // vaga: número em destaque; sem número, o resumo da tela da garagem
   var vv=document.getElementById('cVagaVal'), gar=t('tela_garagem')||{};
   var vagaVal=u('vagaVal')||VAGA;

@@ -56,21 +56,9 @@
       <span class="val" id="cPortaVal"></span>
       <span class="tap" id="cPortaTap" data-u="copiar"></span>
     </button>
-    <a class="e-luz" href="#luz" onclick="abrir('luz');return false">
-      <b data-u="luzTit"></b>
-      <span class="lb">
-        <small data-u="luzSub"></small>
-        <svg width="46" height="64" viewBox="0 0 46 64" aria-hidden="true">
-          <rect x="6" y="6" width="34" height="56" rx="8" fill="#FFFFFF" style="stroke:color-mix(in srgb,var(--assin2) 40%,#fff)" stroke-width="1.5"/>
-          <rect x="14" y="16" width="18" height="26" rx="3" fill="#2A2F2D"/>
-          <circle class="p" cx="23" cy="51" r="3" style="fill:var(--assin2)"/>
-          <g class="c"><rect x="16" y="2" width="14" height="24" rx="2.5" style="fill:var(--assin2)"/><rect x="19" y="6" width="8" height="2" rx="1" fill="#FFFFFF" opacity=".85"/></g>
-        </svg>
-      </span>
-    </a>
-    <a class="e-volt esconde" href="#ape" onclick="abrir('ape');return false">
-      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></svg><span data-u="voltTit"></span></span>
-      <span><span class="val">220V</span><small data-u="voltSub"></small></span>
+    <a class="e-local" id="cLocal" href="#chegar" target="_blank" rel="noopener">
+      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg><span data-u="localTit"></span></span>
+      <span><b class="end" id="cLocalEnd"></b><span class="abre"><span data-u="localAbrir"></span> →</span></span>
     </a>
     <button class="e-wifi" id="cWifi" onclick="WIFI_SENHA?copiar(this,WIFI_SENHA):zap(TXT[L].zapWifi)" aria-label="Copiar a senha do Wi-Fi">
       <span class="t"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16.2a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>Wi-Fi</span><span class="tap" data-u="copiarCurto"></span></span>
@@ -79,6 +67,15 @@
     <a class="e-vaga" href="#garagem" onclick="abrir('garagem');return false">
       <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14M6 17v-5.5l2-5h8l2 5V17M6 11.5h12"/><circle cx="8.5" cy="17" r="1.7"/><circle cx="15.5" cy="17" r="1.7"/></svg><span id="cVagaRot" data-u="vaga"></span></span>
       <span><small id="cVagaSub" data-u="vagaSub"></small><span class="val" id="cVagaVal"></span></span>
+    </a>
+    <a class="e-luz" href="#luz" onclick="abrir('luz');return false">
+      <span class="tx"><b data-u="luzTit"></b><small data-u="luzSub"></small></span>
+      <svg width="46" height="64" viewBox="0 0 46 64" aria-hidden="true">
+          <rect x="6" y="6" width="34" height="56" rx="8" fill="#FFFFFF" style="stroke:color-mix(in srgb,var(--assin2) 40%,#fff)" stroke-width="1.5"/>
+          <rect x="14" y="16" width="18" height="26" rx="3" fill="#2A2F2D"/>
+          <circle class="p" cx="23" cy="51" r="3" style="fill:var(--assin2)"/>
+          <g class="c"><rect x="16" y="2" width="14" height="24" rx="2.5" style="fill:var(--assin2)"/><rect x="19" y="6" width="8" height="2" rx="1" fill="#FFFFFF" opacity=".85"/></g>
+        </svg>
     </a>
   </div>
 
