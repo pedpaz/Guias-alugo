@@ -1,0 +1,127 @@
+<div id="aviso" role="alert" aria-live="assertive"></div>
+<div class="fundo" aria-hidden="true"><div class="par"><div class="tex" id="temaTex"></div><div class="luz"></div></div><div class="veu"></div></div>
+<div class="app">
+
+<!-- ============ TELA INICIAL ============ -->
+<div id="menu">
+  <header class="hero">
+    <div class="bg" id="heroBg"></div>
+    <div class="veu"></div>
+    <img class="marca" id="marcaPredio" alt="">
+    <div class="lang" id="langBar" role="group" aria-label="Idioma">
+      <button data-l="pt" class="on">PT</button><button data-l="en">EN</button><button data-l="es">ES</button>
+    </div>
+    <div class="in">
+      <span class="chip"><i></i><span id="heroChip" data-t="apeNome"></span></span>
+      <h1 data-u="heroTit"></h1>
+      <span class="sub" data-u="heroSub"></span>
+    </div>
+  </header>
+
+  <div class="horas">
+    <div class="h">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15 19 4M17.5 5.5l2 2M15 8l2 2"/></svg>
+      <span><small data-u="hEntRot"></small><b data-u="hEnt"></b></span>
+    </div>
+    <span class="div"></span>
+    <div class="h">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span><small data-u="hSaiRot"></small><b data-u="hSai"></b></span>
+    </div>
+  </div>
+
+  <section class="passos" aria-label="Sua estadia em 3 passos">
+    <div class="passos-h"><small data-u="passosK"></small><b data-u="passosTit"></b></div>
+    <a class="passo p1" id="lnkTermo" target="_blank" rel="noopener">
+      <span class="num">1</span>
+      <span class="tx"><b><span data-u="p1t"></span> <em class="obr"><i></i><span data-u="obr"></span></em></b><small data-u="p1s"></small></span>
+      <span class="cta" data-u="p1c"></span>
+    </a>
+    <button class="passo p2" onclick="abrir('vistoria')">
+      <span class="num"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></span>
+      <span class="tx"><b data-u="p2t"></b><small data-u="p2s"></small></span>
+      <span class="cta" data-u="p2c"></span>
+    </button>
+    <button class="passo p3" onclick="abrir('checkout')">
+      <span class="num">3</span>
+      <span class="tx"><b data-u="p3t"></b><small data-u="p3s"></small></span>
+      <span class="cta" data-u="p3c"></span>
+    </button>
+  </section>
+
+  <div class="sec-tit"><h2 data-u="essencial"></h2></div>
+  <div class="ess">
+    <button class="e-porta" id="cPorta" onclick="SENHA?copiar(this,SENHA):abrir('entrar')" aria-label="Copiar a senha da porta">
+      <span class="rot" id="cPortaRot" data-t="cSenha"></span>
+      <span class="val" id="cPortaVal"></span>
+      <span class="tap" id="cPortaTap" data-u="copiar"></span>
+    </button>
+    <a class="e-luz" href="#luz" onclick="abrir('luz');return false">
+      <b data-u="luzTit"></b>
+      <span class="lb">
+        <small data-u="luzSub"></small>
+        <svg width="46" height="64" viewBox="0 0 46 64" aria-hidden="true">
+          <rect x="6" y="6" width="34" height="56" rx="8" fill="#FFFFFF" style="stroke:color-mix(in srgb,var(--assin2) 40%,#fff)" stroke-width="1.5"/>
+          <rect x="14" y="16" width="18" height="26" rx="3" fill="#2A2F2D"/>
+          <circle class="p" cx="23" cy="51" r="3" style="fill:var(--assin2)"/>
+          <g class="c"><rect x="16" y="2" width="14" height="24" rx="2.5" style="fill:var(--assin2)"/><rect x="19" y="6" width="8" height="2" rx="1" fill="#FFFFFF" opacity=".85"/></g>
+        </svg>
+      </span>
+    </a>
+    <a class="e-volt esconde" href="#ape" onclick="abrir('ape');return false">
+      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></svg><span data-u="voltTit"></span></span>
+      <span><span class="val">220V</span><small data-u="voltSub"></small></span>
+    </a>
+    <button class="e-wifi" id="cWifi" onclick="WIFI_SENHA?copiar(this,WIFI_SENHA):zap(TXT[L].zapWifi)" aria-label="Copiar a senha do Wi-Fi">
+      <span class="t"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16.2a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>Wi-Fi</span><span class="tap" data-u="copiarCurto"></span></span>
+      <span><small id="cWifiRede"></small><span class="val" id="cWifiVal"></span></span>
+    </button>
+    <a class="e-vaga" href="#garagem" onclick="abrir('garagem');return false">
+      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14M6 17v-5.5l2-5h8l2 5V17M6 11.5h12"/><circle cx="8.5" cy="17" r="1.7"/><circle cx="15.5" cy="17" r="1.7"/></svg><span id="cVagaRot" data-u="vaga"></span></span>
+      <span><small id="cVagaSub" data-u="vagaSub"></small><span class="val" id="cVagaVal"></span></span>
+    </a>
+  </div>
+
+
+  <div class="sec-tit"><h2 data-u="tudo"></h2><span data-u="nTopicos"></span></div>
+  <nav class="lista" id="lista" aria-label="Tópicos do guia"></nav>
+
+  <section class="conc" id="concierge">
+    <div class="top">
+      <img class="ic" id="icConc" alt="">
+      <div><b data-u="concTit"></b><small data-u="concSub"></small></div>
+    </div>
+    <label class="campo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off" enterkeyhint="search" data-ph="concPh">
+    </label>
+    <div class="chips" id="chips"></div>
+    <div class="res" id="res" aria-live="polite"></div>
+  </section>
+
+  <div class="rodape">
+    <div class="regras" data-u="rodapeRegras"></div>
+    <img id="marcaAlugo" alt="aluGO">
+    <div data-t="rodape"></div>
+  </div>
+</div>
+
+<!-- ============ TÓPICOS ============ -->
+<div id="telas"></div>
+</div>
+
+<nav class="barra"><div class="in">
+  <button id="bGuia" class="on" onclick="irMenu()">
+    <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+    <span data-u="bGuia"></span>
+  </button>
+  <button id="bConc" onclick="irConcierge()">
+    <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.5-5A8 8 0 1 1 20.5 11.5z"/><path d="m12 8 1.1 2.3 2.5.3-1.8 1.7.5 2.5-2.3-1.2-2.3 1.2.5-2.5-1.8-1.7 2.5-.3z"/></svg>
+    <span data-u="bConc"></span>
+  </button>
+  <button id="bSaida" onclick="abrir('checkout')">
+    <svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M9 16l-4-4 4-4M5 12h10"/></svg>
+    <span data-u="bSaida"></span>
+  </button>
+</div></nav>
+

@@ -1,0 +1,34 @@
+
+/* ===== TEMA DA UNIDADE (as cores vêm do bloco :root do tema) =====
+   Camada fixa atrás do guia: textura da unidade (Gemini) com deriva lenta,
+   brilho que passa como luz sobre o material e leve paralaxe ao rolar. */
+body{background:var(--tema-bg)}
+.fundo{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--tema-bg)}
+.fundo .par{position:absolute;inset:-8% -8% -20% -8%;transform:translate3d(0,calc(var(--sy,0) * -1px),0)}
+.fundo .tex{position:absolute;inset:0;background-size:cover;background-position:center;animation:deriva 38s ease-in-out infinite alternate;will-change:transform}
+@keyframes deriva{from{transform:scale(1.02) translate(0,0) rotate(0deg)}to{transform:scale(1.12) translate(-2.5%,-2%) rotate(.6deg)}}
+.fundo .luz{position:absolute;inset:-60%;mix-blend-mode:screen;
+  background:linear-gradient(118deg,transparent 42%,var(--tema-luz-a) 47%,var(--tema-luz-b) 50%,var(--tema-luz-a) 53%,transparent 58%);
+  animation:luz 12s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes luz{0%{transform:translate(-30%,-8%)}50%{transform:translate(30%,8%)}100%{transform:translate(-30%,-8%)}}
+.fundo .veu{position:absolute;inset:0;background:radial-gradient(130% 70% at 50% 0%,rgba(0,0,0,0) 0%,rgba(var(--tema-veu),.35) 70%,rgba(var(--tema-veu),.6) 100%)}
+.app{position:relative;z-index:1}
+.hero{margin:10px 10px 0;border-radius:28px;box-shadow:0 24px 50px -24px rgba(0,0,0,.8)}
+.horas{margin:-36px 22px 0}
+.sec-tit h2{color:var(--tema-tx)}
+.sec-tit span{color:var(--tema-tx2)}
+.e-porta{box-shadow:0 18px 34px -18px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.08)}
+.ess > *, .lista, .conc, .horas{box-shadow:0 18px 40px -20px rgba(0,0,0,.75)}
+.rodape{color:var(--tema-tx2)}
+.rodape img{filter:brightness(0) invert(1);opacity:.85}
+/* telas de tópico: cabeçalho sobre o veludo, conteúdo numa folha clara */
+.ttopo{background:transparent;color:var(--tema-tx)}
+.ttopo .pos{color:var(--tema-tx2)}
+.ttopo .k{color:var(--tema-tx2)}
+.atalhos button{background:rgba(255,255,255,.12);color:var(--tema-tx);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.atalhos button:first-child{background:#fff;color:var(--ink)}
+.tcorpo{background:var(--bg);border-radius:28px 28px 0 0;margin:0 8px;padding:20px 12px 34px;min-height:70vh;box-shadow:0 -10px 40px -20px rgba(0,0,0,.6)}
+@media (prefers-reduced-motion:reduce){.fundo .tex,.fundo .luz{animation:none}}
+.barra{background:var(--tema-barra);border-top-color:rgba(255,255,255,.08)}
+.barra button{color:var(--tema-tx2)}
+.barra button.on{color:#FFFFFF}
