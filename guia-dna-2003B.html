@@ -1420,7 +1420,7 @@ var CHEV='<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6
 
 /* ---------- TELA INICIAL ---------- */
 function montarHome(){
-  if(TEMA.autoSub&&topico('ape')){ var ap=t('tela_'+topico('ape').telas[0])||{}; if(ap.sub) document.getElementById('heroChip').textContent=ap.sub.replace(/\s*·\s*220V/i,''); }
+  if(u('heroChip')) document.getElementById('heroChip').textContent=u('heroChip'); else if(TEMA.autoSub&&topico('ape')){ var ap=t('tela_'+topico('ape').telas[0])||{}; if(ap.sub) document.getElementById('heroChip').textContent=ap.sub.replace(/\s*·\s*220V/i,''); }
   var pv=document.getElementById('cPortaVal');
   pv.textContent = SENHA || t('cAcessoVal'); pv.classList.toggle('longo', !SENHA);
   pv.classList.toggle('med', !!SENHA && SENHA.length>=8);
