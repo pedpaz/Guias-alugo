@@ -223,6 +223,8 @@ a{color:var(--verde);font-weight:600}
 
 .chave{cursor:pointer}
 
+.anim-porta{margin:0 0 12px}
+
 /* ===== TEMA DA UNIDADE: "Veludo vivo" (Studio Red Velvet) =====
    Camada fixa atrás do guia: textura de veludo (Gemini) com deriva lenta,
    brilho que passa como luz no tecido e leve paralaxe ao rolar. */
@@ -259,6 +261,7 @@ body{background:var(--tema-bg)}
 .barra button.on{color:#FFFFFF}
 
 </style>
+<script src="assets/fechadura-anim.js" defer></script>
 </head>
 <body>
 <div id="aviso" role="alert" aria-live="assertive"></div>
@@ -2674,6 +2677,14 @@ function montarTelas(){
       '</div></section>';
   });
   c.innerHTML=h;
+  // tutorial animado da fechadura (Intelbras FR 101), o mesmo dos outros guias
+  var sp=c.querySelector('#sec-porta');
+  if(sp && SENHA){
+    var bl=sp.querySelectorAll('.bloco'), ref=bl[2]||bl[bl.length-1];
+    var w=document.createElement('div'); w.className='anim-porta';
+    w.innerHTML='<fechadura-anim senha="'+SENHA+'" cor="#B8121F" lang="'+L+'"></fechadura-anim>';
+    if(ref) ref.parentNode.insertBefore(w, ref.nextSibling); else sp.appendChild(w);
+  }
   // a senha em destaque dentro do tópico também copia ao tocar
   [].forEach.call(c.querySelectorAll('.chave'),function(el){
     var v=el.textContent.replace(/\s+/g,'').replace(/✱/g,'*');
