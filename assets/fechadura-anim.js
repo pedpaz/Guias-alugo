@@ -72,11 +72,11 @@
   }
 
   var CSS = function(cor){ return '\
-:host{display:block;margin:0 0 14px;font-family:Manrope,system-ui,-apple-system,sans-serif;color:#221E1B}\
+:host{display:block;margin:0 0 14px;font-family:var(--fa-font,Manrope,system-ui,-apple-system,sans-serif);color:#221E1B}\
 *{box-sizing:border-box}\
 .box{background:#FFFDFA;border:1px solid #E9E0D5;border-radius:20px;padding:18px 16px 16px;\
   box-shadow:0 2px 6px rgba(34,30,27,.05),0 10px 26px rgba(34,30,27,.06)}\
-.tit{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;line-height:1.2;margin:0 0 4px}\
+.tit{font-family:var(--fa-tit,Fraunces,Georgia,serif);font-weight:600;font-size:18px;line-height:1.2;margin:0 0 4px}\
 .sub{font-size:13.5px;color:#6B615A;margin:0 0 16px}\
 .palco{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}\
 .corpo{position:relative;width:138px;height:292px;border-radius:30px;flex:none;padding:7px;\
