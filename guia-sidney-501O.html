@@ -2736,6 +2736,14 @@ var TOPICOS = [
   {id:'checkout',   c:'#D9631A', b:'#FCE9DC', telas:['saida']},
   {id:'ajuda',      c:'#0B2B22', b:'#E1E8E4', telas:['problema']}
 ];
+/* guia com telas organizadas de outro jeito: TEMA.mapa troca as telas de um tópico */
+if(TEMA.mapa) TOPICOS.forEach(function(tp){ if(TEMA.mapa[tp.id]) tp.telas=TEMA.mapa[tp.id].slice(); });
+if(typeof MARCA_PREDIO==='undefined' || !MARCA_PREDIO) var MARCA_PREDIO = (typeof MARCA_DNA!=='undefined') ? MARCA_DNA : '';
+if(typeof aviso!=='function') window.aviso=function(msg){
+  var el=document.getElementById('aviso'); if(!el) return;
+  el.textContent=msg; el.classList.add('on'); clearTimeout(window._avisoT2);
+  window._avisoT2=setTimeout(function(){ el.classList.remove('on'); },4200);
+};
 /* cada guia só mostra as telas que tem; tópico sem tela some do menu */
 TOPICOS.forEach(function(tp){ tp.telas=tp.telas.filter(function(tid){ return TELAS.some(function(x){return x.id===tid;}); }); });
 TOPICOS=TOPICOS.filter(function(tp){ return tp.telas.length; });
@@ -2743,18 +2751,18 @@ function topico(id){ for(var i=0;i<TOPICOS.length;i++) if(TOPICOS[i].id===id) re
 function topicoDaTela(tid){ for(var i=0;i<TOPICOS.length;i++) if(TOPICOS[i].telas.indexOf(tid)>=0) return TOPICOS[i]; return null; }
 function telaDef(tid){ for(var i=0;i<TELAS.length;i++) if(TELAS[i].id===tid) return TELAS[i]; return null; }
 /* subtítulo do tópico: o da unidade (UI_UNIDADE) ou, com TEMA.autoSub, o da tela principal */
-var SUB_AUTO={entrar:['porta','suite'],condominio:['lazer:titulo'],arredores:['bairro'],checkout:['saida']};
+var SUB_AUTO={entrar:'sub',condominio:'titulo',arredores:'sub',checkout:'sub'};
 function subTopico(tp){
   var uu=(typeof UI_UNIDADE!=='undefined')&&UI_UNIDADE[L]&&UI_UNIDADE[L].topicos&&UI_UNIDADE[L].topicos[tp.id];
   if(uu&&uu.s) return uu.s;
-  if(TEMA.autoSub&&SUB_AUTO[tp.id]) for(var i=0;i<SUB_AUTO[tp.id].length;i++){ var p=SUB_AUTO[tp.id][i].split(':'), d=t('tela_'+p[0]), cp=p[1]||'sub'; if(d&&d[cp]) return d[cp]; }
+  if(TEMA.autoSub&&SUB_AUTO[tp.id]){ var d=t('tela_'+tp.telas[0]); if(d&&d[SUB_AUTO[tp.id]]) return d[SUB_AUTO[tp.id]]; }
   return (u('topicos')[tp.id]||{}).s||'';
 }
 var CHEV='<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
 
 /* ---------- TELA INICIAL ---------- */
 function montarHome(){
-  if(TEMA.autoSub){ var ap=t('tela_ape')||{}; if(ap.sub) document.getElementById('heroChip').textContent=ap.sub.replace(/\s*·\s*220V/i,''); }
+  if(TEMA.autoSub&&topico('ape')){ var ap=t('tela_'+topico('ape').telas[0])||{}; if(ap.sub) document.getElementById('heroChip').textContent=ap.sub.replace(/\s*·\s*220V/i,''); }
   var pv=document.getElementById('cPortaVal');
   pv.textContent = SENHA || t('cAcessoVal'); pv.classList.toggle('longo', !SENHA);
   pv.classList.toggle('med', !!SENHA && SENHA.length>=8);
@@ -2815,7 +2823,7 @@ function montarTelas(){
   // vistoria ganha âncora própria (#vistoria) para o atalho da tela inicial
   var vi=c.querySelector('#sec-checkin .vist'); if(vi){ var vb=vi.closest('.bloco'); if(vb) vb.id='vistoria'; }
   // tutorial animado da fechadura (Intelbras FR 101), o mesmo dos outros guias
-  var sp=c.querySelector('#sec-porta');
+  var tpE=topico('entrar'), sp=tpE?c.querySelector('#sec-'+tpE.telas[0]):null;
   if(sp && SENHA && TEMA.fechadura && !sp.querySelector('fechadura-anim')){
     var bl=sp.querySelectorAll('.bloco'), ref=bl[2]||bl[bl.length-1];
     var w=document.createElement('div'); w.className='anim-porta';
@@ -2927,7 +2935,7 @@ function aplicarIdioma(){
 (function init(){
   var mp=document.getElementById('marcaPredio'); if(MARCA_PREDIO) mp.src=MARCA_PREDIO; else mp.style.display='none';
   document.getElementById('marcaAlugo').src = MARCA_ALUGO;
-  document.getElementById('heroBg').style.backgroundImage = 'url('+FOTOS['hero']+')';
+  var fh=FOTOS['hero']||FOTOS[TEMA.hero]||FOTOS[Object.keys(FOTOS)[0]]; document.getElementById('heroBg').style.backgroundImage = 'url('+fh+')';
   document.getElementById('icConc').src = ICS.ajuda;
   document.getElementById('lnkTermo').href = TERMO_URL;
   // tema da unidade: textura de veludo + leve paralaxe ao rolar
