@@ -36,6 +36,8 @@ TEMAS = {
  'ripado': tema('Ripado e LED', f'{T_}/dna1008.webp', '#121110', '#D9822B',
     V('#121110','#F7F3EE','rgba(236,226,214,.74)','rgba(255,180,100,.07)','rgba(255,215,160,.15)','4,3,2','rgba(16,14,12,.9)','#C2701F','#E08A3A','#FFF2E4'),
     fechadura=True),
+ 'dente': tema('Dente-de-leão', f'{T_}/blend.webp', '#17110C', '#C98A3A',
+    V('#17110C','#FBF4EA','rgba(240,226,206,.74)','rgba(255,200,130,.07)','rgba(255,230,180,.15)','8,5,3','rgba(20,14,10,.9)','#B5752C','#D9964A','#FCF1E2')),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -104,6 +106,9 @@ UNIDADES = {
   '1008B': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-1008B.html', base_ref='ab7adad', tema='ripado', hero='sala',
      ui=ui_unidade({'pt':'Apartamento 1008','en':'Apartment 1008','es':'Apartamento 1008'}, {'pt':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower B · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
         vaga_sub={'pt':'2º pavimento da garagem','en':'Garage level 2','es':'2º nivel del garaje'})),
+  '757': dict(predio='Blend Smart Style', arq='guia-blend-757.html', base_ref='5bb9d24', tema='dente',
+     ui=ui_unidade('Blend 757', 'Blend Smart Style · Setor Marista, Goiânia', 15, 12,
+        extra={'pt':{'heroChip':'1 quarto · até 5 hóspedes'},'en':{'heroChip':'1 bedroom · up to 5 guests'},'es':{'heroChip':'1 dormitorio · hasta 5 huéspedes'}})),
 }
 
 def montar(chave):
