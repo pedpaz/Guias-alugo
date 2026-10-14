@@ -51,22 +51,25 @@
 
   <div class="sec-tit"><h2 data-u="essencial"></h2></div>
   <div class="ess">
-    <button class="e-porta" id="cPorta" onclick="SENHA?copiar(this,SENHA):abrir('entrar')" aria-label="Copiar a senha da porta">
-      <span class="rot" id="cPortaRot" data-t="cSenha"></span>
+    <button class="e-card e-porta" id="cPorta" onclick="SENHA?copiar(this,SENHA):abrir('entrar')" aria-label="Copiar a senha da porta">
+      <span class="topo"><span class="rot" id="cPortaRot" data-t="cSenha"></span><img class="ico" id="icPorta" alt=""></span>
       <span class="val" id="cPortaVal"></span>
       <span class="tap" id="cPortaTap" data-u="copiar"></span>
     </button>
-    <a class="e-local" id="cLocal" href="#chegar" target="_blank" rel="noopener">
-      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg><span data-u="localTit"></span></span>
-      <span><b class="end" id="cLocalEnd"></b><span class="abre"><span data-u="localAbrir"></span> →</span></span>
-    </a>
-    <button class="e-wifi" id="cWifi" onclick="WIFI_SENHA?copiar(this,WIFI_SENHA):zap(TXT[L].zapWifi)" aria-label="Copiar a senha do Wi-Fi">
-      <span class="t"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16.2a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>Wi-Fi</span><span class="tap" data-u="copiarCurto"></span></span>
-      <span><small id="cWifiRede"></small><span class="val" id="cWifiVal"></span></span>
+    <button class="e-card e-wifi" id="cWifi" onclick="WIFI_SENHA?copiar(this,WIFI_SENHA):zap(TXT[L].zapWifi)" aria-label="Copiar a senha do Wi-Fi">
+      <span class="topo"><span class="rot">Wi-Fi</span><img class="ico" id="icWifi" alt=""></span>
+      <span class="meio"><small id="cWifiRede"></small><span class="val" id="cWifiVal"></span></span>
+      <span class="tap" data-u="copiar"></span>
     </button>
-    <a class="e-vaga" href="#garagem" onclick="abrir('garagem');return false">
-      <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14M6 17v-5.5l2-5h8l2 5V17M6 11.5h12"/><circle cx="8.5" cy="17" r="1.7"/><circle cx="15.5" cy="17" r="1.7"/></svg><span id="cVagaRot" data-u="vaga"></span></span>
-      <span><small id="cVagaSub" data-u="vagaSub"></small><span class="val" id="cVagaVal"></span></span>
+    <a class="e-card e-local" id="cLocal" href="#chegar" target="_blank" rel="noopener">
+      <span class="topo"><span class="rot" data-u="localTit"></span><img class="ico" id="icLocal" alt=""></span>
+      <span class="val nome" id="cLocalNome"></span>
+      <span class="tap"><span data-u="localAbrir"></span></span>
+    </a>
+    <a class="e-card e-vaga" href="#garagem" onclick="abrir('garagem');return false">
+      <span class="topo"><span class="rot" id="cVagaRot" data-u="vaga"></span><img class="ico" id="icVaga" alt=""></span>
+      <span class="val" id="cVagaVal"></span>
+      <small class="leg" id="cVagaSub" data-u="vagaSub"></small>
     </a>
     <a class="e-luz" href="#luz" onclick="abrir('luz');return false">
       <span class="tx"><b data-u="luzTit"></b><small data-u="luzSub"></small></span>

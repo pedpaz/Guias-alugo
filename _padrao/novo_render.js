@@ -59,14 +59,18 @@ function montarHome(){
   pv.classList.toggle('med', !!SENHA && SENHA.length>=8);
   if(!SENHA){ document.getElementById('cPortaRot').textContent=u('acessoRot'); document.getElementById('cPortaTap').textContent=u('verComo'); }
   document.getElementById('cWifiVal').textContent = WIFI_SENHA || t('cWifiPend');
-  document.getElementById('cWifiVal').classList.toggle('longo', (WIFI_SENHA||'').length>12);
-  document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : u('wifiRedeSub');
+  var wl=(WIFI_SENHA||'').length, wv=document.getElementById('cWifiVal');
+  wv.classList.toggle('med', wl>=10 && wl<14); wv.classList.toggle('longo', wl>=14);
+  document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : '';
   // energia: cartão "Sem luz?" só onde existe a tela do cartão de energia; senão, 220V
   // "Sem luz?" só onde existe o cartão de energia (faixa larga abaixo do essencial)
   document.querySelector('.e-luz').classList.toggle('esconde', !telaDef('luz'));
   // localização: endereço curto + abre o mapa
   var mapa=TEMA.mapsUrl||((typeof MAPA_URL!=='undefined')?MAPA_URL:''), cl=document.getElementById('cLocal');
-  document.getElementById('cLocalEnd').textContent=u('endereco')||((t('tela_chegar')||{}).sub||'');
+  document.getElementById('cLocalNome').textContent=u('predioNome')||'';
+  // ícones 3D do essencial (Gemini)
+  [['icPorta','porta'],['icWifi','wifi'],['icLocal','local'],['icVaga','vaga']].forEach(function(p){
+    var im=document.getElementById(p[0]); if(typeof ICS_ESS!=='undefined'&&ICS_ESS[p[1]]) im.src=ICS_ESS[p[1]]; else im.style.display='none'; });
   if(mapa){ cl.href=mapa; cl.onclick=null; } else { cl.removeAttribute('target'); cl.onclick=function(){ abrir('chegar'); return false; }; }
   // vaga: número em destaque; sem número, o resumo da tela da garagem
   var vv=document.getElementById('cVagaVal'), gar=t('tela_garagem')||{};
