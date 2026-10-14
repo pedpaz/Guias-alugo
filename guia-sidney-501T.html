@@ -225,6 +225,48 @@ a{color:var(--verde);font-weight:600}
 
 .anim-porta{margin:0 0 12px}
 
+/* ===== Sua estadia em 3 passos (check-in online e vistoria em destaque) ===== */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.passos{margin:14px 16px 0;background:#fff;border-radius:24px;padding:14px 12px 12px;box-shadow:0 18px 40px -20px rgba(0,0,0,.75)}
+.passos-h{display:flex;flex-direction:column;gap:1px;margin:0 4px 4px}
+.passos-h small{font-size:11.5px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.passos-h b{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.passo{width:100%;display:flex;align-items:center;gap:12px;padding:12px;margin-top:8px;border-radius:18px;text-decoration:none;color:var(--ink);text-align:left;font-weight:400}
+.passo .num{width:38px;height:38px;flex-shrink:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.passo .num svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.passo .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.passo .tx b{font-size:16px;font-weight:750;letter-spacing:-.01em;line-height:1.25}
+.passo .tx small{font-size:12.5px;color:var(--ink2);line-height:1.35}
+.passo .cta{flex-shrink:0;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:800;white-space:nowrap}
+/* 1 · check-in online: borda viva girando + número pulsando */
+.p1{border:2px solid transparent;background:linear-gradient(#F3FAE3,#F3FAE3) padding-box,
+  conic-gradient(from var(--ang),#B9DC4A,#0A7A32,#B9DC4A 40%,#E6F4C8 60%,#B9DC4A) border-box;animation:gira 3.2s linear infinite}
+@keyframes gira{to{--ang:360deg}}
+.p1 .num{background:var(--forest);color:var(--lima);animation:anel 2s ease-out infinite}
+@keyframes anel{0%{box-shadow:0 0 0 0 rgba(10,122,50,.55)}100%{box-shadow:0 0 0 12px rgba(10,122,50,0)}}
+.p1 .cta{background:var(--forest);color:#fff}
+.obr{display:inline-flex;align-items:center;gap:5px;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:#B42318;background:#FEE4E2;border-radius:999px;padding:2px 8px;vertical-align:2px}
+.obr i{width:6px;height:6px;border-radius:50%;background:#D92D20;animation:pisca2 1.2s ease-in-out infinite}
+@keyframes pisca2{50%{opacity:.25}}
+/* 2 · vistoria: proteção (âmbar com brilho passando) */
+.p2{position:relative;overflow:hidden;background:#FFF6DE;box-shadow:inset 0 0 0 1.5px #EFCB6A}
+.p2:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);
+  transform:translateX(-120%);animation:brilhoV 4.5s ease-in-out 1.2s infinite;pointer-events:none}
+@keyframes brilhoV{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+.p2 .num{background:#C98A00;color:#fff}
+.p2 .cta{background:#fff;color:#7A5200;box-shadow:inset 0 0 0 1.5px #E3B649}
+.p3{background:#F4F6F5}
+.p3 .num{background:#E3E8E5;color:var(--ink2)}
+.p3 .cta{background:#fff;color:var(--ink2);box-shadow:inset 0 0 0 1px var(--linha)}
+/* tópico 1: botão do check-in e a vistoria com destaque */
+#tela-checkin .btn.laranja{background:linear-gradient(135deg,#C4E45A,#A6CF34);color:var(--forest);font-size:17px;font-weight:800;padding:18px;animation:pulsoLima 2.4s ease-in-out infinite}
+@keyframes pulsoLima{0%,100%{box-shadow:0 0 0 0 rgba(166,207,52,.65)}50%{box-shadow:0 0 0 12px rgba(166,207,52,0)}}
+#vistoria{background:#FFF6DE;box-shadow:inset 0 0 0 2px #EFCB6A,var(--soft);scroll-margin-top:14px}
+#vistoria h3{display:flex;align-items:center;gap:8px;font-size:19px}
+#vistoria h3:before{content:"";width:26px;height:26px;flex-shrink:0;border-radius:50%;background:#C98A00 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z'/%3E%3Cpath d='m9 12 2.2 2.2L15.5 10'/%3E%3C/svg%3E") center/16px no-repeat}
+@media (prefers-reduced-motion:reduce){.p1,.p1 .num,.p2:after,.obr i,#tela-checkin .btn.laranja{animation:none}}
+
 /* ===== TEMA DA UNIDADE: "Veludo vivo" (Studio Red Velvet) =====
    Camada fixa atrás do guia: textura de veludo (Gemini) com deriva lenta,
    brilho que passa como luz no tecido e leve paralaxe ao rolar. */
@@ -295,6 +337,25 @@ body{background:var(--tema-bg)}
       <span><small data-u="hSaiRot"></small><b data-u="hSai"></b></span>
     </div>
   </div>
+
+  <section class="passos" aria-label="Sua estadia em 3 passos">
+    <div class="passos-h"><small data-u="passosK"></small><b data-u="passosTit"></b></div>
+    <a class="passo p1" id="lnkTermo" target="_blank" rel="noopener">
+      <span class="num">1</span>
+      <span class="tx"><b><span data-u="p1t"></span> <em class="obr"><i></i><span data-u="obr"></span></em></b><small data-u="p1s"></small></span>
+      <span class="cta" data-u="p1c"></span>
+    </a>
+    <button class="passo p2" onclick="abrir('vistoria')">
+      <span class="num"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></span>
+      <span class="tx"><b data-u="p2t"></b><small data-u="p2s"></small></span>
+      <span class="cta" data-u="p2c"></span>
+    </button>
+    <button class="passo p3" onclick="abrir('checkout')">
+      <span class="num">3</span>
+      <span class="tx"><b data-u="p3t"></b><small data-u="p3s"></small></span>
+      <span class="cta" data-u="p3c"></span>
+    </button>
+  </section>
 
   <div class="sec-tit"><h2 data-u="essencial"></h2></div>
   <div class="ess">
@@ -2524,6 +2585,7 @@ var TEMA_TEX = "data:image/webp;base64,UklGRi5lAABXRUJQVlA4ICJlAAAQJQKdASo7Av4DP
 /* ================= TEXTOS DA INTERFACE (PT/EN/ES) ================= */
 var UI = {
  pt:{
+  passosK:'Antes de entrar', passosTit:'Sua estadia em 3 passos', obr:'Obrigatório', p1t:'Check-in online', p1s:'Libera sua entrada no prédio · leva 2 minutos', p1c:'Fazer agora', p2t:'Vistoria de chegada', p2s:'Nas primeiras horas · protege você de cobrança por dano que já existia', p2c:'Fazer', p3t:'Check-out', p3s:'Até 11h · avise sua saída com um toque', p3c:'Ver',
   heroTit:'501 · Ala T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Entrada a partir', hEnt:'das 14h', hSaiRot:'Saída', hSai:'até as 11h',
   essencial:'O essencial', copiar:'Copiar', copiarCurto:'Copiar',
@@ -2550,6 +2612,7 @@ var UI = {
   }
  },
  en:{
+  passosK:'Before you arrive', passosTit:'Your stay in 3 steps', obr:'Required', p1t:'Online check-in', p1s:'Unlocks your building access · takes 2 minutes', p1c:'Do it now', p2t:'Arrival inspection', p2s:'In the first hours · protects you from charges for damage that was already there', p2c:'Start', p3t:'Check-out', p3s:'By 11 am · let us know with one tap', p3c:'See',
   heroTit:'501 · Wing T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Check-in from', hEnt:'2 pm', hSaiRot:'Check-out', hSai:'by 11 am',
   essencial:'The essentials', copiar:'Copy', copiarCurto:'Copy',
@@ -2576,6 +2639,7 @@ var UI = {
   }
  },
  es:{
+  passosK:'Antes de entrar', passosTit:'Tu estadía en 3 pasos', obr:'Obligatorio', p1t:'Check-in online', p1s:'Libera tu entrada al edificio · toma 2 minutos', p1c:'Hacer ahora', p2t:'Inspección de llegada', p2s:'En las primeras horas · te protege de cobros por daños que ya existían', p2c:'Hacer', p3t:'Check-out', p3s:'Hasta las 11 h · avisa tu salida con un toque', p3c:'Ver',
   heroTit:'501 · Ala T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Entrada desde las', hEnt:'14 h', hSaiRot:'Salida', hSai:'hasta las 11 h',
   essencial:'Lo esencial', copiar:'Copiar', copiarCurto:'Copiar',
@@ -2677,6 +2741,8 @@ function montarTelas(){
       '</div></section>';
   });
   c.innerHTML=h;
+  // vistoria ganha âncora própria (#vistoria) para o atalho da tela inicial
+  var vi=c.querySelector('#sec-checkin .vist'); if(vi){ var vb=vi.closest('.bloco'); if(vb) vb.id='vistoria'; }
   // tutorial animado da fechadura (Intelbras FR 101), o mesmo dos outros guias
   var sp=c.querySelector('#sec-porta');
   if(sp && SENHA){
@@ -2702,6 +2768,7 @@ function marcarBarra(qual){
 /* abrir(id): id de tópico (#energia) ou de tela antiga (#luz, #porta…) —
    os links diretos antigos continuam funcionando. */
 function abrir(id){
+  if(id==='vistoria'){ abrir('checkin'); setTimeout(function(){ var v=document.getElementById('vistoria'); if(v) v.scrollIntoView({behavior:'smooth',block:'start'}); },120); try{ history.replaceState(null,'','#vistoria'); }catch(e){} return; }
   var tp=topico(id), sec=null;
   if(!tp){ tp=topicoDaTela(id); if(tp && tp.telas[0]!==id) sec=id; }
   if(!tp){ irMenu(); return; }
@@ -2791,6 +2858,7 @@ function aplicarIdioma(){
   document.getElementById('marcaAlugo').src = MARCA_ALUGO;
   document.getElementById('heroBg').style.backgroundImage = 'url('+FOTOS['hero']+')';
   document.getElementById('icConc').src = ICS.ajuda;
+  document.getElementById('lnkTermo').href = TERMO_URL;
   // tema da unidade: textura de veludo + leve paralaxe ao rolar
   document.getElementById('temaTex').style.backgroundImage = 'url('+TEMA_TEX+')';
   var fundo=document.querySelector('.fundo'), pend=false;
