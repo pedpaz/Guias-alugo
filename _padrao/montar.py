@@ -153,7 +153,7 @@ UNIDADES = {
         extra={'pt':{'heroChip':'1 quarto · até 5 hóspedes'},'en':{'heroChip':'1 bedroom · up to 5 guests'},'es':{'heroChip':'1 dormitorio · hasta 5 huéspedes'}})),
   '1113': cp('1113', 'cristal', False), '2413': cp('2413', 'cristal', False), '1313': cp('1313', 'cristal', False),
   '911': cp('911', 'imperador', True), '209': cp('209', 'imperador', True),
-  '1310': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1310.html', base_ref='e5534f2', tema='travertino',
+  '1310': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1310.html', base_ref='c78e12d', tema='travertino',
      troca_dados=SAIDA_11H + QS_VISITAS, ui=ui_unidade('Suíte 1310', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra={
         'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama king, escritório, Wi-Fi e banheiro'}, 'entrar': {'t': 'Entrar na suíte'}}},
         'en': {'topicos': {'ape': {'t': 'The suite', 's': 'King bed, office, Wi-Fi and bathroom'}, 'entrar': {'t': 'Getting into the suite'}}},
@@ -168,7 +168,7 @@ UNIDADES = {
      ui=ui_unidade({'pt': 'Apto 503', 'en': 'Apt 503', 'es': 'Depto 503'}, {'pt': 'Torre Conquista · Winner Sport Life, Jardim Goiás', 'en': 'Conquista Tower · Winner Sport Life, Jardim Goiás', 'es': 'Torre Conquista · Winner Sport Life, Jardim Goiás'}, 14, 11,
         vaga_sub={'pt': 'Portão G2 · controle na mesa de jantar', 'en': 'Gate G2 · remote on the dining table', 'es': 'Portón G2 · control en la mesa del comedor'},
         extra={'pt': {'topicos': {'ape': {'s': 'Suítes, Alexa, cozinha e bar'}}}, 'en': {'topicos': {'ape': {'s': 'Suites, Alexa, kitchen and bar'}}}, 'es': {'topicos': {'ape': {'s': 'Suites, Alexa, cocina y bar'}}}})),
-  '504T': dict(predio='Metropolitan Sidney', arq='guia-sidney-504T.html', base_ref='003997a', tema='geometrico', ui=ui_sidney2('504', 'T', 5, '5th')),
+  '504T': dict(predio='Metropolitan Sidney', arq='guia-sidney-504T.html', base_ref='c78e12d', tema='geometrico', ui=ui_sidney2('504', 'T', 5, '5th')),
   '1202O': dict(predio='Metropolitan Sidney', arq='guia-sidney-1202O.html', base_ref='003997a', tema='palha', ui=ui_sidney2('1202', 'O', 12, '12th')),
 }
 # 1202O: Wi-Fi por QR Code no modem (sem senha) — o card leva à explicação
