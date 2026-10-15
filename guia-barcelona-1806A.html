@@ -753,6 +753,9 @@ function montarHome(){
   var wl=(WIFI_SENHA||'').length, wv=document.getElementById('cWifiVal');
   wv.classList.toggle('med', wl>=10 && wl<14); wv.classList.toggle('longo', wl>=14);
   document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : '';
+  // sem senha (ex.: Wi-Fi por QR Code no modem): o card leva à explicação em vez de copiar
+  var cw=document.getElementById('cWifi');
+  if(!WIFI_SENHA && u('wifiTap')){ cw.querySelector('.tap').textContent=u('wifiTap'); cw.onclick=function(){ abrir('ape'); }; wv.classList.add('med'); }
   // energia: cartão "Sem luz?" só onde existe a tela do cartão de energia; senão, 220V
   // "Sem luz?" só onde existe o cartão de energia (faixa larga abaixo do essencial)
   // Crystal 1113/209: no lugar do cartão de energia, o economizador HELP Smart (botoeira)

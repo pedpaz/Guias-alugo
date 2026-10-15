@@ -42,6 +42,12 @@ TEMAS = {
     V('#0C1418','#F1F7F7','rgba(214,236,236,.74)','rgba(90,220,180,.07)','rgba(200,240,235,.14)','3,10,12','rgba(6,16,20,.9)','#0F7A66','#18A086','#E6F6F2')),
  'imperador': tema('Art déco cobre', f'{T_}/imperador.webp', '#120F0C', '#A8692F',
     V('#120F0C','#FBF5EC','rgba(240,228,210,.74)','rgba(255,190,120,.07)','rgba(255,225,180,.15)','8,6,4','rgba(18,14,10,.9)','#A8692F','#C98A4A','#FBF0E3')),
+ 'geometrico': tema('Tapete geométrico', f'{T_}/geometrico.webp', '#0B1622', '#2E7FA6',
+    V('#0B1622','#F0F6FA','rgba(210,228,240,.74)','rgba(90,190,220,.07)','rgba(200,230,245,.14)','3,8,14','rgba(6,14,22,.9)','#2E7FA6','#3F98C2','#E8F3F9'),
+    fechadura=True),
+ 'palha': tema('Palha e madeira', f'{T_}/palha.webp', '#15110C', '#7A8F4E',
+    V('#15110C','#FAF5EC','rgba(238,226,206,.74)','rgba(255,200,130,.07)','rgba(220,235,190,.13)','8,6,3','rgba(20,15,10,.9)','#6F8445','#8CA35C','#F1F5E8'),
+    fechadura=True),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -99,6 +105,13 @@ def ui_crystal(n, suite):
                      'es': ('La suite', 'Cama, wifi, TV, baño y cocina', 'Entrar a la suite')}.items():
             ex[l]['topicos'].update({'ape': {'t': v[0], 's': v[1]}, 'entrar': {'t': v[2]}})
     return ui_unidade(tit, sub, 14, 11, extra=ex)
+def ui_sidney2(n, ala, andar, en_andar):
+    lado = {'T': ('esquerda', 'left', 'izquierda'), 'O': ('direita', 'right', 'derecha')}[ala]
+    ex = {'pt': {'topicos': {'entrar': {'s': f'{andar}º andar, Ala {ala} · senha da porta'}}},
+          'en': {'topicos': {'entrar': {'s': f'{en_andar} floor, wing {ala} · door code'}}},
+          'es': {'topicos': {'entrar': {'s': f'Piso {andar}, ala {ala} · clave de la puerta'}}}}
+    return ui_unidade({'pt': f'{n} · Ala {ala}', 'en': f'{n} · Wing {ala}', 'es': f'{n} · Ala {ala}'}, 'Metropolitan Sidney · Jardim Goiás, Goiânia', 14, 11, extra=ex)
+
 def cp(n, tema_, suite): return dict(predio='Crystal Place', maps=CP_MAPS, arq=f'guia-crystal-{n}.html', base_ref='2d6f8c2', tema=tema_, ui=ui_crystal(n, suite))
 
 UNIDADES = {
@@ -132,7 +145,11 @@ UNIDADES = {
         extra={'pt':{'heroChip':'1 quarto · até 5 hóspedes'},'en':{'heroChip':'1 bedroom · up to 5 guests'},'es':{'heroChip':'1 dormitorio · hasta 5 huéspedes'}})),
   '1113': cp('1113', 'cristal', False), '2413': cp('2413', 'cristal', False), '1313': cp('1313', 'cristal', False),
   '911': cp('911', 'imperador', True), '209': cp('209', 'imperador', True),
+  '504T': dict(predio='Metropolitan Sidney', arq='guia-sidney-504T.html', base_ref='003997a', tema='geometrico', ui=ui_sidney2('504', 'T', 5, '5th')),
+  '1202O': dict(predio='Metropolitan Sidney', arq='guia-sidney-1202O.html', base_ref='003997a', tema='palha', ui=ui_sidney2('1202', 'O', 12, '12th')),
 }
+# 1202O: Wi-Fi por QR Code no modem (sem senha) — o card leva à explicação
+for l, v in {'pt': 'Ver como conectar', 'en': 'How to connect', 'es': 'Cómo conectarse'}.items(): UNIDADES['1202O']['ui'][l]['wifiTap'] = v
 
 def montar(chave):
     U = UNIDADES[chave]; T = TEMAS[U['tema']]
