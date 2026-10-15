@@ -19,7 +19,7 @@ var TOPICOS = [
   {id:'checkin',    c:'#5B5BD6', b:'#ECECFB', telas:['checkin']},
   {id:'chegar',     c:'#2F6FDB', b:'#E6EEFB', telas:['chegar','predio','garagem']},
   {id:'entrar',     c:'#0A7A32', b:'#E3F3E8', telas:['porta','suite']},
-  {id:'energia',    c:'#C97A00', b:'#FCF0D6', telas:['luz']},
+  {id:'energia',    c:'#C97A00', b:'#FCF0D6', telas:['luz','economia']},
   {id:'ape',        c:'#7A4FC2', b:'#EFE8FA', telas:['ape','duplex','cozinha','copa']},
   {id:'condominio', c:'#11867E', b:'#E0F3F1', telas:['lazer','murano','roupas']},
   {id:'regras',     c:'#4F5B57', b:'#E9EDEB', telas:['regras']},
@@ -64,7 +64,13 @@ function montarHome(){
   document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : '';
   // energia: cartão "Sem luz?" só onde existe a tela do cartão de energia; senão, 220V
   // "Sem luz?" só onde existe o cartão de energia (faixa larga abaixo do essencial)
-  document.querySelector('.e-luz').classList.toggle('esconde', !telaDef('luz'));
+  // Crystal 1113/209: no lugar do cartão de energia, o economizador HELP Smart (botoeira)
+  var el=document.querySelector('.e-luz'), eco=!telaDef('luz') && !!telaDef('economia');
+  el.classList.toggle('esconde', !telaDef('luz') && !eco); el.classList.toggle('eco', eco);
+  if(eco){ el.setAttribute('href','#economia'); el.onclick=function(){ abrir('economia'); return false; };
+    el.querySelector('b').innerHTML=u('ecoTit'); el.querySelector('small').innerHTML=u('ecoSub');
+    var sv=el.querySelector('svg'); sv.setAttribute('viewBox','0 0 56 56'); sv.setAttribute('width','56'); sv.setAttribute('height','56');
+    sv.innerHTML='<circle cx="28" cy="28" r="23" fill="#fff" stroke="#C9D6EE" stroke-width="1.5"/><circle class="anel" cx="28" cy="28" r="15" fill="none" stroke="#3E7BFA" stroke-width="3.2"/><circle cx="28" cy="28" r="10.5" fill="#F2F5FA"/>'; }
   // localização: endereço curto + abre o mapa
   var mapa=TEMA.mapsUrl||((typeof MAPA_URL!=='undefined')?MAPA_URL:''), cl=document.getElementById('cLocal');
   document.getElementById('cLocalNome').textContent=u('predioNome')||'';
@@ -86,7 +92,7 @@ function montarHome(){
        '<span class="tx"><b>'+(tx.t||'')+'</b><small>'+subTopico(tp)+'</small></span>'+CHEV+'</button>';
   });
   document.getElementById('lista').innerHTML=h;
-  var chips=u('chips').slice(); if(!telaDef('luz')) chips[0]=u('chipAr');
+  var chips=u('chips').slice(); if(!telaDef('luz')) chips[0]=telaDef('economia')?u('chipEco'):u('chipAr');
   document.getElementById('chips').innerHTML = chips.map(function(c){
     return '<button onclick="perguntar(\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>'; }).join('');
 }
@@ -175,7 +181,7 @@ function ac(el){ el.parentNode.classList.toggle('on'); }
 
 /* ================= CONCIERGE (busca no guia, sem IA) ================= */
 var INDICE=[];
-function semTags(s){ return String(s||'').replace(/<svg[\s\S]*?<\/svg>/g,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
+function semTags(s){ return String(s||'').replace(/<style[\s\S]*?<\/style>/g,' ').replace(/<svg[\s\S]*?<\/svg>/g,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
 function montarIndice(){
   INDICE=[];
   TELAS.forEach(function(s){

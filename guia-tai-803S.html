@@ -291,6 +291,19 @@ fechadura-anim{--fa-font:Geist,system-ui,-apple-system,sans-serif;--fa-tit:Geist
 .e-porta .val.med{font-size:clamp(19px,5.6vw,23px);letter-spacing:0}
 .e-vaga .val.longo{font-family:Geist,system-ui,sans-serif;font-size:17px;font-weight:750;line-height:1.2;letter-spacing:-.01em}
 .e-wifi .val.longo{font-size:14px;letter-spacing:0;line-height:1.25}
+
+/* faixa do economizador HELP Smart (Crystal 1113/209) */
+.e-luz.eco{background:#EEF3FF;box-shadow:inset 0 0 0 1.5px #C9D8F7,var(--soft)}
+.e-luz.eco b{color:#1E54C8}
+.e-luz.eco small{color:#33466E}
+.e-luz.eco .anel{animation:anel 2.6s ease-in-out infinite}
+@keyframes anel{0%,30%{opacity:.2}45%,85%{opacity:1}100%{opacity:.2}}
+/* tutorial original do HELP Smart: cartão escuro dentro da tela (variáveis do guia antigo) */
+.hs-wrap{--bg-2:#141a1d;--bg-3:#1b2226;--rule:rgba(255,255,255,.09);--rule-hi:rgba(255,255,255,.2);--text:#F3F6F5;--text-2:rgba(236,241,239,.76);
+  --text-3:rgba(236,241,239,.54);--amber:#8FB4FF;--amber-hi:#C9DAFF;--amber-lo:rgba(77,141,255,.16);--font-display:Geist,system-ui,sans-serif;--fr-soft:normal;margin:4px 0 6px}
+.hs-wrap .hs{margin-top:0}
+.hs-wrap .hs-h{font-weight:700;letter-spacing:-.02em}
+.hs-wrap p{margin:0}
 :root{--tema-bg:#1C140D;--tema-tx:#FBF5EE;--tema-tx2:rgba(240,226,210,.74);--tema-luz-a:rgba(255,210,150,.07);--tema-luz-b:rgba(255,230,190,.15);--tema-veu:12,8,4;--tema-barra:rgba(24,17,10,.9);--assin:#A8692A;--assin2:#C98A45;--assin-bg:#FBF1E4}
 
 /* ===== TEMA DA UNIDADE (as cores vêm do bloco :root do tema) =====
@@ -2885,7 +2898,7 @@ var UI_UNIDADE = {"pt": {"heroTit": "Flat 803S", "heroSub": "Tai Residências ·
 /* ================= TEXTOS DA INTERFACE (PT/EN/ES) ================= */
 var UI = {
  pt:{
-  localTit:'Como chegar', localAbrir:'Abrir no mapa', predioNome:'', acessoRot:'Acesso', verComo:'Ver como entrar', wifiRede:'Rede', voltTit:'Tomadas', voltSub:'Confira seus aparelhos antes de ligar', garagem:'Garagem', chipAr:'Ar-condicionado', vagaVal:'', passosK:'Antes de entrar', passosTit:'Sua estadia em 3 passos', obr:'Obrigatório', p1t:'Check-in online', p1s:'Libera sua entrada no prédio · leva 2 minutos', p1c:'Fazer agora', p2t:'Vistoria de chegada', p2s:'Nas primeiras horas · protege você de cobrança por dano que já existia', p2c:'Fazer', p3t:'Check-out', p3s:'Até 11h · avise sua saída com um toque', p3c:'Ver',
+  localTit:'Como chegar', localAbrir:'Abrir no mapa', predioNome:'', acessoRot:'Acesso', verComo:'Ver como entrar', wifiRede:'Rede', voltTit:'Tomadas', voltSub:'Confira seus aparelhos antes de ligar', garagem:'Garagem', chipAr:'Ar-condicionado', chipEco:'O ar desligou sozinho', ecoTit:'Entrou? Toque na botoeira', ecoSub:'Feche a porta e toque em uma botoeira — senão o ar e as luzes desligam', vagaVal:'', passosK:'Antes de entrar', passosTit:'Sua estadia em 3 passos', obr:'Obrigatório', p1t:'Check-in online', p1s:'Libera sua entrada no prédio · leva 2 minutos', p1c:'Fazer agora', p2t:'Vistoria de chegada', p2s:'Nas primeiras horas · protege você de cobrança por dano que já existia', p2c:'Fazer', p3t:'Check-out', p3s:'Até 11h · avise sua saída com um toque', p3c:'Ver',
   heroTit:'501 · Ala T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Entrada a partir', hEnt:'das 14h', hSaiRot:'Saída', hSai:'até as 11h',
   essencial:'O essencial', copiar:'Copiar', copiarCurto:'Copiar',
@@ -2912,7 +2925,7 @@ var UI = {
   }
  },
  en:{
-  localTit:'Getting here', localAbrir:'Open in Maps', predioNome:'', acessoRot:'Access', verComo:'How to get in', wifiRede:'Network', voltTit:'Outlets', voltSub:'Check your devices before plugging in', garagem:'Parking', chipAr:'Air conditioning', vagaVal:'', passosK:'Before you arrive', passosTit:'Your stay in 3 steps', obr:'Required', p1t:'Online check-in', p1s:'Unlocks your building access · takes 2 minutes', p1c:'Do it now', p2t:'Arrival inspection', p2s:'In the first hours · protects you from charges for damage that was already there', p2c:'Start', p3t:'Check-out', p3s:'By 11 am · let us know with one tap', p3c:'See',
+  localTit:'Getting here', localAbrir:'Open in Maps', predioNome:'', acessoRot:'Access', verComo:'How to get in', wifiRede:'Network', voltTit:'Outlets', voltSub:'Check your devices before plugging in', garagem:'Parking', chipAr:'Air conditioning', chipEco:'The air switched off', ecoTit:'Came in? Tap the button', ecoSub:'Close the door and tap a wall button — otherwise the air and lights switch off', vagaVal:'', passosK:'Before you arrive', passosTit:'Your stay in 3 steps', obr:'Required', p1t:'Online check-in', p1s:'Unlocks your building access · takes 2 minutes', p1c:'Do it now', p2t:'Arrival inspection', p2s:'In the first hours · protects you from charges for damage that was already there', p2c:'Start', p3t:'Check-out', p3s:'By 11 am · let us know with one tap', p3c:'See',
   heroTit:'501 · Wing T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Check-in from', hEnt:'2 pm', hSaiRot:'Check-out', hSai:'by 11 am',
   essencial:'The essentials', copiar:'Copy', copiarCurto:'Copy',
@@ -2939,7 +2952,7 @@ var UI = {
   }
  },
  es:{
-  localTit:'Cómo llegar', localAbrir:'Abrir en el mapa', predioNome:'', acessoRot:'Acceso', verComo:'Cómo entrar', wifiRede:'Red', voltTit:'Enchufes', voltSub:'Revisa tus aparatos antes de enchufar', garagem:'Cochera', chipAr:'Aire acondicionado', vagaVal:'', passosK:'Antes de entrar', passosTit:'Tu estadía en 3 pasos', obr:'Obligatorio', p1t:'Check-in online', p1s:'Libera tu entrada al edificio · toma 2 minutos', p1c:'Hacer ahora', p2t:'Inspección de llegada', p2s:'En las primeras horas · te protege de cobros por daños que ya existían', p2c:'Hacer', p3t:'Check-out', p3s:'Hasta las 11 h · avisa tu salida con un toque', p3c:'Ver',
+  localTit:'Cómo llegar', localAbrir:'Abrir en el mapa', predioNome:'', acessoRot:'Acceso', verComo:'Cómo entrar', wifiRede:'Red', voltTit:'Enchufes', voltSub:'Revisa tus aparatos antes de enchufar', garagem:'Cochera', chipAr:'Aire acondicionado', chipEco:'Se apagó el aire', ecoTit:'¿Entraste? Toca el botón', ecoSub:'Cierra la puerta y toca un botón de pared; si no, el aire y las luces se apagan', vagaVal:'', passosK:'Antes de entrar', passosTit:'Tu estadía en 3 pasos', obr:'Obligatorio', p1t:'Check-in online', p1s:'Libera tu entrada al edificio · toma 2 minutos', p1c:'Hacer ahora', p2t:'Inspección de llegada', p2s:'En las primeras horas · te protege de cobros por daños que ya existían', p2c:'Hacer', p3t:'Check-out', p3s:'Hasta las 11 h · avisa tu salida con un toque', p3c:'Ver',
   heroTit:'501 · Ala T', heroSub:'Metropolitan Sidney · Jardim Goiás, Goiânia',
   hEntRot:'Entrada desde las', hEnt:'14 h', hSaiRot:'Salida', hSai:'hasta las 11 h',
   essencial:'Lo esencial', copiar:'Copiar', copiarCurto:'Copiar',
@@ -2988,7 +3001,7 @@ var TOPICOS = [
   {id:'checkin',    c:'#5B5BD6', b:'#ECECFB', telas:['checkin']},
   {id:'chegar',     c:'#2F6FDB', b:'#E6EEFB', telas:['chegar','predio','garagem']},
   {id:'entrar',     c:'#0A7A32', b:'#E3F3E8', telas:['porta','suite']},
-  {id:'energia',    c:'#C97A00', b:'#FCF0D6', telas:['luz']},
+  {id:'energia',    c:'#C97A00', b:'#FCF0D6', telas:['luz','economia']},
   {id:'ape',        c:'#7A4FC2', b:'#EFE8FA', telas:['ape','duplex','cozinha','copa']},
   {id:'condominio', c:'#11867E', b:'#E0F3F1', telas:['lazer','murano','roupas']},
   {id:'regras',     c:'#4F5B57', b:'#E9EDEB', telas:['regras']},
@@ -3033,7 +3046,13 @@ function montarHome(){
   document.getElementById('cWifiRede').textContent = WIFI_REDE ? (u('wifiRede')+' '+WIFI_REDE) : '';
   // energia: cartão "Sem luz?" só onde existe a tela do cartão de energia; senão, 220V
   // "Sem luz?" só onde existe o cartão de energia (faixa larga abaixo do essencial)
-  document.querySelector('.e-luz').classList.toggle('esconde', !telaDef('luz'));
+  // Crystal 1113/209: no lugar do cartão de energia, o economizador HELP Smart (botoeira)
+  var el=document.querySelector('.e-luz'), eco=!telaDef('luz') && !!telaDef('economia');
+  el.classList.toggle('esconde', !telaDef('luz') && !eco); el.classList.toggle('eco', eco);
+  if(eco){ el.setAttribute('href','#economia'); el.onclick=function(){ abrir('economia'); return false; };
+    el.querySelector('b').innerHTML=u('ecoTit'); el.querySelector('small').innerHTML=u('ecoSub');
+    var sv=el.querySelector('svg'); sv.setAttribute('viewBox','0 0 56 56'); sv.setAttribute('width','56'); sv.setAttribute('height','56');
+    sv.innerHTML='<circle cx="28" cy="28" r="23" fill="#fff" stroke="#C9D6EE" stroke-width="1.5"/><circle class="anel" cx="28" cy="28" r="15" fill="none" stroke="#3E7BFA" stroke-width="3.2"/><circle cx="28" cy="28" r="10.5" fill="#F2F5FA"/>'; }
   // localização: endereço curto + abre o mapa
   var mapa=TEMA.mapsUrl||((typeof MAPA_URL!=='undefined')?MAPA_URL:''), cl=document.getElementById('cLocal');
   document.getElementById('cLocalNome').textContent=u('predioNome')||'';
@@ -3055,7 +3074,7 @@ function montarHome(){
        '<span class="tx"><b>'+(tx.t||'')+'</b><small>'+subTopico(tp)+'</small></span>'+CHEV+'</button>';
   });
   document.getElementById('lista').innerHTML=h;
-  var chips=u('chips').slice(); if(!telaDef('luz')) chips[0]=u('chipAr');
+  var chips=u('chips').slice(); if(!telaDef('luz')) chips[0]=telaDef('economia')?u('chipEco'):u('chipAr');
   document.getElementById('chips').innerHTML = chips.map(function(c){
     return '<button onclick="perguntar(\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>'; }).join('');
 }
@@ -3144,7 +3163,7 @@ function ac(el){ el.parentNode.classList.toggle('on'); }
 
 /* ================= CONCIERGE (busca no guia, sem IA) ================= */
 var INDICE=[];
-function semTags(s){ return String(s||'').replace(/<svg[\s\S]*?<\/svg>/g,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
+function semTags(s){ return String(s||'').replace(/<style[\s\S]*?<\/style>/g,' ').replace(/<svg[\s\S]*?<\/svg>/g,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
 function montarIndice(){
   INDICE=[];
   TELAS.forEach(function(s){

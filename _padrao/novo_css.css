@@ -280,3 +280,16 @@ fechadura-anim{--fa-font:Geist,system-ui,-apple-system,sans-serif;--fa-tit:Geist
 .e-porta .val.med{font-size:clamp(19px,5.6vw,23px);letter-spacing:0}
 .e-vaga .val.longo{font-family:Geist,system-ui,sans-serif;font-size:17px;font-weight:750;line-height:1.2;letter-spacing:-.01em}
 .e-wifi .val.longo{font-size:14px;letter-spacing:0;line-height:1.25}
+
+/* faixa do economizador HELP Smart (Crystal 1113/209) */
+.e-luz.eco{background:#EEF3FF;box-shadow:inset 0 0 0 1.5px #C9D8F7,var(--soft)}
+.e-luz.eco b{color:#1E54C8}
+.e-luz.eco small{color:#33466E}
+.e-luz.eco .anel{animation:anel 2.6s ease-in-out infinite}
+@keyframes anel{0%,30%{opacity:.2}45%,85%{opacity:1}100%{opacity:.2}}
+/* tutorial original do HELP Smart: cartão escuro dentro da tela (variáveis do guia antigo) */
+.hs-wrap{--bg-2:#141a1d;--bg-3:#1b2226;--rule:rgba(255,255,255,.09);--rule-hi:rgba(255,255,255,.2);--text:#F3F6F5;--text-2:rgba(236,241,239,.76);
+  --text-3:rgba(236,241,239,.54);--amber:#8FB4FF;--amber-hi:#C9DAFF;--amber-lo:rgba(77,141,255,.16);--font-display:Geist,system-ui,sans-serif;--fr-soft:normal;margin:4px 0 6px}
+.hs-wrap .hs{margin-top:0}
+.hs-wrap .hs-h{font-weight:700;letter-spacing:-.02em}
+.hs-wrap p{margin:0}

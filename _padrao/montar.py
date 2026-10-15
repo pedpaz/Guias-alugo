@@ -38,6 +38,10 @@ TEMAS = {
     fechadura=True),
  'dente': tema('Dente-de-leão', f'{T_}/blend.webp', '#17110C', '#C98A3A',
     V('#17110C','#FBF4EA','rgba(240,226,206,.74)','rgba(255,200,130,.07)','rgba(255,230,180,.15)','8,5,3','rgba(20,14,10,.9)','#B5752C','#D9964A','#FCF1E2')),
+ 'cristal': tema('Cristal esmeralda', f'{T_}/cristal.webp', '#0C1418', '#0F7A66',
+    V('#0C1418','#F1F7F7','rgba(214,236,236,.74)','rgba(90,220,180,.07)','rgba(200,240,235,.14)','3,10,12','rgba(6,16,20,.9)','#0F7A66','#18A086','#E6F6F2')),
+ 'imperador': tema('Art déco cobre', f'{T_}/imperador.webp', '#120F0C', '#A8692F',
+    V('#120F0C','#FBF5EC','rgba(240,228,210,.74)','rgba(255,190,120,.07)','rgba(255,225,180,.15)','8,6,4','rgba(18,14,10,.9)','#A8692F','#C98A4A','#FBF0E3')),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -80,6 +84,23 @@ COPA = {'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama, Wi-Fi, TV, banhe
 # QS Marista: a saída é às 11h (Pedro, out/2026) — os guias diziam 12h
 SAIDA_11H = [('12h', '11h'), ('12 pm', '11 am')]
 
+# Crystal Place: 14h/11h, manobrista 24h, silêncio 22h–8h; 1113 e 209 têm o economizador HELP Smart
+CP_MAPS = 'https://maps.google.com/?cid=1307861366333774887'
+CP_RODAPE = {'pt': 'Tomadas 220V · Silêncio das 22h às 8h · Proibido fumar', 'en': '220V outlets · Quiet hours 10 pm–8 am · No smoking',
+             'es': 'Enchufes 220V · Silencio de 22 a 8 h · Prohibido fumar'}
+CP_ECO = {'pt': 'Economizador HELP Smart, ar e 220V', 'en': 'HELP Smart energy saver, AC and 220V', 'es': 'Ahorrador HELP Smart, aire y 220V'}
+def ui_crystal(n, suite):
+    tit = {'pt': f'Suíte {n}', 'en': f'Suite {n}', 'es': f'Suite {n}'} if suite else f'Flat {n}'
+    sub = {'pt': 'Suíte do Imperador · Crystal Place, Goiânia', 'en': 'Emperor Suite · Crystal Place, Goiânia', 'es': 'Suite del Emperador · Crystal Place, Goiânia'} if suite \
+          else 'Crystal Place · Setor Pedro Ludovico, Goiânia'
+    ex = {l: {'rodapeRegras': CP_RODAPE[l], 'topicos': {'energia': {'s': CP_ECO[l]}}} for l in CP_RODAPE}
+    if suite:
+        for l, v in {'pt': ('A suíte', 'Cama, Wi-Fi, TV, banheiro e cozinha', 'Entrar na suíte'), 'en': ('The suite', 'Bed, Wi-Fi, TV, bathroom and kitchen', 'Getting into the suite'),
+                     'es': ('La suite', 'Cama, wifi, TV, baño y cocina', 'Entrar a la suite')}.items():
+            ex[l]['topicos'].update({'ape': {'t': v[0], 's': v[1]}, 'entrar': {'t': v[2]}})
+    return ui_unidade(tit, sub, 14, 11, extra=ex)
+def cp(n, tema_, suite): return dict(predio='Crystal Place', maps=CP_MAPS, arq=f'guia-crystal-{n}.html', base_ref='2d6f8c2', tema=tema_, ui=ui_crystal(n, suite))
+
 UNIDADES = {
   '501T': dict(predio='Metropolitan Sidney', arq='guia-sidney-501T.html', base_ref='ec0964c^', tema='veludo', ui=ui_sidney('T')),
   '501O': dict(predio='Metropolitan Sidney', arq='guia-sidney-501O.html', base_ref='e9bacd1', tema='veludo', ui=ui_sidney('O')),
@@ -109,6 +130,8 @@ UNIDADES = {
   '757': dict(predio='Blend Smart Style', arq='guia-blend-757.html', base_ref='5bb9d24', tema='dente',
      ui=ui_unidade('Blend 757', 'Blend Smart Style · Setor Marista, Goiânia', 15, 12,
         extra={'pt':{'heroChip':'1 quarto · até 5 hóspedes'},'en':{'heroChip':'1 bedroom · up to 5 guests'},'es':{'heroChip':'1 dormitorio · hasta 5 huéspedes'}})),
+  '1113': cp('1113', 'cristal', False), '2413': cp('2413', 'cristal', False), '1313': cp('1313', 'cristal', False),
+  '911': cp('911', 'imperador', True), '209': cp('209', 'imperador', True),
 }
 
 def montar(chave):
