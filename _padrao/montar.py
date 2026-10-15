@@ -48,6 +48,8 @@ TEMAS = {
  'palha': tema('Palha e madeira', f'{T_}/palha.webp', '#15110C', '#7A8F4E',
     V('#15110C','#FAF5EC','rgba(238,226,206,.74)','rgba(255,200,130,.07)','rgba(220,235,190,.13)','8,6,3','rgba(20,15,10,.9)','#6F8445','#8CA35C','#F1F5E8'),
     fechadura=True),
+ 'nogueira': tema('Nogueira e globos', f'{T_}/nogueira.webp', '#14100C', '#C08A3E',
+    V('#14100C','#FBF4EA','rgba(240,226,206,.74)','rgba(255,190,110,.08)','rgba(255,225,170,.15)','8,5,3','rgba(18,13,9,.9)','#A8732E','#C98F45','#FCF1E2')),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -154,6 +156,12 @@ UNIDADES = {
         'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama king, escritório, Wi-Fi e banheiro'}, 'entrar': {'t': 'Entrar na suíte'}}},
         'en': {'topicos': {'ape': {'t': 'The suite', 's': 'King bed, office, Wi-Fi and bathroom'}, 'entrar': {'t': 'Getting into the suite'}}},
         'es': {'topicos': {'ape': {'t': 'La suite', 's': 'Cama king, escritorio, wifi y baño'}, 'entrar': {'t': 'Entrar a la suite'}}}})),
+  '2903': dict(predio='Walk Bueno', maps='https://maps.app.goo.gl/ce1t5VF6Cp3suEKx9', arq='guia-2903-walk-bueno-v20.html', base_ref='1f3c3e3', tema='nogueira',
+     ui=ui_unidade({'pt': 'Duplex 2903', 'en': 'Duplex 2903', 'es': 'Dúplex 2903'}, 'Walk Bueno · Setor Bueno, Goiânia', 15, 12,
+        vaga_sub={'pt': 'Térreo · -1 no elevador', 'en': 'Ground floor · -1 in the lift', 'es': 'Planta baja · -1 en el ascensor'},
+        extra={'pt': {'rodapeRegras': 'Tomadas 220V · Silêncio depois das 22h · Proibido fumar', 'topicos': {'ape': {'t': 'O duplex', 's': 'Casa inteligente, Wi-Fi, bar e adega'}}},
+               'en': {'rodapeRegras': '220V outlets · Quiet after 10 pm · No smoking', 'topicos': {'ape': {'t': 'The duplex', 's': 'Smart home, Wi-Fi, bar and wine fridge'}}},
+               'es': {'rodapeRegras': 'Enchufes 220V · Silencio después de las 22 h · Prohibido fumar', 'topicos': {'ape': {'t': 'El dúplex', 's': 'Casa inteligente, wifi, bar y cava'}}}})),
   '504T': dict(predio='Metropolitan Sidney', arq='guia-sidney-504T.html', base_ref='003997a', tema='geometrico', ui=ui_sidney2('504', 'T', 5, '5th')),
   '1202O': dict(predio='Metropolitan Sidney', arq='guia-sidney-1202O.html', base_ref='003997a', tema='palha', ui=ui_sidney2('1202', 'O', 12, '12th')),
 }
