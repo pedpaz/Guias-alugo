@@ -1,7 +1,7 @@
 """Gera a base v2 do QS-1310 (QS Marista, Suíte 1310) a partir do guia v2 do QS-1701 (978a1cb, mesmo prédio,
 3 idiomas). O que é da suíte (andar, cama king, escritório, vista, capacidade 2 adultos + 1 bebê, vistoria) vem
 do guia antigo do 1310 e é reescrito aqui nos 3 idiomas. A suíte 1310 não tem a tela de copa (o guia antigo não
-menciona). uso: python3 montar-base-QS1310.py → reescreve guia-marista-1310.html (depois: montar.py 1310)"""
+menciona; tem frigobar — Pedro, 15/10). uso: python3 montar-base-QS1310.py → reescreve guia-marista-1310.html (depois: montar.py 1310)"""
 import base64, copy, json, os, re, subprocess
 P = os.path.dirname(os.path.abspath(__file__)); R = os.path.dirname(os.path.dirname(P))
 def git(ref, arq): return subprocess.run(['git', '-C', R, 'show', f'{ref}:{arq}'], capture_output=True, check=True).stdout.decode()
@@ -44,6 +44,9 @@ for L in LS:
                         'Mesada de piedra y <b>amenities</b>: champú, acondicionador y jabón.'),
                       x('Precisa de toalha extra ou de mais amenities? É só pedir pelo WhatsApp.', 'Need an extra towel or more toiletries? Just ask on WhatsApp.',
                         '¿Necesitas otra toalla o más amenities? Pídelo por WhatsApp.')]),
+              dict(h=x('Frigobar', 'Minibar fridge', 'Frigobar'),
+                   p=[x('A suíte tem <b>frigobar</b> para as bebidas e o lanche. Ao sair, retire o que sobrou.', 'The suite has a <b>minibar fridge</b> for drinks and snacks. Empty it when you leave.',
+                        'La suite tiene <b>frigobar</b> para bebidas y snacks. Al irte, retira lo que quedó.')]),
               dict(h=x('Ar-condicionado e energia', 'Air conditioning and power', 'Aire acondicionado y energía'),
                    p=[x('Use o ar com a janela e as cortinas fechadas: gela mais rápido e mantém melhor.', 'Use the air conditioning with the window and curtains closed: it cools faster and holds better.',
                         'Usa el aire con la ventana y las cortinas cerradas: enfría más rápido y mantiene mejor.'),
@@ -56,7 +59,6 @@ for L in LS:
         x('Limpeza geral', 'General cleanliness', 'Limpieza general'), x('Fechadura ou cartão com problema', 'Lock or card problem', 'Problema con la cerradura o la tarjeta')]
     T['tela_regras'] = troca(T['tela_regras'], [('<b>2 hóspede(s)</b>', '<b>2 adultos + 1 bebê</b>'), ('<b>2 guest(s)</b>', '<b>2 adults + 1 baby</b>'),
                                                 ('<b>2 huésped(es)</b>', '<b>2 adultos + 1 bebé</b>')])
-    s = T['tela_saida']; s['blocos'][0]['ul'] = [i for i in s['blocos'][0]['ul'] if not re.search('frigobar|minibar', i, re.I)]
     TXT[L] = T
 assert '1701' not in json.dumps(TXT) and '17º' not in json.dumps(TXT, ensure_ascii=False)
 
