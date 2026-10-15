@@ -392,7 +392,7 @@ window.UNIDADES = {
   "WIN-503C": { predio: "Winner Sport Life", unidade: "Apto 503 · Torre Conquista", bairro: "Jardim Goiás",
     endereco: "Rua 13, nº 45, Jardim Goiás, Goiânia/GO", capacidade: 4,
     camas: { pt: ", em 1 cama king e 1 cama queen", en: ", in 1 king and 1 queen bed", es: ", en 1 cama king y 1 cama queen" },
-    checkin: "14h", checkout: "11h", pede_telefone: true,
+    checkin: "15h", checkout: "12h", pede_telefone: true,
     acesso: ACESSO.fechadura, acesso2: AREAS.garagem_winner, areas_comuns: AREAS.condominio,
     sem: ["animais"], clausulas_extra: [ PETS_WINNER ],
     guia: "guia-winner-503C.html" },
