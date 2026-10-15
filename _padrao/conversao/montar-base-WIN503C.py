@@ -91,7 +91,7 @@ for L in LS:
     rot = 'Winner 503 · Torre Conquista'
     T.update(apeNome=x('Apartamento 503', 'Apartment 503', 'Apartamento 503'), apeSub='Winner Sport Life Residence · Jardim Goiás, Goiânia',
              cSenhaSub=x('fechadura digital · termine com *', 'digital lock · end with *', 'cerradura digital · termina con *'),
-             cHorasVal=x('14h / 11h', '2pm / 11am', '14h / 11h'), cHorasSub=x('entrada a partir das 14h · saída até as 11h', 'check-in from 2pm · check-out by 11am', 'entrada desde las 14h · salida hasta las 11h'),
+             cHorasVal=x('15h / 12h', '3pm / 12pm', '15h / 12h'), cHorasSub=x('entrada a partir das 15h · saída até as 12h', 'check-in from 3pm · check-out by 12pm', 'entrada desde las 15h · salida hasta las 12h'),
              buscaPh=x('O que você procura? (toalha, vaga, senha…)', 'What are you looking for? (towel, parking, code…)', '¿Qué buscas? (toalla, cochera, clave…)'),
              zapOi=x(f'Olá! Sou hóspede do {rot} e preciso de ajuda.', f"Hi! I'm a guest at {rot} and I need some help.", f'¡Hola! Soy huésped del {rot} y necesito ayuda.'),
              zapCheckout=x(f'Olá! Estou fazendo o check-out do {rot}. Já deixei o apartamento.', f"Hi! I'm checking out of {rot}. I've already left the apartment.", f'¡Hola! Estoy haciendo el check-out del {rot}. Ya dejé el departamento.'),
@@ -114,12 +114,12 @@ for L in LS:
             if not ch: continue
             if tid == 'porta': continue
             if tid == 'garagem': b['chave'] = re.sub(r'\D', '', ch); b.setdefault('h', x('A sua vaga', 'Your space', 'Tu cochera')); continue
-            if tid == 'saida': b.pop('chave'); b['h'] = x('Check-out até as 11h', 'Check-out by 11 am', 'Check-out hasta las 11 h'); continue
+            if tid == 'saida': b.pop('chave'); b['h'] = x('Check-out até as 12h', 'Check-out by 12 pm', 'Check-out hasta las 12 h'); continue
             b.pop('chave')
             if 'h' not in b: b['h'] = ch
             else: b.setdefault('p', []).insert(0, '<b>%s</b>' % ch)
         T['tela_' + tid] = d
-    # regras: fumo em destaque com título; visitas proibidas; horários 14h/11h (o guia antigo dizia 15h/12h aqui e 11h na saída)
+    # regras: fumo em destaque com título; visitas proibidas; horários 15h/12h (Pedro, 15/10 — o guia antigo dizia 11h na saída)
     rg = T['tela_regras']['blocos']
     for b in rg:
         if b.get('dest') and 'h' not in b and re.search('fumar|smok|fumar', ' '.join(b.get('p', [])), re.I):
@@ -127,8 +127,8 @@ for L in LS:
     rg.insert(1, dict(dest=True, h=x('Visitas não são permitidas', 'No visitors', 'No se permiten visitas'),
                       p=[x('Só os hóspedes cadastrados no check-in online entram no condomínio e no apartamento.', 'Only the guests registered in the online check-in may enter the building and the apartment.',
                            'Solo los huéspedes registrados en el check-in online entran al condominio y al departamento.')]))
-    T = json.loads(json.dumps(T, ensure_ascii=False).replace('<b>15h / 12h</b>', '<b>14h / 11h</b>').replace('<b>3 pm / 12 pm</b>', '<b>2 pm / 11 am</b>')
-                   .replace('<b>15 h / 12 h</b>', '<b>14 h / 11 h</b>').replace('<b>15h / 12h</b>', '<b>14h / 11h</b>'))
+    T = json.loads(json.dumps(T, ensure_ascii=False).replace('11h', '12h').replace('11 h', '12 h').replace('11 am', '12 pm').replace('11am', '12pm')
+                   .replace('11H', '12H').replace('11 AM', '12 PM'))
     T['tela_problema']['lead'] = ''
     T['tela_ape']['sub'] = x('2 suítes · até 4 hóspedes · 220V', '2 suites · up to 4 guests · 220V', '2 suites · hasta 4 huéspedes · 220V')
     TXT[L] = T
