@@ -130,6 +130,7 @@ for L in LS:
     T = json.loads(json.dumps(T, ensure_ascii=False).replace('<b>15h / 12h</b>', '<b>14h / 11h</b>').replace('<b>3 pm / 12 pm</b>', '<b>2 pm / 11 am</b>')
                    .replace('<b>15 h / 12 h</b>', '<b>14 h / 11 h</b>').replace('<b>15h / 12h</b>', '<b>14h / 11h</b>'))
     T['tela_problema']['lead'] = ''
+    T['tela_ape']['sub'] = x('2 suítes · até 4 hóspedes · 220V', '2 suites · up to 4 guests · 220V', '2 suites · hasta 4 huéspedes · 220V')
     TXT[L] = T
 
 # sinônimos a partir do índice antigo (SYN), quando existir
