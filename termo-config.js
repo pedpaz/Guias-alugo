@@ -43,9 +43,9 @@ window.CLAUSULAS = [
       { pt: "A presença de hóspede não declarado acarreta multa de <b>{multa_extra}</b>, sem prejuízo do encerramento imediato da estadia.",
         en: "An undeclared guest incurs a fine of <b>{multa_extra}</b>, and the stay may be ended immediately.",
         es: "La presencia de un huésped no declarado genera una multa de <b>{multa_extra}</b>, sin perjuicio del cierre inmediato de la estadía." },
-      { pt: "Visitantes não podem pernoitar e devem ser identificados na entrada do prédio.",
-        en: "Visitors may not stay overnight and must be identified at the building entrance.",
-        es: "Las visitas no pueden pernoctar y deben identificarse en la entrada del edificio." }
+      { pt: "<b>Não é permitida a entrada de visitas</b>, nem por pouco tempo: só as pessoas cadastradas neste termo entram na unidade.",
+        en: "<b>Visitors are not allowed</b>, not even briefly: only the people registered in this agreement may enter the unit.",
+        es: "<b>No se permite la entrada de visitas</b>, ni por poco tiempo: solo las personas registradas en este término entran a la unidad." }
     ] },
   { id: "horarios",
     t: { pt: "Do check-in e do check-out", en: "Check-in and check-out", es: "Del check-in y del check-out" },

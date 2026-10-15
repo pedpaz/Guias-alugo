@@ -190,6 +190,7 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:n
 #okGuia .ic,.okZapBtn .ic{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
 #okGuia .tt,.okZapBtn .tt{display:block;font-size:14.5px;font-weight:600}
 #okGuia .sb,.okZapBtn .sb{display:block;font-size:11.5px;opacity:.9;margin-top:1px}
+a.okZapBtn.okEstBtn{background:#0E3B2E;margin-bottom:10px}
 a.okZapBtn{display:flex;align-items:center;gap:12px;background:var(--verde);color:#fff;border-radius:13px;padding:14px 15px;text-decoration:none;text-align:left}
 </style>
 </head>
@@ -290,7 +291,7 @@ a.okZapBtn{display:flex;align-items:center;gap:12px;background:var(--verde);colo
       <div class="tick">✓</div>
       <h2 data-t="okH"></h2>
       <p id="okP"></p>
-      <a href="#" id="okGuia"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span><span class="tt" data-t="okGuia"></span><span class="sb" data-t="okGuiaSub"></span></span></a><a class="okZapBtn" href="#" onclick="zap(T('zapOi'));return false"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span><span class="tt" data-t="okZap"></span><span class="sb" data-t="okZapSub"></span></span></a>
+      <a href="#" id="okGuia"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span><span class="tt" data-t="okGuia"></span><span class="sb" data-t="okGuiaSub"></span></span></a><a class="okZapBtn okEstBtn" href="https://alugo.net.br/estadia" target="_blank" rel="noopener"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span><span class="tt" data-t="okEst"></span><span class="sb" data-t="okEstSub"></span></span></a><a class="okZapBtn" href="#" onclick="zap(T('zapOi'));return false"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span><span class="tt" data-t="okZap"></span><span class="sb" data-t="okZapSub"></span></span></a>
     </div>
   </section>
 
@@ -384,6 +385,10 @@ var TXT = {
   errTel:"Informe um celular válido, com DDD.", errData:"O check-out precisa ser depois do check-in.", errDecl:"É necessário marcar todas as declarações.", errAssin:"Assine no quadro antes de enviar.",
   prontoEye:"Último passo", prontoH:"Tudo pronto para enviar", prontoP:"Ao enviar, o WhatsApp abre com a sua mensagem pronta:", prontoWaT:"Confirme sua chegada", prontoWaS:"É só apertar enviar no WhatsApp", prontoGuT:"O link do guia vai na mensagem", prontoGuS:"Guarde-o! Tem Wi-Fi, acesso, regras e dicas", prontoNota:"Antes de qualquer dúvida, dê uma olhada no guia — quase tudo já está lá 💛", okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okGuiaSub:"Wi-Fi, acesso, regras e dicas", okZapSub:"Tirar uma dúvida", okZap:"Falar com a aluGO",
   rodape:"Gestão de imóveis para temporada",
+  zapCheckinOk:"CHECK-IN ONLINE CONCLUÍDO", zapEstadia:"DATAS", zapEntrada:"Entrada", zapSaida:"Saída",
+  zapEstTit:"MINHA ESTADIA — área do hóspede", zapEstTxt:"Qualquer dúvida durante a estadia, é por aqui:", zapEstLogin:"Entra com o nome do titular e a data de entrada, sem senha.",
+  zapEstLa:"Lá dá para:", zapEstItens:["Incluir ou trocar hóspedes (refazer o termo)","Ver senha da porta, Wi-Fi e vaga — liberados no dia da entrada","Como chegar e tirar dúvidas com a ajuda","Estender a estadia","Avisar o check-out na saída"],
+  okEst:"Abrir a Minha estadia", okEstSub:"Incluir hóspedes, acesso, dúvidas e check-out",
   zapOi:"Olá! Acabei de fazer o check-in online do {unidade} · {predio}.",
   zapTit:"TERMO DE ESTADIA", zapAndar:"{n}º andar", zapHosp:"HÓSPEDES", zapTitular:"Titular", zapHospN:"Hóspede", zapCrianca:"criança, sem documento", zapCel:"cel", zapAs:"às",
   zapAceite:"CIÊNCIA E ACEITE", zapAssinado:"Assinado por", zapEm:"Em", zapRodape:"Aceite registrado via termo online aluGO",
@@ -393,7 +398,7 @@ var TXT = {
   zapItens:[
    "Li e concordo com o termo de estadia da aluGO",
    "!*PROIBIDO FUMAR* no apartamento (cigarro, narguilé, vape) — multa {multa_fumar} + higienização",
-   "Festas, eventos e visitas para pernoite proibidos — multa {multa_festa} + danos",
+   "Festas, eventos e visitas proibidos — multa {multa_festa} + danos",
    "Só as pessoas listadas acima vão se hospedar (máx. {capacidade}; excedente {multa_extra})",
    "Check-out até as {checkout} (atraso {multa_atraso})",
    "*VISTORIA DE ENTRADA:* envio fotos ou vídeo de qualquer avaria em até 3 horas após entrar. Se não enviar, confirmo que recebi o apartamento em perfeitas condições e respondo pelos danos apurados na saída",
@@ -442,6 +447,10 @@ var TXT = {
   errTel:"Enter a valid mobile number.", errData:"Check-out must be after check-in.", errDecl:"You need to tick every declaration.", errAssin:"Please sign in the box before sending.",
   prontoEye:"Last step", prontoH:"Ready to send", prontoP:"When you send, WhatsApp opens with your message ready:", prontoWaT:"Confirm your arrival", prontoWaS:"Just tap send on WhatsApp", prontoGuT:"The guide link is in the message", prontoGuS:"Save it! Wi-Fi, access, rules and tips", prontoNota:"Before asking anything, take a look at the guide — almost everything is there 💛", okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
   rodape:"Short-stay property management",
+  zapCheckinOk:"ONLINE CHECK-IN COMPLETED", zapEstadia:"DATES", zapEntrada:"Check-in", zapSaida:"Check-out",
+  zapEstTit:"MY STAY — guest area", zapEstTxt:"Any question during the stay, start here:", zapEstLogin:"Log in with the main guest's name and the check-in date, no password.",
+  zapEstLa:"There you can:", zapEstItens:["Add or change guests (redo the agreement)","See the door code, Wi-Fi and parking — released on check-in day","Directions and quick answers in Help","Extend the stay","Confirm check-out when leaving"],
+  okEst:"Open My stay", okEstSub:"Add guests, access, questions and check-out",
   zapOi:"Hi! I've just completed the online check-in for {unidade} · {predio}.",
   zapTit:"STAY AGREEMENT", zapAndar:"floor {n}", zapHosp:"GUESTS", zapTitular:"Main guest", zapHospN:"Guest", zapCrianca:"child, no document", zapCel:"mobile", zapAs:"at",
   zapAceite:"ACKNOWLEDGEMENT AND ACCEPTANCE", zapAssinado:"Signed by", zapEm:"On", zapRodape:"Acceptance recorded via aluGO online agreement",
@@ -451,7 +460,7 @@ var TXT = {
   zapItens:[
    "I have read and agree with the aluGO stay agreement",
    "!*NO SMOKING* inside the apartment (cigarettes, hookah, vape) — {multa_fumar} fine + deep cleaning",
-   "Parties, events and overnight visitors are not allowed — {multa_festa} fine + damages",
+   "Parties, events and visitors are not allowed — {multa_festa} fine + damages",
    "Only the people listed above will stay (max. {capacidade}; extra guest {multa_extra})",
    "Check-out by {checkout} (late departure {multa_atraso})",
    "*ARRIVAL INSPECTION:* I will send photos or a video of any damage within 3 hours of arriving. If I don't, I confirm I received the apartment in perfect condition and I am liable for damage found at check-out",
@@ -500,6 +509,10 @@ var TXT = {
   errTel:"Indica un celular válido.", errData:"El check-out debe ser posterior al check-in.", errDecl:"Es necesario marcar todas las declaraciones.", errAssin:"Firma en el recuadro antes de enviar.",
   prontoEye:"Último paso", prontoH:"Todo listo para enviar", prontoP:"Al enviar, WhatsApp se abre con tu mensaje listo:", prontoWaT:"Confirma tu llegada", prontoWaS:"Solo toca enviar en WhatsApp", prontoGuT:"El enlace de la guía va en el mensaje", prontoGuS:"¡Guárdalo! Wi-Fi, acceso, reglas y consejos", prontoNota:"Antes de preguntar algo, mira la guía — casi todo ya está ahí 💛", okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
   rodape:"Gestión de inmuebles para temporada",
+  zapCheckinOk:"CHECK-IN ONLINE COMPLETADO", zapEstadia:"FECHAS", zapEntrada:"Entrada", zapSaida:"Salida",
+  zapEstTit:"MI ESTADÍA — área del huésped", zapEstTxt:"Cualquier duda durante la estadía, es por aquí:", zapEstLogin:"Se entra con el nombre del titular y la fecha de entrada, sin contraseña.",
+  zapEstLa:"Allí se puede:", zapEstItens:["Incluir o cambiar huéspedes (rehacer el término)","Ver la clave de la puerta, el wifi y la cochera — liberados el día de entrada","Cómo llegar y resolver dudas en Ayuda","Extender la estadía","Avisar el check-out al salir"],
+  okEst:"Abrir Mi estadía", okEstSub:"Incluir huéspedes, acceso, dudas y check-out",
   zapOi:"¡Hola! Acabo de hacer el check-in online de {unidade} · {predio}.",
   zapTit:"TÉRMINO DE ESTADÍA", zapAndar:"piso {n}", zapHosp:"HUÉSPEDES", zapTitular:"Titular", zapHospN:"Huésped", zapCrianca:"niño, sin documento", zapCel:"cel", zapAs:"a las",
   zapAceite:"CONOCIMIENTO Y ACEPTACIÓN", zapAssinado:"Firmado por", zapEm:"El", zapRodape:"Aceptación registrada vía término online aluGO",
@@ -509,7 +522,7 @@ var TXT = {
   zapItens:[
    "Leí y estoy de acuerdo con el término de estadía de aluGO",
    "!*PROHIBIDO FUMAR* en el apartamento (cigarrillo, narguile, vape) — multa {multa_fumar} + higienización",
-   "Fiestas, eventos y visitas para pernoctar prohibidos — multa {multa_festa} + daños",
+   "Fiestas, eventos y visitas prohibidos — multa {multa_festa} + daños",
    "Solo las personas listadas arriba se hospedarán (máx. {capacidade}; excedente {multa_extra})",
    "Check-out hasta las {checkout} (retraso {multa_atraso})",
    "*INSPECCIÓN DE ENTRADA:* envío fotos o video de cualquier avería dentro de las 3 horas de entrar. Si no envío, confirmo que recibí el apartamento en perfectas condiciones y respondo por los daños detectados a la salida",
@@ -914,22 +927,28 @@ function agoraBR(){
   try{ return new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).replace(',',' '+T('zapAs')); }
   catch(e){ return new Date().toLocaleString(); }
 }
+var ESTADIA_URL='https://alugo.net.br/estadia';
 function mensagemZap(d){
-  var linha='————————————————————————';
+  var linha='━━━━━━━━━━━━━━━';
   var andar=andarDoApe(), tit=d.hospedes[0]||{};
-  var cab='*'+T('zapTit')+' — '+tx(U.predio).toUpperCase()+' · '+tx(U.unidade).toUpperCase()+'*'+
-    (andar!=null?'\n'+((TXT[L]&&TXT[L].zapAndar)||TXT.pt.zapAndar).replace('{n}',String(andar)):'')+
-    '\n📍 '+tx(U.endereco);
-  var hosp='*'+T('zapHosp')+':*\n'+T('zapTitular')+': '+tit.nome+' — '+(tit.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+(tit.cpf||'—')+
-    (d.telefone?' — '+T('zapCel')+' '+d.telefone:'')+
+  var andarTxt=andar!=null?((TXT[L]&&TXT[L].zapAndar)||TXT.pt.zapAndar).replace('{n}',String(andar)):'';
+  var cab='✅ *'+T('zapCheckinOk')+'*\n'+
+    '🏢 *'+tx(U.predio)+' · '+tx(U.unidade)+'*'+(andarTxt?' — '+andarTxt:'')+
+    (U.endereco?'\n📍 '+tx(U.endereco):'');
+  var doc=function(x){ return (x.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+(x.cpf||'—'); };
+  var hosp='👥 *'+T('zapHosp')+'*\n'+
+    '• *'+tit.nome+'* ('+T('zapTitular').toLowerCase()+')\n   '+doc(tit)+(d.telefone?' · '+T('zapCel')+' '+d.telefone:'')+
     (d.endereco ? (
-      (d.endereco.rg?'\nRG: '+d.endereco.rg:'')+
-      '\n'+T('zapEnd')+': '+[d.endereco.endereco,d.endereco.bairro].filter(Boolean).join(', ')+
-      '\n'+T('zapCidade')+': '+d.endereco.cidade+(d.endereco.estado?' - '+d.endereco.estado:'')+(d.endereco.cep?' — CEP: '+d.endereco.cep:'')
+      (d.endereco.rg?'\n   RG '+d.endereco.rg:'')+
+      '\n   '+[d.endereco.endereco,d.endereco.bairro].filter(Boolean).join(', ')+
+      '\n   '+d.endereco.cidade+(d.endereco.estado?' - '+d.endereco.estado:'')+(d.endereco.cep?' · CEP '+d.endereco.cep:'')
     ) : '')+
-    d.hospedes.slice(1).map(function(x,i){ return '\n'+T('zapHospN')+' '+(i+2)+': '+x.nome+' — '+(x.cpf?((x.documento_tipo==='passaporte'?T('passaporte'):'CPF')+' '+x.cpf):T('zapCrianca')); }).join('');
-  var datas='*'+T('lIn')+':* '+fmt(d.check_in)+' '+T('zapAs')+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+
-    '\n*'+T('lOut')+':* '+fmt(d.check_out)+' '+T('zapAs')+' '+(d.hora_saida||'—');
+    d.hospedes.slice(1).map(function(x){ return '\n• '+x.nome+'\n   '+(x.cpf?doc(x):T('zapCrianca')); }).join('');
+  var datas='📅 *'+T('zapEstadia')+'*\n'+
+    T('zapEntrada')+': *'+fmt(d.check_in)+'* '+T('zapAs')+' '+(d.hora_chegada?horaTexto(d.hora_chegada):'—')+'\n'+
+    T('zapSaida')+': *'+fmt(d.check_out)+'* '+T('zapAs')+' '+(d.hora_saida||'—');
+  var est='📲 *'+T('zapEstTit')+'*\n'+T('zapEstTxt')+'\n👉 '+ESTADIA_URL+'\n_'+T('zapEstLogin')+'_\n'+T('zapEstLa')+'\n'+
+    T('zapEstItens').map(function(x){ return '• '+x; }).join('\n');
   var guiaUrl=''; try{ if(U.guia) guiaUrl=new URL(U.guia, location.href).href; }catch(e){ guiaUrl=''; }
   var guia=guiaUrl?('📘 *'+T('zapGuiaTit')+'*\n'+T('zapGuiaTxt')+'\n👉 '+guiaUrl):'';
   var lista=T('zapItens').slice();
@@ -938,15 +957,17 @@ function mensagemZap(d){
   if((U.sem||[]).indexOf('trajes')>=0 && lista.length){ var ult=lista.length-1; lista[ult]=lista[ult].split(' · ')[0]; }
   if(guiaUrl) lista.push(T('zapGuiaItem'));
   var itens=lista.map(function(s){ return (s.indexOf('!')===0?'⚠️ '+s.slice(1):'✓ '+s); }).join('\n');
-  var aceite='*'+T('zapAceite')+':*\n'+itens;
-  var rod='*'+T('zapAssinado')+':* '+tit.nome+'\n*'+T('zapEm')+':* '+agoraBR()+'\n_'+T('zapRodape')+'_';
+  var aceite='✍️ *'+T('zapAceite')+'*\n'+itens;
+  var rod=T('zapAssinado')+': *'+tit.nome+'*\n'+T('zapEm')+': '+agoraBR()+'\n_'+T('zapRodape')+'_';
   /* Aldeia do Lago: a portaria pede adultos e crianças ANTES dos nomes — é
      como vinha no formulário antigo, e o Pedro preenche nessa ordem. */
   var grupo = U.pede_endereco
-    ? '\u{1F465} *'+T('zapGrupo')+'*\n\u2022 '+T('zapAdultos')+': '+d.adultos+'\n\u2022 '+T('zapCriancas')+': '+d.criancas
+    ? '\u{1F465} *'+T('zapGrupo')+'*\n• '+T('zapAdultos')+': '+d.adultos+'\n• '+T('zapCriancas')+': '+d.criancas
     : '';
-  var partes = grupo ? [cab, linha, grupo, '', hosp, '', datas, linha] : [cab, linha, hosp, '', datas, linha];
-  if(guia){ partes.push(guia); partes.push(linha); }
+  var partes=[cab, linha];
+  if(grupo) partes.push(grupo, '');
+  partes.push(hosp, '', datas, linha, est, linha);
+  if(guia) partes.push(guia, linha);
   return partes.concat([aceite, linha, rod]).join('\n');
 }
 
@@ -991,12 +1012,13 @@ function aplicarIdioma(){
 }
 if(U){
   [].forEach.call(document.querySelectorAll('.lang button'),function(b){
-    b.onclick=function(){ L=b.dataset.l; try{localStorage.setItem('alugo_lang',L);}catch(e){} aplicarIdioma(); };
+    b.onclick=function(){ L=b.dataset.l; try{localStorage.setItem('alugo_termo_lang',L);}catch(e){} aplicarIdioma(); };
   });
   (function init(){
-    var s=null; try{ s=localStorage.getItem('alugo_lang'); }catch(e){}
-    if(!s){ var n=(navigator.language||'pt').slice(0,2); s=(n==='en'||n==='es')?n:'pt'; }
-    L=s;
+    /* Português por padrão (Pedro, 15/10/2026): o idioma do celular não decide mais — muito brasileiro
+       usa o aparelho em inglês. Só muda se o hóspede escolher no seletor (fica lembrado). */
+    var s=null; try{ s=localStorage.getItem('alugo_termo_lang'); }catch(e){}
+    L=(s==='en'||s==='es')?s:'pt';
     var hoje=new Date().toISOString().slice(0,10);
     document.getElementById('check_in').min=hoje; document.getElementById('check_out').min=hoje;
     document.getElementById('check_in').addEventListener('change',function(){ document.getElementById('check_out').min=this.value; });
