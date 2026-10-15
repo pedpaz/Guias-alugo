@@ -50,6 +50,8 @@ TEMAS = {
     fechadura=True),
  'nogueira': tema('Nogueira e globos', f'{T_}/nogueira.webp', '#14100C', '#C08A3E',
     V('#14100C','#FBF4EA','rgba(240,226,206,.74)','rgba(255,190,110,.08)','rgba(255,225,170,.15)','8,5,3','rgba(18,13,9,.9)','#A8732E','#C98F45','#FCF1E2')),
+ 'nero': tema('Mármore Nero e ouro', f'{T_}/nero.webp', '#0A0F0C', '#B08A3E',
+    V('#0A0F0C','#F7F4EC','rgba(232,226,210,.74)','rgba(255,210,140,.07)','rgba(240,225,190,.14)','2,5,3','rgba(8,12,10,.9)','#0F5A3C','#1A7A52','#E8F4EE')),
  'travertino': tema('Travertino', f'{T_}/marista.webp', '#1A1410', '#B0243F',
     V('#1A1410','#FAF4EE','rgba(236,222,208,.74)','rgba(255,200,150,.06)','rgba(255,225,190,.14)','10,6,3','rgba(22,16,12,.9)','#B0243F','#D0385A','#FCEBEF')),
 }
@@ -162,6 +164,10 @@ UNIDADES = {
         extra={'pt': {'rodapeRegras': 'Tomadas 220V · Silêncio depois das 22h · Proibido fumar', 'topicos': {'ape': {'t': 'O duplex', 's': 'Casa inteligente, Wi-Fi, bar e adega'}}},
                'en': {'rodapeRegras': '220V outlets · Quiet after 10 pm · No smoking', 'topicos': {'ape': {'t': 'The duplex', 's': 'Smart home, Wi-Fi, bar and wine fridge'}}},
                'es': {'rodapeRegras': 'Enchufes 220V · Silencio después de las 22 h · Prohibido fumar', 'topicos': {'ape': {'t': 'El dúplex', 's': 'Casa inteligente, wifi, bar y cava'}}}})),
+  '503C': dict(predio='Winner Sport Life', arq='guia-winner-503C.html', base_ref='7faf315', tema='nero',
+     ui=ui_unidade({'pt': 'Apto 503', 'en': 'Apt 503', 'es': 'Depto 503'}, {'pt': 'Torre Conquista · Winner Sport Life, Jardim Goiás', 'en': 'Conquista Tower · Winner Sport Life, Jardim Goiás', 'es': 'Torre Conquista · Winner Sport Life, Jardim Goiás'}, 14, 11,
+        vaga_sub={'pt': 'Portão G2 · controle na mesa de jantar', 'en': 'Gate G2 · remote on the dining table', 'es': 'Portón G2 · control en la mesa del comedor'},
+        extra={'pt': {'topicos': {'ape': {'s': 'Suítes, Alexa, cozinha e bar'}}}, 'en': {'topicos': {'ape': {'s': 'Suites, Alexa, kitchen and bar'}}}, 'es': {'topicos': {'ape': {'s': 'Suites, Alexa, cocina y bar'}}}})),
   '504T': dict(predio='Metropolitan Sidney', arq='guia-sidney-504T.html', base_ref='003997a', tema='geometrico', ui=ui_sidney2('504', 'T', 5, '5th')),
   '1202O': dict(predio='Metropolitan Sidney', arq='guia-sidney-1202O.html', base_ref='003997a', tema='palha', ui=ui_sidney2('1202', 'O', 12, '12th')),
 }
