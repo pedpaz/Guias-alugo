@@ -232,8 +232,8 @@ var PETS_WINNER = {
 };
 
 function crystal(unidade, tipo){
-  return { predio: "Crystal Place", unidade: unidade, bairro: "Setor Oeste",
-    endereco: "Av. Edmundo P. de Abreu, 31, Setor Oeste, Goiânia/GO",
+  return { predio: "Crystal Place", unidade: unidade, bairro: "Setor Pedro Ludovico",
+    endereco: "Av. Edmundo P. de Abreu, 31, Setor Pedro Ludovico, Goiânia/GO",
     capacidade: 4, checkin: "14h", checkout: "11h",
     acesso: ACESSO[tipo], acesso2: ACESSO[tipo+"2"], areas_comuns: AREAS.condominio,
     guia: "guia-crystal-" + unidade.replace(/\D/g,"") + ".html" };
