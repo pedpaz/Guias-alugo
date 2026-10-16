@@ -124,7 +124,7 @@ def cp(n, tema_, suite): return dict(predio='Crystal Place', maps=CP_MAPS, arq=f
 
 UNIDADES = {
   '501T': dict(predio='Metropolitan Sidney', arq='guia-sidney-501T.html', base_ref='ec0964c^', tema='veludo', ui=ui_sidney('T')),
-  '501O': dict(predio='Metropolitan Sidney', arq='guia-sidney-501O.html', base_ref='e9bacd1', tema='veludo', ui=ui_sidney('O')),
+  '501O': dict(predio='Metropolitan Sidney', arq='guia-sidney-501O.html', base_ref='ff167a0', tema='veludo', ui=ui_sidney('O')),
   '1806A': dict(predio='Metropolitan Barcelona', arq='guia-barcelona-1806A.html', base_ref='978a1cb', tema='seda',
      ui=ui_unidade('1806 A', 'Metropolitan Barcelona · Jardim Goiás, Goiânia', 14, 11,
         vaga_sub={'pt':'Subsolo 2 · cartão do portão no apê','en':'Basement 2 · gate card in the flat','es':'Subsuelo 2 · tarjeta del portón en el depto'},
