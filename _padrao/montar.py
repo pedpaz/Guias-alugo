@@ -139,6 +139,7 @@ UNIDADES = {
   '803S': dict(predio='Tai Residências', arq='guia-tai-803S.html', base_ref='978a1cb', tema='carvalho',
      ui=ui_unidade('Flat 803S', 'Tai Residências · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL)),
   '407B': dict(predio='DNA SmartStyle', arq='guia-dna-407B.html', base_ref='978a1cb', tema='marmore',
+     troca_dados=[('É um studio de 40 m²', 'É um studio de 34 m²'), ('A 40 m² studio', 'A 34 m² studio'), ('Un studio de 40 m²', 'Un studio de 34 m²')],  # metragem certa: 34 m² (Pedro, 18/10/2026)
      ui=ui_unidade({'pt':'Flat 407 · Torre B','en':'Flat 407 · Tower B','es':'Flat 407 · Torre B'}, 'DNA SmartStyle · Setor Bueno, Goiânia', 15, 12,
         vaga_sub={'pt':'Subsolo S2 · controle no apê','en':'Basement S2 · remote in the flat','es':'Subsuelo S2 · control en el depto'})),
   '2003B': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-2003B.html', base_ref='978a1cb', tema='noite', hero='sala-estar-jantar',
