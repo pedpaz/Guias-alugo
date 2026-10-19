@@ -374,6 +374,22 @@ window.UNIDADES = {
                     es: "Sé que no se permiten mascotas en la unidad." } ],
     guia: "guia-dna-1008B.html" },
 
+  "DS-706G": { predio: "DNA SmartStyle", unidade: "Flat 706 · Torre G", bairro: "Setor Bueno",
+    endereco: "R. T-37, 2300, Setor Bueno, Goiânia/GO", capacidade: 3,
+    camas: { pt: ", sendo 2 na cama queen e 1 no sofá reclinável da sala (o sofá não abre em cama)",
+             en: ": 2 in the queen bed and 1 on the reclining sofa in the living area (the sofa does not open into a bed)",
+             es: ", siendo 2 en la cama queen y 1 en el sofá reclinable de la sala (el sofá no se abre en cama)" },
+    checkin: "15h", checkout: "12h",
+    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2,
+    areas_comuns: {
+      pt: "O uso das áreas comuns segue o regimento do condomínio. Piscina e espaço gourmet ficam liberados, de sexta a domingo, apenas para reservas de 3 noites ou mais; o salão de festas não está disponível para hospedagem por temporada. É proibido circular no elevador sem camisa ou em traje de banho, e o carrinho de compras só pode ser usado no elevador de serviço.",
+      en: "Use of the common areas follows the building's rules. The pool and gourmet area are available, Friday to Sunday, only for bookings of 3 nights or more; the party room is not available for short stays. Shirtless or swimwear is not allowed in the elevators, and shopping trolleys may only use the service elevator.",
+      es: "El uso de las áreas comunes sigue el reglamento del condominio. La piscina y el espacio gourmet quedan liberados, de viernes a domingo, solo para reservas de 3 noches o más; el salón de fiestas no está disponible para hospedaje temporario. Está prohibido circular en el ascensor sin camiseta o en traje de baño, y el carrito de compras solo puede usarse en el ascensor de servicio." },
+    decl_extra: [ { pt: "Estou ciente de que o controle do portão da garagem fica dentro do apartamento e deve ser deixado no mesmo lugar no check-out, pois a portaria não recebe chaves nem controles.",
+                    en: "I understand the garage gate remote stays inside the apartment and must be left in the same place at check-out, as the front desk does not accept keys or remotes.",
+                    es: "Sé que el control del portón de la cochera queda dentro del apartamento y debe dejarse en el mismo lugar en el check-out, ya que la portería no recibe llaves ni controles." } ],
+    guia: "guia-dna-706G.html" },
+
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
     endereco: "R. T-53, 804, Setor Bueno, Goiânia/GO", capacidade: 4,
