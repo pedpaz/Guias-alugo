@@ -143,7 +143,7 @@ UNIDADES = {
      ui=ui_unidade({'pt':'Flat 407 · Torre B','en':'Flat 407 · Tower B','es':'Flat 407 · Torre B'}, 'DNA SmartStyle · Setor Bueno, Goiânia', 15, 12,
         vaga_sub={'pt':'Subsolo S2 · controle no apê','en':'Basement S2 · remote in the flat','es':'Subsuelo S2 · control en el depto'})),
   # 706G: mesma planta do 407B (Pedro, 17/10/2026); base gerada por dnag0706/guia/gera_base.py a partir do 407B
-  '706G': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-706G.html', base_ref='cd7a2a6', tema='marmore',
+  '706G': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-706G.html', base_ref='b77e44b', tema='marmore',
      ui=ui_unidade('Flat 706', {'pt':'Torre G · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower G · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre G · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
         vaga_sub={'pt':'Subsolo S2 · controle no apê','en':'Basement S2 · remote in the flat','es':'Subsuelo S2 · control en el depto'},
         extra={'pt':{'vagaVal':'74','heroChip':'Studio · até 3 hóspedes'},'en':{'vagaVal':'74','heroChip':'Studio · up to 3 guests'},'es':{'vagaVal':'74','heroChip':'Studio · hasta 3 huéspedes'}})),
