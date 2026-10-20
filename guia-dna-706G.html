@@ -459,7 +459,10 @@ var TELAS = [
      '<p style="font-size:13px;color:var(--tinta-2);margin:10px 0 0">'+d.vistNota+'</p></div>'; }},
   {id:'saida',    n:'12', saida:true, corpo:function(d){ return blocos(d)+
      '<div class="co"><span class="selo">'+d.coSelo+'</span><h3>'+d.coH+'</h3><p>'+d.coP+'</p>'+
-     '<button class="co-btn" onclick="avisarCheckout()">'+d.coBtn+{
+     '<button class="co-btn" onclick="avisarCheckout()">'+d.coBtn+'</button></div>'; }}
+];
+
+var SINONIMOS = {
  "pt": {
   "chegar": [
    "endereco",
@@ -1064,11 +1067,6 @@ var TELAS = [
    "energia",
    "se apago",
    "aire se apago"
-  ]
- }
-}olver",
-   "control",
-   "avisar"
   ]
  }
 };
