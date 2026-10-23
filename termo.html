@@ -381,7 +381,7 @@ var TXT = {
   lAssin:"Assinatura do titular", assinDica:"Assine com o dedo", assinLimpar:"limpar",
   resumoH:"Confira antes de enviar", rTitular:"Titular", rHospedes:"Hóspedes", rDatas:"Período", rHora:"Chegada prevista", rPlaca:"Veículo", rTel:"Celular", rUnidade:"Unidade",
   btVolta:"Voltar", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
-  errObrig:"Preencha este campo.", errNome:"Informe o nome completo (nome e sobrenome).", errCpf:"Informe um CPF ou passaporte válido.",
+  errObrig:"Preencha este campo.", errNome:"Informe o nome completo (nome e sobrenome).", errCpf:"CPF inválido. Confira os números (ou escolha Passaporte).",
   errTel:"Informe um celular válido, com DDD.", errData:"O check-out precisa ser depois do check-in.", errDecl:"É necessário marcar todas as declarações.", errAssin:"Assine no quadro antes de enviar.",
   prontoEye:"Último passo", prontoH:"Tudo pronto para enviar", prontoP:"Ao enviar, o WhatsApp abre com a sua mensagem pronta:", prontoWaT:"Confirme sua chegada", prontoWaS:"É só apertar enviar no WhatsApp", prontoGuT:"O link do guia vai na mensagem", prontoGuS:"Guarde-o! Tem Wi-Fi, acesso, regras e dicas", prontoNota:"Antes de qualquer dúvida, dê uma olhada no guia — quase tudo já está lá 💛", okH:"Check-in enviado!", okP:"Recebemos os seus dados. {pos_envio}", okGuia:"Abrir o guia da estadia", okGuiaSub:"Wi-Fi, acesso, regras e dicas", okZapSub:"Tirar uma dúvida", okZap:"Falar com a aluGO",
   rodape:"Gestão de imóveis para temporada",
@@ -443,7 +443,7 @@ var TXT = {
   lAssin:"Main guest's signature", assinDica:"Sign with your finger", assinLimpar:"clear",
   resumoH:"Check before sending", rTitular:"Main guest", rHospedes:"Guests", rDatas:"Dates", rHora:"Estimated arrival", rPlaca:"Vehicle", rTel:"Mobile", rUnidade:"Unit",
   btVolta:"Back", btSegue:"Continue", btEnviar:"Send check-in", btEnviando:"Sending…",
-  errObrig:"Please fill in this field.", errNome:"Enter the full name (first and last).", errCpf:"Enter a valid ID or passport number.",
+  errObrig:"Please fill in this field.", errNome:"Enter the full name (first and last).", errCpf:"Invalid CPF. Check the digits (or choose Passport).",
   errTel:"Enter a valid mobile number.", errData:"Check-out must be after check-in.", errDecl:"You need to tick every declaration.", errAssin:"Please sign in the box before sending.",
   prontoEye:"Last step", prontoH:"Ready to send", prontoP:"When you send, WhatsApp opens with your message ready:", prontoWaT:"Confirm your arrival", prontoWaS:"Just tap send on WhatsApp", prontoGuT:"The guide link is in the message", prontoGuS:"Save it! Wi-Fi, access, rules and tips", prontoNota:"Before asking anything, take a look at the guide — almost everything is there 💛", okH:"Check-in sent!", okP:"We've received your details. {pos_envio}", okGuia:"Open the stay guide", okZap:"Message aluGO",
   rodape:"Short-stay property management",
@@ -505,7 +505,7 @@ var TXT = {
   lAssin:"Firma del titular", assinDica:"Firma con el dedo", assinLimpar:"borrar",
   resumoH:"Revisa antes de enviar", rTitular:"Titular", rHospedes:"Huéspedes", rDatas:"Período", rHora:"Llegada prevista", rPlaca:"Vehículo", rTel:"Celular", rUnidade:"Unidad",
   btVolta:"Volver", btSegue:"Continuar", btEnviar:"Enviar check-in", btEnviando:"Enviando…",
-  errObrig:"Completa este campo.", errNome:"Indica el nombre completo (nombre y apellido).", errCpf:"Indica un documento o pasaporte válido.",
+  errObrig:"Completa este campo.", errNome:"Indica el nombre completo (nombre y apellido).", errCpf:"CPF inválido. Revisa los números (o elige Pasaporte).",
   errTel:"Indica un celular válido.", errData:"El check-out debe ser posterior al check-in.", errDecl:"Es necesario marcar todas las declaraciones.", errAssin:"Firma en el recuadro antes de enviar.",
   prontoEye:"Último paso", prontoH:"Todo listo para enviar", prontoP:"Al enviar, WhatsApp se abre con tu mensaje listo:", prontoWaT:"Confirma tu llegada", prontoWaS:"Solo toca enviar en WhatsApp", prontoGuT:"El enlace de la guía va en el mensaje", prontoGuS:"¡Guárdalo! Wi-Fi, acceso, reglas y consejos", prontoNota:"Antes de preguntar algo, mira la guía — casi todo ya está ahí 💛", okH:"¡Check-in enviado!", okP:"Recibimos tus datos. {pos_envio}", okGuia:"Abrir la guía de la estadía", okZap:"Hablar con aluGO",
   rodape:"Gestión de inmuebles para temporada",
@@ -761,8 +761,12 @@ function limparAssin(){ if(ctx){ ctx.clearRect(0,0,cv.width,cv.height); desenhou
 /* ================= VALIDACAO ================= */
 function marcarErro(id,mal){ var c=document.getElementById(id); if(!c) return; c.classList.toggle('mal',!!mal); var i=c.querySelector('input'); if(i) i.classList.toggle('erro',!!mal); }
 function soDigitos(s){ return (s||'').replace(/\D/g,''); }
-/* CPF = 11 dígitos (a máscara cuida da pontuação); passaporte = 5+ letras/números. */
-function docOk(d,tipo){ d=(d||'').trim(); if(tipo==='pass') return d.replace(/[^A-Za-z0-9]/g,'').length>=5; return soDigitos(d).length===11; }
+/* CPF = 11 dígitos COM dígitos verificadores corretos (Pedro, 23/10/2026: o
+   termo não pode aceitar CPF errado — o condomínio recusa); passaporte = 5+ letras/números. */
+function cpfValido(v){ var d=soDigitos(v); if(d.length!==11||/^(\d)\1{10}$/.test(d)) return false;
+  function dv(n){ var s=0; for(var i=0;i<n;i++) s+=(+d.charAt(i))*(n+1-i); var r=(s*10)%11; return r===10?0:r; }
+  return dv(9)===+d.charAt(9) && dv(10)===+d.charAt(10); }
+function docOk(d,tipo){ d=(d||'').trim(); if(tipo==='pass') return d.replace(/[^A-Za-z0-9]/g,'').length>=5; return cpfValido(d); }
 
 function validar(etapa){
   var primeiro=null;
