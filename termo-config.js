@@ -402,6 +402,9 @@ window.UNIDADES = {
     endereco: "R. T-55, 95, Setor Marista, Goiânia/GO", capacidade: 5,
     checkin: "15h", checkout: "12h", silencio: "22h e 8h",
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+    /* A administração do Blend exige documento de TODOS, inclusive crianças (Pedro, 23/10/2026):
+       criança deixa de ter documento opcional e entra a opção RG/identidade. */
+    doc_obrigatorio: true,
     guia: "guia-blend-757.html" },
 
   /* ---- Winner (telefone do titular obrigatório; pets com autorização) ---- */
