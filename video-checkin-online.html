@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como acessar sua estadia — aluGO</title>
+<meta name="description" content="Vídeo rápido: como acessar sua área de estadia e fazer o check-in online da aluGO.">
+<meta property="og:title" content="Como acessar sua estadia — aluGO">
+<meta property="og:description" content="Veja em 1 minuto como acessar sua estadia e fazer o check-in online.">
+<meta property="og:image" content="https://pedpaz.github.io/Guias-alugo/video-checkin-online-poster.jpg">
+<meta property="og:type" content="video.other">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#1f9d55; --verde-esc:#157347; --verde-claro:#eafaf1;
+    --texto:#1d2b26; --texto-claro:#5c6b64; --branco:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'DM Sans',system-ui,sans-serif; color:var(--texto);
+    background:
+      radial-gradient(1000px 440px at 50% -8%, rgba(31,157,85,0.12), transparent 62%),
+      linear-gradient(180deg,#f3fbf6 0%,#eef6f1 100%);
+    min-height:100vh; padding:28px 18px 46px;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .wrap{width:100%; max-width:440px}
+  .topo{text-align:center; margin-bottom:20px}
+  .logo{height:30px; width:auto; margin-bottom:16px}
+  .marca{
+    font-size:11px; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--verde); font-weight:600; margin-bottom:8px;
+  }
+  .titulo{font-size:25px; line-height:1.15; font-weight:700; color:var(--texto); margin-bottom:8px}
+  .sub{color:var(--texto-claro); font-size:14.5px; line-height:1.55}
+
+  .player{
+    position:relative; width:100%; border-radius:20px; overflow:hidden;
+    background:#0d1b16; margin:22px 0 20px;
+    box-shadow:0 18px 44px rgba(21,115,71,0.22), 0 3px 10px rgba(0,0,0,0.08);
+    aspect-ratio:9/16;
+  }
+  .player video{width:100%; height:100%; display:block; object-fit:cover}
+
+  .passos{
+    background:var(--branco); border:1px solid rgba(31,157,85,0.16);
+    border-radius:16px; padding:18px 18px 8px; margin-bottom:20px;
+    box-shadow:0 8px 24px rgba(21,115,71,0.08);
+  }
+  .passos h2{font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--verde); margin-bottom:14px}
+  .passo{display:flex; gap:12px; align-items:flex-start; margin-bottom:14px}
+  .num{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    background:var(--verde-claro); color:var(--verde-esc); font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .passo p{font-size:14.5px; line-height:1.5}
+  .passo b{color:var(--texto)}
+
+  .cta{
+    display:block; text-align:center; text-decoration:none;
+    background:var(--verde); color:#fff; font-weight:700; font-size:16px;
+    padding:16px; border-radius:14px; margin-bottom:12px;
+    box-shadow:0 10px 24px rgba(31,157,85,0.3);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .cta:active{transform:translateY(1px); box-shadow:0 6px 16px rgba(31,157,85,0.26)}
+  .ajuda{text-align:center; font-size:13.5px; color:var(--texto-claro)}
+  .ajuda a{color:var(--verde-esc); font-weight:600; text-decoration:none}
+  .rodape{text-align:center; margin-top:28px; font-size:11.5px; color:#9aa8a1; letter-spacing:.3px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topo">
+      <img class="logo" src="assets/alugo.png" alt="aluGO">
+      <div class="marca">Sua estadia</div>
+      <h1 class="titulo">Como acessar sua estadia</h1>
+      <p class="sub">Em 1 minuto, veja como entrar na sua área de hóspede e fazer o check-in online.</p>
+    </div>
+
+    <div class="player">
+      <video controls playsinline preload="metadata" poster="video-checkin-online-poster.jpg">
+        <source src="video-checkin-online.mp4" type="video/mp4">
+        Seu navegador não consegue mostrar o vídeo. Baixe pelo botão abaixo.
+      </video>
+    </div>
+
+    <div class="passos">
+      <h2>O passo a passo</h2>
+      <div class="passo"><span class="num">1</span><p>Abra <b>alugo.net.br</b> e toque em <b>“Minha estadia”</b>.</p></div>
+      <div class="passo"><span class="num">2</span><p>Digite seu <b>nome</b> e a <b>data de entrada</b>. Não precisa de senha.</p></div>
+      <div class="passo"><span class="num">3</span><p>Faça o <b>check-in online</b>. É ele que libera sua entrada no prédio.</p></div>
+    </div>
+
+    <a class="cta" href="https://alugo.net.br/estadia">Acessar minha estadia agora</a>
+    <p class="ajuda">Dentro da sua estadia você também fala com a gente quando precisar.</p>
+
+    <div class="rodape">aluGO · Apartamentos por temporada</div>
+  </div>
+</body>
+</html>
