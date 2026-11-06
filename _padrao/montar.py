@@ -167,9 +167,9 @@ UNIDADES = {
   '2903': dict(predio='Walk Bueno', maps='https://maps.app.goo.gl/ce1t5VF6Cp3suEKx9', arq='guia-2903-walk-bueno-v20.html', base_ref='1f3c3e3', tema='nogueira',
      ui=ui_unidade({'pt': 'Duplex 2903', 'en': 'Duplex 2903', 'es': 'Dúplex 2903'}, 'Walk Bueno · Setor Bueno, Goiânia', 15, 12,
         vaga_sub={'pt': 'Térreo · -1 no elevador', 'en': 'Ground floor · -1 in the lift', 'es': 'Planta baja · -1 en el ascensor'},
-        extra={'pt': {'rodapeRegras': 'Tomadas 220V · Silêncio depois das 22h · Proibido fumar', 'topicos': {'ape': {'t': 'O duplex', 's': 'Casa inteligente, Wi-Fi, bar e adega'}}},
-               'en': {'rodapeRegras': '220V outlets · Quiet after 10 pm · No smoking', 'topicos': {'ape': {'t': 'The duplex', 's': 'Smart home, Wi-Fi, bar and wine fridge'}}},
-               'es': {'rodapeRegras': 'Enchufes 220V · Silencio después de las 22 h · Prohibido fumar', 'topicos': {'ape': {'t': 'El dúplex', 's': 'Casa inteligente, wifi, bar y cava'}}}})),
+        extra={'pt': {'rodapeRegras': 'Tomadas 220V · Silêncio das 22h às 8h · Proibido fumar', 'topicos': {'ape': {'t': 'O duplex', 's': 'Casa inteligente, Wi-Fi, bar e adega'}}},
+               'en': {'rodapeRegras': '220V outlets · Quiet hours 10 pm–8 am · No smoking', 'topicos': {'ape': {'t': 'The duplex', 's': 'Smart home, Wi-Fi, bar and wine fridge'}}},
+               'es': {'rodapeRegras': 'Enchufes 220V · Silencio de 22 h a 8 h · Prohibido fumar', 'topicos': {'ape': {'t': 'El dúplex', 's': 'Casa inteligente, wifi, bar y cava'}}}})),
   '503C': dict(predio='Winner Sport Life', arq='guia-winner-503C.html', base_ref='c5a363e', tema='nero',
      ui=ui_unidade({'pt': 'Apto 503', 'en': 'Apt 503', 'es': 'Depto 503'}, {'pt': 'Torre Conquista · Winner Sport Life, Jardim Goiás', 'en': 'Conquista Tower · Winner Sport Life, Jardim Goiás', 'es': 'Torre Conquista · Winner Sport Life, Jardim Goiás'}, 15, 12,
         vaga_sub={'pt': 'Portão G2 · controle na mesa de jantar', 'en': 'Gate G2 · remote on the dining table', 'es': 'Portón G2 · control en la mesa del comedor'},
@@ -205,6 +205,10 @@ def montar(chave):
             assert velho in d, velho
             d = d.replace(velho, novo)
         s = s[:a] + d + s[b:]
+    # silêncio padronizado em 22h–8h em todos os guias (Pedro, 06/11/2026)
+    from silencio import silencio
+    a = s.index('<script id="dados"'); b = s.index('</script>', a)
+    s = s[:a] + silencio(s[a:b]) + s[b:]
     # nunca o alert nativo (trava o webview): vistoria vazia vira aviso
     s = s.replace('alert(TXT[L].vistVazio)', 'aviso(TXT[L].vistVazio)')
 
