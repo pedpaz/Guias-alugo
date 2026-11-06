@@ -91,8 +91,8 @@ COPA = {'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama, Wi-Fi, TV, banhe
         'en': {'topicos': {'ape': {'t': 'The suite', 's': 'Bed, Wi-Fi, TV, bathroom and pantry'}, 'entrar': {'t': 'Getting into the suite'}}},
         'es': {'topicos': {'ape': {'t': 'La suite', 's': 'Cama, wifi, TV, baño y office'}, 'entrar': {'t': 'Entrar a la suite'}}}}
 
-# QS Marista: a saída é às 11h (Pedro, out/2026) — os guias diziam 12h
-SAIDA_11H = [('12h', '11h'), ('12 pm', '11 am')]
+# QS Marista: entrada 15h e saída 12h (Pedro, 03/11/2026 — vale sobre o 11h que ele tinha dito em out/2026).
+# A base dos guias já diz 12h; a troca que punha 11h saiu.
 # visitas proibidas em todos os guias (Pedro): os do QS diziam que visita só não podia pernoitar
 QS_VISITAS = [('Visitas não podem pernoitar e precisam ser identificadas na recepção.', 'Visitas não são permitidas: só os hóspedes cadastrados no check-in online sobem à suíte.'),
               ('Visitors cannot stay overnight and must be identified at the front desk.', 'Visitors are not allowed: only the guests registered in the online check-in may go up to the suite.'),
@@ -133,9 +133,9 @@ UNIDADES = {
      ui=ui_unidade('Studio 1003A', 'FR Bueno Municipal · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL,
         extra={'pt':{'vagaVal':'093'},'en':{'vagaVal':'093'},'es':{'vagaVal':'093'}})),
   '1701': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1701.html', base_ref='978a1cb', tema='travertino',
-     troca_dados=SAIDA_11H + QS_VISITAS, ui=ui_unidade('Suíte 1701', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra=COPA)),
+     troca_dados=QS_VISITAS, ui=ui_unidade('Suíte 1701', 'QS Marista · Setor Marista, Goiânia', 15, 12, extra=COPA)),
   '402': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-402.html', base_ref='978a1cb', tema='travertino',
-     troca_dados=SAIDA_11H + QS_VISITAS, ui=ui_unidade('Suíte 402', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra=COPA)),
+     troca_dados=QS_VISITAS, ui=ui_unidade('Suíte 402', 'QS Marista · Setor Marista, Goiânia', 15, 12, extra=COPA)),
   '803S': dict(predio='Tai Residências', arq='guia-tai-803S.html', base_ref='978a1cb', tema='carvalho',
      ui=ui_unidade('Flat 803S', 'Tai Residências · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL)),
   '407B': dict(predio='DNA SmartStyle', arq='guia-dna-407B.html', base_ref='978a1cb', tema='marmore',
@@ -160,7 +160,7 @@ UNIDADES = {
   '1113': cp('1113', 'cristal', False), '2413': cp('2413', 'cristal', False), '1313': cp('1313', 'cristal', False),
   '911': cp('911', 'imperador', True), '209': cp('209', 'imperador', True),
   '1310': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1310.html', base_ref='c78e12d', tema='travertino',
-     troca_dados=SAIDA_11H + QS_VISITAS, ui=ui_unidade('Suíte 1310', 'QS Marista · Setor Marista, Goiânia', 15, 11, extra={
+     troca_dados=QS_VISITAS, ui=ui_unidade('Suíte 1310', 'QS Marista · Setor Marista, Goiânia', 15, 12, extra={
         'pt': {'topicos': {'ape': {'t': 'A suíte', 's': 'Cama king, escritório, Wi-Fi e banheiro'}, 'entrar': {'t': 'Entrar na suíte'}}},
         'en': {'topicos': {'ape': {'t': 'The suite', 's': 'King bed, office, Wi-Fi and bathroom'}, 'entrar': {'t': 'Getting into the suite'}}},
         'es': {'topicos': {'ape': {'t': 'La suite', 's': 'Cama king, escritorio, wifi y baño'}, 'entrar': {'t': 'Entrar a la suite'}}}})),
