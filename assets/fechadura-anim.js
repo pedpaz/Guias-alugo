@@ -2,9 +2,9 @@
    aluGO · <fechadura-anim> — Intelbras FR 101 e o "modo de senha aleatória"
    ----------------------------------------------------------------------------
    Fechaduras do Sidney Metropolitan e do DNA SmartStyle (Intelbras FR 101).
-   Com o modo de senha aleatória ligado, o hóspede digita a senha + ✱, a porta
+   Com o modo de senha aleatória ligado, o hóspede digita a senha + ✓, a porta
    NÃO abre e o teclado acende só alguns números sorteados. É preciso tocar
-   nesses números e confirmar de novo com ✱ — aí destrava.
+   nesses números e confirmar de novo com ✓ — aí destrava.
    Fonte: FAQ Intelbras FR 101 ("o teclado acende uma linha aleatória…
    pressione os 3 dígitos exibidos e depois pressione *"; desativar: manual §7.3).
 
@@ -127,8 +127,8 @@
   Fechadura.prototype.connectedCallback = function(){
     if (this._pronto) return; this._pronto = true;
     var senha = (this.getAttribute('senha') || '1234*').trim();
-    var digitos = senha.replace(/[*#✱✓]+$/, '').split('');
-    var okSimb = /#$/.test(senha) ? '#' : '✱';
+    var digitos = senha.replace(/[*#✓]+$/, '').split('');
+    var okSimb = /#$/.test(senha) ? '#' : '✓';
     var cor = this.getAttribute('cor') || '#E0761A';
     var T = TXT[idioma(this)];
     var passos = T.p.map(function(x){ return x.replace('{senha}', digitos.join('')).split('{ok}').join(okSimb); });
