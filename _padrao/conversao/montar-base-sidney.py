@@ -68,7 +68,7 @@ def gerar(u, cor_tema):
                  ('5.º piso', ordinal(A, 'es')), ('quinto piso', ordinal(A, 'es')), ('#B8121F', cor_tema)]
         porta = troca(porta, pares)
         for b in porta['blocos']:
-            if b.get('chave'): b['chave'] = U['senha'].rstrip('*') + ' ✱'
+            if b.get('chave'): b['chave'] = U['senha'].rstrip('*') + ' ✓'
         if not U['luz']:
             porta['blocos'] = [b for b in porta['blocos'] if "abrir('luz')" not in json.dumps(b)]
         porta['blocos'] = [b for b in porta['blocos'] if not (b.get('h', '').startswith(('Nada a', 'Nothing to', 'Nada que')))]

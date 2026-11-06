@@ -136,10 +136,10 @@ def conteudo(n, U, L):
                  f'Desde el lobby, sube en ascensor al {andar}. La suite {n} está <b>a la derecha del ascensor</b>.'),
           blocos=[dict(dest=True, h=x('A senha da porta', 'The door code', 'La clave de la puerta'),
                        p=[x('A porta tem fechadura digital.', 'The door has a digital lock.', 'La puerta tiene cerradura digital.')], chave=s),
-                  dict(h=x('O asterisco faz parte', 'The asterisk is part of it', 'El asterisco es parte de la clave'),
-                       p=[x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com o <b>asterisco (*)</b> — é ele que confirma.',
-                            f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>asterisk (*)</b> — that is what confirms it.',
-                            f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con el <b>asterisco (*)</b>: es lo que confirma.'),
+                  dict(h=x('A tecla V (✓) faz parte', 'The V (✓) key is part of it', 'La tecla V (✓) es parte de la clave'),
+                       p=[x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>V (✓)</b> — é ele que confirma.',
+                            f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>V (✓) key</b> — that is what confirms it.',
+                            f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>V (✓)</b>: es lo que confirma.'),
                           x('Se errar, espere alguns segundos e comece de novo, do zero.', 'If you get it wrong, wait a few seconds and start again from the beginning.',
                             'Si te equivocas, espera unos segundos y empieza de nuevo desde cero.')])] +
                  ([dict(dest=True, pill=x('atenção', 'heads-up', 'atención'), h=x('Puxe a porta enquanto digita', 'Pull the door while you type', 'Tira de la puerta mientras marcas'),
@@ -394,8 +394,8 @@ def conteudo(n, U, L):
     ac = []
     if U['acesso'] == 'senha':
         s = U['senha']; dig = s.rstrip('*')
-        r = [x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com o <b>asterisco (*)</b>.', f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>asterisk (*)</b>.',
-               f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con el <b>asterisco (*)</b>.')]
+        r = [x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>V (✓)</b>.', f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>V (✓) key</b>.',
+               f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>V (✓)</b>.')]
         if n == '911':
             r.append(x('<b>Puxe a porta para o seu lado enquanto digita</b> — sem puxar, o trinco não gira por causa do peso da porta.',
                        '<b>Pull the door towards you while you type</b> — without pulling, the bolt cannot turn because of the weight of the door.',
@@ -448,7 +448,7 @@ def gerais(n, U, nome, L):
       secaoMenu=x('O que você precisa saber', 'What you need to know', 'Lo que necesitas saber'),
       apeSub=x('Crystal Place · Setor Pedro Ludovico, Goiânia', 'Crystal Place · Setor Pedro Ludovico, Goiânia', 'Crystal Place · Setor Pedro Ludovico, Goiânia'),
       cSenha=x('Senha da porta', 'Door code', 'Clave de la puerta'),
-      cSenhaSub=x('fechadura digital · o asterisco no final confirma', 'digital lock · the asterisk at the end confirms', 'cerradura digital · el asterisco al final confirma'),
+      cSenhaSub=x('fechadura digital · a tecla V (✓) no final confirma', 'digital lock · the V (✓) key at the end confirms', 'cerradura digital · la tecla V (✓) al final confirma'),
       cAcesso=x('Seu acesso', 'Your access', 'Tu acceso'),
       cAcessoVal={'senha': x('Fechadura digital', 'Digital lock', 'Cerradura digital'), 'cartao': x('Cartão na recepção', 'Key card at reception', 'Tarjeta en recepción'),
                   'chave': x('Chave na recepção', 'Key at reception', 'Llave en recepción')}[U['acesso']],
@@ -474,7 +474,7 @@ def gerais(n, U, nome, L):
 SIN_BASE = {
  'pt': {'chegar': ['endereco', 'onde fica', 'mapa', 'uber', 'taxi', '99', 'localizacao', 'aeroporto', 'rodoviaria', 'edmundo', 'pedro ludovico', 'areiao'],
         'predio': ['portaria', 'recepcao', 'documento', 'rg', 'identidade', 'chegada', 'cadastro', 'visita', 'visitas', '24h'],
-        'porta': ['senha', 'senha da porta', 'fechadura', 'asterisco', 'codigo', 'abrir a porta', 'como entro', 'cartao', 'chave', 'nao abre', 'andar', 'elevador'],
+        'porta': ['senha', 'senha da porta', 'fechadura', 'asterisco', 'tecla v', 'codigo', 'abrir a porta', 'como entro', 'cartao', 'chave', 'nao abre', 'andar', 'elevador'],
         'ape': ['wifi', 'wi-fi', 'rede', 'internet', 'senha do wifi', 'cama', 'sofa cama', 'toalha', 'enxoval', 'tv', 'ar condicionado', '220v', 'voltagem', 'tomada', 'cafe', 'acucar', 'alavie', 'perfume', 'aroma'],
         'cozinha': ['cozinha', 'geladeira', 'fogao', 'cooktop', 'micro-ondas', 'microondas', 'panela', 'prato', 'talher', 'taca', 'lixo'],
         'economia': ['economizador', 'help smart', 'botoeira', 'botao', 'ar desligou', 'luz apagou', 'desligou sozinho', 'energia', 'sensor'],
@@ -486,7 +486,7 @@ SIN_BASE = {
         'checkin': ['check-in', 'checkin', 'termo', 'cadastro', 'vistoria', 'formulario', 'documento'],
         'saida': ['check-out', 'checkout', 'saida', 'ir embora', 'devolver', 'cartao', 'chave', 'malas', 'bagagem', 'guardar malas', '11h']},
  'en': {'chegar': ['address', 'where', 'map', 'uber', 'taxi', 'location', 'airport'], 'predio': ['front desk', 'reception', 'id', 'arrival', 'visitor', '24h'],
-        'porta': ['code', 'door code', 'lock', 'asterisk', 'key card', 'key', 'open the door', 'floor', 'lift', 'elevator'],
+        'porta': ['code', 'door code', 'lock', 'asterisk', 'tecla v', 'key card', 'key', 'open the door', 'floor', 'lift', 'elevator'],
         'ape': ['wifi', 'wi-fi', 'network', 'internet', 'password', 'bed', 'sofa bed', 'towel', 'tv', 'air conditioning', '220v', 'voltage', 'outlet', 'coffee', 'alavie', 'scent'],
         'cozinha': ['kitchen', 'fridge', 'stove', 'microwave', 'pan', 'plates', 'rubbish', 'trash'],
         'economia': ['energy saver', 'help smart', 'button', 'air switched off', 'lights off', 'sensor'],
@@ -495,7 +495,7 @@ SIN_BASE = {
         'problema': ['problem', 'not working', 'broken', 'help'], 'bairro': ['restaurant', 'bar', 'park', 'shopping', 'supermarket', 'pharmacy'],
         'checkin': ['check-in', 'checkin', 'form', 'registration', 'inspection'], 'saida': ['check-out', 'checkout', 'leave', 'return', 'luggage', 'bags']},
  'es': {'chegar': ['direccion', 'donde', 'mapa', 'uber', 'taxi', 'ubicacion', 'aeropuerto'], 'predio': ['recepcion', 'porteria', 'documento', 'llegada', 'visita', '24 h'],
-        'porta': ['clave', 'clave de la puerta', 'cerradura', 'asterisco', 'tarjeta', 'llave', 'abrir la puerta', 'piso', 'ascensor'],
+        'porta': ['clave', 'clave de la puerta', 'cerradura', 'asterisco', 'tecla v', 'tarjeta', 'llave', 'abrir la puerta', 'piso', 'ascensor'],
         'ape': ['wifi', 'red', 'internet', 'cama', 'sofa cama', 'toalla', 'tv', 'aire acondicionado', '220v', 'voltaje', 'enchufe', 'cafe', 'alavie', 'aroma'],
         'cozinha': ['cocina', 'heladera', 'microondas', 'olla', 'platos', 'basura'],
         'economia': ['ahorrador', 'help smart', 'boton', 'se apago el aire', 'luces apagadas', 'sensor'],
