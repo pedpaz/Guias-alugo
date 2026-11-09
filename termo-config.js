@@ -15,7 +15,7 @@ window.PADRAO = {
   multa_festa: "R$ 500,00",
   multa_atraso: "R$ 200,00 por hora",
   multa_extra: "R$ 200,00 por pessoa",
-  silencio: "22h e 7h",
+  silencio: "22h e 8h",
   pos_envio: { pt: "Guarde este link: você recebe a confirmação por WhatsApp.",
                en: "Keep this link: you'll get a confirmation on WhatsApp.",
                es: "Guarda este enlace: recibirás la confirmación por WhatsApp." }
