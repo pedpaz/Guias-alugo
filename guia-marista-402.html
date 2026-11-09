@@ -2358,7 +2358,7 @@ function montarTelas(){
   }
   // a senha em destaque dentro do tópico também copia ao tocar
   [].forEach.call(c.querySelectorAll('.chave'),function(el){
-    var v=el.textContent.replace(/\s+/g,'').replace(/✱/g,'*');
+    var v=el.textContent.replace(/\s+/g,'').replace(/✓/g,'*');
     if(SENHA && v===SENHA){ el.setAttribute('role','button'); el.onclick=function(){ copiarTexto(SENHA); aviso(t('copiado')+' · '+SENHA); }; }
   });
 }
