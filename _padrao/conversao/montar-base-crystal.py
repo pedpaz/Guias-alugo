@@ -136,10 +136,10 @@ def conteudo(n, U, L):
                  f'Desde el lobby, sube en ascensor al {andar}. La suite {n} está <b>a la derecha del ascensor</b>.'),
           blocos=[dict(dest=True, h=x('A senha da porta', 'The door code', 'La clave de la puerta'),
                        p=[x('A porta tem fechadura digital.', 'The door has a digital lock.', 'La puerta tiene cerradura digital.')], chave=s),
-                  dict(h=x('A tecla V (✓) faz parte', 'The V (✓) key is part of it', 'La tecla V (✓) es parte de la clave'),
-                       p=[x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>V (✓)</b> — é ele que confirma.',
-                            f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>V (✓) key</b> — that is what confirms it.',
-                            f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>V (✓)</b>: es lo que confirma.'),
+                  dict(h=x('A tecla de confirmar faz parte', 'The confirm key is part of it', 'La tecla de confirmar es parte de la clave'),
+                       p=[x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>✓ ou ✱</b> — é ele que confirma.',
+                            f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>✓ or ✱ key</b> — that is what confirms it.',
+                            f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>✓ o ✱</b>: es lo que confirma.'),
                           x('Se errar, espere alguns segundos e comece de novo, do zero.', 'If you get it wrong, wait a few seconds and start again from the beginning.',
                             'Si te equivocas, espera unos segundos y empieza de nuevo desde cero.')])] +
                  ([dict(dest=True, pill=x('atenção', 'heads-up', 'atención'), h=x('Puxe a porta enquanto digita', 'Pull the door while you type', 'Tira de la puerta mientras marcas'),
@@ -394,8 +394,8 @@ def conteudo(n, U, L):
     ac = []
     if U['acesso'] == 'senha':
         s = U['senha']; dig = s.rstrip('*')
-        r = [x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>V (✓)</b>.', f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>V (✓) key</b>.',
-               f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>V (✓)</b>.')]
+        r = [x(f'Toque no teclado para acendê-lo, digite <b>{dig}</b> e finalize com a tecla <b>✓ ou ✱</b>.', f'Touch the keypad to wake it, type <b>{dig}</b> and finish with the <b>✓ or ✱ key</b>.',
+               f'Toca el teclado para encenderlo, marca <b>{dig}</b> y termina con la tecla <b>✓ o ✱</b>.')]
         if n == '911':
             r.append(x('<b>Puxe a porta para o seu lado enquanto digita</b> — sem puxar, o trinco não gira por causa do peso da porta.',
                        '<b>Pull the door towards you while you type</b> — without pulling, the bolt cannot turn because of the weight of the door.',
@@ -448,7 +448,7 @@ def gerais(n, U, nome, L):
       secaoMenu=x('O que você precisa saber', 'What you need to know', 'Lo que necesitas saber'),
       apeSub=x('Crystal Place · Setor Pedro Ludovico, Goiânia', 'Crystal Place · Setor Pedro Ludovico, Goiânia', 'Crystal Place · Setor Pedro Ludovico, Goiânia'),
       cSenha=x('Senha da porta', 'Door code', 'Clave de la puerta'),
-      cSenhaSub=x('fechadura digital · a tecla V (✓) no final confirma', 'digital lock · the V (✓) key at the end confirms', 'cerradura digital · la tecla V (✓) al final confirma'),
+      cSenhaSub=x('fechadura digital · a tecla ✓ ou ✱ no final confirma', 'digital lock · the ✓ or ✱ key at the end confirms', 'cerradura digital · la tecla ✓ o ✱ al final confirma'),
       cAcesso=x('Seu acesso', 'Your access', 'Tu acceso'),
       cAcessoVal={'senha': x('Fechadura digital', 'Digital lock', 'Cerradura digital'), 'cartao': x('Cartão na recepção', 'Key card at reception', 'Tarjeta en recepción'),
                   'chave': x('Chave na recepção', 'Key at reception', 'Llave en recepción')}[U['acesso']],
