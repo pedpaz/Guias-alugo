@@ -147,6 +147,8 @@ UNIDADES = {
      ui=ui_unidade('Flat 706', {'pt':'Torre G · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower G · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre G · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
         vaga_sub={'pt':'Subsolo S2 · portão por reconhecimento facial','en':'Basement S2 · gate opens by face ID','es':'Subsuelo S2 · portón por reconocimiento facial'},
         extra={'pt':{'vagaVal':'74','heroChip':'Studio · até 3 hóspedes','ecoTit':'Entrou? Toque no EcoTouch','ecoSub':'Feche a porta e toque no botão abaixo do adesivo verde — senão o ar e as luzes desligam'},'en':{'vagaVal':'74','heroChip':'Studio · up to 3 guests','ecoTit':'Came in? Tap the EcoTouch','ecoSub':'Close the door and tap the button below the green sticker — otherwise the AC and lights switch off'},'es':{'vagaVal':'74','heroChip':'Studio · hasta 3 huéspedes','ecoTit':'¿Entraste? Toca el EcoTouch','ecoSub':'Cierra la puerta y toca el botón debajo del adhesivo verde; si no, el aire y las luces se apagan'}})),
+  # 706B (15/11/2026): gerado a partir do guia PUBLICADO do 407B (mesma planta), com dados, fotos e textos do 706B.
+  # Não remontar pelo montar.py: corrigir direto em guia-dna-706B.html (os publicados divergem dos base_ref).
   '2003B': dict(predio='DNA SmartStyle', maps='https://maps.app.goo.gl/j8CLV2GZbMLrWVQUA', arq='guia-dna-2003B.html', base_ref='978a1cb', tema='noite', hero='sala-estar-jantar',
      mapa={'entrar': ['ape'], 'ape': ['duplex', 'cozinha']},
      ui=ui_unidade({'pt':'Duplex 2003','en':'Duplex 2003','es':'Dúplex 2003'}, {'pt':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia','en':'Tower B · DNA SmartStyle · Setor Bueno, Goiânia','es':'Torre B · DNA SmartStyle · Setor Bueno, Goiânia'}, 15, 12,
