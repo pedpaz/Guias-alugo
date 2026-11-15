@@ -409,7 +409,8 @@ window.UNIDADES = {
     areas_comuns: {
       pt: "O uso das áreas comuns (piscina e spa aquecidos, academia, sauna, área de convivência e minimercado) segue o regimento interno do condomínio, inclusive quanto a horários e à proibição de fumar. As áreas aquecidas funcionam até as 22h.",
       en: "Use of the common areas (heated pool and spa, gym, sauna, lounge and mini market) follows the building's internal rules, including opening hours and the smoking ban. The heated areas are open until 10 pm.",
-      es: "El uso de las áreas comunes (piscina y spa climatizados, gimnasio, sauna, área de convivencia y minimercado) sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar. Las áreas climatizadas funcionan hasta las 22h." } },
+      es: "El uso de las áreas comunes (piscina y spa climatizados, gimnasio, sauna, área de convivencia y minimercado) sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar. Las áreas climatizadas funcionan hasta las 22h." },
+    guia: "guia-expression-1906.html" },
 
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
