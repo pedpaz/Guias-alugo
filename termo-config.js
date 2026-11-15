@@ -396,6 +396,21 @@ window.UNIDADES = {
     acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.dna,
     guia: "guia-dna-706B.html" },
 
+  /* ---- The Expression (cadastro no sistema do condomínio + garagem por reconhecimento facial) ---- */
+  "EXP-1906": { predio: "The Expression", unidade: "Flat 1906", bairro: "Setor Bueno",
+    endereco: "Rua T-51, 921, Setor Bueno, Goiânia/GO", capacidade: 2,
+    camas: { pt: ", na cama de casal", en: ", in the double bed", es: ", en la cama de matrimonio" },
+    checkin: "14h", checkout: "11h",
+    acesso: {
+      pt: "A entrada no prédio depende do cadastro de cada hóspede no sistema do condomínio, feito pela aluGO a partir desta lista; sem o cadastro, a portaria não autoriza a entrada. A garagem abre por <b>reconhecimento facial</b>. O acesso ao apartamento é por <b>fechadura digital</b> com senha, enviada após a confirmação do cadastro, que não deve ser repassada a terceiros.",
+      en: "Entry to the building depends on each guest being registered in the condominium system, which aluGO does from this list; without it, the front desk will not allow entry. The garage opens by <b>facial recognition</b>. Access to the apartment is by <b>digital lock</b> with a code, sent once your registration is confirmed, which must not be shared.",
+      es: "La entrada al edificio depende del registro de cada huésped en el sistema del condominio, que hace aluGO a partir de esta lista; sin el registro, la portería no autoriza la entrada. El garaje se abre por <b>reconocimiento facial</b>. El acceso al apartamento es por <b>cerradura digital</b> con clave, enviada tras confirmar el registro, que no debe compartirse." },
+    acesso2: ACESSO.fechadura2,
+    areas_comuns: {
+      pt: "O uso das áreas comuns (piscina e spa aquecidos, academia, sauna, área de convivência e minimercado) segue o regimento interno do condomínio, inclusive quanto a horários e à proibição de fumar. As áreas aquecidas funcionam até as 22h.",
+      en: "Use of the common areas (heated pool and spa, gym, sauna, lounge and mini market) follows the building's internal rules, including opening hours and the smoking ban. The heated areas are open until 10 pm.",
+      es: "El uso de las áreas comunes (piscina y spa climatizados, gimnasio, sauna, área de convivencia y minimercado) sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar. Las áreas climatizadas funcionan hasta las 22h." } },
+
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
     endereco: "R. T-53, 804, Setor Bueno, Goiânia/GO", capacidade: 4,
