@@ -128,7 +128,7 @@
     if (this._pronto) return; this._pronto = true;
     var senha = (this.getAttribute('senha') || '1234*').trim();
     var digitos = senha.replace(/[*#✓]+$/, '').split('');
-    var okSimb = /#$/.test(senha) ? '#' : '✓';
+    var okSimb = /#$/.test(senha) ? '#' : '✓/✱';
     var cor = this.getAttribute('cor') || '#E0761A';
     var T = TXT[idioma(this)];
     var passos = T.p.map(function(x){ return x.replace('{senha}', digitos.join('')).split('{ok}').join(okSimb); });

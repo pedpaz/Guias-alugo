@@ -90,7 +90,7 @@ for L in LS:
     T = {k: v for k, v in txt_base[L].items() if not k.startswith('tela_')}
     rot = 'Winner 503 · Torre Conquista'
     T.update(apeNome=x('Apartamento 503', 'Apartment 503', 'Apartamento 503'), apeSub='Winner Sport Life Residence · Jardim Goiás, Goiânia',
-             cSenhaSub=x('fechadura digital · termine com a tecla V (✓)', 'digital lock · end with the V (✓) key', 'cerradura digital · termina con la tecla V (✓)'),
+             cSenhaSub=x('fechadura digital · termine com a tecla ✓ ou ✱', 'digital lock · end with the ✓ or ✱ key', 'cerradura digital · termina con la tecla ✓ o ✱'),
              cHorasVal=x('15h / 12h', '3pm / 12pm', '15h / 12h'), cHorasSub=x('entrada a partir das 15h · saída até as 12h', 'check-in from 3pm · check-out by 12pm', 'entrada desde las 15h · salida hasta las 12h'),
              buscaPh=x('O que você procura? (toalha, vaga, senha…)', 'What are you looking for? (towel, parking, code…)', '¿Qué buscas? (toalla, cochera, clave…)'),
              zapOi=x(f'Olá! Sou hóspede do {rot} e preciso de ajuda.', f"Hi! I'm a guest at {rot} and I need some help.", f'¡Hola! Soy huésped del {rot} y necesito ayuda.'),
