@@ -387,6 +387,15 @@ window.UNIDADES = {
       es: "El uso de las áreas comunes sigue el reglamento del condominio. La piscina y el espacio gourmet quedan liberados, de viernes a domingo, solo para estadías de 2 noches o más; el salón de fiestas no está disponible para hospedaje temporario. Está prohibido circular en el ascensor sin camiseta o en traje de baño, y el carrito de compras solo puede usarse en el ascensor de servicio." },
     guia: "guia-dna-706G.html" },
 
+  "DS-706B": { predio: "DNA SmartStyle", unidade: "Flat 706 · Torre B", bairro: "Setor Bueno",
+    endereco: "R. T-37, 2300, Setor Bueno, Goiânia/GO", capacidade: 4,
+    camas: { pt: ", sendo 2 na cama de casal e 2 no sofá-cama da sala",
+             en: ": 2 in the double bed and 2 on the sofa bed in the living area",
+             es: ", siendo 2 en la cama de matrimonio y 2 en el sofá cama de la sala" },
+    checkin: "15h", checkout: "12h",
+    acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.dna,
+    guia: "guia-dna-706B.html" },
+
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
     endereco: "R. T-53, 804, Setor Bueno, Goiânia/GO", capacidade: 4,
