@@ -132,6 +132,11 @@ UNIDADES = {
   '1003A': dict(predio='FR Bueno Municipal', arq='guia-fr-bueno-1003A.html', base_ref='978a1cb', tema='agua',
      ui=ui_unidade('Studio 1003A', 'FR Bueno Municipal · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL,
         extra={'pt':{'vagaVal':'093'},'en':{'vagaVal':'093'},'es':{'vagaVal':'093'}})),
+  # 2007A (Michel, 24/11/2026): gerado do guia PUBLICADO do 1003A (fotos do apê, textos e dados trocados por script);
+  # nunca remontar a partir de base_ref — o arquivo publicado é a fonte.
+  '2007A': dict(predio='FR Bueno Municipal', arq='guia-fr-bueno-2007A.html', base_ref=None, tema='agua',
+     ui=ui_unidade('Studio 2007A', 'FR Bueno Municipal · Setor Bueno, Goiânia', 15, 12, vaga_sub=FACIAL,
+        extra={'pt':{'vagaVal':'282M'},'en':{'vagaVal':'282M'},'es':{'vagaVal':'282M'}})),
   '1701': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-1701.html', base_ref='978a1cb', tema='travertino',
      troca_dados=QS_VISITAS, ui=ui_unidade('Suíte 1701', 'QS Marista · Setor Marista, Goiânia', 15, 12, extra=COPA)),
   '402': dict(predio='QS Marista', maps='https://maps.app.goo.gl/cJUTfjhT6uFq1ADb7', arq='guia-marista-402.html', base_ref='978a1cb', tema='travertino',
