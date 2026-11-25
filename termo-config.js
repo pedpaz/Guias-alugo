@@ -471,3 +471,11 @@ window.UNIDADES = {
 
 /* FR Bueno 1003A: os dois códigos (guia e sistema aluGO) abrem o mesmo termo. */
 window.UNIDADES["FB-1003A"] = window.UNIDADES["FRB-1003A"];
+
+/* FR Bueno 2007A (Michel, 24/11/2026): studio com painel de madeira, cama queen + sofá-cama de casal. */
+window.UNIDADES["FB-2007A"] = { predio: "FR Bueno", unidade: "Apto 2007A", bairro: "Setor Bueno",
+  endereco: "Av. T-9, nº 728, Setor Bueno, Goiânia/GO", capacidade: 4,
+  camas: { pt: ", em 1 cama queen e 1 sofá-cama de casal", en: ", in 1 queen bed and 1 double sofa bed", es: ", en 1 cama queen y 1 sofá cama de matrimonio" },
+  checkin: "15h", checkout: "12h",
+  acesso: ACESSO.fechadura, acesso2: ACESSO.fechadura2, areas_comuns: AREAS.condominio,
+  guia: "guia-fr-bueno-2007A.html" };
