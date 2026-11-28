@@ -412,6 +412,22 @@ window.UNIDADES = {
       es: "El uso de las áreas comunes (piscina y spa climatizados, gimnasio, sauna, área de convivencia y minimercado) sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar. Las áreas climatizadas funcionan hasta las 22h." },
     guia: "guia-expression-1906.html" },
 
+  /* ---- Brookfield Towers (Jardim Goiás) · cadastro na portaria; até o ABL Prime aceitar a unidade, por e-mail à administração ---- */
+  "BFT-2209": { predio: "Brookfield Towers", unidade: "Estúdio 2209", bairro: "Jardim Goiás",
+    endereco: "Av. Dep. Jamel Cecílio, 2929, Jardim Goiás, Goiânia/GO", capacidade: 3,
+    camas: { pt: ", sendo 2 na cama de casal e 1 no sofá-cama", en: ": 2 in the double bed and 1 on the sofa bed", es: ", 2 en la cama de matrimonio y 1 en el sofá cama" },
+    checkin: "14h", checkout: "11h",
+    acesso: {
+      pt: "A entrada no prédio depende do cadastro de cada hóspede na portaria, feito pela aluGO a partir desta lista; sem o cadastro, a portaria não autoriza a entrada. O acesso ao apartamento é por <b>fechadura digital</b> com senha, enviada após a confirmação do cadastro, que não deve ser repassada a terceiros.",
+      en: "Entry to the building depends on each guest being registered at the front desk, which aluGO does from this list; without it, the front desk will not allow entry. Access to the apartment is by <b>digital lock</b> with a code, sent once your registration is confirmed, which must not be shared.",
+      es: "La entrada al edificio depende del registro de cada huésped en la portería, que hace aluGO a partir de esta lista; sin el registro, la portería no autoriza la entrada. El acceso al apartamento es por <b>cerradura digital</b> con clave, enviada tras confirmar el registro, que no debe compartirse." },
+    acesso2: ACESSO.fechadura2,
+    areas_comuns: {
+      pt: "O uso das áreas comuns (academia, coworking, lounge e lavanderia) segue o regimento interno do condomínio, inclusive quanto a horários e à proibição de fumar. Spa e espaço gourmet não fazem parte da estadia.",
+      en: "Use of the common areas (gym, coworking, lounge and laundry room) follows the building's internal rules, including opening hours and the smoking ban. The spa and gourmet area are not included in the stay.",
+      es: "El uso de las áreas comunes (gimnasio, coworking, lounge y lavandería) sigue el reglamento interno del condominio, incluidos los horarios y la prohibición de fumar. El spa y el espacio gourmet no forman parte de la estadía." },
+    guia: "guia-brookfield-2209.html" },
+
   /* ---- Tai Residencial ---- */
   "TR-803S": { predio: "Tai Residencial", unidade: "Flat 803S", bairro: "Setor Bueno",
     endereco: "R. T-53, 804, Setor Bueno, Goiânia/GO", capacidade: 4,
